@@ -1,23 +1,29 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 
+@font-face {
+font-family: documan;
+src: url("http://developer.mozilla.org/@api/deki/files/2934/=VeraSeBd.ttf");
+}
+
 * {
-	color: #111111; 
+	color: #000000; 
 	font-family: 'Spoqa Han Sans', 'Sans-serif';
 	font-size: 14px;
 }
 
 body {
-	background-color: #CFCFCF;
+	background-color: #FFFFFF;
 	margin-top: 8px;
 	margin-left: 16px;
 	margin-right: 16px;
 }
 
 #callout {
-	background-color: #444444;
+	background-color: #FFFFFF;
 }
 
 h1, h2, h3 {
+	font-family: 
 	margin-left: 24px
 }
 
