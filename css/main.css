@@ -2,10 +2,12 @@
 
 li {
 	font-family: 'Spoqa Han Sans', 'Sans-serif';
+	font-size: 14px;
 	margin-left: 16px;
 }
 
 h1, h2, h3 {
 	font-family: 'Spoqa Han Sans', 'Sans-serif';
+	font-size: 14px;
 	margin-left: 24px
 }
