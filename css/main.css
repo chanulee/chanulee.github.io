@@ -1,6 +1,11 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
 
-.title {
+li {
 	font-family: 'Spoqa Han Sans', 'Sans-serif';
-	margin-left: 15px;
+	margin-left: 16px;
+}
+
+h1, h2, h3 {
+	font-family: 'Spoqa Han Sans', 'Sans-serif';
+	margin-left: 24px
 }
