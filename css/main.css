@@ -10,6 +10,7 @@ url("/resources/Documan-Medium.woff") format('woff');
 	color: #000000; 
 	font-family: 'documan', 'Spoqa Han Sans', 'Sans-serif';
 	font-size: 14px;
+	line-height: 20px;
 }
 
 body {
