@@ -48,8 +48,6 @@ a {
 	color: #ff4633;
 }
 
-ul {
-list-style: square inside url("/resources/dia.svg");
-  margin: 0;
-  padding: 16;
-}
+	ul {
+	list-style: square outside url("/resources/spark.svg");
+	}
