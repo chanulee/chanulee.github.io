@@ -2,12 +2,13 @@
 
 @font-face {
 font-family: documan;
-src: url("http://developer.mozilla.org/@api/deki/files/2934/=VeraSeBd.ttf");
+src: url("/resources/Documan-Medium.woff2") format('woff2'),
+url("/resources/Documan-Medium.woff") format('woff');
 }
 
 * {
 	color: #000000; 
-	font-family: 'Spoqa Han Sans', 'Sans-serif';
+	font-family: 'documan', 'Spoqa Han Sans', 'Sans-serif';
 	font-size: 14px;
 }
 
