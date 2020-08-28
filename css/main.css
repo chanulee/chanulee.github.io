@@ -53,6 +53,13 @@ hr.solid {
 	border-radius: 1px;
 }
 
-	ul {
-	list-style: square outside url("/resources/spark.svg");
-	}
+ul {
+list-style: square outside url("/resources/spark.svg");
+}
+
+footer {
+	text-align: center;
+	font-size: 12px;
+	color: #eeeeee;
+}
+	
