@@ -48,6 +48,11 @@ a {
 	color: #ff4633;
 }
 
+hr.solid {
+	border-top: 1px solid #eeeeee;
+	border-radius: 1px;
+}
+
 	ul {
 	list-style: square outside url("/resources/spark.svg");
 	}
