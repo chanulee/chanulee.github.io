@@ -7,7 +7,7 @@ url("/resources/Documan-Medium.woff") format('woff');
 }
 
 * {
-	color: #000000; 
+	color: #111111; 
 	font-family: 'documan', 'Spoqa Han Sans', 'Sans-serif';
 	font-size: 14px;
 	line-height: 20px;
@@ -20,12 +20,25 @@ body {
 	margin-right: 16px;
 }
 
+#alert {
+	text-align: center;
+	color: #ffffff;
+	background-color: #8300FF;
+}
+
+#title {
+	font-family: 'documan';
+	font-size: 12px
+	margin-left: 24px
+}
+
 #callout {
 	background-color: #FFFFFF;
 }
 
 h1, h2, h3 {
-	font-family: 
+	font-family: 'documan';
+	font-size: 12px
 	margin-left: 24px
 }
 
