@@ -24,9 +24,6 @@ body {
 	color: #cdf563;
 }
 
-#callout {
-}
-
 h1 {
 	font-weight: normal;
 	font-size: 16px
@@ -57,9 +54,7 @@ ul {
 list-style: square outside url("/resources/spark.svg");
 }
 
-footer {
+#footer {
 	text-align: center;
-	font-size: 12px;
-	color: #eeeeee;
+	color: #DDDDDD;
 }
-	
