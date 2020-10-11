@@ -36,6 +36,11 @@ h2, h3 {
 	margin-left: 24px
 }
 
+#minor {
+	color: #888888;
+	font-size: 12px
+}
+
 a {
 	color: #3e8ef1; 
 	text-decoration: none;
