@@ -1,16 +1,16 @@
 @font-face {
-	font-family: "SF Pro KR", "SF Pro Display", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Basier Square", "Apple SD Gothic Neo", Roboto, "Noto Sans KR", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
 }
 
 * {
-	color: #000000;
-	font-family: "SF Pro KR", "SF Pro Display", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Basier Square", "Apple SD Gothic Neo", Roboto, "Noto Sans KR", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #060509;
+	font-family: 'IBM Plex Sans', sans-serif;
 	font-size: 14px;
 	line-height: 20px;
 }
 
 body {
-	background-color: #f9f9f9;
+	background-color: #f3f3f3;
 	margin-top: 8px;
 	margin-left: 16px;
 	margin-right: 16px;
@@ -18,28 +18,29 @@ body {
 }
 
 h1 {
-	font-weight: normal;
+	font-weight: 500;
 	font-size: 16px margin-left: 24px
 }
 
 h2,
 h3 {
-	font-weight: normal;
+	font-weight: 500;
 	font-size: 14px margin-left: 24px
 }
 
 #minor {
-	color: #888888;
+	color: #060509;
+	opacity: 0.6;
 	font-size: 12px
 }
 
 a {
-	color: #cdf563;
+	color: #2d2fde;
 	text-decoration: none;
 }
 
 #title {
-	color: #ff4633;
+	color: #f78ae0;
 }
 
 hr.solid {
