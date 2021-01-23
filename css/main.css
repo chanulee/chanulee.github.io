@@ -1,37 +1,31 @@
 @font-face {
-font-family: "SF Pro KR", "SF Pro Display", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Basier Square", "Apple SD Gothic Neo", Roboto, "Noto Sans KR", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "SF Pro KR", "SF Pro Display", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Basier Square", "Apple SD Gothic Neo", Roboto, "Noto Sans KR", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 * {
-	color: #221e1f; 
+	color: #000000;
 	font-family: "SF Pro KR", "SF Pro Display", "SF Pro Icons", -apple-system, BlinkMacSystemFont, "Basier Square", "Apple SD Gothic Neo", Roboto, "Noto Sans KR", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 20px;
 }
 
 body {
-	background-color: #e0e0df;
+	background-color: #f9f9f9;
 	margin-top: 8px;
 	margin-left: 16px;
 	margin-right: 16px;
 	margin-bottom: 24px;
 }
 
-#alert {
-	text-align: center;
-	color: #cdf563;
-}
-
 h1 {
 	font-weight: normal;
-	font-size: 16px
-	margin-left: 24px
+	font-size: 16px margin-left: 24px
 }
 
-h2, h3 {
+h2,
+h3 {
 	font-weight: normal;
-	font-size: 14px
-	margin-left: 24px
+	font-size: 14px margin-left: 24px
 }
 
 #minor {
@@ -40,11 +34,11 @@ h2, h3 {
 }
 
 a {
-	color: #5551ff; 
+	color: #cdf563;
 	text-decoration: none;
 }
 
-#title{
+#title {
 	color: #ff4633;
 }
 
@@ -54,7 +48,7 @@ hr.solid {
 }
 
 ul {
-list-style: square outside url("/resources/spark.svg");
+	list-style: square outside url("/resources/spark.svg");
 }
 
 #footer {
