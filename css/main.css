@@ -1,43 +1,33 @@
 @font-face {
-	font-family: 'IBM Plex Sans', sans-serif;
+	font-family: 'EduFavoritHangul-Regular', sans-serif;
+	src: url(/resources/EduFavoritHangul-Regular.woff2) format('woff2');
 }
 
 * {
-	color: #060509;
-	font-family: 'IBM Plex Sans', sans-serif;
+	font-family: 'EduFavoritHangul-Regular', sans-serif;
+	src: url(/resources/EduFavoritHangul-Regular.woff2) format('woff2');
 	font-size: 14px;
-	font-weight: 400;
-	line-height: 24px;
+	line-height: 18px;
 }
 
 body {
-	background-color: #f3f3f3;
+	background-color: #d2dbe0;
 	margin-top: 24px;
 	margin-left: 24px;
 	margin-right: 24px;
 	margin-bottom: 24px;
 }
-
-h1 {
-	font-weight: 600;
-	font-size: 16px
-}
-
 	
-#minor {
-	color: #060509;
-	opacity: 0.6;
-	font-size: 12px
+.top {
+	text-align: center;
+	color: #0D0D0D;
 }
 
 a {
-	color: #2d2fde;
+	color: #773dff;
 	text-decoration: none;
 }
 
-#title {
-	color: #fd02a4;
-}
 
 hr.solid {
 	border-top: 1px solid #eeeeee;
