@@ -1,18 +1,18 @@
 @font-face {
-	font-family: EduFavoritHangul, sans-serif;
+	font-family: 'EduFavoritHangul';
 	src: url(/resources/EduFavoritHangul-Regular.woff2) format('woff2');
 	font-weight: regular;
 }
 
 * {
-	font-family: 'EduFavoritHangul-Regular', sans-serif;
-	src: url(/resources/EduFavoritHangul-Regular.woff2) format('woff2');
+	font-family: 'EduFavoritHangul', sans-serif;
 	font-size: 14px;
 	line-height: 18px;
 }
 
 body {
-	font-family: EduFavoritHangul-Regular, sans-serif;
+	font-family: 'EduFavoritHangul', sans-serif;
+	color: #b40000;
 	background-color: #d2dbe0;
 	margin-top: 24px;
 	margin-left: 24px;
@@ -30,18 +30,12 @@ a {
 	text-decoration: none;
 }
 
-
-hr.solid {
-	border-top: 1px solid #eeeeee;
-	border-radius: 1px;
-}
-
 ul {
-	margin-right: 24px;
+
 }
 
 #footer {
-	font-family: 'EduFavoritHangul-Regular', sans-serif;
+	font-family: 'EduFavoritHangul', sans-serif;
 	text-align: center;
 	color: #ffffff;
 }
