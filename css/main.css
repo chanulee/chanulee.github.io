@@ -29,6 +29,12 @@ body {
 	height: auto;
 }
 
+#center {
+	top: 24px;
+	text-align: center;
+	color: #0D0D0D;
+}
+
 .bottom {
 	text-align: center;
 	color: #0D0D0D;
