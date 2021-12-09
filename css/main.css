@@ -23,11 +23,19 @@ body {
 .top {
 	text-align: center;
 	color: #0D0D0D;
-	// position: sticky;
+	position: sticky;
 	top: 30px;
 	width: device-width;
 	height: auto;
 }
+
+.des {
+		text-align: center;
+		color: #0D0D0D;
+		top: 30px;
+		width: device-width;
+		height: auto;
+	}
 
 #center {
 	top: 24px;
