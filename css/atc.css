@@ -20,6 +20,7 @@ body {
 	font-family: degular-text,sans-serif;
 	font-weight: 400;
 	color: #0D0D0D;
+	background-color: #e3e7e9;
 	margin-top: 24px;
 	margin-left: 24px;
 	margin-right: 24px;
@@ -30,7 +31,7 @@ body {
 .top {
 	font-size: 24px;
 	text-align: center;
-	color: #0D0D0D;
+	color: #662fe2;
 	position: sticky;
 	top: 30px;
 	width: device-width;
@@ -52,6 +53,7 @@ body {
 
 #text {
 	font-family: degular-text,sans-serif;
+	font-weight: 400;
 	color: #0D0D0D;
 }
 
@@ -67,22 +69,17 @@ body {
 }
 
 a {
-	color: #773dff;
+	color: #0cc66c;
+	font-weight: 400;
 	text-decoration: underline;
+	text-decoration-color: #662fe2;
 }
 
 ul {
 
 }
 
-#lang {
-	font-size: 12px;
-	color: #001e86
-}
-
 #footer {
 font-family: degular-text,sans-serif;
 font-weight: 400;
-	text-align: center;
-	color: #662fe2;
 }
