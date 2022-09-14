@@ -116,6 +116,7 @@ i {
 }
 
 #footer {
+	margin-top: 32px;
 	text-align: center;
 	font-style: italic;
 	color: rgba(18, 18, 18, 0.2);
