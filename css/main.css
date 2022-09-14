@@ -14,7 +14,7 @@
 	font-family: 'EduFavoritHangul', sans-serif;
 	font-weight: 300;
 	font-size: 14px;
-	line-height: 22px;
+	line-height: 20px;
 }
 
 body {
@@ -29,30 +29,37 @@ body {
 	align-items: center;
 	position: sticky;
 	background-color: #f6f6f6;
-	padding: 8px 8px;
+	padding-bottom: 4px;
+	padding-top: 6px;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 .navbar_menu {
 	list-style: none;
 	display: flex;
 	margin: 0;
-	padding-left: 16px;
+	padding-left: 8px;
+
 }
 
 .navbar_menu a {
 	color: #111111;
+	text-decoration: none;
+
 }
 
 .navbar_menu li {
 	align-items: right;
-	padding: 8px 16px;
+	padding: 8px 8px;
 }
 
 .top {
-	margin-left: 24px;
-	margin-right: 24px;
+	margin-top: 24px;
+	margin-bottom: 24px;
+	margin-left: 16px;
+	margin-right: 16px;
 	color: #0D0D0D;
-	top: 30px;
 	height: auto;
 }
 
@@ -63,7 +70,7 @@ body {
 }
 
 #minor {
-	color: rgba(13, 13, 13, 0.5);
+	color: rgba(13, 13, 13, 0.4);
 }
 
 
@@ -78,18 +85,23 @@ body {
 }
 
 p {
-	margin-left: 24px;
-	margin-right: 24px;
+	margin-left: 16px;
+	margin-right: 16px;
 
 }
 
 a {
-	color: #773dff;
-	text-decoration: none;
+	color: #642fe1;
 }
 
-ul {
-	margin-left: 16px;
+i {
+	font-style: italic;
+	font-weight: 500;
+}
+
+.cvList li {
+	margin-bottom: 16px;
+	margin-left: 8px;
 	margin-right: 24px;
 }
 
@@ -100,5 +112,7 @@ ul {
 
 #footer {
 	text-align: center;
-	color: rgba(18, 18, 18, 0.5);
+	font-style: italic;
+	color: rgba(18, 18, 18, 0.2);
+	
 }
