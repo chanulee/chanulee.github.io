@@ -23,14 +23,14 @@ body {
 	align-items: center;
 	position: sticky;
 	background-color: #f6f6f6;
-	padding: 8px 12px;
+	padding: 8px 8px;
 }
 
 .navbar_menu {
 	list-style: none;
 	  display: flex;
 	  margin: 0;
-	  padding-left: 8px;
+	  padding-left: 16px;
 }
 
 .navbar_menu a {
@@ -39,24 +39,17 @@ body {
 
 .navbar_menu li {
 	align-items: right;
-	padding: 8px 8px;
+	padding: 8px 16px;
 }
 
 .top {
-	text-align: center;
+	margin-left: 24px;
+	margin-right: 24px;
 	color: #0D0D0D;
 	top: 30px;
-	width: device-width;
 	height: auto;
 }
 
-.des {
-	text-align: center;
-	color: #0D0D0D;
-	top: 30px;
-	width: device-width;
-	height: auto;
-}
 
 #center {
 	margin-left: 24px;
@@ -96,7 +89,6 @@ ul {
 }
 
 #footer {
-	font-family: 'EduFavoritHangul', sans-serif;
 	text-align: center;
-	color: #ffffff;
+	color: rgba(18, 18, 18, 0.5);
 }
