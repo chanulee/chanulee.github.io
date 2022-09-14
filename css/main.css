@@ -73,6 +73,11 @@ body {
 	color: rgba(13, 13, 13, 0.4);
 }
 
+#dent {
+	margin-top: 8px;
+	margin-left: 48px;
+	margin-bottom: 32px;
+}
 
 .bottom {
 	text-align: center;
