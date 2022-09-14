@@ -7,37 +7,59 @@
 * {
 	font-family: 'EduFavoritHangul', sans-serif;
 	font-size: 14px;
-	line-height: 21px;
+	line-height: 20px;
 }
 
 body {
 	font-family: 'EduFavoritHangul', sans-serif;
 	color: #0D0D0D;
 	background-color: #e3e7e9;
-	margin-top: 24px;
-	margin-left: 24px;
-	margin-right: 24px;
-	margin-bottom: 24px;
+	margin: 0px;
 }
-	
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	background-color: #f6f6f6;
+	padding: 8px 12px;
+}
+
+.navbar_menu {
+	list-style: none;
+	  display: flex;
+	  margin: 0;
+	  padding-left: 8px;
+}
+
+.navbar_menu a {
+	color: #111111;
+}
+
+.navbar_menu li {
+	align-items: right;
+	padding: 8px 8px;
+}
+
 .top {
 	text-align: center;
 	color: #0D0D0D;
-	position: sticky;
 	top: 30px;
 	width: device-width;
 	height: auto;
 }
 
 .des {
-		text-align: center;
-		color: #0D0D0D;
-		top: 30px;
-		width: device-width;
-		height: auto;
-	}
+	text-align: center;
+	color: #0D0D0D;
+	top: 30px;
+	width: device-width;
+	height: auto;
+}
 
 #center {
+	margin-left: 24px;
 	top: 24px;
 	color: #0D0D0D;
 }
@@ -64,7 +86,8 @@ a {
 }
 
 ul {
-
+	margin-left: 16px;
+	margin-right: 24px;
 }
 
 #lang {
