@@ -14,14 +14,53 @@
 	font-family: 'EduFavoritHangul', sans-serif;
 	font-weight: 300;
 	font-size: 14px;
-	line-height: 20px;
+	line-height: 125%;
+	margin: 0px;
+	text-underline-offset: 2px;
+
+}
+
+:root {
+	--end-margin: 24px;
 }
 
 body {
 	color: #0D0D0D;
-	background-color: #e4e6e6;
-	margin: 0px;
+	background-color: #f6f6f6;
 }
+
+p {
+	margin-left: var(--end-margin);
+	margin-right: var(--end-margin);
+}
+
+a {
+	color: #642fe1;
+}
+ 
+i {
+	font-style: italic;
+	font-weight: 500;
+}
+
+u{
+	text-decoration-color: #642fe1;
+}
+
+/* button {
+	margin-right: var(--end-margin);
+	margin-left: var(--end-margin);
+	margin-bottom: 24px;
+	color: #f6f6f6;	
+	background-color: #0D0D0D;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	padding: 10px 12px 8px;
+	cursor: pointer;
+} */
 
 .navbar {
 	position: fixed;
@@ -33,23 +72,16 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	position: sticky;
-	background-color: #f6f6f6;
-	padding: 6px 8px 4px;
+	background-color: #ffffff;
+	padding: 6px 0px 4px;
 }
-
-/*
-t r b l
-t rl b
-tb rl
-everthang
-*/
 
 .navbar_menu {
 	list-style: none;
 	display: flex;
-	margin: 0;
-	padding-left: 16px;
-	padding-right: 8px;
+	margin: 0px;
+	padding-left: var(--end-margin);
+	padding-right: calc(var(--end-margin) - 8px) ;
 
 }
 
@@ -61,64 +93,40 @@ everthang
 
 .navbar_menu li {
 	align-items: right;
-	padding: 8px 8px;
+	padding: 8px 8px 7px;
 }
 
-.top {
-	margin: 24px 8px;
-	color: #0D0D0D;
-	height: auto;
+
+
+/*
+t r b l
+t rl b
+tb rl
+everthang
+*/
+
+.cvList li {
+	margin-top: 8px;
+	margin-left: 0px;
+	margin-right: var(--end-margin);
 }
 
-#center {
+.title {
+	margin: 24px var(--end-margin) 8px;
+}
+
+.about {
+	font-size: 20px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+#mono {
 	font-family: 'Space Mono', monospace;
-	margin-left: 24px;
-	margin-right: 24px;
-	color: #0D0D0D;
 }
 
 #minor {
 	color: rgba(13, 13, 13, 0.4);
-}
-
-#dent {
-	margin: 8px 24px 32px;
-}
-
-.bottom {
-	text-align: center;
-	color: #0D0D0D;
-	position: fixed;
-	bottom: 0px;
-	width: device-width;
-	height: auto;
-	background: #f8f8f8
-}
-
-p {
-	margin-left: 16px;
-	margin-right: 16px;
-
-}
-
-a {
-	color: #642fe1;
-}
-
-i {
-	font-style: italic;
-	font-weight: 500;
-}
-
-.cvList li {
-	margin-bottom: 16px;
-	margin-left: 8px;
-	margin-right: 24px;
-}
-
-#lang {
-	font-size: 12px;
-	color: #001e86
 }
 
 #footer {
