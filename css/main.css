@@ -13,15 +13,14 @@
 * {
 	font-family: 'EduFavoritHangul', sans-serif;
 	font-weight: 300;
-	font-size: 14px;
-	line-height: 125%;
+	font-size: 16px;
+	line-height: 140%;
 	margin: 0px;
 	text-underline-offset: 2px;
-
 }
 
 :root {
-	--end-margin: 24px;
+	--end-margin: 16px;
 }
 
 body {
@@ -39,7 +38,6 @@ a {
 }
  
 i {
-	font-style: italic;
 	font-weight: 500;
 }
 
@@ -47,9 +45,10 @@ u{
 	text-decoration-color: #642fe1;
 }
 
-/* button {
+button {
 	margin-right: var(--end-margin);
 	margin-left: var(--end-margin);
+	margin-top: 4px;
 	margin-bottom: 24px;
 	color: #f6f6f6;	
 	background-color: #0D0D0D;
@@ -57,10 +56,10 @@ u{
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 14px;
+	font-size: 16px;
 	padding: 10px 12px 8px;
 	cursor: pointer;
-} */
+}
 
 .navbar {
 	position: fixed;
@@ -72,7 +71,7 @@ u{
 	justify-content: space-between;
 	align-items: center;
 	position: sticky;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	padding: 6px 0px 4px;
 }
 
@@ -116,7 +115,7 @@ everthang
 }
 
 .about {
-	font-size: 20px;
+	font-size: 16px;
 	margin-top: 16px;
 	margin-bottom: 16px;
 }
@@ -130,9 +129,8 @@ everthang
 }
 
 #footer {
-	margin-top: 48px;
+	font-size: 12px;
 	text-align: center;
-	font-style: italic;
 	color: rgba(18, 18, 18, 0.2);
 	
 }
