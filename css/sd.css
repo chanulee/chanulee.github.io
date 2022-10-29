@@ -1,0 +1,132 @@
+@font-face {
+	font-family: 'EduFavoritHangul';
+	src: url(/resources/EduFavoritHangul-Book.woff2) format('woff2');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'EduFavoritHangul';
+	src: url(/resources/EduFavoritHangul-Medium.woff2) format('woff2');
+	font-weight: 500;
+}
+
+* {
+	font-family: 'EduFavoritHangul', sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 140%;
+	margin: 0px;
+	text-underline-offset: 2px;
+}
+
+:root {
+	--end-margin: 16px;
+}
+
+body {
+	color: #0D0D0D;
+	background-color: #f6f6f6;
+}
+
+p {
+	margin-left: var(--end-margin);
+	margin-right: var(--end-margin);
+}
+
+a {
+	color: #1d0061;
+}
+
+u{
+	text-decoration-color: #642fe1;
+}
+
+button {
+	margin-right: var(--end-margin);
+	margin-left: var(--end-margin);
+	margin-top: 4px;
+	margin-bottom: 24px;
+	color: #f6f6f6;	
+	background-color: #0D0D0D;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	padding: 10px 12px 8px;
+	cursor: pointer;
+}
+
+.navbar {
+	position: fixed;
+	  top: 0;
+	  /* width: 100% */
+	  left: 0;
+	  right: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	/* background-color: #ffffff; */
+	padding: 6px 0px 4px;
+}
+
+.navbar_menu {
+	list-style: none;
+	display: flex;
+	margin: 0px;
+	padding-left: var(--end-margin);
+	padding-right: calc(var(--end-margin) - 8px) ;
+
+}
+
+.navbar_menu a {
+	color: #111111;
+	text-decoration: none;
+
+}
+
+.navbar_menu li {
+	align-items: right;
+	padding: 8px 8px 7px;
+}
+
+
+
+/*
+t r b l
+t rl b
+tb rl
+everthang
+*/
+
+.cvList li {
+	margin-top: 8px;
+	margin-left: 0px;
+	margin-right: var(--end-margin);
+}
+
+.title {
+	margin: 24px var(--end-margin) 8px;
+}
+
+.about {
+	font-size: 16px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+#mono {
+	font-family: 'Space Mono', monospace;
+}
+
+#minor {
+	color: rgba(13, 13, 13, 0.4);
+}
+
+#footer {
+	font-size: 12px;
+	text-align: center;
+	color: rgba(18, 18, 18, 0.2);
+	
+}
