@@ -1,21 +1,20 @@
 ---
 title: Sunny Day
-desc: Imagining and depicting sustainable tommorrow and future of technology with XR and Wearable.
+desc: How might we immerse people in XR contents regarding sustainable tommorrow and future of technology?
 caption: National Research Foundation
-brief: CUBE is an interface and interaction design project that researched what kind of interaction people can do in the moving medium - mobility(cars) - when the fourth stage of autonomous driving is commercialized in the future.
-context: With Auto driving 4.0, People will have more spare time in vehicles in the future. To imagine various scenarios and design an interface for them is needed.
-solution: Came up with Multi-modal, Surface shifting Interface and Seat
-skill_role: HCI Design, User Research, Prototyping
-type: Human-Computer Interaction, UX Design
+brief: Sunny Day is an immersive media art that imagines and depicts sustainable tommorrow and future of technology.
+context: 'Immersive Media Art' nowadays with huge screen and projection lack of interaction or new experience. In terms of content, artworks regarding climate change tends to depict dystopia and make us feel lethargic and hopeless.
+solution: An XR system consist of Azure Kinect, Vive, ESP32 Interface and UWB location recognition. Using the system, “Sunny Day” provides the immersive experience of a hopeful future that will initiate the viewers’ active participation.
+skill_role: Team Lead, Design Engineer
+type: Sustainable Technology, XR, Telepresence, Human-Computer Interaction, Research
 timeline: 2022.03 ~ 2022.12
-duration: N months
-associations: Human Augmentation Lab at ETRI, EnSepTion
-collaborators: Gwonu Ryu, Dabin Kim
-professor: Yongsoon Choi Ph.D
+duration: 10 months
+associations: Funded by National Research Foundation
+collaborators: Gwonu Ryu, Sanggyo Seo, Kyubeom Shim, Taehyun Kim
+professor: Prof. Yongsoon Choi, Prof. Sangwook Lee, Prof. Jeanho Chu
 links: [
-    ['link name', 'https://naver.com'], 
-    ['other link name', 'https://google.com'], 
-    ['another link name', 'https://daum.net']
+    ['Sunny Day Technology Report', 'https://ssk7808.github.io/sunnyday/'], 
+    ['Art & Technology Conference 2022', 'http://atc2022.dothome.co.kr/?page_id=15844&lang=en']
 ]
 hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg
 gallery: [
@@ -33,5 +32,5 @@ process: [
     ['3. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
 ]
 order: 1
-slug: sunny-day-1
+slug: sunny-day
 ---
