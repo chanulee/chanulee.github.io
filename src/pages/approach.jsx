@@ -11,9 +11,9 @@ function ApproachPage() {
 
             <header className="w-full mt-xxl2 mb-xxl3 px-xxl4 flex flex-col">
                 <h1 className="H1 mb-m">
-                    CHANWOO LEE
+                    Approach
                 </h1>
-                <p className="Subtitle">
+                <p className="Subtitle opacity-50">
                     1. Imagine a better future<br/>
                     2. Design a future technology<br/>
                     3. Bring it to everyday life<br/>
@@ -23,19 +23,19 @@ function ApproachPage() {
             <main className="w-full px-xxl4 flex flex-col">
                 <div className="flex flex-col mb-xxl3">
                     <p className="Subtitle opacity-50">
-                        1. IMAGINE A BETTER FUTURE
+                        Viewpoint on technology
                     </p>
                     <h3 className="H3R">
                         Creativity comes from context
                     </h3>
                     <p className="Body24">
-                        The world we live in is constantly changing, and fast paced development of technology is one of the main reasons for it. Technology does not exists solely. It should be handled with its context with its stakeholders - how it was initiated, how it affects society and human behavior
+                        The world we live in is constantly changing, and fast paced development of technology is one of the main reasons for it. Technology does not exists solely. It should be handled with its context with its stakeholders - how it was initiated, how it affects society and human behavior.
                     </p>
                 </div>
 
                 <div className="flex flex-col mb-xxl3">
                     <p className="Subtitle opacity-50">
-                        2. DESIGN A FUTURE TECHNOLOGY
+                        Design Approach
                     </p>
                     <h3 className="H3R">
                         Art as a research, Design and Engineering as a practice.
@@ -47,7 +47,7 @@ function ApproachPage() {
 
                 <div className="flex flex-col mb-xxl3">
                     <p className="Subtitle opacity-50">
-                        3. BRING IT TO EVERYDAY LIFE
+                        Mindset to design a better future
                     </p>
                     <h3 className="H3R">
                         Positivity: Better Future and Witty Expression
@@ -61,7 +61,7 @@ function ApproachPage() {
 
                 <div className="flex flex-col mb-xxl3">
                     <p className="Subtitle opacity-50">
-                        3. BRING IT TO EVERYDAY LIFE
+                        How I learn and improve
                     </p>
                     <h3 className="H3R">
                         Learning By Doing
