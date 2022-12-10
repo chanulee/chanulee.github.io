@@ -1,39 +1,33 @@
 ---
-title: Sunny Day 9
-desc: Imagining and depicting sustainable tommorrow and future of technology with XR and Wearable.
-caption: National Research Foundation
-brief: CUBE is an interface and interaction design project that researched what kind of interaction people can do in the moving medium - mobility(cars) - when the fourth stage of autonomous driving is commercialized in the future.
+title: Tonicscape VR
+desc: Showing the discrete musical melody and the atmosphere with visuals.
+caption: KT Corp.
+brief: TonicScape is a game-style VR instrument that enables the player to draw the melody within background music. 
 context: With Auto driving 4.0, People will have more spare time in vehicles in the future. To imagine various scenarios and design an interface for them is needed.
 solution: Came up with Multi-modal, Surface shifting Interface and Seat
-skill_role: HCI Design, User Research, Prototyping
-type: Human-Computer Interaction, UX Design
-timeline: 2022.03 ~ 2022.12
-duration: N months
-associations: Human Augmentation Lab at ETRI, EnSepTion
-collaborators: Gwonu Ryu, Dabin Kim
-professor: Yongsoon Choi Ph.D
+skill_role: HCI Designer, User Research
+type: Collaborative, Human-Computer Interaction
+timeline: 2020.04 ~ 2021.1
+duration: 6 months
+associations: Customer New Business R&D Division at KT Corp.
+collaborators: Chaeryeong Oh, Sangyu Lee, Siyeong Song
+professor: Prof. Sanghyun Cooper Yoo (K'ARTS)
 links: [
-    ['link name', 'https://naver.com'], 
-    ['other link name', 'https://google.com'], 
-    ['another link name', 'https://daum.net']
+    ['Sogang People (KR)', 'http://www.sogang.ac.kr/front/boardview.do?bbsConfigFK=58&pkid=526654'], 
+    ['Art & Technology Best Work Showcase (Demo)', 'https://www.youtube.com/watch?v=QYP0AGHhPvs']
 ]
-hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg
+hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/hero.jpg
 gallery: [
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
+    ['Tonicscape Overview', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/g0.jpg'],
+    ['Screenshot (Theme)', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/g1.jpg'],
+    ['Screenshot (Melody)', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/g2.jpg']
 ]
-video: "https://player.vimeo.com/video/394873709?h=a67838aa30" 
+video: "https://player.vimeo.com/video/727283666?h=c138771ecf&badge=0&autopause=0&player_id=0&app_id=58479/embed"                     
 process: [
-    ['1. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['2. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['3. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
+    ['Flow ideation', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p1.jpg'],
+    ['Evaluation & feedback from KT corp', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p2.jpg'],
+    ['Featured in Sogang University's news, 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p3.jpg']
 ]
 order: 9
-slug: sunny-day-9
+slug: tonicscape
 ---
-
-
