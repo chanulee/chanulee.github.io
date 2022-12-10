@@ -5,7 +5,7 @@ caption: UN Climate Change Conference 2021 (COP26)
 brief: Illogical love is an artistic research project addressing sustainanility, symbiosis and optimistic future.
 context: As a cultural programme for UN COP26 Glasgow and P4G Seoul Summit 2021, The Gathering Moss invites global audiences to explore and experience artistic ideas on climate change.
 solution: Designed and engineered the working prototype of local underwater datacenter P1 after research about technology and engineering was conducted in phase 2.
-skill_role: Co-Researcher, Design Engineer
+skill_role: Co-Researcher, Design Engineer, Artist
 type: Global Collaboration, SUSTAINABLE FUTURE, DATA, RESEARCH, DIGITAL FABRICATION, DESIGN FICTION
 timeline: 2021.08 ~ 2022.12
 duration: 16 months
@@ -21,20 +21,29 @@ links: [
     ['Featured in Korea Herald', 'https://m.koreaherald.com/amp/view.php?ud=20210820000771'],
     ['Talk at ARKO Forum', 'https://youtu.be/fYmoV4dEh3Y']
 ]
-hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg
+hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/hero.jpg
 gallery: [
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
+    ['WE ARE LIVING IN A KNOTTED WORLD', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g1.jpg'],
+    ['CALLING AND RESPONDING', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g2.jpg'],
+    ['ILLOGICAL.LOVE', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g3.jpg'],
+    ['Local underwater datacenter being part of marine biology (Dall-E)', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g4.jpg'],
+    ['Tech Research Report', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g5.jpg'],
+    ['Detail of P1: local underwater datacenter prototype', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g6.jpg'],
+    ['Detail of P1: local underwater datacenter prototype', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g7.jpg'],
+    ['P1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g8.jpg'],
+    ['Virtual exhibition Gathering Moss 2022 at Art Center Nabi cryptovoxel', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/g9.jpg']
 ]
-video: "https://player.vimeo.com/video/394873709?h=a67838aa30"                     
+video: "https://player.vimeo.com/video/774093365?h=a0938321c1&color=e5ded0&title=0&byline=0&portrait=0"                     
 process: [
-    ['1. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['2. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
-    ['3. some text describes process', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love_hero.jpg'],
+    ['Gathering Moss Creative Camp: Chanu Lee and Sooah Kwak', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p1.jpg'],
+    ['Gathering Moss Creative Camp', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p2.jpg'],
+    ['WIP: Illogical Love Posters', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p3.jpg'],
+    ['WIP: Technology sketch of P1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p5.jpg'],
+    ['Technology diagram of P1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p6.jpg'],
+    ['WIP: P1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p7.jpg'],
+    ['WIP: P1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p8.jpg'],
+    ['WIP: P1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p9.jpg'],
+    ['WIP: 3D model of P1 for Gathering Moss 2022', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/illogical-love/p10.jpg']
 ]
 order: 3
 slug: illogical-love
