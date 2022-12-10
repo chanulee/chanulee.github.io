@@ -2,9 +2,9 @@
 title: Tonicscape VR
 desc: Showing the discrete musical melody and the atmosphere with visuals.
 caption: KT Corp.
-brief: TonicScape is a game-style VR instrument that enables the player to draw the melody within background music. 
-context: With Auto driving 4.0, People will have more spare time in vehicles in the future. To imagine various scenarios and design an interface for them is needed.
-solution: Came up with Multi-modal, Surface shifting Interface and Seat
+brief: TonicScape is an award-winning game-style VR instrument that enables the player to 'draw' the melody. 
+context: VR being a highly visual-centric medium, it has potential to be used as an instrument.
+solution: VR game-style instrument that enables the player to 'draw' the melody within background music.
 skill_role: HCI Designer, User Research
 type: Collaborative, Human-Computer Interaction
 timeline: 2020.04 ~ 2021.1
@@ -25,7 +25,7 @@ gallery: [
 video: "https://player.vimeo.com/video/727283666?h=c138771ecf&badge=0&autopause=0&player_id=0&app_id=58479/embed"                     
 process: [
     ['Flow ideation', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p1.jpg'],
-    ['Evaluation & feedback from KT corp', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p2.jpg'],
+    ['Scored high in Graphic and Sound, Optimization and Creativity from KT corp', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p2.jpg'],
     ['Featured in Sogang University's news, 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p3.jpg']
 ]
 order: 9
