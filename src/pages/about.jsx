@@ -70,10 +70,10 @@ function AboutPage() {
                             NIA (National Information Society Agency)<br/>
                             ETRI (Electronics and Telecommunications Research Institute)<br/>
                             <br/>
-                            Lifetyle Media Group<br/>
+                            Sogang University<br/>
                             Music and Art Learning Group<br/>
                             BaSE Lab<br/>
-                            Sogang University
+                            Lifetyle Media Group
                         </p>
                     </div>
 
