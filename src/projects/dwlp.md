@@ -1,10 +1,10 @@
 ---
 title: Dept. of Web & Land Property
-desc: What if the government take control of web, a highly physical asset?
+desc: Web is highly phisical - just like land. What if the government take control of it?
 caption: Ministry of Science and ICT, Platform-L Contemporary Art Center
-brief: ‘Dept. of Web & Land Property (DWLP)’ is a five-piece series of interactive media art, data visualization, and live audio visual performance on the Web's physical properties.
-context: With Auto driving 4.0, People will have more spare time in vehicles in the future. To imagine various scenarios and design an interface for them is needed.
-solution: Came up with Multi-modal, Surface shifting Interface and Seat
+brief: 'Dept. of Web & Land Property (DWLP)' deals with the relationship between the web and our lives, government and data, imagining fictional ministry that governs web resources, which is limited.
+context: ‘DWLP’ is set in the near future when the depletion of web resources is beginning to be recognized by the public and managed by the Department that seeks market stability and balanced development between land, the physical home of citizens, and the web, the practical home of citizens.
+solution: A five-piece series of interactive media art, data visualization, and live audio visual performance on the Web's physical properties.
 skill_role: UIUX Design(Sketch, Zeplin), Digital Fabrication, Python(Raspberry Pi 3), Arduino(C/C++)
 type: WEB, DATA, DIGITAL FABRICATION, MEDIA ART
 timeline: 2019.4 ~ 2019.10
@@ -13,8 +13,9 @@ associations: Supported by Ministry of Science and ICT, Platform-L Contemporary 
 collaborators: Dongmin Kim, Sooah Kwak, jtodaone
 professor: 
 links: [
+    ['DWLP Web Archive', 'https://vimeo.com/681196718'],
     ['Platform-L Contemporary Art Center (KR)', 'https://naver.com'],
-    ['Art BAVA (KR)', 'https://www.artbava.com/exhibit/웹국토자산부-dept-of-web-land-property/']
+    ['Art BAVA (KR)', 'https://www.artbava.com/exhibit/웹국토자산부-dept-of-web-land-property/'],
 ]
 hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/dwlp/hero.jpg
 gallery: [
