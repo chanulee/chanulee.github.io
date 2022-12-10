@@ -6,7 +6,7 @@ brief: New media art and research project regarding how AI will change the way p
 context: A new workforce performing human intelligence tasks, such as data labeling and annotation, has emerged in the fourth industrial revolution. Their efforts contribute to further refining artificial intelligence models designed to replace human labor.
 solution: Our work intends to provide an interactive and gamified experience for the audience to perform such labor firsthand and visualize the compensations in return.
 skill_role: Research, HCI Design
-type: Research, Human-Computer Interaction, UX Design
+type: Research, Human-Computer Interaction, New Media Art
 timeline: 2020.07 ~ 2020.12
 duration: 6 months
 associations: AI Open Lab at Art Center Nabi
