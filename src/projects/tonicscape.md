@@ -2,7 +2,7 @@
 title: Tonicscape VR
 desc: Showing the discrete musical melody and the atmosphere with visuals.
 caption: KT Corp.
-brief: TonicScape is an award-winning game-style VR instrument that enables the player to 'draw' the melody. 
+brief: TonicScape is an award-winning game-style VR instrument that enables the player to 'draw' the melody to bring the sense of synesthesia. 
 context: VR being a highly visual-centric medium, it has potential to be used as an instrument.
 solution: VR game-style instrument that enables the player to 'draw' the melody within background music.
 skill_role: HCI Designer, User Research
