@@ -16,7 +16,7 @@ links: [
     ['AI Open Lab @ Art Center Nabi (KR)', 'https://www.nabi.or.kr/page/board_view.php?brd_idx=1099&brd_id=lab'], 
     ['PLAY ON AI @ Art Center Nabi (EN)', 'https://www.nabi.or.kr/en/page/board_view.php?brd_idx=1091&brd_id=project'], 
     ['Featured in AI Times (KR)', 'https://www.aitimes.kr/news/articleView.html?idxno=22622'], 
-    ['PLAY ON AI featured in CROWN GOOSE (EN)', 'https://crowngooseusa.com/blogs/crown-featured/crown-goose-x-art-center-nabi-play-on-ai']
+    ['PLAY ON AI featured in Crowngoose (EN)', 'https://crowngooseusa.com/blogs/crown-featured/crown-goose-x-art-center-nabi-play-on-ai']
 ]
 hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/hero.jpg
 gallery: [
