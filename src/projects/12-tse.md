@@ -1,6 +1,6 @@
 ---
 title: Technology, Society and Entrepreneurship (TSE)
-desc: Product and business have power to positively impact everyday life.
+desc: Positive impact on everyday life via product and business.
 caption: Sogang University
 brief: BBA in TSE is a student structured major encompassing Business, Technology and Society. 
 context: The academic goal of TSE is to foster technology-based innovative entrepreneurs who can positively impact the world in the era of the information society and Industry 4.0.
