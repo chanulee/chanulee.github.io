@@ -19,13 +19,13 @@ links: [
 ]
 hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/hero.jpg
 gallery: [
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/g1.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/g2.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/g3.jpg']
+    ['Technological Diagram', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/g1.jpg'],
+    ['Layer system of digital artwork', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/g2.jpg'],
+    ['Proceeding of Korea Computer Congress 2022', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/g3.jpg']
 ]
 video: ""                     
 process: [
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/p1.jpg']
+    ['BaSE Lab Open Seminar', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/p1.jpg']
 ]
 order: 8
 slug: nft-auth-paper
