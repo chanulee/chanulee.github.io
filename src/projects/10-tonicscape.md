@@ -28,6 +28,6 @@ process: [
     ['Scored high in Graphic and Sound, Optimization and Creativity from KT corp', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p2.jpg'],
     ['Featured in Sogang University's news, 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p3.jpg']
 ]
-order: 9
+order: 10
 slug: tonicscape
 ---
