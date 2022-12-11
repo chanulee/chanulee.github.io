@@ -30,6 +30,6 @@ process: [
     ['Information Architecture 2', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p4.jpg'],
     ['Information Architecture 3', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p5.jpg']
 ]
-order: 10
+order: 11
 slug: etnah
 ---
