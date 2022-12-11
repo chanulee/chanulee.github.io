@@ -12,24 +12,23 @@ associations: Gallery Hyundai, ALTAVA Group
 collaborators: Saetbyeol Leeyouk
 professor:
 links: [
-    ['ETNAH Official', 'https://etnah.com/en'], 
-    ['Featured in Artsy', 'https://www.artsy.net/article/artsy-editorial-6-artists-discover-kiaf-seoul'], 
-    ['Gallery Hyundai', 'https://www.galleryhyundai.com/story/view/20000000225'],
-    ['Featured in Korea Herald', 'https://www.koreaherald.com/view.php?ud=20220213000156']
+    ['ETNAH Official (EN/KR)', 'https://etnah.com/en'], 
+    ['Featured in Artsy (EN)', 'https://www.artsy.net/article/artsy-editorial-6-artists-discover-kiaf-seoul'], 
+    ['Gallery Hyundai (EN)', 'https://www.galleryhyundai.com/story/view/20000000225'],
+    ['Featured in Korea Herald (EN)', 'https://www.koreaherald.com/view.php?ud=20220213000156']
 ]
 hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/hero.jpg
 gallery: [
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/g1.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/g2.jpg'],
+    ['Artist profile page (Kenny Scharf)', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/g1.jpg'],
+    ['Art project page (Bodyscape)', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/g2.jpg'],
 ]
 video: ""                     
 process: [
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p1.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p2.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p3.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p4.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p5.jpg'],
-    ['caption yeah!!! yeah!!!', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p6.jpg']
+    ['Information Architecture ideation', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p1.jpg'],
+    ['Mid-fidelity prototype with Sketch', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p2.jpg'],
+    ['Information Architecture 1', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p3.jpg'],
+    ['Information Architecture 2', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p4.jpg'],
+    ['Information Architecture 3', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/etnah/p5.jpg']
 ]
 order: 10
 slug: etnah
