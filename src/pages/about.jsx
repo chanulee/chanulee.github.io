@@ -46,7 +46,7 @@ function AboutPage() {
 
                 <aside className="col-span-4 flex flex-col">
                     <StaticImage className="w-full rounded-m" src="../images/profile.JPG" alt="profile picture of chanwoo lee"/>
-                    <Link className="w-fit H4R mt-l" noArrow={true}>
+                    <Link href="https://drive.google.com/file/d/1JWyc6PEvfI86qygfqS8mHAzSXstRtHi-/view" blank={true} className="w-fit H4R mt-l" noArrow={true}>
                         Download CV
                         <Download className="ml-xs"/>
                     </Link>

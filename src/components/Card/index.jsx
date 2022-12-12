@@ -9,7 +9,7 @@ function Card({ className, href, img, title, desc, caption, children }) {
             to={href}
         >
             <div className="w-auto h-[240px] flex justify-center items-center rounded-xs overflow-hidden">
-                <img className="w-full" src={img} alt={`${title} hero image`}/>
+                <img className="min-h-[240px] h-auto" src={img} alt={`${title} hero image`}/>
             </div>
 
             <h4 className="H4">
