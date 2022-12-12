@@ -2,7 +2,7 @@
 title: Dept. of Web & Land Property
 desc: Web is highly phisical - just like land. What if the government take control of it?
 caption: Ministry of Science and ICT, Platform-L Contemporary Art Center
-brief: 'Dept. of Web & Land Property (DWLP)' deals with the relationship between the web and our lives, government and data, imagining fictional ministry that governs web resources, which is limited.
+brief: "'Dept. of Web & Land Property (DWLP)' deals with the relationship between the web and our lives, government and data, imagining fictional ministry that governs web resources, which is limited."
 context: ‘DWLP’ is set in the near future when the depletion of web resources is beginning to be recognized by the public and managed by the Department that seeks market stability and balanced development between land, the physical home of citizens, and the web, the practical home of citizens.
 solution: A five-piece series of interactive media art, data visualization, and live audio visual performance on the Web's physical properties.
 skill_role: UIUX Design(Sketch, Zeplin), Digital Fabrication, Python(Raspberry Pi 3), Arduino(C/C++)

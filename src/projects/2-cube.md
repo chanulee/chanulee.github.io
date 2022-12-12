@@ -1,5 +1,5 @@
 ---
-title: CUBE: Multi-modal Personal Controller for Future Mobility
+title: "CUBE: Multi-modal Personal Controller for Future Mobility"
 desc: What kind of interface and interaction is needed in the future of mobility technology?
 caption: ETRI
 brief: CUBE is an interface and interaction design project that researched what kind of interaction people can do in the moving medium - mobility(cars) - when the fourth stage of autonomous driving is commercialized in the future.

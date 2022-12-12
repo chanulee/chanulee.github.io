@@ -3,8 +3,8 @@ title: Sunny Day
 desc: How might we immerse people in XR contents regarding sustainable tommorrow and future of technology?
 caption: National Research Foundation
 brief: Sunny Day is an immersive media art that imagines and depicts sustainable tommorrow and future of technology.
-context: 'Immersive Media Art' nowadays with huge screen and projection lack of interaction or new experience. In terms of content, artworks regarding climate change tends to depict dystopia and make us feel lethargic and hopeless.
-solution: An XR system consist of Azure Kinect, Vive, ESP32 Interface and UWB location recognition. Using the system, “Sunny Day” provides the immersive experience of a hopeful future that will initiate the viewers’ active participation.
+context: "'Immersive Media Art' nowadays with huge screen and projection lack of interaction or new experience. In terms of content, artworks regarding climate change tends to depict dystopia and make us feel lethargic and hopeless."
+solution: An XR system consists of Azure Kinect, Vive, ESP32 Interface and UWB location recognition. Using the system, “Sunny Day” provides the immersive experience of a hopeful future that will initiate the viewers’ active participation.
 skill_role: Team Lead, Design Engineer
 type: Sustainable Technology, XR, Telepresence, Human-Computer Interaction, Research
 timeline: 2022.03 ~ 2022.12

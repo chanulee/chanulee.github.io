@@ -39,7 +39,7 @@ process: [
     ['Initial idea of AI Boss simulator', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p5.jpg'],
     ['Initial idea of Language after AI', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p6.jpg'],
     ['Human Intelligence Task(HIT) for AI', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p7.jpg'],
-    ['AI's impact on labour system', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p8.jpg'],
+    ["AI's impact on labour system", 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p8.jpg'],
     ['Universalized Human Intelligence Task(HIT)', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p9.jpg'],
     ['Initial sketch of conveyer belt inspired installation', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p10.jpg'],
     ['Exhibition day D-2', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/intheloop/p11.jpg']

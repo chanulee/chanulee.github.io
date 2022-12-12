@@ -14,7 +14,7 @@ collaborators: Gina Kim
 professor: Prof. SY Park
 links: [
     ['DBPia (KR)', 'https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11113898'],
-    ['KCC '22 Slide (Slideshare, KR), 'https://www.slideshare.net/ChanuLee3/nft-image-copyright-protection-system-using-image-layer-based-creator-authentication'],
+    ["KCC '22 Slide (Slideshare, KR)", 'https://www.slideshare.net/ChanuLee3/nft-image-copyright-protection-system-using-image-layer-based-creator-authentication'],
     ['BaSE Lab Seminar (KR)', 'https://www.youtube.com/watch?v=HrXV9y57d8c']
 ]
 hero: https://portfolio-22.s3.ap-northeast-2.amazonaws.com/nft/hero.jpg

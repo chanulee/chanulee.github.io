@@ -1,5 +1,5 @@
 ---
-title: ETNAH: NFT art trading platform
+title: "ETNAH: NFT art trading platform"
 desc: Changing the way people buy and collect artworks with NFT
 caption: Gallery Hyundai
 brief: Produced information architecture, short-term service tactics, user flow and mid-fidelity prototype of an NFT art trading platform ‘ETNAH’, working with business development and back-end, blockchain engineers.

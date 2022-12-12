@@ -26,7 +26,7 @@ video: "https://player.vimeo.com/video/727283666?h=c138771ecf&badge=0&autopause=
 process: [
     ['Flow ideation', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p1.jpg'],
     ['Scored high in Graphic and Sound, Optimization and Creativity from KT corp', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p2.jpg'],
-    ['Featured in Sogang University's news, 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p3.jpg']
+    ['Featured in Sogang University news', 'https://portfolio-22.s3.ap-northeast-2.amazonaws.com/tonicscape/p3.jpg']
 ]
 order: 10
 slug: tonicscape
