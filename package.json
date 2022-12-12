@@ -12,7 +12,7 @@
         "build": "gatsby build",
         "serve": "gatsby serve",
         "clean": "gatsby clean",
-        "deploy": "gatsby build && gh-pages -d public -b main --remote chanu"
+        "deploy": "gatsby build && gh-pages -d public -b main --remote origin"
     },
     "dependencies": {
         "gatsby": "^5.0.0",
