@@ -42,7 +42,7 @@ function Projects() {
                 </p>
             </header>
 
-            <main className="w-full mb-xxl5 px-xxl4 grid grid-cols-12 gap-x-l gap-y-xxl">
+            <main className="w-full mb-xxl5 px-xxl4 grid grid-cols-12 gap-x-l gap-y-xxl items-start">
                 {
                     projects.map(obj => {
                         const { title, desc, caption, slug, hero } = obj.frontmatter

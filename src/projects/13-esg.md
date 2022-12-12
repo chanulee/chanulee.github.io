@@ -9,7 +9,7 @@ skill_role: Business Strategy, Research, Visual Design
 type: Human-Computer Interaction, UX Design
 timeline: 2022.04 ~ 2022.6
 duration: 3 months
-associations:
+associations: ''
 collaborators: Gwonu Ryu, Dabin Kim
 professor: Prof. Yungseok Park
 links: [

@@ -108,7 +108,7 @@ function IndexPage() {
                         </h4>
                     </div>
 
-                    <div className="w-full mb-xxl grid grid-cols-12 gap-x-l gap-y-xxl2">
+                    <div className="w-full mb-xxl grid grid-cols-12 gap-x-l gap-y-xxl2 items-start">
                         {
                             projects.map(obj => {
 

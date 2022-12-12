@@ -5,35 +5,10 @@ import { v4 as uuid } from 'uuid'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
-function ProjectDetails() {
-    const { markdownRemark: data } = useStaticQuery(graphql`
-        query singleProject ($slug: String) {
-            markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-                frontmatter {
-                    hero
-                    title
-                    desc
-                    caption
-                    brief
-                    context
-                    solution
-                    skill_role
-                    type
-                    timeline
-                    duration
-                    associations
-                    video
-                    gallery
-                    process
-                    collaborators
-                    professor
-                    links
-                }
-            }
-        }
-    `)
+function ProjectDetails({ data }) {
+    const { markdownRemark } = data
 
-    const { frontmatter: values } = data
+    const { frontmatter: values } = markdownRemark
 
     return (
         <>
@@ -59,7 +34,7 @@ function ProjectDetails() {
                         Brief
                     </h4>
                     <p className="Body24 col-span-9">
-                        { values.brief }
+                        { values?.brief }
                     </p>
                 </div>
                 <div className="w-full mb-xl grid grid-cols-12 gap-x-l">
@@ -67,7 +42,7 @@ function ProjectDetails() {
                         Context
                     </h4>
                     <p className="Body24 col-span-9">
-                        { values.context }
+                        { values?.context }
                     </p>
                 </div>
                 <div className="w-full mb-xxl2 grid grid-cols-12 gap-x-l">
@@ -75,7 +50,7 @@ function ProjectDetails() {
                         Solution
                     </h4>
                     <p className="Body24 col-span-9">
-                        { values.solution }
+                        { values?.solution }
                     </p>
                 </div>
 
@@ -85,7 +60,7 @@ function ProjectDetails() {
                         <p className="mb-m body opacity-50">
                             Skills & Role
                         </p>
-                        { values.skill_role.split(',').map(line => {
+                        { values?.skill_role?.split(',').map(line => {
                             const trimed = line.trim()
                             return (
                                 <p className="body">
@@ -99,7 +74,7 @@ function ProjectDetails() {
                         <p className="mb-m body opacity-50">
                             Type
                         </p>
-                        { values.type.split(',').map(line => {
+                        { values?.type?.split(',').map(line => {
                             const trimed = line.trim()
                             return (
                                 <p className="body">
@@ -114,7 +89,7 @@ function ProjectDetails() {
                             Timeline
                         </p>
                         <p className="body">
-                            {`${values.timeline} (${values.duration})`}
+                            {`${values?.timeline} (${values?.duration})`}
                         </p>       
                     </div>
                     <div className="col-span-3">
@@ -122,7 +97,7 @@ function ProjectDetails() {
                         <p className="mb-m body opacity-50">
                             Associated with
                         </p>
-                        { values.associations.split(',').map(line => {
+                        { values?.associations?.split(',').map(line => {
                             const trimed = line.trim()
                             return (
                                 <p className="body">
@@ -155,7 +130,7 @@ function ProjectDetails() {
                         Gallery
                     </h4>
                     <div className="grid grid-cols-12 gap-x-l gap-y-xxl">
-                        { values.gallery.map((obj, idx) => (
+                        { values?.gallery?.map((obj, idx) => (
                             <div className="col-span-4" key={uuid()}>
                                 <img 
                                     className="w-full mb-xs"
@@ -175,7 +150,7 @@ function ProjectDetails() {
                         Process
                     </h4>
                     <div className="grid grid-cols-12 gap-x-l gap-y-xxl">
-                        { values.process.map((obj, idx) => (
+                        { values?.process?.map((obj, idx) => (
                             <div className="col-span-4" key={uuid()}>
                                 <img 
                                     className="w-full mb-xs"
@@ -196,7 +171,7 @@ function ProjectDetails() {
                         <p className="mb-m body opacity-50">
                             Collaborated with
                         </p>
-                        { values.collaborators.split(',').map(line => {
+                        { values?.collaborators?.split(',').map(line => {
                             const trimed = line.trim()
                             return (
                                 <p className="body">
@@ -210,7 +185,7 @@ function ProjectDetails() {
                         <p className="mb-m body opacity-50">
                             Professor
                         </p>
-                        { values.professor.split(',').map(line => {
+                        { values?.professor?.split(',').map(line => {
                             const trimed = line.trim()
                             return (
                                 <p className="body">
@@ -224,7 +199,7 @@ function ProjectDetails() {
                         <p className="mb-m body opacity-50">
                             Links
                         </p>
-                        { values.links.map(line => (
+                        { values?.links?.map(line => (
                             <a className="body block" href={line[1]}>
                                 { line[0] }
                             </a>
@@ -239,3 +214,30 @@ function ProjectDetails() {
 }
 
 export default ProjectDetails
+
+export const query = graphql`
+    query singleProject ($slug: String) {
+        markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+            frontmatter {
+                hero
+                title
+                desc
+                caption
+                brief
+                context
+                solution
+                skill_role
+                type
+                timeline
+                duration
+                associations
+                video
+                gallery
+                process
+                collaborators
+                professor
+                links
+            }
+        }
+    }
+`

@@ -11,7 +11,7 @@ timeline: 2019.4 ~ 2019.10
 duration: 7 months
 associations: Supported by Ministry of Science and ICT, Platform-L Contemporary Art Center
 collaborators: Dongmin Kim, Sooah Kwak, jtodaone
-professor: 
+professor: ''
 links: [
     ['DWLP Web Archive', 'https://vimeo.com/681196718'],
     ['Platform-L Contemporary Art Center (KR)', 'https://naver.com'],
