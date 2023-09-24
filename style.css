@@ -127,6 +127,13 @@ img{
 .list-item:hover{
 	opacity: 50%;
 }
+.list-item-main{
+	padding: 0px 12px 48px 12px;
+	flex: 100%;
+}
+.list-item-main:hover{
+	opacity: 50%;
+}
 
 /* LIST 2 - approach */
 .list-app{
