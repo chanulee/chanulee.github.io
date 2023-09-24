@@ -1,0 +1,187 @@
+@import url("https://use.typekit.net/uvz0uhv.css");
+
+*{
+	box-sizing:border-box;
+	margin:0 auto;
+	transition: opacity 0.5s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	font-size: 100%;
+	text-decoration: none;
+
+}
+
+body{
+	font-family: "neue-haas-grotesk-text", sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	font-style: normal;
+	color: #171313;
+	background: #fbfbfb;
+}
+a:hover{
+	opacity: 50%;
+}
+
+
+h1{
+	/* LANDING H1 */
+	font-size: 24px;
+	padding: 48px 24px 12px 24px;
+}
+h2{
+	/* PAGE MAIN TITLE */
+	font-size: 40px;
+	padding: 80px 24px;
+}
+h3{
+	/* SECTION TITLE */
+	font-size: 24px;
+	font-family: "etna", serif;
+	font-weight: 400;
+	padding: 0px 0px 4px 0px;
+	line-height: 160&;
+}
+h4{
+	/* ITEM TITLE */
+	font-family: "etna", serif;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 4px 0px 8px 0px;
+}
+h5{
+	/* Approach Body */
+	font-size: 20px;
+	padding: 4px 0px 16px 0px;
+	line-height: 140%;
+	font-weight: 400;
+	opacity: 50%;
+}
+h6{
+	/* ITEM SUBTITLE */
+	opacity: 50%;
+	line-height: 150%;
+
+}
+sub{
+	font-size: 12px;
+	line-height: 0px;
+}
+img{
+	padding: 0px 0px 8px 0px;
+}
+
+
+/* NAVIGATION BAR */
+.navbar{
+	display: flex;
+	text-align: left;
+	padding: 16px 24px;
+}
+.navbar a {
+	color: #171313;
+	text-decoration: none;
+}
+.left-container{
+	flex: 25%;
+}
+.right-container{
+	display: flex;
+	flex-wrap: wrap; 
+	flex: 75%;
+}
+.page{
+	padding: 0px 0px 8px 0px;
+	flex: 25%;
+}
+.page-now{
+	padding: 0px 0px 8px 0px;
+	flex: 25%;
+	font-weight: 500;
+}
+
+.section-header{
+	padding: 24px 24px 24px 24px;
+	
+}
+
+/* LIST 3 - project */
+.list{
+	display: flex;
+	flex-wrap: wrap; 
+	padding: 0px 12px;
+}
+.list a{
+	all: unset;
+}
+
+.list-item{
+	padding: 0px 12px 48px 12px;
+	flex: 33%;
+}
+.list-item:hover{
+	opacity: 50%;
+}
+
+/* LIST 2 - approach */
+.list-app{
+	padding: 24px 12px 24px 12px;
+	flex: 50%;
+}
+
+/* LANDING PAGE HEADER SECTION */
+.landing-header{
+	height: 550px;
+	background-image: url("https://portfolio-22.s3.ap-northeast-2.amazonaws.com/sunny-day/g2.jpg");
+	background-repeat: no-repeat;
+	/*background-attachment: fixed;*/
+	background-position: center center;
+	background-size: cover;
+	color: #fbfbfb;
+	position: relative;
+}
+
+.topics{
+	padding-left: 24px;
+	position: absolute;
+	bottom: 24px;
+}
+.topics p{
+	padding: 0px 0px 8px 0px;
+	opacity: 50%;
+}
+.topics a{
+	font-size: 24px;
+	font-family: "etna", serif;
+	color: #fbfbfb;
+	text-decoration: none;
+	line-height: 160%;
+}
+
+/* RESPONSIVE */
+@media (max-width:620px) {
+	.right-container{
+		display: flex;
+		flex-wrap: wrap; 
+		flex: 50%;
+	}
+	.left-container{
+		flex: 50%;
+	}
+	.page{
+		flex: 100%;
+	}
+	.list-item{
+		flex: 100%;
+	}
+	.list-app{
+		flex: 100%;
+	}
+	h2{
+		display: none;
+	}
+}
