@@ -73,6 +73,7 @@ sub{
 }
 img{
 	padding: 0px 0px 8px 0px;
+	width: 100%; aspect-ratio: 5 / 3.5; object-fit: cover;
 }
 
 
@@ -121,7 +122,7 @@ img{
 
 .list-item{
 	padding: 0px 12px 48px 12px;
-	flex: 33%;
+	flex: 50%;
 }
 .list-item:hover{
 	opacity: 50%;
