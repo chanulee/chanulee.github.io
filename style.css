@@ -22,6 +22,7 @@ body{
 	font-style: normal;
 	color: #171313;
 	background: #fbfbfb;
+	line-height: 150%;
 }
 a:hover{
 	opacity: 50%;
@@ -31,7 +32,10 @@ a:hover{
 h1{
 	/* LANDING H1 */
 	font-size: 24px;
-	padding: 48px 24px 12px 24px;
+	font-family: "etna", serif;
+	font-weight: 400;
+	line-height: 150%;
+	padding: 0px 0px 12px 0px;
 }
 h2{
 	/* PAGE MAIN TITLE */
@@ -44,7 +48,7 @@ h3{
 	font-family: "etna", serif;
 	font-weight: 400;
 	padding: 0px 0px 4px 0px;
-	line-height: 160&;
+	line-height: 160%;
 }
 h4{
 	/* ITEM TITLE */
@@ -55,11 +59,11 @@ h4{
 }
 h5{
 	/* Approach Body */
-	font-size: 20px;
+	font-size: 16px;
 	padding: 4px 0px 16px 0px;
-	line-height: 140%;
+	line-height: 150%;
 	font-weight: 400;
-	opacity: 50%;
+	opacity: 70%;
 }
 h6{
 	/* ITEM SUBTITLE */
@@ -75,7 +79,22 @@ img{
 	padding: 0px 0px 8px 0px;
 	width: 100%; aspect-ratio: 5 / 3.5; object-fit: cover;
 }
-
+button {
+  border: none;
+  background-color: rgb(236, 236, 236);
+  color: rgb(27, 27, 27);
+  padding: 16px 24px;
+  border-radius: 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px 8px 0px 0px;
+  cursor: pointer;
+}
+.about ul {
+	opacity: 50%;
+	padding: 00px 0px 0px 16px;
+}
 
 /* NAVIGATION BAR */
 .navbar{
@@ -107,7 +126,52 @@ img{
 
 .section-header{
 	padding: 24px 24px 24px 24px;
-	
+}
+
+.hello-container{
+	padding: 48px 24px;
+	display: flex;
+	flex-wrap: wrap; 
+}
+.hello-h{
+	padding: 0px;
+	flex: 50%;
+}
+.hello{
+	padding: 0px 0px 0px 12px;
+	flex: 50%;
+
+}
+.hello p{
+	font-size: 20px;
+	line-height: 140%;
+	padding: 0px 0px 20px 0px;
+}
+.hello a{
+	color: black;
+	text-decoration-color: rgb(48, 55, 230);
+}
+
+.about-container{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0px 12px;
+}
+.about-left{
+	display: flex;
+	flex-wrap: wrap;
+	flex: 50%;
+}
+.about{
+	flex: 50%;
+	padding: 0px 12px;
+}
+.about-right{
+	flex: 50%;
+	padding: 0px 12px;
+}
+.about img{
+	aspect-ratio: 3.5 / 5; 
 }
 
 /* LIST 3 - project */
@@ -119,21 +183,28 @@ img{
 .list a{
 	all: unset;
 }
+.list button{
+	margin: 12px;
+}
 
 .list-item{
-	padding: 0px 12px 48px 12px;
+	padding: 24px 12px 24px 12px;
 	flex: 50%;
 }
+/*
 .list-item:hover{
 	opacity: 50%;
 }
+*/
 .list-item-main{
 	padding: 0px 12px 48px 12px;
 	flex: 100%;
 }
+/*
 .list-item-main:hover{
 	opacity: 50%;
 }
+*/
 
 /* LIST 2 - approach */
 .list-app{
@@ -170,6 +241,14 @@ img{
 	line-height: 160%;
 }
 
+.collaborators{
+	background-color: #f6f6f6;
+	padding: 24px;
+}
+.collaborators h5{
+	padding: 8px 0px 8px 0px;
+}
+
 /* RESPONSIVE */
 @media (max-width:620px) {
 	.right-container{
@@ -183,10 +262,17 @@ img{
 	.page{
 		flex: 100%;
 	}
+	.hello-h, .hello{
+		flex: 100%;
+		padding: 0px;
+	}
 	.list-item{
 		flex: 100%;
 	}
 	.list-app{
+		flex: 100%;
+	}
+	.about-left{
 		flex: 100%;
 	}
 	h2{
