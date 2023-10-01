@@ -126,6 +126,9 @@ button {
 
 .section-header{
 	padding: 24px 24px 24px 24px;
+	flex: 50%;
+	position: sticky;
+	top: 0;
 }
 
 .hello-container{
@@ -175,10 +178,14 @@ button {
 }
 
 /* LIST 3 - project */
-.list{
+.section{
 	display: flex;
-	flex-wrap: wrap; 
+	flex-wrap: wrap;
+}
+
+.list{
 	padding: 0px 12px;
+	flex: 50%;
 }
 .list a{
 	all: unset;
@@ -189,17 +196,12 @@ button {
 
 .list-item{
 	padding: 24px 12px 24px 12px;
-	flex: 50%;
 }
 /*
 .list-item:hover{
 	opacity: 50%;
 }
 */
-.list-item-main{
-	padding: 0px 12px 48px 12px;
-	flex: 100%;
-}
 /*
 .list-item-main:hover{
 	opacity: 50%;
@@ -266,7 +268,10 @@ button {
 		flex: 100%;
 		padding: 0px;
 	}
-	.list-item{
+	.section-header{
+		flex: 100%;
+	}
+	.list{
 		flex: 100%;
 	}
 	.list-app{
