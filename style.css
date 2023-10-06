@@ -127,7 +127,7 @@ button {
 .section-header{
 	padding: 24px 24px 24px 24px;
 	flex: 50%;
-	position: sticky;
+	/*position: sticky;*/
 	top: 0;
 }
 
