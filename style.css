@@ -173,8 +173,27 @@ button {
 	flex: 50%;
 	padding: 0px 12px;
 }
+.about-right p{
+	font-size: 14px;
+	line-height: 140%;
+	padding: 0px 0px 20px 0px;
+}
+.about-right a{
+	color: black;
+	text-decoration-color: rgb(48, 55, 230);
+}
 .about img{
 	aspect-ratio: 3.5 / 5; 
+}
+.connect{
+	display: flex;
+	flex-wrap: wrap;
+	flex: 50%;
+	padding: 12px;
+	margin: 24px 0px 24px 0px;
+}
+.connect button{
+	margin: 12px 0px 0px 0px;
 }
 
 /* LIST 3 - project */
@@ -196,6 +215,7 @@ button {
 
 .list-item{
 	padding: 24px 12px 24px 12px;
+	flex: 100%;
 }
 /*
 .list-item:hover{
@@ -272,6 +292,9 @@ button {
 		flex: 100%;
 	}
 	.list{
+		flex: 100%;
+	}
+	.list-item{
 		flex: 100%;
 	}
 	.list-app{
