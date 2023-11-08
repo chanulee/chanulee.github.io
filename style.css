@@ -286,6 +286,10 @@ footer {
 .collaborators ul{
 	margin: 0px 0px 16px 0px;
 }
+.rotom{
+	padding: 12px;
+	width: 50%; aspect-ratio: auto;
+}
 
 /* RESPONSIVE */
 @media (max-width:620px) {
