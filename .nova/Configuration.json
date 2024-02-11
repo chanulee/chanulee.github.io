@@ -1,15 +1,16 @@
 {
+  "eablokker.tabsSidebar.config.collapsedFolders" : [
+
+  ],
   "eablokker.tabsSidebar.config.customKindGroupsOrder" : [
-    "html",
-    "css"
+    "css",
+    "html"
   ],
   "eablokker.tabsSidebar.config.customTabOrder" : [
-    "\/Users\/chanu\/Documents\/GitHub\/chanulee.github.io\/about.html",
-    "\/Users\/chanu\/Documents\/GitHub\/chanulee.github.io\/style.css",
-    "\/Users\/chanu\/Documents\/GitHub\/chanulee.github.io\/projects.html",
-    "\/Users\/chanu\/Documents\/GitHub\/chanulee.github.io\/index.html",
-    "\/Users\/chanu\/Documents\/GitHub\/chanulee.github.io\/approach.html",
-    "\/Users\/chanu\/Documents\/GitHub\/chanulee.github.io\/rotom.html",
-    "\/Users\/chanu\/Library\/Mobile Documents\/.Trash\/rotom.html"
+    "file:\/\/\/Users\/chanu\/Local%20Documents\/GitHub\/chanulee.github.io\/style.css",
+    "file:\/\/\/Users\/chanu\/Local%20Documents\/GitHub\/chanulee.github.io\/index.html",
+    "file:\/\/\/Users\/chanu\/Local%20Documents\/GitHub\/chanulee.github.io\/approach.html",
+    "file:\/\/\/Users\/chanu\/Local%20Documents\/GitHub\/chanulee.github.io\/projects.html",
+    "file:\/\/\/Users\/chanu\/Local%20Documents\/GitHub\/chanulee.github.io\/about.html"
   ]
 }

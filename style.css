@@ -52,10 +52,9 @@ h3{
 }
 h4{
 	/* ITEM TITLE */
-	font-family: "etna", serif;
+	font-family: "neue-haas-grotesk-text", sans-serif;
 	font-size: 16px;
-	font-weight: 700;
-	padding: 4px 0px 8px 0px;
+	padding: 0px 0px 4px 0px;
 }
 h5{
 	/* Approach Body */
@@ -145,23 +144,19 @@ footer {
 }
 
 .hello-container{
-	padding: 48px 24px;
+	padding: 36px 24px;
 	display: flex;
 	flex-wrap: wrap; 
 }
-.hello-h{
-	padding: 0px;
-	flex: 50%;
-}
+
 .hello{
 	padding: 0px 0px 0px 12px;
 	flex: 50%;
-
 }
 .hello p{
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 140%;
-	padding: 0px 0px 20px 0px;
+	padding: 0px 0px 32px 0px;
 }
 .hello a{
 	color: black;
