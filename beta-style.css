@@ -271,10 +271,14 @@ footer {
 	flex: 50%;
 }
 
-.detail{
-
+.detail ul{
+	opacity: 0.5;
+	margin-top: 0.5rem;
 }
 
+.detail li, b{
+	font-size: 0.75rem;
+}
 
 /* LIST 2 - approach */
 .list-app{
@@ -334,8 +338,16 @@ footer {
 		flex: 100%;
 	}
 	
+	.detail ul{
+		margin-top: 0rem;
+	}
+	
+	.detail li, b{
+		font-size: 0.875rem;
+	}
+	
 	sub{
-	display: block;
+		display: block;
 	}
 	
 	/* Hide h5 elements by default in mobile mode and enable transition */
@@ -347,7 +359,7 @@ footer {
 	}
 	.list-info .detail.show {
 		max-height: 20em; /* Adjust this value based on your content */
-		opacity: 0.5;
+		opacity: 1;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
 	}
