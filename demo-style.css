@@ -235,16 +235,18 @@ footer {
 	flex: 50%;
 }
 
-.list-info h5 {
-	display: none;
-	transition: opacity 0.3s ease-in-out;
-	opacity: 0;
+.list-info h4 {
+	max-height: 0; /* Initially no height */
+	overflow: hidden; /* Prevent content from spilling out */
+	opacity: 0; /* Make it transparent */
+	transition: max-height 0.3s ease, opacity 0.3s ease; /* Smooth transition for both properties */
 }
 
-.list-info h5.show {
-	display: block;
-	opacity: 1;
+.list-info h4.show {
+	max-height: 5em; /* Adjust based on the content's size, provide enough space for the content */
+	opacity: 1; /* Fully visible */
 }
+
 
 /* LIST 2 - approach */
 .list-app{
