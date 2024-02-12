@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5 {
 body{
 	font-style: normal;
 	color: #171313;
-	background-color: #eeeeee;
+	background-color: #efefef;
 	line-height: 140%;
 }
 a:hover{
@@ -91,14 +91,13 @@ button {
 }
 
 footer {
-	background-color: #2c2c2c;
-	padding: 24px 0px 24px 0px;
+	background-color: #e4e4e4;
+	padding: 16px 0px 16px 0px;
 	margin: 32px 0px 0px 0px;
-	color: #ffffff;
 }
 
 .footertext{
-	margin: 16px 0px 24px 24px;
+	margin: 16px 0px 16px 16px;
 }
 
 .about ul {
@@ -236,6 +235,17 @@ footer {
 	flex: 50%;
 }
 
+.list-info h5 {
+	display: none;
+	transition: opacity 0.3s ease-in-out;
+	opacity: 0;
+}
+
+.list-info h5.show {
+	display: block;
+	opacity: 1;
+}
+
 /* LIST 2 - approach */
 .list-app{
 	padding: 24px 12px 24px 12px;
@@ -251,10 +261,6 @@ footer {
 }
 .collaborators ul{
 	margin: 0px 0px 16px 0px;
-}
-.rotom{
-	padding: 12px;
-	width: 50%; aspect-ratio: auto;
 }
 
 /* RESPONSIVE */
@@ -292,7 +298,7 @@ footer {
 	.about-left{
 		flex: 100%;
 	}
-	h2{
+	/* h2{
 		display: none;
-	}
+	} */
 }
