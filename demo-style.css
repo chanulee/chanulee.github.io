@@ -1,10 +1,14 @@
+html {
+	font-size: 20px;
+}
+
 *{
 	box-sizing:border-box;
 	font-family: "arial", sans-serif;
 	margin:0 auto;
 	transition: opacity 0.5s;
-	font-size: 14px;
-	line-height: 140%;
+	font-size: 0.875rem;
+	line-height: 1.4;
 }
 
 /* hr {
@@ -27,7 +31,6 @@ body{
 	font-style: normal;
 	color: #171313;
 	background-color: #efefef;
-	line-height: 140%;
 }
 a:hover{
 	opacity: 50%;
@@ -36,20 +39,19 @@ a:hover{
 
 h1{
 	/* LANDING H1 */
-	font-size: 24px;
-	padding: 0px 0px 12px 0px;
+	font-size: 1.5rem; /* 24px equivalent */
+	padding-bottom: 0.75rem; /* 12px equivalent for h1 */
 }
 
 h2{
 	/* SECTION TITLE */
-	font-size: 24px;
-	font-weight: 400;
-	padding: 0px 0px 4px 0px;
+	font-size: 1.5rem; /* 24px equivalent */
+	padding-bottom: 0.25rem; /* 4px equivalent */
 }
 
 h3{
 	/* ITEM TITLE */
-	padding: 0px 0px 0px 0px;
+	padding: 0px;
 }
 
 h4{
@@ -65,7 +67,7 @@ sub{
 }
 
 img{
-	margin-bottom: 8px;
+	margin-bottom: 0.5rem; /* 8px equivalent */
 	width: 100%;
 	aspect-ratio: 5 / 3.5; object-fit: cover;
 }
@@ -74,42 +76,42 @@ iframe{
 	width: 100%;
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
-	margin-bottom: 8px;
+	margin-bottom: 0.5rem; /* 8px equivalent */
 }
 
 button {
-  border: none;
-  background-color: rgb(236, 236, 236);
-  color: rgb(27, 27, 27);
-  padding: 16px 24px;
-  border-radius: 32px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 0px 8px 0px 0px;
-  cursor: pointer;
+	
+	border: none;
+	background-color: rgb(236, 236, 236);
+	color: rgb(27, 27, 27);
+	padding: 1rem 1.5rem; /* 16px vertical and 24px horizontal paddings */
+	border-radius: 2rem; /* 32px equivalent */
+	font-size: 1rem; /* 16px equivalent */
+	margin-right: 0.5rem; /* 8px equivalent */
+
+	text-decoration: none;
+	display: inline-block;
+
+	cursor: pointer;
 }
 
 footer {
 	background-color: #e4e4e4;
-	padding: 16px 0px 16px 0px;
-	margin: 32px 0px 0px 0px;
+	
+	padding: 1rem 0; /* 16px top and bottom padding */
+	margin-top: 2rem; /* 32px equivalent */
 }
 
 .footertext{
-	margin: 16px 0px 16px 16px;
-}
-
-.about ul {
-	opacity: 50%;
-	padding: 00px 0px 0px 16px;
+	margin: 1rem 0; /* 16px top and bottom margin */
+	padding-left: 1rem; /* 16px left padding */
 }
 
 /* NAVIGATION BAR */
 .navbar{
 	display: flex;
 	text-align: left;
-	padding: 16px 16px;
+	padding: 1rem; /* 16px padding */
 }
 .navbar a {
 	color: #171313;
@@ -117,7 +119,7 @@ footer {
 }
 .left-container{
 	flex: 25%;
-	padding: 0px 16px 0px 0px;
+	padding: 0px 1rem 0px 0px;
 }
 .right-container{
 	display: flex;
@@ -136,25 +138,25 @@ footer {
 }
 
 .section-header{
-	padding: 24px 24px 24px 24px;
+	padding: 1.5rem;
 	flex: 50%;
 	top: 0;
 }
 
 .hello-container{
-	padding: 0px 16px;
-	padding-top: 24px;
+	padding: 0px 1rem;
+	padding-top: 1.5rem;
 	display: flex;
 	flex-wrap: wrap; 
 }
 
 .hello{
-	padding: 0px 0px 0px 12px;
+	padding: 0px;
 	flex: 50%;
 }
 .hello p{
 	line-height: 140%;
-	padding: 0px 0px 32px 0px;
+	padding: 0px 0px 2rem 0px;
 }
 .hello a{
 	color: black;
@@ -231,20 +233,13 @@ footer {
 }
 
 .list-info{
-	padding: 0px 0px 0px 16px;
+	padding: 0px 0px 0px 1rem;
 	flex: 50%;
+	cursor: pointer;
 }
 
 .list-info h4 {
-	max-height: 0; /* Initially no height */
-	overflow: hidden; /* Prevent content from spilling out */
-	opacity: 0; /* Make it transparent */
-	transition: max-height 0.3s ease, opacity 0.3s ease; /* Smooth transition for both properties */
-}
 
-.list-info h4.show {
-	max-height: 5em; /* Adjust based on the content's size, provide enough space for the content */
-	opacity: 1; /* Fully visible */
 }
 
 
@@ -267,6 +262,11 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width:620px) {
+	
+	html {
+		font-size: 16px;
+	}
+	
 	.right-container{
 		display: flex;
 		flex-wrap: wrap; 
@@ -300,6 +300,19 @@ footer {
 	.about-left{
 		flex: 100%;
 	}
+	
+	/* Hide h5 elements by default in mobile mode and enable transition */
+	.list-info h4 {
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease, opacity 0.3s ease;
+	}
+	.list-info h4.show {
+		max-height: 5em; /* Adjust this value based on your content */
+		opacity: 1;
+	}
+	
 	/* h2{
 		display: none;
 	} */
