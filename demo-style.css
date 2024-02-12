@@ -51,6 +51,7 @@ h2{
 
 h3{
 	/* ITEM TITLE */
+	font-weight: bold;
 	padding: 0px;
 }
 
@@ -145,18 +146,18 @@ footer {
 
 .hello-container{
 	padding: 0px 1rem;
-	padding-top: 1.5rem;
+	padding-top: 1rem;
 	display: flex;
 	flex-wrap: wrap; 
 }
 
 .hello{
 	padding: 0px;
+	margin-bottom: 4rem;
 	flex: 50%;
 }
 .hello p{
 	line-height: 140%;
-	padding: 0px 0px 2rem 0px;
 }
 .hello a{
 	color: black;
