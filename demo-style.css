@@ -1,0 +1,267 @@
+*{
+	box-sizing:border-box;
+	font-family: "arial", sans-serif;
+	margin:0 auto;
+	transition: opacity 0.5s;
+	font-size: 14px;
+	line-height: 140%;
+}
+
+h1, h2, h3, h4, h5 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+body{
+	font-style: normal;
+	color: #171313;
+	background-color: #eeeeee;
+	line-height: 150%;
+}
+a:hover{
+	opacity: 50%;
+}
+
+
+h1{
+	/* LANDING H1 */
+	font-size: 24px;
+	padding: 0px 0px 12px 0px;
+}
+h2{
+	/* PAGE MAIN TITLE */
+	font-size: 40px;
+	padding: 80px 24px;
+}
+h3{
+	/* SECTION TITLE */
+	font-size: 24px;
+	font-weight: 400;
+	padding: 0px 0px 4px 0px;
+}
+h4{
+	/* ITEM TITLE */
+	padding: 0px 0px 0px 0px;
+}
+h5{
+	/* Approach Body */
+	padding: 4px 0px 8px 0px;
+	opacity: 70%;
+}
+
+sub{
+	line-height: 0px;
+}
+img{
+	padding: 0px 0px 8px 0px;
+	width: 100%;
+	aspect-ratio: 5 / 3.5; object-fit: cover;
+}
+
+button {
+  border: none;
+  background-color: rgb(236, 236, 236);
+  color: rgb(27, 27, 27);
+  padding: 16px 24px;
+  border-radius: 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px 8px 0px 0px;
+  cursor: pointer;
+}
+
+footer {
+	background-color: #2c2c2c;
+	padding: 24px 0px 24px 0px;
+	margin: 32px 0px 0px 0px;
+	color: #ffffff;
+}
+
+.footertext{
+	margin: 16px 0px 24px 24px;
+}
+
+.about ul {
+	opacity: 50%;
+	padding: 00px 0px 0px 16px;
+}
+
+/* NAVIGATION BAR */
+.navbar{
+	display: flex;
+	text-align: left;
+	padding: 16px 24px;
+}
+.navbar a {
+	color: #171313;
+	text-decoration: none;
+}
+.left-container{
+	flex: 25%;
+	padding: 0px 16px 0px 0px;
+}
+.right-container{
+	display: flex;
+	flex-wrap: wrap; 
+	flex: 75%;
+}
+.page{
+	color: #171313;
+	padding: 0px 0px 0px 0px;
+	flex: 25%;
+}
+.page-now{
+	padding: 0px 0px 0px 0px;
+	flex: 25%;
+}
+
+.section-header{
+	padding: 24px 24px 24px 24px;
+	flex: 50%;
+	top: 0;
+}
+
+.hello-container{
+	padding: 0px 24px;
+	padding-top: 24px;
+	display: flex;
+	flex-wrap: wrap; 
+}
+
+.hello{
+	padding: 0px 0px 0px 12px;
+	flex: 50%;
+}
+.hello p{
+	line-height: 140%;
+	padding: 0px 0px 32px 0px;
+}
+.hello a{
+	color: black;
+	text-decoration-color: rgb(48, 55, 230);
+}
+
+.about-container{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0px 12px;
+}
+.about-left{
+	display: flex;
+	flex-wrap: wrap;
+	flex: 50%;
+}
+.about{
+	flex: 50%;
+	padding: 0px 12px;
+}
+.about-right{
+	flex: 50%;
+	padding: 0px 12px;
+}
+.about-right p{
+	font-size: 16px;
+	line-height: 140%;
+	padding: 0px 0px 20px 0px;
+}
+.about-right a{
+	color: black;
+	text-decoration-color: rgb(48, 55, 230);
+}
+.about img{
+	aspect-ratio: 3.5 / 5; 
+}
+.connect{
+	display: flex;
+	flex-wrap: wrap;
+	flex: 50%;
+	padding: 12px;
+	margin: 24px 0px 24px 0px;
+}
+.connect button{
+	margin: 12px 0px 0px 0px;
+}
+
+/* LIST 3 - project */
+.section{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.list{
+	padding: 0px 12px;
+	flex: 50%;
+}
+.list a{
+	all: unset;
+}
+.list button{
+	margin: 12px;
+}
+
+.list-item{
+	padding: 0px 12px 42px 12px;
+	flex: 100%;
+}
+
+/* LIST 2 - approach */
+.list-app{
+	padding: 24px 12px 24px 12px;
+	flex: 50%;
+}
+
+
+.collaborators{
+	background-color: #f6f6f6;
+	padding: 24px;
+}
+.collaborators h5{
+	padding: 8px 0px 8px 0px;
+}
+.collaborators ul{
+	margin: 0px 0px 16px 0px;
+}
+.rotom{
+	padding: 12px;
+	width: 50%; aspect-ratio: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width:620px) {
+	.right-container{
+		display: flex;
+		flex-wrap: wrap; 
+		flex: 50%;
+	}
+	.left-container{
+		flex: 50%;
+	}
+	.page{
+		flex: 100%;
+	}
+	.hello-h, .hello{
+		flex: 100%;
+		padding: 0px;
+	}
+	.section-header{
+		flex: 100%;
+	}
+	.list{
+		flex: 100%;
+	}
+	.list-item{
+		flex: 100%;
+	}
+	.list-app{
+		flex: 100%;
+	}
+	.about-left{
+		flex: 100%;
+	}
+	h2{
+		display: none;
+	}
+}
