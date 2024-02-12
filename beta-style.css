@@ -91,7 +91,7 @@ iframe{
 button {
 	
 	border: none;
-	background-color: rgb(236, 236, 236);
+	background-color: #ececec;
 	color: rgb(27, 27, 27);
 	padding: 1rem 1.5rem; /* 16px vertical and 24px horizontal paddings */
 	border-radius: 2rem; /* 32px equivalent */
@@ -271,9 +271,22 @@ footer {
 	flex: 50%;
 }
 
+.list-info h3{
+	padding-bottom: 0.3rem;
+	border-bottom: 1px solid #d2d2d2;
+	margin-bottom: 0.3rem;
+}
+
+.list-info h4{
+	padding-bottom: 0.3rem;
+	margin-bottom: 0.3rem;
+}
+
 .detail ul{
+	border-top: 1px solid #d2d2d2;
 	opacity: 0.5;
-	margin-top: 0.5rem;
+	padding-top: 0.6rem;
+	margin-bottom: 0.3rem;
 }
 
 .detail li, b{
@@ -336,10 +349,6 @@ footer {
 	}
 	.about-left{
 		flex: 100%;
-	}
-	
-	.detail ul{
-		margin-top: 0rem;
 	}
 	
 	.detail li, b{
