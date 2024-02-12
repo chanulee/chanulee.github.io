@@ -57,14 +57,22 @@ h3{
 
 h4{
 	/* Approach Body */
-	padding: 0px;
+
 }
 
 h5{
-	
+
 }
 
 sub{
+	padding: 0rem;
+	text-decoration: underline;
+	opacity: 0.5;
+	display: none;
+}
+
+ul{
+  padding-inline-start: 1rem;
 }
 
 img{
@@ -236,10 +244,9 @@ footer {
 .list-info{
 	padding: 0px 0px 0px 1rem;
 	flex: 50%;
-	cursor: pointer;
 }
 
-.list-info h4 {
+.detail{
 
 }
 
@@ -302,16 +309,22 @@ footer {
 		flex: 100%;
 	}
 	
+	sub{
+	display: block;
+	}
+	
 	/* Hide h5 elements by default in mobile mode and enable transition */
-	.list-info h4 {
+	.list-info .detail {
 		max-height: 0;
 		opacity: 0;
 		overflow: hidden;
 		transition: max-height 0.3s ease, opacity 0.3s ease;
 	}
-	.list-info h4.show {
-		max-height: 5em; /* Adjust this value based on your content */
-		opacity: 1;
+	.list-info .detail.show {
+		max-height: 6em; /* Adjust this value based on your content */
+		opacity: 0.5;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
 	}
 	
 	/* h2{

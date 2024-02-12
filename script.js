@@ -5,8 +5,8 @@ document.querySelectorAll('.list-item').forEach(item => {
 			// If it is, don't perform the toggle action
 			return;
 		}
-		// Otherwise, toggle the 'show' class on the h5 element
-		const h4 = event.currentTarget.querySelector('.list-info h4');
-		h4.classList.toggle('show');
+		// Otherwise, toggle the 'show' class on the sub element
+		const detailDiv = event.currentTarget.querySelector('.list-info .detail');
+		detailDiv.classList.toggle('show');
 	});
 });
