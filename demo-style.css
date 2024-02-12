@@ -7,6 +7,15 @@
 	line-height: 140%;
 }
 
+/* hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+} */
+
 h1, h2, h3, h4, h5 {
 	margin: 0;
 	padding: 0;
@@ -18,7 +27,7 @@ body{
 	font-style: normal;
 	color: #171313;
 	background-color: #eeeeee;
-	line-height: 150%;
+	line-height: 140%;
 }
 a:hover{
 	opacity: 50%;
@@ -30,34 +39,42 @@ h1{
 	font-size: 24px;
 	padding: 0px 0px 12px 0px;
 }
+
 h2{
-	/* PAGE MAIN TITLE */
-	font-size: 40px;
-	padding: 80px 24px;
-}
-h3{
 	/* SECTION TITLE */
 	font-size: 24px;
 	font-weight: 400;
 	padding: 0px 0px 4px 0px;
 }
-h4{
+
+h3{
 	/* ITEM TITLE */
 	padding: 0px 0px 0px 0px;
 }
-h5{
+
+h4{
 	/* Approach Body */
-	padding: 4px 0px 8px 0px;
-	opacity: 70%;
+	padding: 0px;
+}
+
+h5{
+	
 }
 
 sub{
-	line-height: 0px;
 }
+
 img{
-	padding: 0px 0px 8px 0px;
+	margin-bottom: 8px;
 	width: 100%;
 	aspect-ratio: 5 / 3.5; object-fit: cover;
+}
+
+iframe{
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	margin-bottom: 8px;
 }
 
 button {
@@ -93,7 +110,7 @@ footer {
 .navbar{
 	display: flex;
 	text-align: left;
-	padding: 16px 24px;
+	padding: 16px 16px;
 }
 .navbar a {
 	color: #171313;
@@ -108,6 +125,7 @@ footer {
 	flex-wrap: wrap; 
 	flex: 75%;
 }
+
 .page{
 	color: #171313;
 	padding: 0px 0px 0px 0px;
@@ -125,7 +143,7 @@ footer {
 }
 
 .hello-container{
-	padding: 0px 24px;
+	padding: 0px 16px;
 	padding-top: 24px;
 	display: flex;
 	flex-wrap: wrap; 
@@ -192,8 +210,7 @@ footer {
 }
 
 .list{
-	padding: 0px 12px;
-	flex: 50%;
+	padding: 0px 16px;
 }
 .list a{
 	all: unset;
@@ -203,8 +220,20 @@ footer {
 }
 
 .list-item{
-	padding: 0px 12px 42px 12px;
+	display: flex;
+	flex-wrap: wrap; 
 	flex: 100%;
+	margin-bottom: 40px;
+}
+
+.list-img{
+	padding: 0px;
+	flex: 50%;
+}
+
+.list-info{
+	padding: 0px 0px 0px 16px;
+	flex: 50%;
 }
 
 /* LIST 2 - approach */
@@ -212,7 +241,6 @@ footer {
 	padding: 24px 12px 24px 12px;
 	flex: 50%;
 }
-
 
 .collaborators{
 	background-color: #f6f6f6;
@@ -249,11 +277,14 @@ footer {
 	.section-header{
 		flex: 100%;
 	}
-	.list{
-		flex: 100%;
-	}
 	.list-item{
 		flex: 100%;
+	}
+	.list-img, .list-info{
+		flex: 100%;
+	}
+	.list-info{
+		padding: 0px;
 	}
 	.list-app{
 		flex: 100%;
