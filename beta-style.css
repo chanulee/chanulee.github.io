@@ -111,6 +111,35 @@ footer {
 	margin-top: 2rem; /* 32px equivalent */
 }
 
+#prev, #next {
+	cursor: pointer;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -22px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+}
+
+#next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+#prev {
+	left: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+.slider-img {
+	width: 100%;
+	display: none; /* Hide all images by default */
+}
+
 .news-list{
 	margin-left: 1rem;
 	margin-right: 1rem;
@@ -261,7 +290,12 @@ footer {
 	margin-bottom: 40px;
 }
 
+
+
 .list-img{
+	position: relative;
+	max-width: 100%; /* Adjust as needed */
+	margin: auto;
 	padding: 0px;
 	flex: 50%;
 }
