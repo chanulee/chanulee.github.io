@@ -29,8 +29,8 @@ h1, h2, h3, h4, h5 {
 
 body{
 	font-style: normal;
-	color: #171313;
-	background-color: #efefef;
+	color: #181a1c;
+	background-color: #f2f2f2;
 }
 a:hover{
 	opacity: 50%;
@@ -92,7 +92,7 @@ button {
 	
 	border: none;
 	background-color: #ececec;
-	color: rgb(27, 27, 27);
+	color: #181a1c;
 	padding: 1rem 1.5rem; /* 16px vertical and 24px horizontal paddings */
 	border-radius: 2rem; /* 32px equivalent */
 	font-size: 1rem; /* 16px equivalent */
@@ -134,7 +134,8 @@ footer {
 }
 
 .news{
-	background-color: #f6f6f6;
+	background-color: #fbfbfb;
+	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
 	margin-bottom: 0.5rem;
 	padding: 1rem;
 	border-radius: 0.5rem;
@@ -167,7 +168,7 @@ footer {
 	padding: 1rem; /* 16px padding */
 }
 .navbar a {
-	color: #171313;
+	color: #181a1c;
 	text-decoration: none;
 }
 .left-container{
@@ -180,7 +181,7 @@ footer {
 	flex: 75%;
 }
 .page{
-	color: #171313;
+	color: #181a1c;
 	padding: 0px 0px 0px 0px;
 	flex: 25%;
 }
@@ -211,7 +212,7 @@ footer {
 	line-height: 140%;
 }
 .hello a{
-	color: black;
+	color: #181a1c;
 	text-decoration-color: rgb(48, 55, 230);
 }
 
@@ -239,7 +240,7 @@ footer {
 	padding: 0px 0px 20px 0px;
 }
 .about-right a{
-	color: black;
+	color: #181a1c;
 	text-decoration-color: rgb(48, 55, 230);
 }
 .about img{
