@@ -1,29 +1,40 @@
-@import url("https://use.typekit.net/uvz0uhv.css");
+html {
+	font-size: 20px;
+}
 
 *{
 	box-sizing:border-box;
+	font-family: "arial", sans-serif;
 	margin:0 auto;
 	transition: opacity 0.5s;
+	font-size: 0.875rem;
+	line-height: 1.4;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+} */
+
+h1, h2, h3, h4, h5 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
-	font-size: 100%;
 	text-decoration: none;
-
 }
 
 body{
-	font-family: "neue-haas-grotesk-text", sans-serif;
-	font-size: 14px;
-	font-weight: 400;
 	font-style: normal;
-	color: #171313;
-	background: #fbfbfb;
-	line-height: 150%;
+	color: #181a1c;
+	background-color: #f2f2f2;
 }
+
+
+
 a:hover{
 	opacity: 50%;
 }
@@ -31,95 +42,141 @@ a:hover{
 
 h1{
 	/* LANDING H1 */
-	font-size: 24px;
-	font-family: "etna", serif;
-	font-weight: 400;
-	line-height: 150%;
-	padding: 0px 0px 12px 0px;
+	font-size: 1.5rem; /* 24px equivalent */
+	padding-bottom: 0.75rem; /* 12px equivalent for h1 */
 }
+
 h2{
-	/* PAGE MAIN TITLE */
-	font-size: 40px;
-	padding: 80px 24px;
-}
-h3{
 	/* SECTION TITLE */
-	font-size: 24px;
-	font-family: "etna", serif;
-	font-weight: 400;
-	padding: 0px 0px 4px 0px;
-	line-height: 160%;
+	font-size: 1.5rem; /* 24px equivalent */
+	padding-bottom: 0.25rem; /* 4px equivalent */
 }
-h4{
+
+h3{
 	/* ITEM TITLE */
-	font-family: "neue-haas-grotesk-text", sans-serif;
-	font-size: 16px;
-	padding: 0px 0px 4px 0px;
+	font-weight: bold;
+	padding: 0px;
 }
-h5{
+
+h4{
 	/* Approach Body */
-	font-size: 16px;
-	padding: 4px 0px 16px 0px;
-	line-height: 150%;
-	font-weight: 400;
-	opacity: 70%;
-}
-h6{
-	/* ITEM SUBTITLE */
-	opacity: 50%;
-	line-height: 150%;
 
 }
+
+h5{
+
+}
+
 sub{
-	font-size: 12px;
-	line-height: 0px;
+	padding: 0rem;
+	text-decoration: underline;
+	opacity: 0.5;
+	display: none;
 }
+
+ul{
+  padding-inline-start: 1rem;
+}
+
 img{
-	padding: 0px 0px 8px 0px;
-	width: 100%; aspect-ratio: 5 / 3.5; object-fit: cover;
+	margin-bottom: 0.5rem; /* 8px equivalent */
+	width: 100%;
+	aspect-ratio: 5 / 3.5; object-fit: cover;
 }
+
+iframe{
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	margin-bottom: 0.5rem; /* 8px equivalent */
+}
+
 button {
-  border: none;
-  background-color: rgb(236, 236, 236);
-  color: rgb(27, 27, 27);
-  padding: 16px 24px;
-  border-radius: 32px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 0px 8px 0px 0px;
-  cursor: pointer;
+	
+	border: none;
+	background-color: #ececec;
+	color: #181a1c;
+	padding: 1rem 1.5rem; /* 16px vertical and 24px horizontal paddings */
+	border-radius: 2rem; /* 32px equivalent */
+	font-size: 1rem; /* 16px equivalent */
+	margin-right: 0.5rem; /* 8px equivalent */
+
+	text-decoration: none;
+	display: inline-block;
+
+	cursor: pointer;
 }
 
 footer {
-	background-color: #2c2c2c;
-	padding: 24px 0px 24px 0px;
-	margin: 32px 0px 0px 0px;
-	color: #ffffff;
+	background-color: #e4e4e4;
+	
+	padding: 1rem 0; /* 16px top and bottom padding */
+	margin-top: 2rem; /* 32px equivalent */
 }
 
-.footertext{
-	margin: 16px 0px 24px 24px;
+#prev, #next {
+	cursor: pointer;
+	position: absolute; /* Position arrows over the images */
+	top: 50%;
+	transform: translateY(-50%); /* Center vertically */
+	width: auto;
+	color: white;
+	font-size: 18px;
+	transition: 0.6s ease;
+	user-select: none;
+	background-color: transparent; /* Remove background */
+	border: none; /* Remove border if it exists */
 }
 
-.about ul {
-	opacity: 50%;
-	padding: 00px 0px 0px 16px;
+#next {
+	right: 0;
 }
+
+#prev {
+	left: 0;
+}
+
+.news{
+	background-color: #fbfbfb;
+	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
+	margin-bottom: 0.5rem;
+	padding: 1rem;
+	border-radius: 0.5rem;
+}
+
+.news-list{
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-bottom: 4rem;
+}
+
+.news-list h3{
+	margin-bottom: 0.5rem;
+	margin-left: 1rem;
+	font-weight: normal;
+	opacity: 0.5;
+}
+
+.news-list h4{
+	opacity: 0.5;
+	margin-bottom: 0.25rem;
+}
+
+
 
 /* NAVIGATION BAR */
 .navbar{
 	display: flex;
 	text-align: left;
-	padding: 16px 24px;
+	padding: 1rem; /* 16px padding */
 }
 .navbar a {
-	color: #171313;
+	color: #181a1c;
 	text-decoration: none;
 }
 .left-container{
 	flex: 25%;
-	padding: 0px 16px 0px 0px;
+	padding: 0px 1rem 0px 0px;
 }
 .right-container{
 	display: flex;
@@ -127,39 +184,38 @@ footer {
 	flex: 75%;
 }
 .page{
-	padding: 0px 0px 8px 0px;
+	color: #181a1c;
+	padding: 0px 0px 0px 0px;
 	flex: 25%;
 }
 .page-now{
-	padding: 0px 0px 8px 0px;
+	padding: 0px 0px 0px 0px;
 	flex: 25%;
-	font-weight: 500;
 }
 
 .section-header{
-	padding: 24px 24px 24px 24px;
+	padding: 1.5rem;
 	flex: 50%;
-	/*position: sticky;*/
 	top: 0;
 }
 
 .hello-container{
-	padding: 36px 24px;
+	padding: 0px 1rem;
+	padding-top: 1rem;
 	display: flex;
 	flex-wrap: wrap; 
 }
 
 .hello{
-	padding: 0px 0px 0px 12px;
+	padding: 0px;
+	margin-bottom: 3rem;
 	flex: 50%;
 }
 .hello p{
-	font-size: 16px;
 	line-height: 140%;
-	padding: 0px 0px 32px 0px;
 }
 .hello a{
-	color: black;
+	color: #181a1c;
 	text-decoration-color: rgb(48, 55, 230);
 }
 
@@ -187,7 +243,7 @@ footer {
 	padding: 0px 0px 20px 0px;
 }
 .about-right a{
-	color: black;
+	color: #181a1c;
 	text-decoration-color: rgb(48, 55, 230);
 }
 .about img{
@@ -211,8 +267,7 @@ footer {
 }
 
 .list{
-	padding: 0px 12px;
-	flex: 50%;
+	padding: 0px 1rem;
 }
 .list a{
 	all: unset;
@@ -222,53 +277,55 @@ footer {
 }
 
 .list-item{
-	padding: 24px 12px 24px 12px;
+	display: flex;
+	flex-wrap: wrap; 
 	flex: 100%;
+	margin-bottom: 6rem;
 }
-/*
-.list-item:hover{
-	opacity: 50%;
+
+.list-img{
+	position: relative;
+	max-width: 100%; /* Adjust as needed */
+	padding: 0px;
+	flex: 50%;
 }
-*/
-/*
-.list-item-main:hover{
-	opacity: 50%;
+
+.slider-img {
+	width: 100%;
+	display: none; /* Hide all images by default */
 }
-*/
+
+.list-info{
+	padding: 0px 0px 0px 1rem;
+	flex: 50%;
+}
+
+.list-info h3{
+	padding-bottom: 0.6rem;
+	border-bottom: 1px solid #d2d2d2;
+	margin-bottom: 0.6rem;
+}
+
+.list-info h4{
+	padding-bottom: 0.3rem;
+	margin-bottom: 0.3rem;
+}
+
+.detail ul{
+	border-top: 1px solid #d2d2d2;
+	opacity: 0.5;
+	padding-top: 0.6rem;
+	margin-bottom: 0.3rem;
+}
+
+.detail li, b{
+	font-size: 0.75rem;
+}
 
 /* LIST 2 - approach */
 .list-app{
 	padding: 24px 12px 24px 12px;
 	flex: 50%;
-}
-
-/* LANDING PAGE HEADER SECTION */
-.landing-header{
-	height: 550px;
-	background-image: url("https://portfolio-22.s3.ap-northeast-2.amazonaws.com/sunny-day/g2.jpg");
-	background-repeat: no-repeat;
-	/*background-attachment: fixed;*/
-	background-position: center center;
-	background-size: cover;
-	color: #fbfbfb;
-	position: relative;
-}
-
-.topics{
-	padding-left: 24px;
-	position: absolute;
-	bottom: 24px;
-}
-.topics p{
-	padding: 0px 0px 8px 0px;
-	opacity: 50%;
-}
-.topics a{
-	font-size: 24px;
-	font-family: "etna", serif;
-	color: #fbfbfb;
-	text-decoration: none;
-	line-height: 160%;
 }
 
 .collaborators{
@@ -281,13 +338,19 @@ footer {
 .collaborators ul{
 	margin: 0px 0px 16px 0px;
 }
-.rotom{
-	padding: 12px;
-	width: 50%; aspect-ratio: auto;
+
+.footertext{
+	margin: 1rem 0; /* 16px top and bottom margin */
+	padding-left: 1rem; /* 16px left padding */
 }
 
 /* RESPONSIVE */
 @media (max-width:620px) {
+	
+	html {
+		font-size: 16px;
+	}
+	
 	.right-container{
 		display: flex;
 		flex-wrap: wrap; 
@@ -306,11 +369,14 @@ footer {
 	.section-header{
 		flex: 100%;
 	}
-	.list{
-		flex: 100%;
-	}
 	.list-item{
 		flex: 100%;
+	}
+	.list-img, .list-info{
+		flex: 100%;
+	}
+	.list-info{
+		padding: 0px;
 	}
 	.list-app{
 		flex: 100%;
@@ -318,7 +384,34 @@ footer {
 	.about-left{
 		flex: 100%;
 	}
-	h2{
-		display: none;
+	
+	.detail li, b{
+		font-size: 0.875rem;
 	}
+	
+	sub{
+		display: block;
+	}
+	
+	#prev, #next {
+		display: none; /* Hide arrows on mobile */
+	}
+	
+	/* Hide h5 elements by default in mobile mode and enable transition */
+	.list-info .detail {
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease, opacity 0.3s ease;
+	}
+	.list-info .detail.show {
+		max-height: 20em; /* Adjust this value based on your content */
+		opacity: 1;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+	
+	/* h2{
+		display: none;
+	} */
 }
