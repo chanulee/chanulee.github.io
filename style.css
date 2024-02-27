@@ -4,7 +4,7 @@ html {
 
 *{
 	box-sizing:border-box;
-	font-family: "arial", sans-serif;
+	font-family: "Imperial Sans Text", sans-serif;
 	margin:0 auto;
 	transition: opacity 0.5s;
 	font-size: 0.875rem;
@@ -23,7 +23,7 @@ html {
 h1, h2, h3, h4, h5 {
 	margin: 0;
 	padding: 0;
-	font-weight: normal;
+	font-weight: 300;
 	text-decoration: none;
 }
 
@@ -33,6 +33,9 @@ body{
 	background-color: #f2f2f2;
 }
 
+b{
+	font-weight: 500;
+}
 
 
 a:hover{
@@ -54,13 +57,12 @@ h2{
 
 h3{
 	/* ITEM TITLE */
-	font-weight: bold;
+	font-weight: 500;
 	padding: 0px;
 }
 
 h4{
 	/* Approach Body */
-
 }
 
 h5{
@@ -405,7 +407,7 @@ footer {
 		transition: max-height 0.3s ease, opacity 0.3s ease;
 	}
 	.list-info .detail.show {
-		max-height: 20em; /* Adjust this value based on your content */
+		max-height: 60em; /* Adjust this value based on your content */
 		opacity: 1;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
