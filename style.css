@@ -1,3 +1,38 @@
+@font-face {
+  font-family: 'ImperialSansText';
+  src: url('resources/fonts/ImperialSansText-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ImperialSansText';
+  src: url('resources/fonts/ImperialSansText-Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ImperialSansText';
+  src: url('resources/fonts/ImperialSansText-Medium.woff2') format('woff2');
+  font-weight: 500; /* Medium */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ImperialSansText';
+  src: url('resources/fonts/ImperialSansText-Regular.woff2') format('woff2');
+  font-weight: normal; /* 400 */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ImperialSansText';
+  src: url('resources/fonts/ImperialSansText-Semibold.woff2') format('woff2');
+  font-weight: 600; /* SemiBold */
+  font-style: normal;
+}
+
 html {
 	font-size: 20px;
 }
