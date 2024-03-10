@@ -39,7 +39,7 @@ html {
 
 *{
 	box-sizing:border-box;
-	font-family: "Imperial Sans Text", sans-serif;
+	font-family: 'ImperialSansText', sans-serif;
 	margin:0 auto;
 	transition: opacity 0.5s;
 	font-size: 0.875rem;
