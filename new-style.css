@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5 {
 body{
 	font-style: normal;
 	color: #181a1c;
-	background-color: #FFFCF5;
+	background-color: #f4f4f4;
 }
 
 b{
@@ -205,10 +205,13 @@ footer {
 .navbar{
 	display: flex;
 	text-align: left;
+	position: sticky;
+	top: 0;
 	padding: 1rem; /* 16px padding */
 }
 .navbar a {
 	color: #181a1c;
+	mix-blend-mode: difference;
 	text-decoration: none;
 }
 .left-container{
