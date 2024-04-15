@@ -50,14 +50,49 @@ html {
 	line-height: 1.4;
 }
 
-/* hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 1px solid #ccc;
-	margin: 1em 0;
-	padding: 0;
-} */
+.carousel {
+	width: 100%;
+	aspect-ratio: 5 / 3.5;
+	position: relative;
+	overflow: hidden;
+	border-radius: 24px; /* Round corners */
+	margin-bottom: 0.5rem;
+}
+
+.slides {
+	display: flex;
+	transition: transform 0.5s ease; /* Sliding animation */
+}
+
+.slides img {
+	width: 100%;
+	aspect-ratio: 5 / 3.5;
+	object-fit: cover;
+}
+
+.btn {
+	position: absolute;
+	top: 50%;
+	background: rgba(0, 0, 0, 0.2);
+	transform: translateY(-55%);
+	color: rgba(239, 239, 239, 0.5);
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	z-index: 100;
+}
+
+.btn hover {
+	opacity: 50%
+}
+
+.prev {
+	left: 4px;
+}
+
+.next {
+	right: 4px;
+}
 
 h1,
 h2,
@@ -131,6 +166,7 @@ img {
 	width: 100%;
 	aspect-ratio: 5 / 3.5;
 	object-fit: cover;
+	border-radius: 24px;
 }
 
 iframe {
@@ -138,6 +174,7 @@ iframe {
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
 	margin-bottom: 0.5rem;
+	border-radius: 24px;
 	/* 8px equivalent */
 }
 
@@ -386,7 +423,6 @@ footer {
 
 .list-info h3 {
 	padding-bottom: 0.6rem;
-	border-bottom: 1px solid #d2d2d2;
 	margin-bottom: 0.6rem;
 }
 
