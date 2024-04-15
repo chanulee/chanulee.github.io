@@ -79,7 +79,7 @@ html {
 	border: none;
 	cursor: pointer;
 	padding: 10px;
-	z-index: 100;
+	z-index: 50;
 }
 
 .btn hover {
@@ -207,33 +207,6 @@ footer {
 	/* 32px equivalent */
 }
 
-#prev,
-#next {
-	cursor: pointer;
-	position: absolute;
-	/* Position arrows over the images */
-	top: 50%;
-	transform: translateY(-50%);
-	/* Center vertically */
-	width: auto;
-	color: white;
-	font-size: 18px;
-	transition: 0.6s ease;
-	user-select: none;
-	background-color: transparent;
-	/* Remove background */
-	border: none;
-	/* Remove border if it exists */
-}
-
-#next {
-	right: 0;
-}
-
-#prev {
-	left: 0;
-}
-
 .news {
 	background-color: #fbfbfb;
 	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
@@ -269,6 +242,7 @@ footer {
 	position: sticky;
 	top: 0;
 	padding: 1rem;
+	z-index: 100;
 	/* 16px padding */
 }
 
