@@ -520,12 +520,6 @@ b {
 		display: block;
 	}
 
-	#prev,
-	#next {
-		display: none;
-		/* Hide arrows on mobile */
-	}
-
 	/* Hide h5 elements by default in mobile mode and enable transition */
 	.list-info .detail {
 		max-height: 0;
@@ -542,7 +536,22 @@ b {
 		margin-bottom: 0.5rem;
 	}
 
-	/* h2{
-		display: none;
-	} */
+	.carousel {
+		overflow: visible;
+	}
+
+	.slides {
+		transform: none; /* Remove any transformations */
+		transition: none; /* Disable transitions */
+		flex-direction: column; /* Stack images vertically */
+	}
+	
+	.slides img {
+		margin-bottom: 0.8rem;
+	}
+	
+	.btn {
+		display: none; /* Hide navigation buttons on small screens */
+	}
+
 }
