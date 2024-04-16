@@ -369,7 +369,7 @@ footer {
 }
 
 .list {
-	padding: 0px 1rem;
+	padding: 0px 0.5rem;
 }
 
 .list a {
@@ -402,6 +402,7 @@ footer {
 }
 
 .list-info {
+	margin: 0px 0.5rem;
 	padding: 0px 0px 0px 1rem;
 	flex: 50%;
 }
