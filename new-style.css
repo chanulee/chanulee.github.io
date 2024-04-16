@@ -45,7 +45,7 @@ html {
 	box-sizing: border-box;
 	font-family: 'ImperialSansText', sans-serif;
 	margin: 0 auto;
-	transition: opacity 0.5s;
+	transition: opacity 0.4s;
 	font-size: 0.875rem;
 	line-height: 1.4;
 }
@@ -108,8 +108,8 @@ h5 {
 
 body {
 	font-style: normal;
-	color: #181a1c;
-	background-color: #f4f4f4;
+	color: #1f1f1f;
+	background-color: #ffffff;
 }
 
 b {
@@ -142,10 +142,14 @@ h3 {
 	/* ITEM TITLE */
 	font-weight: 500;
 	padding: 0px;
+	font-size: 1rem;
 }
 
 h4 {
 	/* Approach Body */
+	opacity: 40%;
+	padding: 0px;
+	font-size: 1rem;
 }
 
 h5 {}
@@ -200,7 +204,7 @@ button {
 }
 
 footer {
-	background-color: #e4e4e4;
+	background-color: #F8FAFD;
 
 	padding: 1rem 0;
 	/* 16px top and bottom padding */
@@ -209,7 +213,7 @@ footer {
 }
 
 .news {
-	background-color: #fbfbfb;
+	background-color: #F8FAFD;
 	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
 	margin-bottom: 0.5rem;
 	padding: 1rem;
@@ -295,6 +299,7 @@ footer {
 }
 
 .hello p {
+	font-size: 1rem;
 	line-height: 140%;
 }
 
@@ -397,13 +402,18 @@ footer {
 }
 
 .list-info h3 {
-	padding-bottom: 0.6rem;
-	margin-bottom: 0.6rem;
+	/* padding-bottom: 0.6rem;
+	margin-bottom: 0.6rem; */
 }
 
 .list-info h4 {
-	padding-bottom: 0.3rem;
-	margin-bottom: 0.3rem;
+	padding-bottom: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.list-info p {
+	opacity: 80%;
+	margin-bottom: 0.6rem;
 }
 
 .detail ul {

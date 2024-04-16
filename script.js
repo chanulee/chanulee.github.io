@@ -6,7 +6,7 @@ document.querySelectorAll('.list-info').forEach(item => {
 			return;
 		}
 		// Otherwise, toggle the 'show' class on the sub element
-		const detailDiv = event.currentTarget.querySelector('.list-info .detail');
+		const detailDiv = event.currentTarget.querySelector('.detail');
 		detailDiv.classList.toggle('show');
 	});
 });
