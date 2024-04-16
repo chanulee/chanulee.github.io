@@ -249,7 +249,6 @@ footer {
 .navbar {
 	display: flex;
 	text-align: left;
-	position: sticky;
 	top: 0;
 	padding: 1rem;
 	z-index: 100;
@@ -381,9 +380,8 @@ footer {
 }
 
 .list-item {
-	display: flex;
-	flex-wrap: wrap;
-	flex: 100%;
+	/* display: flex;
+	flex-wrap: wrap; */
 	margin-bottom: 6rem;
 }
 
@@ -465,6 +463,11 @@ b {
 
 	html {
 		font-size: 16px;
+	}
+	
+	.navbar {
+		position: sticky;
+
 	}
 
 	.right-container {
