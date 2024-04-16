@@ -68,7 +68,7 @@ html {
 	width: 100%;
 	aspect-ratio: 5 / 3.5;
 	object-fit: cover;
-	margin-right: 8px;
+	margin-right: 16px;
 }
 
 .btn {

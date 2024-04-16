@@ -25,7 +25,7 @@ document.querySelector('.next').addEventListener('click', () => {
 
 function moveSlide(step) {
 	slideIndex = (slideIndex + step + totalSlides) % totalSlides;
-	const slideWidth = slides[0].width+8;
+	const slideWidth = slides[0].width+16;
 	document.querySelector('.slides').style.transform = 'translateX(' + (-slideWidth * slideIndex) + 'px)';
 }
 
