@@ -464,11 +464,6 @@ b {
 	html {
 		font-size: 16px;
 	}
-	
-	.navbar {
-		position: sticky;
-
-	}
 
 	.right-container {
 		display: flex;
