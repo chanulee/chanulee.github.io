@@ -11,6 +11,15 @@ document.querySelectorAll('.list-info').forEach(item => {
 	});
 });
 
+document.querySelectorAll('.news-list').forEach(item => {
+	item.addEventListener('click', event => {
+		// Check if the screen width is more than 620px
+		// Otherwise, toggle the 'show' class on the sub element
+		const detailDiv = event.currentTarget.querySelector('.news-detail');
+		detailDiv.classList.toggle('show');
+	});
+});
+
 let slideIndex = 0;
 const slides = document.querySelectorAll('.slides img');
 const totalSlides = slides.length;
