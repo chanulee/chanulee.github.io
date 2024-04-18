@@ -44,10 +44,14 @@ html {
 * {
 	box-sizing: border-box;
 	font-family: 'ImperialSansText', sans-serif;
-	margin: 0 auto;
 	transition: opacity 0.4s;
 	font-size: 0.875rem;
 	line-height: 1.4;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	text-decoration: none;
+	color: #1f1f1f;
 }
 
 .carousel {
@@ -66,7 +70,7 @@ html {
 
 .slides img {
 	width: 100%;
-	aspect-ratio: 5 / 3.5;
+	aspect-ratio: 5 / 3;
 	object-fit: cover;
 	margin-right: 16px;
 }
@@ -95,20 +99,7 @@ html {
 	right: 4px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-	text-decoration: none;
-}
-
 body {
-	font-style: normal;
-	color: #1f1f1f;
 	background-color: #ffffff;
 }
 
@@ -123,19 +114,22 @@ a:hover {
 
 
 h1 {
-	/* LANDING H1 */
-	font-size: 1.5rem;
-	/* 24px equivalent */
-	padding-bottom: 0.75rem;
-	/* 12px equivalent for h1 */
+	/* TITLE */
+	font-weight: 500;
+	font-size: 2rem;
+	line-height: 120%;
+	padding-bottom: 0px;
+	margin-bottom: 0px;	
 }
 
 h2 {
-	/* SECTION TITLE */
-	font-size: 1.5rem;
-	/* 24px equivalent */
-	padding-bottom: 0.25rem;
-	/* 4px equivalent */
+	/* HEAD SUBTITLE */
+	font-size: 2rem;
+	padding-top: 0px;
+	margin-top: 0px;	
+	line-height: 120%;
+	padding-bottom: 1rem;
+	opacity: 50%;
 }
 
 h3 {
@@ -349,18 +343,6 @@ footer {
 	aspect-ratio: 3.5 / 5;
 }
 
-.connect {
-	display: flex;
-	flex-wrap: wrap;
-	flex: 50%;
-	padding: 12px;
-	margin: 24px 0px 24px 0px;
-}
-
-.connect button {
-	margin: 12px 0px 0px 0px;
-}
-
 /* LIST 3 - project */
 .section {
 	display: flex;
@@ -438,18 +420,6 @@ b {
 	flex: 50%;
 }
 
-.collaborators {
-	background-color: #f6f6f6;
-	padding: 24px;
-}
-
-.collaborators h5 {
-	padding: 8px 0px 8px 0px;
-}
-
-.collaborators ul {
-	margin: 0px 0px 16px 0px;
-}
 
 .footertext {
 	margin: 1rem 0;
