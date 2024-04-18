@@ -125,6 +125,7 @@ sub {
 	text-decoration: underline;
 	opacity: 0.5;
 	display: none;
+	cursor: pointer;
 }
 
 ul {
@@ -428,7 +429,6 @@ footer {
 		flex: 50%;
 	}
 
-
 	.left-container {
 		flex: 50%;
 	}
@@ -442,14 +442,10 @@ footer {
 		padding: 0px;
 	}
 
-	.section-header {
-		flex: 100%;
-	}
 	
 	h3, h4, .hello p {
 		max-width: 100%
 	}
-
 
 	.list-item {
 		flex: 100%;
@@ -464,12 +460,9 @@ footer {
 		padding: 0px;
 	}
 
-
 	sub {
 		display: block;
 	}
-
-
 
 	/* Hide h5 elements by default in mobile mode and enable transition */
 	.list-info .detail {
@@ -502,7 +495,7 @@ footer {
 	}
 	
 	.btn {
-		display: none; /* Hide navigation buttons on small screens */
+		display: none;
 	}
 
 }

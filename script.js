@@ -20,21 +20,27 @@ document.querySelectorAll('.news-list').forEach(item => {
 	});
 });
 
-let slideIndex = 0;
-const slides = document.querySelectorAll('.slides img');
-const totalSlides = slides.length;
 
-document.querySelector('.prev').addEventListener('click', () => {
-	moveSlide(-1);
-});
 
-document.querySelector('.next').addEventListener('click', () => {
-	moveSlide(1);
-});
+function setupCarousel(carouselContainer) {
+	let slideIndex = 0;
+	const slides = carouselContainer.querySelectorAll('img');
+	const totalSlides = slides.length;
 
-function moveSlide(step) {
-	slideIndex = (slideIndex + step + totalSlides) % totalSlides;
-	const slideWidth = slides[0].width+0.5rem;
-	document.querySelector('.slides').style.transform = 'translateX(' + (-slideWidth * slideIndex) + 'px)';
+	carouselContainer.querySelector('.prev').addEventListener('click', () => {
+		moveSlide(-1);
+	});
+
+	carouselContainer.querySelector('.next').addEventListener('click', () => {
+		moveSlide(1);
+	});
+
+	function moveSlide(step) {
+		slideIndex = (slideIndex + step + totalSlides) % totalSlides;
+		const slideWidth = slides[0].width;
+		carouselContainer.querySelector('.slides').style.transform = 'translateX(' + (-slideWidth * slideIndex) + 'px)';
+	}
 }
 
+// Query all carousels and initialize them
+document.querySelectorAll('.carousel').forEach(setupCarousel);
