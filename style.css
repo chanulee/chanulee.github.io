@@ -81,20 +81,20 @@ a:hover {
 h1 {
 	/* TITLE */
 	font-weight: 500;
-	font-size: 2rem;
-	line-height: 110%;
+	font-size: 1.75rem;
+	line-height: 120%;
 	padding-bottom: 0px;
-	margin-bottom: 0px;	
+	margin-bottom: 0rem;	
 }
 
 h2 {
 	/* HEAD SUBTITLE */
-	font-size: 2rem;
+	font-size: 1.75rem;
 	padding-top: 0px;
 	margin-top: 0px;	
-	line-height: 110%;
+	line-height: 120%;
 	margin-bottom: 3rem;
-	opacity: 50%;
+	opacity: 30%;
 }
 
 h3 {
@@ -395,20 +395,21 @@ footer {
 	}
 	
 	.main {
-		padding-top: 2rem;
+		padding-top: 3rem;
 		margin: 0rem 0.5rem;
 	}
 	
 	.news {
-		padding: 1rem 0.5rem;
+		padding: 1rem;
 	}
 	
 	.news-list {
-		margin: 0px 0rem;
+		margin: 3rem 0.5rem;
+		margin-bottom: 4rem;
 	}
 	
 	.news-list h3 {
-	margin-left: 0.5rem;
+		margin-left: 0rem;
 	}
 	
 	.slides img {
