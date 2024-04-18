@@ -165,8 +165,6 @@ button {
 	/* 32px equivalent */
 	font-size: 1rem;
 	/* 16px equivalent */
-	margin-right: 0.5rem;
-	/* 8px equivalent */
 
 	text-decoration: none;
 	display: inline-block;
@@ -317,12 +315,14 @@ footer {
 }
 
 .slides {
+	width: 100%;
 	display: flex;
 	transition: transform 0.5s ease; /* Sliding animation */
 }
 
 .slides img {
 	width: 100%;
+	min-width: 100%;
 	aspect-ratio: 5 / 3;
 	object-fit: cover;
 	border-radius: 1rem;
@@ -346,11 +346,11 @@ footer {
 }
 
 .prev {
-	left: 0.4rem;
+	left: 0.5rem;
 }
 
 .next {
-	right: 0.4rem;
+	right: 0.5rem; 
 }
 
 

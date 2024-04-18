@@ -38,7 +38,11 @@ function setupCarousel(carouselContainer) {
 	function moveSlide(step) {
 		slideIndex = (slideIndex + step + totalSlides) % totalSlides;
 		const slideWidth = slides[0].width;
-		carouselContainer.querySelector('.slides').style.transform = 'translateX(' + (-slideWidth * slideIndex) + 'px)';
+		const remValue = parseFloat(getComputedStyle(document.documentElement).fontSize); // Get the value of 1 rem in pixels
+		const additionalWidth = 0.5 * remValue;
+		const newWidth = slideWidth + additionalWidth;
+
+		carouselContainer.querySelector('.slides').style.transform = 'translateX(' + (-newWidth * slideIndex) + 'px)';
 	}
 }
 
