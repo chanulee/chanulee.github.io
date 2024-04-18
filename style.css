@@ -69,7 +69,7 @@ body {
 }
 
 b {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 
@@ -80,7 +80,7 @@ a:hover {
 
 h1 {
 	/* TITLE */
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 1.75rem;
 	line-height: 120%;
 	padding-bottom: 0px;
@@ -100,7 +100,7 @@ h2 {
 h3 {
 	/* ITEM TITLE */
 	margin-top: 1rem;
-	font-weight: 500;
+	font-weight: 600;
 	padding: 0px;
 	font-size: 1.125rem;
 	max-width: 70%;
@@ -115,9 +115,14 @@ h4 {
 	max-width: 70%;
 }
 
-p, li, b {
+p, li, b, a {
 	font-size: 0.75rem;
 	line-height: 130%;
+}
+
+a{
+	text-decoration: underline;
+	text-decoration-color: #0000CD;
 }
 
 sub {
@@ -389,7 +394,7 @@ footer {
 		font-size: 16px;
 	}
 	
-	p, li, b {
+	p, li, b, a {
 		font-size: 0.825rem;
 		line-height: 130%;
 	}
