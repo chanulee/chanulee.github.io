@@ -169,7 +169,7 @@ button {
 }
 
 footer {
-	background-color: #db1aac;
+	background-color: #F8FAFD;
 	margin: 0px;
 	padding: 0px 0px;
 }
@@ -320,14 +320,14 @@ footer {
 	aspect-ratio: 5 / 3;
 	object-fit: cover;
 	border-radius: 1rem;
-	margin: 0.7rem;
+	margin-right: 0.5rem;
 }
 
 .btn {
 	position: absolute;
 	top: 50%;
 	background: rgba(0, 0, 0, 0.2);
-	transform: translateY(-55%);
+	transform: translateY(-50%);
 	color: rgba(239, 239, 239, 0.5);
 	border: none;
 	cursor: pointer;
@@ -340,11 +340,11 @@ footer {
 }
 
 .prev {
-	left: 4px;
+	left: 0.4rem;
 }
 
 .next {
-	right: 4px;
+	right: 0.4rem;
 }
 
 
@@ -388,12 +388,34 @@ footer {
 		font-size: 16px;
 	}
 	
+	p, li, b {
+		font-size: 0.825rem;
+		line-height: 130%;
+	}
+	
 	.main {
+		padding-top: 2rem;
 		margin: 0rem 0.5rem;
+	}
+	
+	.news {
+		padding: 1rem 0.5rem;
 	}
 	
 	.news-list {
 		margin: 0px 0rem;
+	}
+	
+	.news-list h3 {
+	margin-left: 0.5rem;
+	}
+	
+	.slides img {
+		margin-right: 0rem;
+	}
+	
+	.dt-l, .dt-r {
+		flex: 100%;
 	}
 	
 	.list-info, .hello {
@@ -405,6 +427,7 @@ footer {
 		flex-wrap: wrap;
 		flex: 50%;
 	}
+
 
 	.left-container {
 		flex: 50%;
@@ -441,13 +464,6 @@ footer {
 		padding: 0px;
 	}
 
-	.list-app {
-		flex: 100%;
-	}
-
-	.about-left {
-		flex: 100%;
-	}
 
 	sub {
 		display: block;
