@@ -56,7 +56,7 @@ html {
 
 .carousel {
 	width: 100%;
-	aspect-ratio: 5 / 3.5;
+	aspect-ratio: 5 / 3;
 	position: relative;
 	overflow: hidden;
 	border-radius: 24px; /* Round corners */
@@ -71,7 +71,8 @@ html {
 .slides img {
 	width: 100%;
 	aspect-ratio: 5 / 3;
-	object-fit: cover;
+	object-fit: fit;
+	border-radius: 24px;
 	margin-right: 16px;
 }
 
@@ -163,7 +164,7 @@ img {
 	margin-bottom: 0.5rem;
 	/* 8px equivalent */
 	width: 100%;
-	aspect-ratio: 5 / 3.5;
+	aspect-ratio: 5 / 3;
 	object-fit: cover;
 	border-radius: 24px;
 }
@@ -350,7 +351,7 @@ footer {
 }
 
 .list {
-	padding: 0px 0.5rem;
+	padding: 0px 2rem;
 }
 
 .list a {
@@ -414,11 +415,6 @@ b {
 	font-size: 0.75rem;
 }
 
-/* LIST 2 - approach */
-.list-app {
-	padding: 24px 12px 24px 12px;
-	flex: 50%;
-}
 
 
 .footertext {
@@ -457,6 +453,10 @@ b {
 
 	.section-header {
 		flex: 100%;
+	}
+	
+	.list {
+		padding: 0px 0.5rem;
 	}
 
 	.list-item {
