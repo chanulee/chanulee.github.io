@@ -157,13 +157,13 @@ iframe {
 
 button {
 	border: none;
-	background-color: #ececec;
-	color: #181a1c;
-	padding: 1rem 1.5rem;
+	background-color: #FFB6C1;
+	color: #0000CD;
+	padding: 0.75rem 1.25rem;
 	/* 16px vertical and 24px horizontal paddings */
 	border-radius: 2rem;
 	/* 32px equivalent */
-	font-size: 1rem;
+	font-size: 0.75rem;
 	/* 16px equivalent */
 
 	text-decoration: none;
@@ -288,8 +288,8 @@ footer {
 }
 
 .hello a {
-	color: #181a1c;
-	text-decoration-color: rgb(48, 55, 230);
+	color: #0000CD;
+	text-decoration-color: #FFB6C1;
 }
 
 .list-item {
@@ -552,6 +552,7 @@ footer {
 	
 	.footer-l {
 		flex: 100%;
+		padding-bottom: 2.5rem;
 	}
 
 	
@@ -561,7 +562,7 @@ footer {
 	
 	.footer-block {
 		padding: 2rem;
-		/* margin-bottom: -1px; */
+		max-width: 50%;
 	}
 
 }
