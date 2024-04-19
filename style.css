@@ -141,7 +141,7 @@ img {
 	margin-bottom: 0.5rem;
 	/* 8px equivalent */
 	width: 100%;
-	aspect-ratio: 5 / 3;
+	aspect-ratio: 2 / 1;
 	object-fit: cover;
 	border-radius: 24px;
 }
@@ -306,7 +306,7 @@ footer {
 
 .carousel {
 	width: 100%;
-	aspect-ratio: 5 / 3;
+	aspect-ratio: 2 / 1;
 	position: relative;
 	overflow: hidden;
 	border-radius: 1rem; /* Round corners */
@@ -322,7 +322,7 @@ footer {
 .slides img {
 	width: 100%;
 	min-width: 100%;
-	aspect-ratio: 5 / 3;
+	aspect-ratio: 2 / 1;
 	object-fit: cover;
 	border-radius: 1rem;
 	margin-right: 0.5rem;
@@ -530,6 +530,7 @@ footer {
 
 	.carousel {
 		overflow: visible;
+		aspect-ratio: 5 / 3;
 	}
 
 	.slides {
@@ -540,6 +541,11 @@ footer {
 	
 	.slides img {
 		margin-bottom: 0.8rem;
+		aspect-ratio: 5 / 3;
+	}
+	
+	img {
+		aspect-ratio: 5 / 3;
 	}
 	
 	.btn {
