@@ -464,8 +464,8 @@ button {
 		font-size: 16px;
 	}
 	
-	p, li, b, a {
-		font-size: 0.825rem;
+	p, li, b, a, button {
+		font-size: 1rem;
 		line-height: 130%;
 	}
 	
@@ -538,6 +538,10 @@ button {
 
 	sub {
 		display: block;
+	}
+	
+	.detail {
+		flex-direction: column;
 	}
 
 	/* Hide h5 elements by default in mobile mode and enable transition */
