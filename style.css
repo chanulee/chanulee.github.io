@@ -75,6 +75,7 @@ b {
 
 a:hover {
 	opacity: 50%;
+	color: #0000CD;
 }
 
 
@@ -153,23 +154,6 @@ iframe {
 	margin-bottom: 0.5rem;
 	border-radius: 24px;
 	/* 8px equivalent */
-}
-
-button {
-	border: none;
-	background-color: #FFB6C1;
-	color: #0000CD;
-	padding: 0.75rem 1.25rem;
-	/* 16px vertical and 24px horizontal paddings */
-	border-radius: 2rem;
-	/* 32px equivalent */
-	font-size: 0.75rem;
-	/* 16px equivalent */
-
-	text-decoration: none;
-	display: inline-block;
-
-	cursor: pointer;
 }
 
 footer {
@@ -288,8 +272,7 @@ footer {
 }
 
 .hello a {
-	color: #0000CD;
-	text-decoration-color: #FFB6C1;
+
 }
 
 .list-item {
@@ -328,19 +311,58 @@ footer {
 	margin-right: 0.5rem;
 }
 
-.btn {
+button {
+	padding: 0.5rem 1rem;
+	/* 16px vertical and 24px horizontal paddings */
+	border-radius: 2rem;
+	/* 32px equivalent */
+	font-size: 0.75rem;
+	/* 16px equivalent */
+	text-decoration: none;
+	display: inline-block;
+	transition: 0.5s ease;
+	cursor: pointer;
+}
+
+
+.m-btn {
+	color: #0000CD;
+	margin-top: 2rem;
+	border: none;
+	background-color: #FFB6C1;
+}
+
+.m-btn:hover {
+	background-color: #0000CD;
+	color: #FFB6C1;
+	
+}
+
+.s-btn {
+	margin-top: 2rem;
+	color: #FFB6C1;
+	border: 1px solid #FFB6C1;
+	background-color: #ffffff;
+}
+
+.s-btn:hover {
+	background-color: #0000CD;
+	border: 1px solid #0000CD;
+}
+
+.sl-btn {
 	position: absolute;
 	top: 50%;
 	background: rgba(0, 0, 0, 0.2);
 	transform: translateY(-50%);
-	color: rgba(239, 239, 239, 0.5);
+	color: rgba(255, 255, 255, 0.75);
 	border: none;
 	cursor: pointer;
 	padding: 0.5rem;
 	z-index: 50;
 }
 
-.btn hover {
+.sl-btn:hover {
 	opacity: 50%
 }
 
@@ -359,7 +381,6 @@ footer {
 }
 
 .list-info p {
-
 	margin-bottom: 0.6rem;
 }
 
@@ -426,7 +447,7 @@ footer {
 
 .footer-down {
 	display: flex;
-	padding: 2rem;
+	padding: 1rem 2rem;
 }
 
 /* RESPONSIVE */
