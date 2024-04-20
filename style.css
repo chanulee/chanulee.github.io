@@ -74,8 +74,6 @@ b {
 
 
 
-
-
 h1 {
 	/* TITLE */
 	font-weight: 600;
@@ -332,26 +330,28 @@ button {
 	margin-top: 2rem;
 	border: none;
 	background-color: #ffb9c3;
+	border: 1px solid #FFB6C1;
 }
 
 .m-btn:hover {
 	background-color: #0000CD;
 	color: #ffb9c3;
+	border: 1px solid #0000CD;
 	
 }
 
 .s-btn {
 	margin-top: 2rem;
 	color: #ffb9c3;
-	border: none;
-	/* border: 1px solid #FFB6C1; */
+	/* border: none; */
+	border: 1px solid #FFB6C1;
 	
 	background-color: #ffffff;
 }
 
 .s-btn:hover {
 	background-color: #0000CD;
-	/* border: 1px solid #0000CD; */
+	border: 1px solid #0000CD;
 }
 
 .sl-btn {
