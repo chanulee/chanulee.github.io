@@ -51,13 +51,13 @@ html {
 	padding: 0;
 	font-weight: normal;
 	text-decoration: none;
-	color: #1f1f1f;
+	color: #151718;
 }
 
 
 
 body {
-	background-color: #ffffff;
+	background-color: #fefefe;
 }
 
 .main {
@@ -73,10 +73,7 @@ b {
 }
 
 
-a:hover {
-	opacity: 50%;
-	color: #0000CD;
-}
+
 
 
 h1 {
@@ -126,6 +123,11 @@ a{
 	text-decoration-color: #0000CD;
 }
 
+a:hover {
+	/* opacity: 50%; */
+	color: #0000CD;
+}
+
 sub {
 	padding: 0rem;
 	text-decoration: underline;
@@ -162,7 +164,7 @@ footer {
 }
 
 .news {
-	background-color: #F8FAFD;
+	background-color: #f7f9fc;
 	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
 	margin-bottom: 0.5rem;
 	padding: 1rem;
@@ -329,25 +331,27 @@ button {
 	color: #0000CD;
 	margin-top: 2rem;
 	border: none;
-	background-color: #FFB6C1;
+	background-color: #ffb9c3;
 }
 
 .m-btn:hover {
 	background-color: #0000CD;
-	color: #FFB6C1;
+	color: #ffb9c3;
 	
 }
 
 .s-btn {
 	margin-top: 2rem;
-	color: #FFB6C1;
-	border: 1px solid #FFB6C1;
+	color: #ffb9c3;
+	border: none;
+	/* border: 1px solid #FFB6C1; */
+	
 	background-color: #ffffff;
 }
 
 .s-btn:hover {
 	background-color: #0000CD;
-	border: 1px solid #0000CD;
+	/* border: 1px solid #0000CD; */
 }
 
 .sl-btn {
@@ -400,6 +404,9 @@ button {
 	flex: 30%;
 }
 
+.dt-r p{
+	margin: 0rem;
+}
 
 .footer {
 	display: flex;
