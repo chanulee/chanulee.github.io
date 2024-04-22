@@ -161,13 +161,21 @@ footer {
 	padding: 0px 0px;
 }
 
+.heading {
+	margin: 3rem 2rem 2rem 2rem;
+}
+
+.heading a {
+	opacity: 50%;
+}
+
 .manifesto {
 	margin-top: 0.5rem;
 	text-align: center;
 	background-color: #f7f9fc;
 	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
 	margin-bottom: 2rem;
-	padding: 2rem 1rem;
+	padding: 2rem;
 	border-radius: 1rem;
 }
 
