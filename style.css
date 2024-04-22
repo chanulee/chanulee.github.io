@@ -161,6 +161,39 @@ footer {
 	padding: 0px 0px;
 }
 
+.manifesto {
+	margin-top: 0.5rem;
+	text-align: center;
+	background-color: #f7f9fc;
+	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
+	margin-bottom: 2rem;
+	padding: 2rem 1rem;
+	border-radius: 1rem;
+}
+
+.manifesto b {
+	font-weight: 500;
+	font-style: italic;
+} 
+
+.ab-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+
+.approach h3 {
+	margin-bottom: 0.5rem;
+	margin-left: 2rem;
+	font-weight: normal;
+	opacity: 0.5;
+}
+
+.ab-list-item {
+	flex: 50%;
+}
+
 .news {
 	background-color: #f7f9fc;
 	/* box-shadow: 0px 0.2rem 0.4rem rgba(46, 46, 46, 0.05); */
