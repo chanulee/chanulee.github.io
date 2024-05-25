@@ -95,7 +95,7 @@ h2 {
 
 h3 {
 	/* ITEM TITLE */
-	margin-top: 1rem;
+	margin-top: 0.5rem;
 	font-weight: 600;
 	padding: 0px;
 	font-size: 1.125rem;
@@ -104,7 +104,7 @@ h3 {
 
 h4 {
 	/* Approach Body */
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 	opacity: 40%;
 	padding: 0px;
 	font-size: 1.125rem;
@@ -144,7 +144,7 @@ img {
 	width: 100%;
 	aspect-ratio: 2 / 1;
 	object-fit: cover;
-	border-radius: 24px;
+	border-radius: 1rem;
 }
 
 iframe {
@@ -152,7 +152,7 @@ iframe {
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
 	margin-bottom: 0.5rem;
-	border-radius: 24px;
+	border-radius: 1rem;
 	/* 8px equivalent */
 }
 
@@ -319,7 +319,7 @@ footer {
 .list-item {
 	/* display: flex;
 	flex-wrap: wrap; */
-	margin-bottom: 6rem;
+	margin-bottom: 4rem;
 }
 
 .list-img {
@@ -333,7 +333,6 @@ footer {
 	aspect-ratio: 2 / 1;
 	position: relative;
 	overflow: hidden;
-	border-radius: 1rem; /* Round corners */
 	margin-bottom: 0.5rem;
 }
 
@@ -351,6 +350,8 @@ footer {
 	border-radius: 1rem;
 	margin-right: 0.5rem;
 }
+
+
 
 button {
 	padding: 0.5rem 1rem;
@@ -419,11 +420,10 @@ button {
 	right: 0.5rem; 
 }
 
-
-
 .list-info {
-
+	cursor: pointer;
 }
+
 
 .list-info p {
 	margin-bottom: 0.6rem;
