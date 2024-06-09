@@ -40,6 +40,23 @@ html {
   pointer-events: none;
 }
 
+.blur-layer{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: -1;
+  -webkit-transform: translateZ(0);
+  pointer-events: none;
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(2rem);
+	-webkit-backdrop-filter: blur(2rem);
+}
+
 * {
 	box-sizing: border-box;
 	font-family: 'ImperialSansText', sans-serif;
@@ -54,14 +71,12 @@ html {
 }
 
 body {
+	padding: 0rem 2rem;
 
 }
 
 .main {
-	padding: 0rem 2rem;
-	background: rgba(0, 0, 0, 0.8);
-	backdrop-filter: blur(2rem);
-	-webkit-backdrop-filter: blur(2rem);
+
 }
 
 
