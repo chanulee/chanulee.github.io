@@ -22,8 +22,8 @@ html {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background: rgba(23, 23, 23, 1);
-
 }
+
 
 .bg {
 	background-image: url('resources/generic.png');
@@ -57,6 +57,9 @@ html {
 	-webkit-backdrop-filter: blur(2rem);
 }
 
+	/* backdrop-filter: blur(2rem);
+-webkit-backdrop-filter: blur(2rem); */
+
 * {
 	box-sizing: border-box;
 	font-family: 'ImperialSansText', sans-serif;
@@ -75,7 +78,7 @@ body {
 }
 
 .main {
-
+	
 }
 
 
@@ -134,20 +137,21 @@ a:hover {
 	color: rgba(255, 255, 255, 0.5);
 }
 
+
 .title{
-	padding-top: 17rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
-.title h1{
-	margin-bottom: 0.5rem;
+.title h2{
+	max-width: 50%;
+	margin: 0 auto;
 }
 
-.sec, .sec-combination{
-	margin-top: 14rem; /*200*/
-}
-
-.sec-combination h2{
-	margin-bottom: 1.5rem;
+.zone {
+	padding: 13rem 0rem;
+	/* background: #ffffff;
+	box-shadow: inset 0rem 0rem 10rem rgba(0, 0, 0, 0.5); */
 }
 
 
@@ -169,19 +173,29 @@ a:hover {
 }
 
 img {
-	margin-bottom: 0.5rem;
-	/* 8px equivalent */
+	border-radius: 0.5rem;
 	width: 100%;
-	aspect-ratio: 2 / 1;
+	/* 8px equivalent */
+	/* aspect-ratio: 2 / 1; */
+	aspect-ratio: auto;
 	object-fit: cover;
+	object-position: center;
 	/* border-radius: 1rem; */
+}
+
+iframe {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	margin-bottom: 0.5rem;
+	/* border-radius: 1rem; */
+	/* 8px equivalent */
 }
 
 footer {
 	margin: 0px;
 	padding: 0px;
 }
-
 
 .buttons{
 	width: 50%;
@@ -232,9 +246,64 @@ footer {
 	text-align: left;
 }
 
+
+
+.carousel {
+	width: 100%;
+	aspect-ratio: 2 / 1;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 0.5rem;
+}
+
+.slides {
+	width: 100%;
+	display: flex;
+	transition: transform 0.5s ease; /* Sliding animation */
+}
+
+.slides img {
+	width: 100%;
+	min-width: 100%;
+	aspect-ratio: 2 / 1;
+	object-fit: cover;
+	/* border-radius: 1rem; */
+	margin-right: 0.5rem;
+}
+
+.flex {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-start;
+	column-gap: 2rem;
+	margin-bottom: 4rem;
+}
+
+.prj {
+	cursor: pointer;
+	margin-top: 2rem;
+	width: calc(50% - 1rem);
+	max-width: calc(50% - 1rem);
+	flex-grow: 1;
+	margin-bottom: 1.5rem;
+	text-shadow: 0rem 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+
+}
+
+.prj img {
+	margin-bottom: 0.5rem;
+	box-shadow: 0rem 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+}
+
+.prj p {
+	font-size: 1.5rem;
+}
+
+
 .navbar {
 	z-index: 1000;
-
 	position: fixed;
 	justify-content: center;
 	align-content: center;
@@ -255,7 +324,7 @@ footer {
 	background: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(1rem);
 	-webkit-backdrop-filter: blur(1rem);
-	color: white;
+	color: rgb(255, 255, 255);
 	font-size: 0; /* Initially hide text */
 	transition: all 0.2s ease-in-out;
 	box-sizing: border-box;
