@@ -20,7 +20,7 @@ html {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background-attachment: scroll;
 }
 
 * {
@@ -115,7 +115,7 @@ a:hover {
 }
 
 .sec, .sec-combination{
-	margin-top: 12.5rem; /*200*/
+	margin-top: 14rem; /*200*/
 }
 
 .sec-combination h2{
@@ -124,7 +124,7 @@ a:hover {
 
 
 .s-sec{
-	margin: 12.5rem 0rem;
+	margin: 14rem 0rem;
 }
 
 
@@ -328,7 +328,12 @@ footer {
 	}
 	
 	h2 {
-		font-size: 2rem;
+		font-size: 1.75rem;
+		line-height: 130%;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
 		line-height: 130%;
 	}
 	
