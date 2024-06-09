@@ -292,6 +292,7 @@ footer {
 
 	html {
 		font-size: 14px;
+		background-attachment: fixed;
 	}
 	
 	.buttons{
@@ -322,6 +323,8 @@ footer {
 	
 	h1 {
 		font-size: 4rem;
+		background-attachment: fixed;
+
 	}
 	
 	h2 {
