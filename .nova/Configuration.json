@@ -3,12 +3,9 @@
 
   ],
   "eablokker.tabsSidebar.config.customKindGroupsOrder" : [
-    "html",
     "css"
   ],
   "eablokker.tabsSidebar.config.customTabOrder" : [
-    "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/index-beta.html",
-    "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/style-beta.css",
-    "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/projects-beta.html"
+    "file:\/\/\/Users\/chanu\/.Trash\/style-beta.css"
   ]
 }
