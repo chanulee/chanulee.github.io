@@ -14,6 +14,13 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'ImperialSansDisplay';
+	src: url('resources/fonts/ImperialSansDisplay-Light.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+
 html {
 	font-size: 16px;
 	background-image: url('resources/generic.png');
@@ -101,7 +108,9 @@ h2 {
 h3 {
 	/* ITEM TITLE */
 	font-size: 1.5rem; /*24*/
-	line-height: 120%;
+	line-height: 130%;
+	font-weight: 200;
+	color: rgba(255, 255, 255, 0.75);
 }
 
 h4 {
@@ -123,7 +132,10 @@ p {
 }
 
 a{
+	font-family: inherit;
 	font-size: inherit;
+	font-weight: inherit;
+	color: inherit;
 	text-decoration: underline;
 	text-underline-offset: 0.2rem;
 	text-decoration-color: rgba(255, 255, 255, 0.5);
@@ -144,6 +156,18 @@ a:hover {
 
 .sec, .sec-combination{
 	margin-top: 14rem; /*200*/
+}
+
+.sec h2, h3 {
+	max-width: 67%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.sec-combination h2, h3 {
+	max-width: 67%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .sec-combination h2{
@@ -210,12 +234,11 @@ footer {
 	backdrop-filter: blur(1em);
 	-webkit-backdrop-filter: blur(1rem);
 	padding: 1.5rem 1.25rem;
-
+	background: rgba(0, 0, 0, 0.4);
 }
 
 .button{
 	border-radius: 1.5rem;
-	background: rgba(0, 0, 0, 0.4);
 	flex-direction: column;
 
 }
@@ -224,7 +247,6 @@ footer {
 	align-content: end;
 	height: 15rem;
 	border-radius: 2rem;
-	background: rgba(255, 255, 255, 0.3);
 }
 
 .big-button h2{
@@ -288,6 +310,14 @@ footer {
 		background-attachment: fixed;
 	}
 	
+	.sec h2, h3 {
+		max-width: 75%;
+	}
+	
+	.sec-combination h2, h3 {
+		max-width: 75%;
+	}
+	
 	.buttons{
 		width: 100%;
 	}
@@ -313,6 +343,14 @@ footer {
 	}
 }
 @media (max-width:640px) {
+	
+	.sec h2, h3 {
+		max-width: 100%;
+	}
+	
+	.sec-combination h2, h3 {
+		max-width: 100%;
+	}
 	
 	h1 {
 		font-size: 4rem;
