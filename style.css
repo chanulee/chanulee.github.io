@@ -1,28 +1,5 @@
 @font-face {
 	font-family: 'ImperialSansText';
-	src: url('resources/fonts/ImperialSansText-Bold.woff2') format('woff2');
-	font-weight: bold;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'ImperialSansText';
-	src: url('resources/fonts/ImperialSansText-Light.woff2') format('woff2');
-	font-weight: 300;
-	/* Light */
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'ImperialSansText';
-	src: url('resources/fonts/ImperialSansText-Medium.woff2') format('woff2');
-	font-weight: 500;
-	/* Medium */
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'ImperialSansText';
 	src: url('resources/fonts/ImperialSansText-Regular.woff2') format('woff2');
 	font-weight: normal;
 	/* 400 */
@@ -30,10 +7,10 @@
 }
 
 @font-face {
-	font-family: 'ImperialSansText';
-	src: url('resources/fonts/ImperialSansText-Semibold.woff2') format('woff2');
-	font-weight: 600;
-	/* SemiBold */
+	font-family: 'ImperialSansDisplay';
+	src: url('resources/fonts/ImperialSansDisplay-Regular.woff2') format('woff2');
+	font-weight: normal;
+	/* 400 */
 	font-style: normal;
 }
 
@@ -111,12 +88,13 @@ h4 {
 	max-width: 70%;
 }
 
-p, li, b, a {
+p, li{
 	font-size: 0.75rem;
 	line-height: 130%;
 }
 
 a{
+	font-size: inherit;
 	text-decoration: underline;
 	text-decoration-color: #0000CD;
 }
@@ -180,7 +158,6 @@ footer {
 }
 
 .manifesto b {
-	font-weight: 500;
 	font-style: italic;
 } 
 
@@ -309,8 +286,9 @@ footer {
 	
 }
 
-.hello p {
-	max-width: 75%;
+.flex {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 
@@ -433,6 +411,10 @@ button {
 .detail {
 	display: flex;
 	margin-top: 2rem;
+}
+
+.flex50{
+	flex: 50%;
 }
 
 .dt-l {
