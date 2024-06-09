@@ -342,7 +342,7 @@ footer {
 		aspect-ratio: 5 / 3;
 	}
 }
-@media (max-width:640px) {
+@media (max-width:680px) {
 	
 	.sec h2, h3 {
 		max-width: 100%;
