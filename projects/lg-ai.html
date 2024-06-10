@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/style-prj.css">
+
+	<title>Sunny Day</title>
+	
+	<meta name="description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
+	<meta property="og:url" content="https://chanulee.github.io">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Chanwoo Lee">
+	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
+	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
+	
+</head>
+
+<body>
+<div class="main">
+	<div class="bg">
+	</div>
+	<div class="blur-layer">
+	</div>
+	
+	<div class="navbar">
+		<div class="nav-item" onclick="location.href='/projects.html';"><p>Chanwoo</p></div>
+		<div class="nav-item" id="current" onclick="location.href='/projects.html';"><p>← Projects</p></div>
+		<div class="nav-item" onclick="location.href='/index.html';"><p>About</p></div>
+	</div>
+	
+	<div class="title-prj">
+		<h2>LG Intelligent System</h2>
+		<h3><a href="https://www.lg.com/global/mobility/press-release/lg-presents-vision-with-ai-powered-innovations-at-lg-world-premiere" target="_blank">LG Electronics</a></h3>
+		<h3><span id="o30"> · </span> <a href="https://www.theverge.com/2023/12/28/24018312/lg-gram-pro-laptops-2024-ces" target="_blank">The Verge</a> <span id="o30"> · </span> <a href="https://www.engadget.com/lgs-latest-gram-laptops-are-predictably-stuffed-with-ai-features-163910204.html?guccounter=1" target="_blank">Engadget</a></h3>
+	</div>
+	
+	<div class="content">
+		<img src="/resources/lg-0.png" alt="" id="blur">
+		
+		<p id="blur">A 3-part project of AI & connectivity R&D:
+			<br/>Multi-device connectivity UX Research(+1Y),
+			<br/>research and proposal for LG SuperApp UX & Strategy(+2~3Y)
+			<br/>and LG AI Human-AI Interaction & System roadmap(+2~3Y).</p>		
+		
+		<img src="/resources/lg-1.gif" alt="" id="blur">
+		
+		<p id="blur">
+			Structured design principles & objectives for Human-AI interaction, designing hybrid AI interface. With interaction-centric AI approach, streamlined data learning system and AI architecture blueprint for future LG AI roadmap.
+		</p>
+		
+		<iframe src="https://player.vimeo.com/video/935242486" frameborder="0" allow="autoplay; fullscreen" allowfullscreen id="blur"></iframe>
+		
+		<p>
+			Our proposal for integrating AI organizing feature into connectivity app has been accepted and released in 2024 as one of 3 main features of LG gram Pro.</p>
+			
+		<div class="detail-index">
+			<div class="detail-item">Project Timeline<br/>2023</div>
+			<div class="detail-item">Role<br/>AI-HCI Researcher</div>
+			<div class="detail-item">Team<br/>Soyeon Kang, Jiyoung Kim, Nakyeong Yu</div>
+			<div class="detail-item">Supervisor<br/>Jinhwa Hong (LG Electronics),<br/>Professor Jeung-uk Ha (Professor of AI, Sogang University)</div>
+		</div>
+	</div>
+
+
+	<div class="s-sec">
+		<div class="buttons">
+			<a class="big-button" id="blur">
+				<h2>All Projects<br/>←</h2>
+			</a>
+		</div>
+	</div>
+
+	
+	<div class="footer" id="o30" >
+		<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
+	</div>
+		
+		<script>
+		function setBlurEffect() {
+			const texts = document.querySelectorAll('#blur');
+			const windowHeight = window.innerHeight;
+		
+			texts.forEach(text => {
+				const rect = text.getBoundingClientRect();
+				const textCenterY = rect.top + rect.height / 2;
+		
+				// Calculate the blur amount and opacity based on the Y position
+				let blurAmount = Math.max(0, (textCenterY - 0.75 * windowHeight) / (windowHeight / 2) * 10);
+				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.75 * windowHeight) / (windowHeight / 2));
+		
+				// Apply the blur and opacity to the text
+				text.style.filter = `blur(${blurAmount}px)`;
+				text.style.opacity = opacityAmount;
+			});
+		}
+		
+		// Initialize blur effect on page load
+		document.addEventListener('DOMContentLoaded', function () {
+			setBlurEffect();
+		});
+		
+		// Adjust blur effect on scroll
+		document.addEventListener('scroll', function () {
+			setBlurEffect();
+		});
+		
+		</script>
+</div>
+</body>
+
+<footer>
+</footer>
+</html>

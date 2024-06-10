@@ -253,7 +253,13 @@ footer {
 	text-align: left;
 }
 
-.navbar {
+/*
+
+Nav Bar Elements
+
+*/
+
+.navbar {	
 	margin: 1.5rem 0rem;
 	z-index: 1000;
 	width: 100%;
@@ -280,13 +286,12 @@ footer {
 }
 
 #current {
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.5);
 	color: rgba(255, 255, 255, 0.9);
 }
 
-.nav-item a{
+.nav-item p{
 	font-size: 1.5rem;
-	text-decoration: none;
 	color: inherit;
 }
 
