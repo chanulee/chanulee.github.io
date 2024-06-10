@@ -28,8 +28,7 @@ html {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background: rgba(23, 23, 23, 1);
-
+	background: rgba(242, 242, 242, 1);
 }
 
 .bg {
@@ -255,51 +254,44 @@ footer {
 }
 
 .navbar {
+	margin: 1.5rem 0rem;
 	z-index: 1000;
-
-	position: fixed;
+	width: 100%;
 	justify-content: center;
 	align-content: center;
-	height: 4rem;
+	height: auto;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 2px; /* Initial gap between buttons */
-	transition: gap 0.1s ease-in-out;
+	gap: 2rem; /* Expanded gap between buttons */
 }
 
 .nav-item {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 16px; /* Initial width */
-	height: 8px; /* Initial height */
-	border-radius: 24px; /* Initial border radius */
-	background: rgba(255, 255, 255, 0.2);
+	width: calc((100% - 10rem)/6);
+	height: 3rem;
+	border-radius: 1.5rem; /* Ensure border radius remains consistent */
+	background: rgba(50, 50, 50, 0.2);
+	text-align: center;
+	align-content: center;
+
 	backdrop-filter: blur(1rem);
 	-webkit-backdrop-filter: blur(1rem);
-	color: white;
-	font-size: 0; /* Initially hide text */
-	transition: all 0.2s ease-in-out;
-	box-sizing: border-box;
+	
 	cursor: pointer;
 }
 
-.nav-item.expanded {
-	width: 10rem;
-	height: 2.5rem;
-	font-size: 1rem; /* Show text */
-	border-radius: 1.5rem; /* Ensure border radius remains consistent */
-	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(1rem);
-	-webkit-backdrop-filter: blur(1rem);
+#current {
+	background: rgba(0, 0, 0, 0.4);
+	color: rgba(255, 255, 255, 0.9);
 }
 
-.nav-item.expanded: hover {
-	background: rgba(255, 0, 0, 0.2);
+.nav-item a{
+	font-size: 1.5rem;
+	text-decoration: none;
+	color: inherit;
 }
 
-.navbar.expanded {
-	gap: 0.5rem; /* Expanded gap between buttons */
+.nav-item:hover{
+	opacity: 50%;
 }
 
 /* RESPONSIVE */
