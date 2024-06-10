@@ -307,6 +307,17 @@ Nav Bar Elements
 		background-attachment: fixed;
 	}
 	
+	.navbar {
+		margin: 1.5rem 0rem;
+		width: 100%;
+		position: sticky;
+		gap: 0.5rem; 
+	}
+	
+	.nav-item {
+		flex: 30%;
+	}
+	
 	.sec h2, h3 {
 		max-width: 75%;
 	}
