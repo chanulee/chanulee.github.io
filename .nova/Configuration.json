@@ -4,15 +4,13 @@
   ],
   "eablokker.tabsSidebar.config.customKindGroupsOrder" : [
     "css",
-    "html",
-    "json"
+    "html"
   ],
   "eablokker.tabsSidebar.config.customTabOrder" : [
     "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/index.html",
     "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/about.html",
     "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/style.css",
     "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/style-prj.css",
-    "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/.nova\/Configuration.json",
     "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/projects.html",
     "file:\/\/\/Users\/chanu\/Local-Documents\/GitHub\/chanulee.github.io\/projects\/snap.html"
   ]
