@@ -357,7 +357,6 @@ Project Detail Page
 	border-radius: 1rem;
 	width: 75%;
 	box-shadow: 0rem 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
-
 }
 
 .content iframe{
@@ -461,6 +460,26 @@ Just In Case
 	
 	p{
 		font-size: 0.8rem;
+	}
+	
+	.content img{
+		width: 100%;
+	}
+	
+	.detail-index {
+		width: 100%;
+	}
+	
+	.content p{
+		width: 100%;
+	}
+	
+	.content iframe{
+		width: 100%;
+	}
+	
+	.detail-item {
+		width: calc(33% - 0.75rem);
 	}
 	
 	.slides img {
