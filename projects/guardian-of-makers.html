@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/style-prj.css">
+
+	<title>Guardian of Makers</title>
+	
+	<meta name="description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
+	<meta property="og:url" content="https://chanulee.github.io">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Chanwoo Lee">
+	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
+	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
+	
+</head>
+
+<body>
+<div class="main">
+	<div class="bg">
+	</div>
+	<div class="blur-layer">
+	</div>
+	
+	<div class="navbar">
+		<div class="nav-item" onclick="location.href='/index.html';"><p>Chanwoo</p></div>
+		<div class="nav-item" id="current" onclick="location.href='/projects.html';"><p>← Projects</p></div>
+		<div class="nav-item" onclick="location.href='/about.html';"><p>About</p></div>
+	</div>
+	
+	<div class="title-prj">
+		<h2>Guardian of Maker</h2>
+		<h3><a href="https://ai.google.dev/gemini-api" target="_blank">Google AI Hackathon</a> </h3>
+	</div>
+	
+	<div class="content">
+		<img src="/resources/gom1.gif" alt="" id="blur">
+		
+		<p id="blur">
+			Interactive MR system for immersive storytelling capable of high degree of freedom in creative expressions, integrating UWB sensors, Azure Kinect and htc Vive.
+		</p>
+		
+		
+		<p id="blur">Solarpunk media art about a future where pixels approach the realm of atom, and the climate crisis has been overcome.</p>
+		
+		<img src="/resources/gom3.jpg" alt="" id="blur">
+		
+		<p id="blur">As a research team lead, I led research, design & engineering of the MR system and developed wearable input device.<br  />As a co-artist, we worked on research for future scenario and current humanity's climate technologies.</p>		
+		
+		<div class="detail-index">
+			<div class="detail-item">TIMELINE<br/>2024</div>
+			<div class="detail-item">ROLE<br/>Research Lead<br/>HCI Design Engineering</div>
+			<div class="detail-item">AFFILIATION<br/>Self-initiated Project</div>
+			<div class="detail-item">TEAM<br/>Saetbyeol Leeyouk</div>
+		</div>
+	</div>
+
+
+	<div class="s-sec">
+		<div class="buttons">
+			<a class="big-button" id="blur" href="/projects.html">
+			<h2>All Projects<br/>←</h2>
+			</a>
+		</div>
+	</div>
+
+	
+	<div class="footer" id="o30" >
+		<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
+	</div>
+		
+		<script>
+		function setBlurEffect() {
+			const texts = document.querySelectorAll('#blur');
+			const windowHeight = window.innerHeight;
+		
+			texts.forEach(text => {
+				const rect = text.getBoundingClientRect();
+				const textCenterY = rect.top + rect.height / 2;
+		
+				// Calculate the blur amount and opacity based on the Y position
+				let blurAmount = Math.max(0, (textCenterY - 0.75 * windowHeight) / (windowHeight / 2) * 10);
+				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.75 * windowHeight) / (windowHeight / 2));
+		
+				// Apply the blur and opacity to the text
+				text.style.filter = `blur(${blurAmount}px)`;
+				text.style.opacity = opacityAmount;
+			});
+		}
+		
+		// Initialize blur effect on page load
+		document.addEventListener('DOMContentLoaded', function () {
+			setBlurEffect();
+		});
+		
+		// Adjust blur effect on scroll
+		document.addEventListener('scroll', function () {
+			setBlurEffect();
+		});
+		
+		</script>
+</div>
+</body>
+
+<footer>
+</footer>
+</html>

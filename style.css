@@ -85,7 +85,7 @@ body {
 }
 
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
 	font-family: 'ImperialSansDisplay', sans-serif;
 	padding: 0rem;
 	margin: 0rem;	
@@ -113,6 +113,14 @@ h3 {
 }
 
 h4 {
+	font-family: 'ImperialSansText', sans-serif;
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 1.25rem; /*24*/
+	line-height: 130%;
+	padding: 0rem;
+	margin: 0rem;	
+	text-align: center;
+	text-shadow: 0rem 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
 
 }
 

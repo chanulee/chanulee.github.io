@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/style-prj.css">
+
+	<title>human.intheloop</title>
+	
+	<meta name="description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
+	<meta property="og:url" content="https://chanulee.github.io">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Chanwoo Lee">
+	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
+	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
+	
+</head>
+
+<body>
+<div class="main">
+	<div class="bg">
+	</div>
+	<div class="blur-layer">
+	</div>
+	
+	<div class="navbar">
+		<div class="nav-item" onclick="location.href='/index.html';"><p>Chanwoo</p></div>
+		<div class="nav-item" id="current" onclick="location.href='/projects.html';"><p>← Projects</p></div>
+		<div class="nav-item" onclick="location.href='/about.html';"><p>About</p></div>
+	</div>
+	
+	<div class="title-prj">
+		<h2>human.intheloop</h2>
+		<h3><a href="https://www.nabi.or.kr/en/page/board_view.php?brd_idx=1091&brd_id=project" target="_blank">Nabi AI Open Lab</a></h3>
+	</div>
+	
+	<div class="content">
+		<img src="/resources/hero/intheloop.jpg" alt="" id="blur">
+		
+		<p id="blur">
+			A new workforce performing human intelligence tasks, such as data labeling and annotation, has emerged in the fourth industrial revolution. Their efforts contribute to further refining artificial intelligence models designed to replace human labor.
+		</p>
+		
+		<iframe src="https://player.vimeo.com/video/776993562" frameborder="0" allow="autoplay; fullscreen" allowfullscreen id="blur"></iframe>
+		
+		<p id="blur">Our work intends to provide an interactive and gamified experience for the audience to perform such labor firsthand and visualize the compensations in return. The mundane yet incessant nature of the tasks reminds of the extinct occupations in the previous industrial revolutions, like assembly line workers, telephone operators, and human computers.</p>
+		
+		<div class="detail-index">
+			<div class="detail-item">TIMELINE<br/>2022 - 2023</div>
+			<div class="detail-item">ROLE<br/>Research Lead<br/>HCI Design Engineering</div>
+			<div class="detail-item">AFFILIATION<br/>Nabi AI Open Lab</div>
+			<div class="detail-item">TEAM<br/>Hyunchul Kim, Soomin Park, Michael Park</div>
+		</div>
+	</div>
+
+
+	<div class="s-sec">
+		<div class="buttons">
+			<a class="big-button" id="blur" href="/projects.html">
+			<h2>All Projects<br/>←</h2>
+			</a>
+		</div>
+	</div>
+
+	
+	<div class="footer" id="o30" >
+		<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
+	</div>
+		
+		<script>
+		function setBlurEffect() {
+			const texts = document.querySelectorAll('#blur');
+			const windowHeight = window.innerHeight;
+		
+			texts.forEach(text => {
+				const rect = text.getBoundingClientRect();
+				const textCenterY = rect.top + rect.height / 2;
+		
+				// Calculate the blur amount and opacity based on the Y position
+				let blurAmount = Math.max(0, (textCenterY - 0.75 * windowHeight) / (windowHeight / 2) * 10);
+				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.75 * windowHeight) / (windowHeight / 2));
+		
+				// Apply the blur and opacity to the text
+				text.style.filter = `blur(${blurAmount}px)`;
+				text.style.opacity = opacityAmount;
+			});
+		}
+		
+		// Initialize blur effect on page load
+		document.addEventListener('DOMContentLoaded', function () {
+			setBlurEffect();
+		});
+		
+		// Adjust blur effect on scroll
+		document.addEventListener('scroll', function () {
+			setBlurEffect();
+		});
+		
+		</script>
+</div>
+</body>
+
+<footer>
+</footer>
+</html>
