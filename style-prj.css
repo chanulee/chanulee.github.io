@@ -222,7 +222,7 @@ img {
 	border-radius: 0.5rem;
 	width: 100%;
 	/* aspect-ratio: 2 / 1; */
-	aspect-ratio: auto;
+	aspect-ratio: 5 / 3;
 	object-fit: cover;
 	object-position: center;
 }
