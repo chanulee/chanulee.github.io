@@ -435,6 +435,27 @@ Project Detail Page
 	width: calc(25% - 0.75rem);
 }
 
+.prjlst-index {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 2rem;
+	column-gap: 1rem;
+	row-gap: 3rem;
+}
+
+.prjlst-item {
+	text-align: left;
+	width: calc(25% - 0.75rem);
+}
+
+.prjlst-item p{
+	font-size: 1rem;
+}
+
 /*
 
 Just In Case
