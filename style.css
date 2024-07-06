@@ -21,6 +21,13 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'ImperialSansText';
+	src: url('resources/fonts/ImperialSansText-Light.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+
 html {
 	font-size: 16px;
 	background-image: url('resources/sunnyday.jpg');
@@ -85,7 +92,7 @@ body {
 }
 
 
-h1, h2, h3 {
+h1, h2 {
 	font-family: 'ImperialSansDisplay', sans-serif;
 	padding: 0rem;
 	margin: 0rem;	
@@ -106,27 +113,22 @@ h2 {
 
 h3 {
 	/* ITEM TITLE */
+	font-family: 'ImperialSansText', sans-serif;
+
+	padding: 0rem;
+	margin: 0rem;	
+	text-align: center;
+	text-shadow: 0rem 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
 	font-size: 1.5rem; /*24*/
 	line-height: 130%;
 	font-weight: 200;
 	color: rgba(255, 255, 255, 0.75);
 }
 
-h4 {
-	font-family: 'ImperialSansText', sans-serif;
-	color: rgba(255, 255, 255, 0.75);
-	font-size: 1.25rem; /*24*/
-	line-height: 130%;
-	padding: 0rem;
-	margin: 0rem;	
-	text-align: center;
-	text-shadow: 0rem 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
-
-}
-
 p {
 	font-family: 'ImperialSansText', sans-serif;
 	font-size: 1rem; /*16*/
+	font-weight: 200;
 	line-height: 125%;
 }
 

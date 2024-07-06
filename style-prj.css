@@ -105,8 +105,9 @@ h2 {
 
 h3 {
 	/* ITEM TITLE */
+	
 	font-size: 1.5rem; /*24*/
-	line-height: 120%;
+	line-height: 130%;
 }
 
 h4 {
@@ -232,6 +233,26 @@ iframe {
 	border-radius: 0.5rem;
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
+}
+
+.sec, .sec-combination{
+	margin-bottom: 14rem; /*200*/
+}
+
+.sec h2, h3 {
+	max-width: 67%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.sec-combination h2, h3 {
+	max-width: 67%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.sec-combination h2{
+	margin-bottom: 1.5rem;
 }
 
 .s-sec{
@@ -487,6 +508,14 @@ Just In Case
 		font-size: 0.8rem;
 	}
 	
+	.sec h2, h3 {
+		max-width: 75%;
+	}
+	
+	.sec-combination h2, h3 {
+		max-width: 75%;
+	}
+	
 	.content img{
 		width: 100%;
 	}
@@ -541,6 +570,14 @@ Just In Case
 	
 	p{
 		font-size: 1rem;
+	}
+	
+	.sec h2, h3 {
+		max-width: 100%;
+	}
+	
+	.sec-combination h2, h3 {
+		max-width: 100%;
 	}
 	
 	.buttons{
