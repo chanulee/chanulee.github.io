@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style-prj.css">
+
+	<title>Projects - CHANWOO LEE</title>
+</head>
+
+<body>
+<div class="main">
+	<div class="bg">
+	</div>
+	<div class="blur-layer">
+	</div>
+	<div class="navbar">
+		<div class="nav-item" onclick="location.href='/index.html';"><p>Chanwoo</p></div>
+		<div class="nav-item" id="current"><p>Projects</p></div>
+		<div class="nav-item" onclick="location.href='/about.html';"><p>About</p></div>
+	</div>
+	
+	<h3 id="blur">Archive</h3>
+	<div class="prjlst-index">
+		<div class="prjlst-item"><p id="blur">DIGITAL DOUBLES</p></div>
+		<div class="prjlst-item"><p id="blur"><p>MODEM WORKS</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Future scenario research on personalised AI</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+
+		<div class="prjlst-item"><p id="blur">SENSORY MISALIGNMENT AR</p></div>
+		<div class="prjlst-item"><p id="blur">SNAP INC</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Media art project on human senses and reality technology</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+
+		<div class="prjlst-item"><p id="blur">RESPONSIBLE AI DESIGN FRAMEWORK</p></div>
+		<div class="prjlst-item"><p id="blur">SELF-INITIATED PROJECT</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Presented at ICML LONDON 2024</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+
+		<div class="prjlst-item"><p id="blur">OPPO CENTRE</p></div>
+		<div class="prjlst-item"><p id="blur">OPPO</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Combining privacy and sustainability</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+		
+		<div class="prjlst-item"><p id="blur">RECSYS+LLM</p></div>
+		<div class="prjlst-item"><p id="blur">RCA COMPUTER SCIENCE RESEARCH CENTRE</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Research on combining recommender systems and LLMs</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+		
+		<div class="prjlst-item"><p id="blur">SKETCHROTOM</p></div>
+		<div class="prjlst-item"><p id="blur">IN-HOUSE PROJECT</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">New way to sketch, interacting with static sketch like a magic sketchbook</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+	
+		<div class="prjlst-item"><p id="blur">DFS CUBIC SOFA</p></div>
+		<div class="prjlst-item"><p id="blur">DFS</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Sustainable furniture design using cardboard</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+
+		<div class="prjlst-item"><p id="blur">PULSE BRACELET</p></div>
+		<div class="prjlst-item"><p id="blur">IMPERIAL COLLEGE LONDON</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">Fighting in-club sexual harassment by making social interaction with technology design</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+
+		<div class="prjlst-item"><p id="blur">PLAY, PLAY, and PLAY: CITY</p></div>
+		<div class="prjlst-item"><p id="blur">KIMOK</p></div>
+		<div class="prjlst-item" id="des"><p id="blur">C++ software development for RCA 2024 show</p></div>
+		<div class="prjlst-item" id="right"><p id="blur">2024</p></div>
+	</div>
+	
+	<div class="s-sec">
+		<div class="buttons">
+			<a class="big-button" id="blur" href="/index.html">
+				<h2>Main<br/>→</h2>
+			</a>
+			<a class="big-button" id="blur" href="/about.html">
+				<h2>About<br/>→</h2>
+			</a>
+		</div>
+	</div>
+
+
+	
+		
+	<div class="footer" id="o30" >
+		<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
+	</div>
+		
+		<script>
+		function setBlurEffect() {
+			const texts = document.querySelectorAll('#blur');
+			const windowHeight = window.innerHeight;
+		
+			texts.forEach(text => {
+				const rect = text.getBoundingClientRect();
+				const textCenterY = rect.top + rect.height / 2;
+		
+				// Calculate the blur amount and opacity based on the Y position
+				let blurAmount = Math.max(0, (textCenterY - 0.8 * windowHeight) / (windowHeight / 2) * 10);
+				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.8 * windowHeight) / (windowHeight / 2));
+		
+				// Apply the blur and opacity to the text
+				text.style.filter = `blur(${blurAmount}px)`;
+				text.style.opacity = opacityAmount;
+			});
+		}
+		
+		// Initialize blur effect on page load
+		document.addEventListener('DOMContentLoaded', function () {
+			setBlurEffect();
+		});
+		
+		// Adjust blur effect on scroll
+		document.addEventListener('scroll', function () {
+			setBlurEffect();
+		});
+		
+		
+	
+		</script>
+</div>
+</body>
+
+<footer>
+</footer>
+</html>
