@@ -457,6 +457,23 @@ Project Detail Page
 	row-gap: 1rem;
 }
 
+#h p {
+	font-family: 'ImperialSansDisplay', sans-serif;
+	font-size: 1.5rem;
+}
+
+#h-des p {
+	font-family: 'ImperialSansDisplay', sans-serif;
+	font-size: 1.5rem;
+	width: calc(42% - 0.75rem);
+}
+
+#h-right p {
+	font-family: 'ImperialSansDisplay', sans-serif;
+	font-size: 1.5rem;
+	text-align: right;
+}
+
 #des {
 	width: calc(42% - 0.75rem);
 }
