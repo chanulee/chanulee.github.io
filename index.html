@@ -1,13 +1,8 @@
 <!DOCTYPE html>
-<!--
-	2024
-	Chanwoo Lee
--->
 <html>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
 
 	<title>Chanwoo Lee</title>
 	
@@ -17,154 +12,278 @@
 	<meta property="og:title" content="Chanwoo Lee">
 	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
 	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
+
+	<style>
+		html {
+			font-size: 16px;
+		    background-color: #f9f9f9;
+		    overflow: auto;
+		}
+
+		* {
+			box-sizing: border-box;
+			font-family: serif;
+			transition: 0.4s;
+			font-size: 0.875rem;
+			line-height: 120%;
+			margin: 0px;
+			padding: 0px;
+		    color: #111111;
+		}
+
+		body {
+			/* cursor: none; Hide the default cursor */
+			overflow: auto;
+			min-height: 100vh;
+		}
+
+		.main {
+			display: flex;
+			min-height: 100vh;
+		}
+
+		.left {
+			flex: 1;
+			position: fixed;
+			width: 50%;
+			height: 100vh;
+			padding: 1rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.right {
+			flex: 1;
+			margin-left: 50%;
+			padding: 2rem;
+			overflow-y: auto;
+		}
+
+		/* Media query for mobile */
+		@media (max-width: 768px) {
+			.main {
+				flex-direction: column;
+			}
+
+			.left {
+				position: relative;
+				width: 100%;
+				height: 100vh;
+				padding: 1rem;
+			}
+
+			.right {
+				margin-left: 0;
+				padding: 1rem;
+			}
+		}
+
+		.right > div {
+			margin-bottom: 3rem;
+		}
+
+		.module {
+			box-shadow: 0px 0.25rem 1rem rgba(0, 0, 0, 0.10);
+			max-width: 75%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		/* For mobile screens, let modules take full width */
+		@media (max-width: 768px) {
+			.module {
+				max-width: 100%;
+			}
+		}
+
+		.photo img {
+			width: 100%;
+			border-radius: 4px;
+			display: block; /* Removes any unwanted spacing */
+		}
+
+		.link-card {
+			padding: 1rem;
+			background: white;
+			border-radius: 0.5rem;
+		}
+
+		.link-card .title {
+			font-size: 1.25rem;
+			font-weight: bold;
+			margin-bottom: 0.5rem;
+		}
+
+		.link-card .description {
+			font-size: 0.875rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.link-card img {
+			width: 100%;
+			border-radius: 0.25rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.link-card a {
+			text-decoration: none;
+			color: #111111;
+			display: block;
+		}
+
+		.link-card a:hover {
+			opacity: 0.8;
+		}
+
+		.editor-block {
+			padding: 0.5rem;
+			background: #DDDDDD;
+			border-radius: 0.5rem;
+		}
+
+		.editor-block h3 {
+			font-size: 2rem;
+			text-align: left;
+			margin-bottom: 1rem;
+		}
+
+		.editor-block p {
+			font-size: 1.5rem;
+			text-align: left;
+			margin-bottom: 1rem;
+		}
+
+		.editor-block img {
+			width: 100%;
+			border-radius: 0px;
+			margin-bottom: 1rem;
+		}
+
+		.editor-block a {
+			font-size: 1.5rem;
+			text-align: left;
+			text-decoration: underline;
+			display: block;
+		}
+
+		.editor-block a:hover {
+			opacity: 0.7;
+			text-decoration: none;
+		}
+
+		.postit {
+			padding: 1rem;
+			background: #F9DD66;
+			border-radius: 0.25rem;
+			max-width: 50%;
+			min-height: calc(25vw * 3/4);
+			height: auto;
+			margin: 0 auto;
+			display: flex;           /* Added to help with centering */
+			align-items: center;     /* Added to help with centering */
+			justify-content: center; /* Added to help with centering */
+		}
+
+		.postit p {
+			text-align: center;
+			color: black;
+			font-size: 1.5rem;
+			font-family: Inter;
+			font-weight: 400;
+			line-height: 120%;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+			max-width: 100%;        /* Added to prevent text overflow */
+			padding: 0.5rem;        /* Added to prevent text touching edges */
+			margin: 0;              /* Added to ensure proper centering */
+		}
+
+		.clocks {
+			display: flex;
+			justify-content: space-between;
+			gap: 1rem;
+		}
+
+		.clock {
+			flex: 1;
+		}
+	</style>
 </head>
 
 <body>
-	<div class="bg">
-	</div>
-	<div class="blur-layer">
-	</div>
 	<div class="main">
-	<div class="navbar">
-		<div class="nav-item" id="current"><p>Chanwoo</p></div>
-		<div class="nav-item" onclick="location.href='/projects.html';"><p>Projects</p></div>
-		<div class="nav-item" onclick="location.href='/about.html';"><p>About</p></div>
-	</div>
-		
-		<div class="title">
-			<h1>Chanwoo Lee</h1>
-			<h2 id="o50">Designing Computational Tools for Everyone</h2>
-		</div>
-		
-		<div class="sec">
-			<h2 id="blur">Co-designing technology and behaviour to build the future.</h2>
-			
-			<div class="buttons">
-				<a class="button" id="blur" href='https://drive.google.com/file/d/1MhRJjFJrRrx9xhDTY0j-VpzT9FEiwetZ/view?usp=sharing' target="_blank">
-					<p>Digital Renaissance Manifesto ↗</p>
-					<p id="o30">PDF</p>
-				</a>
-				<a class="button" id="blur" href='https://www.imperial.ac.uk/design-engineering/about-us/what-is-design-engineering/' target="_blank">
-					<p>Design Engineering ↗</p>
-					<p id="o30">imperial.ac.uk</p>
-				</a>
+		<div class="left">
+			<div class="intro">
+				<h1>Hello, I'm Chanwoo Lee.</h1>
+				<h2>I'm an HCI design engineer, researcher and artist interested in the future of computing and its impact on society.</h2>
+				<h2>In belief that difference makes difference, I co-design technologies and behaviours for human creativity and productivity.</h2>
+				<h2>Just like an architect: He designs information technology and human relationship of the future.</h2>
+				<h2>I'm pursuing MA/MSc Innovation Design Engineering at Imperial College London and the Royal College of Art. Prior to his masters, he received his BAS in Art & Technology, and BBA in Technology, Society and Entrepreneurship from Sogang University, Seoul.</h2>
 			</div>
-		</div>
-		
-		<div class="sec">
-			<h2 id="blur">Just like an architect:<br/>Mix of designer, engineer and researcher.</h2>
-		</div>
-
-		<div class="sec-combination">
-			<h2 id="blur">
-				Understanding relationship between human and technology.
-			</h2>
-			
-			<h3 id="blur">Future Scenarios</h3>
-			<h3 id="blur">Contemporary Media Art</h3>
-			<h3 id="blur">Design Research</h3>
-
-			<div class="buttons">
-				<a class="button" id="blur" href="/projects/snap.html">
-					<p>Exploring sense and reality on AR</p>
-					<p id="o30">SNAP R&D</p>
-				</a>
-				<a class="button" id="blur" href="/projects/illogical-love.html">
-					<p>The future of decentralized, sustainable web</p>
-					<p id="o30">COP26 selected Media Art</p>
-				</a>
+			<div class="clocks">
+				<div class="clock" id="london-clock">London: --:--:--</div>
+				<div class="clock" id="seoul-clock">Seoul: --:--:--</div>
 			</div>
 		</div>
 	
-		
-		<div class="sec-combination">
-			<h2 id="blur">
-				How can we make it happen with computers?
-			</h2>
-			
-			<h3 id="blur">Applied Computing Research</h3>
-			<h3 id="blur">Interaction & Interface Design Engineering</h3>
-			
-			<div class="buttons">
-				
-				<a class="button" id="blur" href="/projects/lg-ai.html">
-					<p>Right information at the right moment on laptop</p>
-					<p id="o30">LG Electronics R&D</p>
-				</a>
-				<a class="button" id="blur" href="/projects/oppo.html">
-					<p>Data ownership and personal AI using old phones</p>
-					<p id="o30">OPPO R&D</p>
-				</a>
+		<div class="right">
+			<div class="module editor-block">
+				<h3>Digital Doubles research with MODEM</h3> 
+				<!-- <p>This is a paragraph.</p> -->
+				<img src="modem.webp" alt="">
+				<a href="https://modemworks.com/research/digital-doubles/" target="_blank">View project</a>
 			</div>
-		</div>
-		
-		
-		<div class="sec">
-			<h2 id="blur">Currently pursuing</h2>
-			<h2 id="blur">MA/MSc Innovation Design Engineering</h2>
-			<h2 id="blur">at <a href="https://imperial.ac.uk" target="_blank">Imperial College ↗</a></h2>
-			<h2 id="blur">and <a href="https://rca.ac.uk" target="_blank">Royal College of Art ↗</a>.</h2>
-		</div> 
-		
-		<div class="sec">
-			<h3 id="blur">Human Centred Computing</h3>
-			<h3 id="blur">Human-Computer Interaction</h3>
-			<h3 id="blur">Intelligent System</h3>
-			<h3 id="blur"><a href="https://neurips.cc/virtual/2022/invited-talk/55870" target="_blank">Interaction-centric AI ↗</a></h3>
-			<h3 id="blur"><a href="https://www.cs.cmu.edu/~jasonh/courses/ubicomp-sp2007/slides/12-intro-context-aware.pdf" target="_blank">context-aware system ↗</a></h3>
-			<h3 id="blur"><a href="https://web.mit.edu/6.826/www/notes/HO13.pdf" target="_blank">semantic file system ↗</a></h3>
-			<h3 id="blur">Graph and machine learning</h3>
-		</div>
-			
-		<div class="s-sec">
-			<div class="buttons">
-				<a class="big-button" id="blur" href="/projects.html">
-					<h2>Projects<br/>→</h2>
-				</a>
-				<a class="big-button" id="blur" href="/about.html">
-					<h2>About<br/>→</h2>
-				</a>
-			</div>
-		</div>
-			
-		<div class="footer" id="o30" >
-			<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
-		</div>
-			
-		<script>
-		function setBlurEffect() {
-			const texts = document.querySelectorAll('#blur');
-			const windowHeight = window.innerHeight;
-		
-			texts.forEach(text => {
-				const rect = text.getBoundingClientRect();
-				const textCenterY = rect.top + rect.height / 2;
-		
-				// Calculate the blur amount and opacity based on the Y position
-				let blurAmount = Math.max(0, (textCenterY - 0.65 * windowHeight) / (windowHeight / 2) * 10);
-				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.55 * windowHeight) / (windowHeight / 2));
-		
-				// Apply the blur and opacity to the text
-				text.style.filter = `blur(${blurAmount}px)`;
-				text.style.opacity = opacityAmount;
-			});
-		}
-		
-		// Initialize blur effect on page load
-		document.addEventListener('DOMContentLoaded', function () {
-			setBlurEffect();
-		});
-		
-		// Adjust blur effect on scroll
-		document.addEventListener('scroll', function () {
-			setBlurEffect();
-		});
-		
-		
-		</script>
-	</div>
-</body>
 
-<footer>
-</footer>
+			<div class="module postit">
+				<p>How much power do users have on their own data and 'personal' computer?</p>
+			</div>
+
+			<div class="module photo">
+				<img src="aiethics.png" alt="">
+			</div>
+
+			<div class="module link-card">
+				<a href="https://github.com/chanulee/persona-studio" target="_blank">
+					<h3>Link title</h3>
+					<p>link description</p>
+					<p>link</p>
+					<img src="image-source.jpg" alt="Card image">
+				</a>
+			</div>
+
+			<div class="module editor-block">
+				<h3>This is a text block.</h3> 
+				<p>This is a paragraph.</p>
+				<img src="aiethics.png" alt="">
+				<a href="">Open this</a> 
+			</div>
+			
+
+		</div>
+	</div>
+
+	<script>
+
+		// Real-time clocks for London and Seoul
+		function updateClocks() {
+		    var londonClock = document.getElementById('london-clock');
+		    var seoulClock = document.getElementById('seoul-clock');
+
+		    var now = new Date();
+
+		    // London time
+		    var londonTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/London" }));
+
+		    // Seoul time
+		    var seoulTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+
+		    londonClock.textContent = 'London: ' + londonTime.toLocaleTimeString();
+		    seoulClock.textContent = 'Seoul: ' + seoulTime.toLocaleTimeString();
+		}
+
+		setInterval(updateClocks, 1000);
+		updateClocks();
+	</script>
+</body>
 </html>
