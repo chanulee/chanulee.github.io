@@ -32,9 +32,21 @@
 		}
 
 		body {
-			/* cursor: none; Hide the default cursor */
+			cursor: none; /* Hide the default cursor */
 			overflow: auto;
 			min-height: 100vh;
+		}
+
+		h1 {
+			font-size: 2rem;
+			margin: 0;
+			font-weight: 400;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+			margin: 0;
+			font-weight: 400;
 		}
 
 		.main {
@@ -77,6 +89,10 @@
 				margin-left: 0;
 				padding: 1rem;
 			}
+
+			.module {
+				max-width: 100%;
+			}
 		}
 
 		.right > div {
@@ -90,13 +106,6 @@
 			margin-right: auto;
 		}
 
-		/* For mobile screens, let modules take full width */
-		@media (max-width: 768px) {
-			.module {
-				max-width: 100%;
-			}
-		}
-
 		.photo img {
 			width: 100%;
 			border-radius: 4px;
@@ -104,20 +113,34 @@
 		}
 
 		.link-card {
-			padding: 1rem;
-			background: white;
-			border-radius: 0.5rem;
+			background: #f9f9f9;
+			border-radius: 1rem;
+			width: 60%;
+			margin-left: auto;
+			margin-right: auto;
 		}
 
-		.link-card .title {
-			font-size: 1.25rem;
-			font-weight: bold;
-			margin-bottom: 0.5rem;
-		}
-
-		.link-card .description {
+		.link-source {
+			width: 100%;
+			background: rgba(0, 0, 0, 0.1);
 			font-size: 0.875rem;
-			margin-bottom: 0.5rem;
+			color: #393939;
+			padding: 0.25rem;
+			padding-left: 1rem;
+			border-top-left-radius: 1rem;
+			border-top-right-radius: 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.4em;
+		}
+
+		.link-content {
+			padding: 1rem;
+			font-size: 1rem;
+		}
+
+		.link-content h3, p {
+			font-size: inherit;
 		}
 
 		.link-card img {
@@ -138,20 +161,23 @@
 
 		.editor-block {
 			padding: 0.5rem;
-			background: #DDDDDD;
+			background: #0f0f0f;
 			border-radius: 0.5rem;
+			
 		}
 
 		.editor-block h3 {
 			font-size: 2rem;
 			text-align: left;
 			margin-bottom: 1rem;
+			color: white;
 		}
 
 		.editor-block p {
 			font-size: 1.5rem;
 			text-align: left;
 			margin-bottom: 1rem;
+			color: white;
 		}
 
 		.editor-block img {
@@ -165,6 +191,7 @@
 			text-align: left;
 			text-decoration: underline;
 			display: block;
+			color: white;
 		}
 
 		.editor-block a:hover {
@@ -208,57 +235,184 @@
 		.clock {
 			flex: 1;
 		}
+
+		.social-icons {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.social-icons a {
+			opacity: 0.7;
+		}
+
+		.social-icons a:hover {
+			opacity: 1;
+		}
+
+		.social-icons img {
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+
+		/* Add these cursor styles */
+		.cursor {
+			width: 1rem;
+			height: 1rem;
+			background: rgba(0, 0, 0, 0.5);
+			border-radius: 50%;
+			position: fixed;
+			pointer-events: none;
+			z-index: 9999;
+			transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+						width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+						height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+						border-radius 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+						padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			top: 0;
+			left: 0;
+			transform: translate3d(0, 0, 0);
+			display: flex;
+			align-items: center;
+			white-space: nowrap;
+			backdrop-filter: blur(0.25rem);
+			-webkit-backdrop-filter: blur(0.25rem);
+		}
+
+		.cursor.hover {
+			transform: scale(1);
+			background: rgba(0, 0, 0, 0.7);
+			border-radius: 1rem;
+			width: auto;
+			padding: 0.75rem; /* increased padding */
+			height: 2.5rem;  /* explicit height for taller appearance */
+			display: flex;
+			align-items: center;
+		}
+
+		.cursor.hover::after {
+			content: attr(data-link);
+			color: white;
+			margin-left: 0.5rem;
+			font-family: sans-serif;
+			font-size: 0.875rem;  /* slightly larger font */
+			opacity: 0;  /* start invisible */
+			animation: fadeIn 0.2s forwards 0.1s;  /* fade in after cursor expands */
+		}
+
+		@keyframes fadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+
+		.cursor.click {
+			transform: scale(0.8);
+			background: rgba(0, 0, 0, 0.7);
+		}
+
+		/* Add hover state for clickable elements */
+		a, button {
+			cursor: none;
+		}
 	</style>
 </head>
 
 <body>
+	<div class="cursor"></div>
+
 	<div class="main">
 		<div class="left">
-			<div class="intro">
-				<h1>Hello, I'm Chanwoo Lee.</h1>
-				<h2>I'm an HCI design engineer, researcher and artist interested in the future of computing and its impact on society.</h2>
-				<h2>In belief that difference makes difference, I co-design technologies and behaviours for human creativity and productivity.</h2>
-				<h2>Just like an architect: He designs information technology and human relationship of the future.</h2>
-				<h2>I'm pursuing MA/MSc Innovation Design Engineering at Imperial College London and the Royal College of Art. Prior to his masters, he received his BAS in Art & Technology, and BBA in Technology, Society and Entrepreneurship from Sogang University, Seoul.</h2>
-			</div>
 			<div class="clocks">
 				<div class="clock" id="london-clock">London: --:--:--</div>
 				<div class="clock" id="seoul-clock">Seoul: --:--:--</div>
+			</div>
+			<div class="intro">
+				<h1>Hello, I'm Chanwoo Lee.</h1>
+				<h2>
+					I'm an HCI design engineer, researcher and artist.
+					I'm interested in the future of computing and its impact on society.
+					I co-design technologies and behaviours for human creativity and productivity.
+					Currently pursuing MA/MSc Innovation Design Engineering at Imperial College London and the Royal College of Art.
+				</h2>
+			</div>
+
+			<div class="social-icons">
+				<a href="https://www.linkedin.com/in/chanulee/" target="_blank">
+					<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn">
+				</a>
+				<a href="https://github.com/chanulee" target="_blank">
+					<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub">
+				</a>
+				<a href="https://x.com/krevony" target="_blank">
+					<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter or X">
+				</a>
+				<a href="https://www.instagram.com/chanu.kyle.lee" target="_blank">
+					<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram">
+				</a>
 			</div>
 		</div>
 	
 		<div class="right">
 			<div class="module editor-block">
 				<h3>Digital Doubles research with MODEM</h3> 
-				<!-- <p>This is a paragraph.</p> -->
-				<img src="modem.webp" alt="">
+				<p>Exploring how our identities evolve when lifelike simulations begin to communicate on our behalf.</p>
+				<img src="resources/modem.gif" alt="">
 				<a href="https://modemworks.com/research/digital-doubles/" target="_blank">View project</a>
 			</div>
 
 			<div class="module postit">
-				<p>How much power do users have on their own data and 'personal' computer?</p>
-			</div>
-
-			<div class="module photo">
-				<img src="aiethics.png" alt="">
+				<p>How much power and control do we have on our own data and 'personal' computer?</p>
 			</div>
 
 			<div class="module link-card">
+				<a href="https://github.com/chanulee/everychat" target="_blank">
+					<div class="link-source"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" style="width: 0.75rem; height: 0.75rem; margin:0;">github.com</div>
+					<div class="link-content">
+						<h3>everychat</h3>
+						<p>Everychat everywhere all at once. Multiverse-timeline AI chat.</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="module postit">
+				<p>Providing ability to build their own 'personal tools'</p>
+			</div>
+
+			<div class="module photo">
+				<img src="resources/arch.gif" alt="">
+			</div>
+
+
+			<div class="module link-card">
 				<a href="https://github.com/chanulee/persona-studio" target="_blank">
-					<h3>Link title</h3>
-					<p>link description</p>
-					<p>link</p>
-					<img src="image-source.jpg" alt="Card image">
+					<div class="link-source"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" style="width: 0.75rem; height: 0.75rem; margin:0;">github.com</div>
+					<div class="link-content">
+						<h3>Persona Studio</h3>
+						<p>Your true personal AI. Full ownership, customisation and control.</p>
+					</div>
 				</a>
 			</div>
 
 			<div class="module editor-block">
 				<h3>This is a text block.</h3> 
 				<p>This is a paragraph.</p>
-				<img src="aiethics.png" alt="">
+				<img src="resources/csrc.jpg" alt="">
 				<a href="">Open this</a> 
 			</div>
 			
+			<!-- <div class="stack">
+				<div class="module photo">
+					<img src="resources/sd-1.gif" alt="">
+				</div>
+
+				<div class="module editor-block">
+				<h3>This is a text block.</h3> 
+				<p>This is a paragraph.</p>
+				<img src="aiethics.png" alt="">
+					<a href="">Open this</a> 
+				</div>
+			</div> -->
 
 		</div>
 	</div>
@@ -284,6 +438,38 @@
 
 		setInterval(updateClocks, 1000);
 		updateClocks();
+
+		// Custom cursor
+		const cursor = document.querySelector('.cursor');
+		
+		document.addEventListener('mousemove', (e) => {
+			cursor.style.left = e.clientX + 'px';
+			cursor.style.top = e.clientY + 'px';
+		});
+
+		document.addEventListener('mousedown', () => {
+			cursor.classList.add('click');
+		});
+
+		document.addEventListener('mouseup', () => {
+			cursor.classList.remove('click');
+		});
+
+		// Add hover effect for clickable elements
+		const clickables = document.querySelectorAll('a');
+		clickables.forEach(element => {
+			element.addEventListener('mouseenter', () => {
+				cursor.classList.add('hover');
+				// Extract domain from href
+				let domain = new URL(element.href).hostname.replace('www.', '');
+				cursor.setAttribute('data-link', `${domain} →`);
+			});
+			
+			element.addEventListener('mouseleave', () => {
+				cursor.classList.remove('hover');
+				cursor.removeAttribute('data-link');
+			});
+		});
 	</script>
 </body>
 </html>
