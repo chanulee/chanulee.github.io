@@ -11,310 +11,9 @@
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Chanwoo Lee">
 	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
+	<meta property="og:image" content="/resources/csrc.jpg">
 
-	<style>
-		html {
-			font-size: 16px;
-		    background-color: #f9f9f9;
-		    overflow: auto;
-		}
-
-		* {
-			box-sizing: border-box;
-			font-family: serif;
-			transition: 0.4s;
-			font-size: 0.875rem;
-			line-height: 120%;
-			margin: 0px;
-			padding: 0px;
-		    color: #111111;
-		}
-
-		body {
-			cursor: none; /* Hide the default cursor */
-			overflow: auto;
-			min-height: 100vh;
-		}
-
-		h1 {
-			font-size: 2rem;
-			margin: 0;
-			font-weight: 400;
-		}
-
-		h2 {
-			font-size: 1.5rem;
-			margin: 0;
-			font-weight: 400;
-		}
-
-		.main {
-			display: flex;
-			min-height: 100vh;
-		}
-
-		.left {
-			flex: 1;
-			position: fixed;
-			width: 50%;
-			height: 100vh;
-			padding: 1rem;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-		}
-
-		.right {
-			flex: 1;
-			margin-left: 50%;
-			padding: 2rem;
-			overflow-y: auto;
-		}
-
-		/* Media query for mobile */
-		@media (max-width: 768px) {
-			.main {
-				flex-direction: column;
-			}
-
-			.left {
-				position: relative;
-				width: 100%;
-				height: 100vh;
-				padding: 1rem;
-			}
-
-			.right {
-				margin-left: 0;
-				padding: 1rem;
-			}
-
-			.module {
-				max-width: 100%;
-			}
-		}
-
-		.right > div {
-			margin-bottom: 3rem;
-		}
-
-		.module {
-			box-shadow: 0px 0.25rem 1rem rgba(0, 0, 0, 0.10);
-			max-width: 75%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.photo img {
-			width: 100%;
-			border-radius: 4px;
-			display: block; /* Removes any unwanted spacing */
-		}
-
-		.link-card {
-			background: #f9f9f9;
-			border-radius: 1rem;
-			width: 60%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.link-source {
-			width: 100%;
-			background: rgba(0, 0, 0, 0.1);
-			font-size: 0.875rem;
-			color: #393939;
-			padding: 0.25rem;
-			padding-left: 1rem;
-			border-top-left-radius: 1rem;
-			border-top-right-radius: 1rem;
-			display: flex;
-			align-items: center;
-			gap: 0.4em;
-		}
-
-		.link-content {
-			padding: 1rem;
-			font-size: 1rem;
-		}
-
-		.link-content h3, p {
-			font-size: inherit;
-		}
-
-		.link-card img {
-			width: 100%;
-			border-radius: 0.25rem;
-			margin-bottom: 0.5rem;
-		}
-
-		.link-card a {
-			text-decoration: none;
-			color: #111111;
-			display: block;
-		}
-
-		.link-card a:hover {
-			opacity: 0.8;
-		}
-
-		.editor-block {
-			padding: 0.5rem;
-			background: #0f0f0f;
-			border-radius: 0.5rem;
-			
-		}
-
-		.editor-block h3 {
-			font-size: 2rem;
-			text-align: left;
-			margin-bottom: 1rem;
-			color: white;
-		}
-
-		.editor-block p {
-			font-size: 1.5rem;
-			text-align: left;
-			margin-bottom: 1rem;
-			color: white;
-		}
-
-		.editor-block img {
-			width: 100%;
-			border-radius: 0px;
-			margin-bottom: 1rem;
-		}
-
-		.editor-block a {
-			font-size: 1.5rem;
-			text-align: left;
-			text-decoration: underline;
-			display: block;
-			color: white;
-		}
-
-		.editor-block a:hover {
-			opacity: 0.7;
-			text-decoration: none;
-		}
-
-		.postit {
-			padding: 1rem;
-			background: #F9DD66;
-			border-radius: 0.25rem;
-			max-width: 50%;
-			min-height: calc(25vw * 3/4);
-			height: auto;
-			margin: 0 auto;
-			display: flex;           /* Added to help with centering */
-			align-items: center;     /* Added to help with centering */
-			justify-content: center; /* Added to help with centering */
-		}
-
-		.postit p {
-			text-align: center;
-			color: black;
-			font-size: 1.5rem;
-			font-family: Inter;
-			font-weight: 400;
-			line-height: 120%;
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-			max-width: 100%;        /* Added to prevent text overflow */
-			padding: 0.5rem;        /* Added to prevent text touching edges */
-			margin: 0;              /* Added to ensure proper centering */
-		}
-
-		.clocks {
-			display: flex;
-			justify-content: space-between;
-			gap: 1rem;
-		}
-
-		.clock {
-			flex: 1;
-		}
-
-		.social-icons {
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
-		}
-
-		.social-icons a {
-			opacity: 0.7;
-		}
-
-		.social-icons a:hover {
-			opacity: 1;
-		}
-
-		.social-icons img {
-			width: 1.25rem;
-			height: 1.25rem;
-		}
-
-		/* Add these cursor styles */
-		.cursor {
-			width: 1rem;
-			height: 1rem;
-			background: rgba(0, 0, 0, 0.5);
-			border-radius: 50%;
-			position: fixed;
-			pointer-events: none;
-			z-index: 9999;
-			transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-						width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-						height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-						border-radius 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-						padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-			top: 0;
-			left: 0;
-			transform: translate3d(0, 0, 0);
-			display: flex;
-			align-items: center;
-			white-space: nowrap;
-			backdrop-filter: blur(0.25rem);
-			-webkit-backdrop-filter: blur(0.25rem);
-		}
-
-		.cursor.hover {
-			transform: scale(1);
-			background: rgba(0, 0, 0, 0.7);
-			border-radius: 1rem;
-			width: auto;
-			padding: 0.75rem; /* increased padding */
-			height: 2.5rem;  /* explicit height for taller appearance */
-			display: flex;
-			align-items: center;
-		}
-
-		.cursor.hover::after {
-			content: attr(data-link);
-			color: white;
-			margin-left: 0.5rem;
-			font-family: sans-serif;
-			font-size: 0.875rem;  /* slightly larger font */
-			opacity: 0;  /* start invisible */
-			animation: fadeIn 0.2s forwards 0.1s;  /* fade in after cursor expands */
-		}
-
-		@keyframes fadeIn {
-			to {
-				opacity: 1;
-			}
-		}
-
-		.cursor.click {
-			transform: scale(0.8);
-			background: rgba(0, 0, 0, 0.7);
-		}
-
-		/* Add hover state for clickable elements */
-		a, button {
-			cursor: none;
-		}
+	<link rel="stylesheet" href="style.css">
 	</style>
 </head>
 
@@ -369,7 +68,7 @@
 				<a href="https://github.com/chanulee/everychat" target="_blank">
 					<div class="link-source"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" style="width: 0.75rem; height: 0.75rem; margin:0;">github.com</div>
 					<div class="link-content">
-						<h3>everychat</h3>
+						<h3>Everychat</h3>
 						<p>Everychat everywhere all at once. Multiverse-timeline AI chat.</p>
 					</div>
 				</a>
@@ -380,7 +79,7 @@
 			</div>
 
 			<div class="module photo">
-				<img src="resources/arch.gif" alt="">
+				<img src="resources/sd-1.gif" alt="">
 			</div>
 
 
@@ -400,7 +99,27 @@
 				<img src="resources/csrc.jpg" alt="">
 				<a href="">Open this</a> 
 			</div>
+
+			<div class="module photo">
+				<img src="resources/oppo.png" alt="">
+			</div>
 			
+			<div class="module editor-block">
+				<h3>This is a text block.</h3> 
+				<p>This is a paragraph.</p>
+				<img src="resources/il.jpg" alt="">
+				<a href="">Open this</a> 
+			</div>
+
+			<div class="module photo">
+				<img src="resources/intheloop.jpg" alt="">
+			</div>
+
+			<div class="module editor-block">
+				<p>This is a paragraph.</p>
+				<img src="resources/26.webp" alt="">
+				<a href="">Open this</a> 
+			</div>
 			<!-- <div class="stack">
 				<div class="module photo">
 					<img src="resources/sd-1.gif" alt="">
