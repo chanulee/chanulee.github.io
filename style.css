@@ -444,11 +444,17 @@ a, button {
 .stack.expanded .module {
     position: relative;
     transform: none;
+    z-index: 1; /* Reset z-index in expanded state */
     margin-bottom: 24px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-	width: 80%; /* Match width of regular modules */
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
+    transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+                box-shadow 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+                margin 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+                width 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+                z-index 0s linear 0.25s; /* Delay z-index change until halfway through animation */
 }
 
 .stack.expanded .module:last-child {
