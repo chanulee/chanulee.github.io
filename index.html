@@ -14,7 +14,7 @@
 	<meta property="og:image" content="/resources/csrc.jpg">
 
 	<link rel="stylesheet" href="style.css">
-	</style>
+
 </head>
 
 <body>
@@ -26,6 +26,7 @@
 				<div class="clock" id="london-clock">London: --:--:--</div>
 				<div class="clock" id="seoul-clock">Seoul: --:--:--</div>
 			</div>
+
 			<div class="intro">
 				<h1>Hello, I'm Chanwoo Lee.</h1>
 				<h2>
@@ -49,6 +50,9 @@
 				<a href="https://www.instagram.com/chanu.kyle.lee" target="_blank">
 					<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram">
 				</a>
+				<a href="https://scholar.google.com/citations?hl=en&authuser=1&user=Ei4tM6wAAAAJ" target="_blank">
+					<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg" alt="Google Scholar">
+				</a>
 			</div>
 		</div>
 	
@@ -57,11 +61,11 @@
 				<h3>Digital Doubles research with MODEM</h3> 
 				<p>Exploring how our identities evolve when lifelike simulations begin to communicate on our behalf.</p>
 				<img src="resources/modem.gif" alt="">
-				<a href="https://modemworks.com/research/digital-doubles/" target="_blank">View project</a>
+				<a href="https://modemworks.com/research/digital-doubles/" target="_blank">Full Study</a>
 			</div>
 
 			<div class="module postit">
-				<p>How much power and control do we have on our own data and 'personal' computer?</p>
+				<p>Do we have agency, power, ownership and control on our 'personal' computer?</p>
 			</div>
 
 			<div class="module link-card">
@@ -75,13 +79,12 @@
 			</div>
 
 			<div class="module postit">
-				<p>Providing ability to build their own 'personal tools'</p>
+				<p>Democratise ability to 'build' deeply personal tools</p>
 			</div>
 
 			<div class="module photo">
 				<img src="resources/sd-1.gif" alt="">
 			</div>
-
 
 			<div class="module link-card">
 				<a href="https://github.com/chanulee/persona-studio" target="_blank">
@@ -94,14 +97,26 @@
 			</div>
 
 			<div class="module editor-block">
-				<h3>This is a text block.</h3> 
-				<p>This is a paragraph.</p>
+				<h3>How can we directly manipulate RecSys?</h3> 
 				<img src="resources/csrc.jpg" alt="">
-				<a href="">Open this</a> 
+				<p>Leveraging LLM to directly manipulate RecSys. At RCA Computer Science Research Centre.</p>
 			</div>
 
 			<div class="module photo">
 				<img src="resources/oppo.png" alt="">
+			</div>
+
+			<div class="stack collapsed" id="stack1">
+				<div class="stack-title">My Stack</div>
+				<div class="stack-counter">2</div>
+				<div class="stack-content">
+					<div class="module photo">
+						<img src="resources/sd-1.gif" alt="">
+					</div>
+					<div class="module postit">
+						<p>Democratise ability to 'build' deeply personal tools</p>
+					</div>
+				</div>
 			</div>
 			
 			<div class="module editor-block">
@@ -112,32 +127,36 @@
 			</div>
 
 			<div class="module photo">
+				<img src="resources/sd-1.gif" alt="">
+			</div>
+
+			<div class="module photo">
 				<img src="resources/intheloop.jpg" alt="">
 			</div>
 
-			<div class="module editor-block">
-				<p>This is a paragraph.</p>
-				<img src="resources/26.webp" alt="">
-				<a href="">Open this</a> 
+			<div class="module photo">
+				<img src="resources/aiethics.png" alt="">
 			</div>
-			<!-- <div class="stack">
-				<div class="module photo">
-					<img src="resources/sd-1.gif" alt="">
-				</div>
 
-				<div class="module editor-block">
-				<h3>This is a text block.</h3> 
-				<p>This is a paragraph.</p>
-				<img src="aiethics.png" alt="">
-					<a href="">Open this</a> 
+			<div class="stack collapsed" id="stack2">
+				<div class="stack-title">Teaching Assistant at RCA</div>
+				<div class="stack-counter">2</div>
+				<div class="stack-content">
+					<div class="module editor-block">
+						<p>Design Thinking & Innovation in Practice</p>
+						<img src="resources/26.webp" alt="">
+					</div>
+					<div class="module editor-block">
+						<p>Design Thinking</p>
+						<img src="resources/26.webp" alt="">
+					</div>
 				</div>
-			</div> -->
+			</div>
 
 		</div>
 	</div>
 
 	<script>
-
 		// Real-time clocks for London and Seoul
 		function updateClocks() {
 		    var londonClock = document.getElementById('london-clock');
@@ -147,7 +166,6 @@
 
 		    // London time
 		    var londonTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/London" }));
-
 		    // Seoul time
 		    var seoulTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
 
@@ -179,7 +197,6 @@
 		clickables.forEach(element => {
 			element.addEventListener('mouseenter', () => {
 				cursor.classList.add('hover');
-				// Extract domain from href
 				let domain = new URL(element.href).hostname.replace('www.', '');
 				cursor.setAttribute('data-link', `${domain} →`);
 			});
@@ -187,6 +204,40 @@
 			element.addEventListener('mouseleave', () => {
 				cursor.classList.remove('hover');
 				cursor.removeAttribute('data-link');
+			});
+		});
+
+		// Stack interaction
+		const stacks = document.querySelectorAll('.stack');
+		const stackStates = new Map(); // To track expanded state of each stack
+
+		stacks.forEach(stack => {
+			stackStates.set(stack, false); // Initialize all stacks as not expanded
+			
+			stack.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const isExpanded = stackStates.get(stack);
+				
+			if (!isExpanded) {
+				stack.classList.remove('collapsed');
+				stack.classList.add('expanded');
+				stackStates.set(stack, true);
+			} else {
+				stack.classList.remove('expanded');
+				stack.classList.add('collapsed');
+				stackStates.set(stack, false);
+				}
+			});
+		});
+
+		// Click outside stack to collapse if expanded
+		document.addEventListener('click', (e) => {
+			stacks.forEach(stack => {
+				if (stackStates.get(stack) && !stack.contains(e.target)) {
+					stack.classList.remove('expanded');
+					stack.classList.add('collapsed');
+					stackStates.set(stack, false);
+				}
 			});
 		});
 	</script>
