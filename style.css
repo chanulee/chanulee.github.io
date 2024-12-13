@@ -531,3 +531,13 @@ a, button {
     }
     
 }
+
+a {
+    opacity: 0.5;
+    text-decoration: none;
+    font-size: inherit;
+}
+
+a:hover {
+    opacity: 1;
+}
