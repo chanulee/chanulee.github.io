@@ -71,41 +71,6 @@ h2 {
     overflow-y: auto;
 }
 
-/* Media query for mobile */
-@media (max-width: 768px) {
-    .main {
-        flex-direction: column;
-    }
-
-    .left {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        padding: 1rem;
-    }
-
-    .right {
-        margin-left: 0;
-        padding: 1rem;
-    }
-
-    .module {
-        max-width: 100%;
-    }
-
-    .cursor {
-        display: none; /* Hide custom cursor on mobile */
-    }
-
-    body {
-        cursor: auto; /* Restore default cursor on mobile */
-    }
-
-    a, button {
-        cursor: pointer; /* Restore default pointer cursor for clickable elements */
-    }
-}
-
 .italic {
     font-style: italic;
 }
@@ -116,18 +81,18 @@ h2 {
 
 .module {
     box-shadow: 0px 0.25rem 1rem rgba(0, 0, 0, 0.10);
-    max-width: 80%;
+    width: 80%;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 4rem;
     border-radius: 4px;
     position: relative;
     overflow: hidden;
     transform-origin: 50% 50%;
-    transform: translateY(0) rotate3d(1,1,0,0deg);  /* Combined transform initial state */
+    transform: translateY(0) rotate3d(1,1,0,0deg);
     transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
-                box-shadow 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
-                margin 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
-                width 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+                box-shadow 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
     will-change: transform, box-shadow;
 }
 
@@ -491,4 +456,78 @@ a, button {
 
 .stack.expanded .module:last-child {
     margin-bottom: 0;
+}
+
+/* Update stack module styles */
+.stack .module {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 24px 0;
+}
+
+.stack .module:last-child {
+    margin-bottom: 0;
+}
+
+.stack.expanded .module {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+
+    html {
+        font-size: 14px;
+    }
+
+    body {
+        cursor: auto; /* Restore default cursor on mobile */
+    }
+
+    a, button {
+        cursor: pointer; /* Restore default pointer cursor for clickable elements */
+    }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .cursor {
+        display: none; /* Hide custom cursor on mobile */
+    }
+
+    .left {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        padding: 1rem;
+    }
+
+    .right {
+        margin-left: 0;
+        padding: 1rem 0.5rem;
+    }
+
+    .module {
+        max-width: 100%;
+        width: 92%;
+        margin-bottom: 2rem;
+    }
+    
+    .postit {
+        max-width: none;
+        width: 80%;
+    }
+
+    .stack .module {
+        width: 100%;
+    }
+    
+    .stack.expanded .module {
+        width: 92%;
+    }
+    
 }
