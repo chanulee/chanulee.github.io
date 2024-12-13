@@ -92,6 +92,18 @@ h2 {
     .module {
         max-width: 100%;
     }
+
+    .cursor {
+        display: none; /* Hide custom cursor on mobile */
+    }
+
+    body {
+        cursor: auto; /* Restore default cursor on mobile */
+    }
+
+    a, button {
+        cursor: pointer; /* Restore default pointer cursor for clickable elements */
+    }
 }
 
 .italic {
