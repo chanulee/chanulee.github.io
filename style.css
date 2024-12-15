@@ -54,6 +54,7 @@ h2 {
 }
 
 .left {
+    opacity: 0.5;
     flex: 1;
     position: fixed;
     width: 50%;
@@ -64,11 +65,20 @@ h2 {
     justify-content: space-between;
 }
 
+.left:hover {
+    opacity: 1;
+}
+
 .right {
+    opacity: 0.5;
     flex: 1;
     margin-left: 50%;
     padding: 2rem;
     overflow-y: auto;
+}
+
+.right:hover {
+    opacity: 1;
 }
 
 .italic {
@@ -101,10 +111,27 @@ h2 {
     box-shadow: 0 8px 16px rgba(0,0,0,0.12);
 }
 
+.photo {
+    position: relative;
+}
+
 .photo img {
+    position: relative;
     width: 100%;
     border-radius: 4px;
     display: block;
+}
+
+.photo p {
+    position: absolute;
+    font-style: italic;
+    bottom: 1rem;
+    left: 1rem;
+    color: rgb(0, 0, 0);
+    opacity: 0.75;
+    font-size: 0.875rem;
+    margin: 0.2rem 0.4rem;
+    z-index: 1;
 }
 
 .link-card {
@@ -361,7 +388,7 @@ a, button {
 
 /* Collapsed state */
 .stack.collapsed {
-    transform: rotate3d(1,1,0,-2deg);
+    transform: rotate3d(1,1,0,4deg);
 	transform-origin: 50% 50%;  /* Add this */
 }
 
@@ -388,7 +415,7 @@ a, button {
 }
 
 .stack.collapsed .module:nth-child(2) {
-    transform: translateY(-50%) rotate(-2deg) translateY(12px);
+    transform: translateY(-50%) rotate(-6deg) translateY(0px);
     z-index: 3;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
@@ -405,7 +432,7 @@ a, button {
 }
 
 .stack.collapsed:hover .module:nth-child(2) {
-    transform: translateY(-50%) rotate(-4deg) translateY(16px);
+    transform: translateY(-50%) rotate(-10deg) translateY(0px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }
 
