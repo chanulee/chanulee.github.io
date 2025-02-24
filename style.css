@@ -43,7 +43,7 @@ h1 {
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 0;
     font-weight: 400;
 }
@@ -54,7 +54,6 @@ h2 {
 }
 
 .left {
-    opacity: 0.5;
     flex: 1;
     position: fixed;
     width: 50%;
@@ -65,20 +64,11 @@ h2 {
     justify-content: space-between;
 }
 
-.left:hover {
-    opacity: 1;
-}
-
 .right {
-    opacity: 0.5;
     flex: 1;
     margin-left: 50%;
     padding: 2rem;
     overflow-y: auto;
-}
-
-.right:hover {
-    opacity: 1;
 }
 
 .italic {
@@ -188,7 +178,7 @@ h2 {
 }
 
 .editor-block h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: left;
     margin-bottom: 1rem;
     color: white;
@@ -196,7 +186,7 @@ h2 {
 }
 
 .editor-block p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: left;
     margin-bottom: 1rem;
     color: white;
@@ -247,16 +237,6 @@ h2 {
     margin: 0;
 }
 
-.clocks {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.clock {
-    flex: 1;
-}
-
 .social-icons {
     display: flex;
     align-items: center;
@@ -272,8 +252,8 @@ h2 {
 }
 
 .social-icons img {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
 }
 
 /* Custom cursor styles */
@@ -505,13 +485,16 @@ a, button {
 
 /* Media query for mobile */
 @media (max-width: 768px) {
-
     html {
         font-size: 14px;
     }
 
     body {
         cursor: auto; /* Restore default cursor on mobile */
+    }
+
+    .cursor {
+        display: none !important; /* Force hide custom cursor on mobile */
     }
 
     a, button {
@@ -522,12 +505,7 @@ a, button {
         flex-direction: column;
     }
 
-    .cursor {
-        display: none; /* Hide custom cursor on mobile */
-    }
-
     .left {
-        opacity: 1;
         position: relative;
         width: 100%;
         height: 100vh;
@@ -535,7 +513,6 @@ a, button {
     }
 
     .right {
-        opacity: 1;
         margin-left: 0;
         padding: 1rem 0.5rem;
     }
