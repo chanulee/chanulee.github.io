@@ -4,86 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav>
-        <h4><a href="/new/index.html">Chanwoo Lee</a></h4>
-        <ul>
-            <li><a href="/new/approach.html">Approach</a></li>
-            <li><a href="/new/project.html">Project</a></li>
-            <li><a href="/new/feed.html">Feed</a></li>
-        </ul>
+        <div class="nav-left">
+            <h4><a href="/new/index.html">Chanwoo Lee</a></h4>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="/new/approach.html">Approach</a></li>
+                <li><a href="/new/project.html">Project</a></li>
+                <li><a href="/new/feed.html">Feed</a></li>
+            </ul>
+        </div>
     </nav>
-
-    <!-- hero -->
-    <div class="header"> 
-        <h1>Project</h1>
-        <h3>Co-designing technology and human behaviour.</h3>
-        <div class="minilist">
-            <a href="">Area of Interest</a>
-            <a href="">Featured</a>
-            <a href="#index">Index</a>
-        </div>
-    </div>
-
-    <!-- Upcoming & Recent -->
-    <div class="section">
-        <h2>Area of Interest</h2>
-        <div class="four-column">
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-        </div>
-    </div>
 
     <!-- Section 3 -->
     <div class="section">
-        <h2>Featured</h2>
-        <div class="four-column">
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
-            <div class="item">
-                <img src="/resources/26.webp" alt="alt text">
-                <h4>Title</h4>
-                <p id="sub">Description</p> 
-            </div>
+        <h2>Featured Projects</h2>
+        <div class="featured-grid" id="featuredProjects">
+            <!-- Featured projects will be loaded here via JavaScript -->
         </div>
     </div>
 
     <div class="section">
-        <h2>Index</h2>
+        <h2>Full Index</h2>
         <div class="project-table">
             <div class="project-header">
                 <div class="project-col project-name sortable" data-sort="project">PROJECT <span class="sort-icon">↕</span></div>
@@ -99,13 +49,76 @@
 
     <!-- Footer -->
     <footer>
-        <h2>Contact Us</h2>
-        <p id="contact">Email: example@example.com</p>
-        <p>Phone: (123) 456-7890</p>
-        <p>&copy; 2023 My Website. All rights reserved.</p>
+        <div class="footer-top">
+            <div class="footer-left">
+                <h2>Chanwoo Lee</h2>
+                <p class="footer-subtitle">Interface Architect.</p>
+                <p class="footer-description">Designing and engineering computer interaction, interface and system for human agency.</p>
+            </div>
+            <div class="footer-right">
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <a href="/new/approach.html">Approach</a>
+                        <a href="/new/project.html">Project</a>
+                        <a href="/new/feed.html">Feed</a>
+                    </div>
+                    <div class="footer-nav-col">
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Github</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <p>Feel free to say hi, ask question or request for collaboration.</p>
+                    <p class="footer-email">chanwoo.lee@imperial.ac.uk</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-year">2025</div>
+            <div class="footer-times">
+                <span id="london-time">London BST 00:00:00</span>
+                <span id="seoul-time">Seoul KST 00:00:00</span>
+            </div>
+        </div>
     </footer>
 
     <script>
+        // Real-time clock function
+        function updateClocks() {
+            const now = new Date();
+            
+            // London time (Europe/London timezone)
+            const londonTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Europe/London',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            // Seoul time (Asia/Seoul timezone)
+            const seoulTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Seoul',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            // Determine if London is in BST or GMT
+            const londonOffset = new Date().toLocaleString('en', {timeZone: 'Europe/London', timeZoneName: 'short'}).split(' ').pop();
+            const londonLabel = londonOffset === 'BST' ? 'BST' : 'GMT';
+            
+            // Update the display
+            document.getElementById('london-time').textContent = `London ${londonLabel} ${londonTime}`;
+            document.getElementById('seoul-time').textContent = `Seoul KST ${seoulTime}`;
+        }
+        
+        // Update clocks immediately and then every second
+        updateClocks();
+        setInterval(updateClocks, 1000);
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Path to your JSON file
             const jsonFilePath = 'projects.json';
@@ -122,7 +135,8 @@
                 })
                 .then(projects => {
                     projectsData = projects; // Store the data
-                    renderProjects(projectsData); // Initial render
+                    renderFeaturedProjects(projectsData); // Render featured projects
+                    renderProjects(projectsData); // Initial render of full index
                     
                     // Add event listeners to sortable headers
                     document.querySelectorAll('.sortable').forEach(header => {
@@ -136,7 +150,56 @@
                     console.error('Error loading projects:', error);
                     document.getElementById('projectList').innerHTML = 
                         '<div class="error-message"><p>Failed to load projects. Please try again later.</p></div>';
+                    document.getElementById('featuredProjects').innerHTML = 
+                        '<div class="error-message"><p>Failed to load featured projects. Please try again later.</p></div>';
                 });
+            
+            function renderFeaturedProjects(projects) {
+                const featuredContainer = document.getElementById('featuredProjects');
+                
+                // Clear any existing content
+                featuredContainer.innerHTML = '';
+                
+                // Filter and render featured projects (limit to 4)
+                const featuredProjects = projects.filter(project => project.featured === true || project.featured === "bold");
+                
+                featuredProjects.forEach(project => {
+                    const projectItem = document.createElement('div');
+                    projectItem.className = 'item';
+                    
+                    // Add 'bold' class if featured is set to "bold"
+                    if (project.featured === "bold") {
+                        projectItem.classList.add('bold');
+                    }
+                    
+                    // Create project name with optional link
+                    let projectNameContent = project.project || 'Title';
+                    if (project.projectLink) {
+                        projectNameContent = `<a href="${project.projectLink}" target="_blank">${projectNameContent}</a>`;
+                    }
+                    
+                    const imgElement = document.createElement('img');
+                    imgElement.src = "/resources/26.webp";
+                    imgElement.alt = project.project || 'Project image';
+
+                    const textContainer = document.createElement('div');
+
+                    const titleElement = document.createElement('h4');
+                    titleElement.innerHTML = projectNameContent;
+
+                    const descriptionElement = document.createElement('p');
+                    descriptionElement.id = 'sub';
+                    descriptionElement.textContent = project.description || 'Description';
+
+                    textContainer.appendChild(titleElement);
+                    textContainer.appendChild(descriptionElement);
+
+                    projectItem.appendChild(imgElement);
+                    projectItem.appendChild(textContainer);
+                    
+                    featuredContainer.appendChild(projectItem);
+                });
+            }
             
             function renderProjects(projects) {
                 const projectList = document.getElementById('projectList');
