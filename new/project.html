@@ -175,12 +175,18 @@
                     // Create project name with optional link
                     let projectNameContent = project.project || 'Title';
                     if (project.projectLink) {
-                        projectNameContent = `<a href="${project.projectLink}" target="_blank">${projectNameContent}</a>`;
+                        projectNameContent = `<a href=\"${project.projectLink}\" target=\"_blank\">${projectNameContent}</a>`;
                     }
                     
                     const imgElement = document.createElement('img');
-                    imgElement.src = "/resources/26.webp";
+                    // Use project.thumbnail if available, otherwise use a default or handle absence
+                    imgElement.src = project.thumbnail || "/resources/placeholder.webp"; // Assuming a placeholder if no thumbnail
                     imgElement.alt = project.project || 'Project image';
+
+                    // Create the thumbnail container and append the image
+                    const thumbnailContainer = document.createElement('div');
+                    thumbnailContainer.className = 'thumbnail-container';
+                    thumbnailContainer.appendChild(imgElement);
 
                     const textContainer = document.createElement('div');
 
@@ -194,7 +200,8 @@
                     textContainer.appendChild(titleElement);
                     textContainer.appendChild(descriptionElement);
 
-                    projectItem.appendChild(imgElement);
+                    // Append the thumbnail container and text container to the project item
+                    projectItem.appendChild(thumbnailContainer);
                     projectItem.appendChild(textContainer);
                     
                     featuredContainer.appendChild(projectItem);
