@@ -4,14 +4,29 @@
       "affiliation": "Self-Initiated",
       "description": "Research on new mental model for the agentic AI age",
       "year": "ONGOING",
-      "featured": "bold"
+      "thumbnail": ""
+    },
+    {
+      "project": "Innovation Project",
+      "affiliation": "Map Project Office",
+      "description": "Future of Personal AI",
+      "year": "ONGOING",
+      "thumbnail": ""
     },
     {
       "project": "Voyage",
       "affiliation": "beyond",
       "description": "R&D for non-invasive BCI",
       "year": "ONGOING",
-      "featured": true
+      "featured": true,
+      "thumbnail": ""
+    },
+    {
+      "project": "HyperNote",
+      "affiliation": "Lovelace Lab",
+      "description": "Lightweight, simple and open-sourced UI for local LLM",
+      "year": "ONGOING",
+      "thumbnail": ""
     },
     {
       "project": "Frameworks for Digital Double",
@@ -19,7 +34,7 @@
       "affiliationLink": "https://modemworks.com/",
       "description": "Research on frameworks for digital double",
       "year": "ONGOING",
-      "featured": true
+      "thumbnail": ""
     },
     {
       "project": "Everychat",
@@ -27,7 +42,7 @@
       "affiliation": "Self-Initiated",
       "description": "PROJECT",
       "year": "2025",
-      "featured": true
+      "thumbnail": ""
     },
     {
       "project": "OpenSimples",
@@ -35,35 +50,33 @@
       "affiliation": "Self-Initiated",
       "description": "PROJECT",
       "year": "2025",
-      "featured": true
+      "thumbnail": ""
     },
     {
       "project": "coreOllama",
       "projectLink": "https://github.com/chanulee/coreOllama",
       "affiliation": "Self-Initiated",
       "description": "Lightweight, simple and open-sourced UI for local LLM",
-      "year": "2025"
-    },
-    {
-      "project": "HyperNote",
-      "affiliation": "Self-Initiated",
-      "description": "Lightweight, simple and open-sourced UI for local LLM",
-      "year": "2025"
+      "year": "2025",
+      "thumbnail": ""
     },
     {
       "project": "Persona Studio",
       "projectLink": "https://github.com/chanulee/persona-studio",
       "affiliation": "Self-Initiated",
       "description": "PROJECT",
-      "year": "2025"
+      "year": "2025",
+      "thumbnail": ""
     },
     {
-      "project": "TwelveLabs Brand and Web",
+      "project": "TwelveLabs",
       "projectLink": "https://www.twelvelabs.io",
       "affiliation": "Pentagram",
       "affiliationLink": "https://www.pentagram.com/",
       "description": "Translating technology into metaphor and visual",
-      "year": "2024"
+      "year": "2024",
+      "featured": "bold",
+      "thumbnail": "/resources/26_TL_Keynote_HR.avif"
     },
     {
       "project": "Digital Double",
@@ -71,35 +84,41 @@
       "affiliation": "MODEM",
       "affiliationLink": "https://modemworks.com/",
       "description": "Future scenario research on Digital Doubles",
-      "year": "2024"
+      "year": "2024",
+      "featured": true,
+      "thumbnail": "/resources/modem.gif"
     },
     {
       "project": "Listen &amp; Observe: LLM-RecSys Hybrid System",
       "affiliation": "RCA CSRC",
       "affiliationLink": "https://www.rca.ac.uk/csrc/",
       "description": "Research on LLM-RecSys hybrid system",
-      "year": "2024"
+      "year": "2024",
+      "thumbnail": ""
     },
     {
       "project": "Sensory Misalignment",
       "affiliation": "Snap Inc",
       "affiliationLink": "https://ar.snap.com",
       "description": "PROJECT",
-      "year": "2024"
+      "year": "2024",
+      "thumbnail": ""
     },
     {
       "project": "OPPO Centre",
       "affiliation": "OPPO",
       "affiliationLink": "https://www.oppo.com",
       "description": "PROJECT",
-      "year": "2024"
+      "year": "2024",
+      "thumbnail": ""
     },
     {
       "project": "Sphere",
       "affiliation": "Huawei, Dyson School of Design Engineering",
       "affiliationLink": "https://www.imperial.ac.uk/design-engineering/",
       "description": "Feeling text generation for AI literacy",
-      "year": "2023"
+      "year": "2023",
+      "thumbnail": ""
     },
     {
       "project": "LG Lounge AI",
@@ -107,7 +126,9 @@
       "affiliation": "LG Electronics",
       "affiliationLink": "https://www.lg.com",
       "description": "R&D for AI features and roadmap on laptop OS",
-      "year": "2023"
+      "year": "2023",
+      "featured": true,
+      "thumbnail": "/resources/lg-2.png"
     },
     {
       "project": "Sunny Day",
@@ -115,7 +136,8 @@
       "affiliation": "Sogang University, National Research Foundation",
       "affiliationLink": "https://www.lg.com",
       "description": "Research on immersive XR system and solarpunk immersive media art",
-      "year": "2023"
+      "year": "2023",
+      "thumbnail": ""
     },
     {
       "project": "Never Tell the Trick",
@@ -123,61 +145,73 @@
       "affiliation": "Sogang University, National Research Foundation",
       "affiliationLink": "https://www.lg.com",
       "description": "Research on immersive XR system and solarpunk immersive media art",
-      "year": "2023"
+      "year": "2023",
+      "thumbnail": ""
     },
     {
       "project": "Virtual Audio Datasets",
       "affiliation": "Sogang University, KAIST",
       "description": "R&D for",
-      "year": "2022"
+      "year": "2022",
+      "thumbnail": ""
     },
     {
       "project": "Illogical Love II",
       "affiliation": "Arts Korea Council, Art Center Nabi",
       "description": "PROJECT",
-      "year": "2022"
+      "year": "2022",
+      "featured": true,
+      "thumbnail": ""
     },
     {
       "project": "Illogical Love I",
       "affiliation": "British Council, Korea Foundation, Watershed, Art Center Nabi",
       "description": "PROJECT",
-      "year": "2021"
+      "year": "2021",
+      "thumbnail": ""
     },
     {
       "project": "human.inthe.loop",
       "affiliation": "Art Center Nabi",
       "description": "PROJECT",
-      "year": "2020"
+      "year": "2020",
+      "thumbnail": ""
     },
     {
       "project": "CUBE",
       "affiliation": "ETRI",
       "description": "R&D for multi-modal interfaces for self-driving scenarios",
-      "year": "2020"
+      "year": "2020",
+      "thumbnail": ""
     },
     {
       "project": "NFT Layer Authentication",
       "affiliation": "BaSE Lab",
       "description": "Research on NFT creator authentication with layer information",
-      "year": "2020"
+      "year": "2020",
+      "thumbnail": ""
     },
     {
       "project": "Black Light",
       "affiliation": "JIFF 100FILMS100POSTERS",
       "description": "Interactive web and graphic poster",
-      "year": "2020"
+      "year": "2020",
+      "thumbnail": ""
     },
     {
       "project": "Knowledgesmith",
       "affiliation": "Self-Initiated",
       "description": "Interactive game for infoworking information",
-      "year": "2020"
+      "year": "2020",
+      "thumbnail": ""
     },
     {
       "project": "Generation-Z",
       "affiliation": "Monthly DESIGN",
       "description": "Interactive web and graphic poster",
-      "year": "2020"
+      "year": "2020",
+      "featured": true,
+      "thumbnail": ""
     },
     {
       "project": "Dept. of Web & Land Property",
@@ -185,6 +219,8 @@
       "affiliation": "Ministry of Science and ICT, Platform-L Contemporary Art Center",
       "affiliationLink": "https://www.lg.com",
       "description": "Research on immersive XR system and solarpunk immersive media art",
-      "year": "2019"
+      "year": "2019",
+      "featured": true,
+      "thumbnail": ""
     }
   ]
