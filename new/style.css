@@ -81,6 +81,24 @@ p {
     object-fit: cover;
 }
 
+/* Add a container for the image to control aspect ratio */
+.item .thumbnail-container {
+    position: relative;
+    width: 100%;
+    /* Calculate 5:3 aspect ratio: 3 / 5 = 0.6 = 60% */
+    padding-top: 60%; /* This creates the 5:3 aspect ratio container */
+    overflow: hidden; /* Hide parts of the image outside the container */
+}
+
+.item .thumbnail-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crop and center the image */
+}
+
 .hero img {
     width: 100%;
     height: 320px;
