@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cupid</title>
+    <title>Halftone Contour Visualizer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
     <style>
@@ -46,7 +46,7 @@ const params = {
 
     // Resonance-specific settings
     resonanceSharpness: 4.0,
-    resonanceCurve: 2.0,
+    resonanceSmoothness: 2.0,
 
     // Color settings
     dotColor: [0, 0, 0],
@@ -54,10 +54,16 @@ const params = {
     
     // Invert the effect
     invert: false,
+
+    // Export settings
+    saveAsPNG: () => exportTransparentPNG(),
 };
 
 // --- p5.js Sketch ---
 let gui; // Make GUI globally accessible
+
+// GUI controllers for dynamic visibility
+let savePNGController;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -66,49 +72,75 @@ function setup() {
     gui = new dat.GUI();
 
     const modeFolder = gui.addFolder('Mode & Metric');
-    modeFolder.add(params, 'mode', ['Loading', 'Result']).name('Display Mode').onChange(draw);
-    modeFolder.add(params, 'resultMethod', ['Complexity', 'Resonance']).name('Result Method').onChange(draw);
-    modeFolder.add(params, 'metricValue', 0, 100).name('Metric (0-100)');
+    modeFolder.add(params, 'mode', ['Loading', 'Result']).name('Display Mode').onChange(updateGUI);
+    modeFolder.add(params, 'resultMethod', ['Complexity', 'Resonance']).name('Result Method').onChange(updateGUI);
+    modeFolder.add(params, 'metricValue', 0, 100).name('Metric (0-100)').onChange(updateGUI);
     modeFolder.open();
     
     const blobFolder = gui.addFolder('Shape & Motion (Loading)');
-    blobFolder.add(params, 'noiseScale', 0.1, 2.0).name('Complexity');
-    blobFolder.add(params, 'noiseSpeed', 0, 0.05).name('Animation Speed');
-    blobFolder.add(params, 'blobFactor', 0.1, 1.5).name('Size');
+    blobFolder.add(params, 'noiseScale', 0.1, 2.0).name('Complexity').onChange(updateGUI);
+    blobFolder.add(params, 'noiseSpeed', 0, 0.05).name('Animation Speed').onChange(updateGUI);
+    blobFolder.add(params, 'blobFactor', 0.1, 1.5).name('Size').onChange(updateGUI);
     blobFolder.open();
 
     const halftoneFolder = gui.addFolder('Halftone Effect');
-    halftoneFolder.add(params, 'spacing', 5, 50).name('Grid Spacing');
-    halftoneFolder.add(params, 'minDotSize', 0, 20).name('Min Dot Size');
-    halftoneFolder.add(params, 'maxDotSize', 0, 50).name('Max Dot Size');
-    halftoneFolder.add(params, 'invert').name('Invert Effect');
+    halftoneFolder.add(params, 'spacing', 5, 50).name('Grid Spacing').onChange(updateGUI);
+    halftoneFolder.add(params, 'minDotSize', 0, 20).name('Min Dot Size').onChange(updateGUI);
+    halftoneFolder.add(params, 'maxDotSize', 0, 50).name('Max Dot Size').onChange(updateGUI);
+    halftoneFolder.add(params, 'invert').name('Invert Effect').onChange(updateGUI);
     halftoneFolder.open();
 
     const zoneFolder = gui.addFolder('Zone of Interest');
-    zoneFolder.add(params, 'zoneOfInterest').name('Active');
-    zoneFolder.add(params, 'zoneRadius', 50, Math.min(windowWidth, windowHeight) / 2).name('Radius');
-    zoneFolder.add(params, 'edgeSoftness', 0, 100).name('Edge Softness');
+    zoneFolder.add(params, 'zoneOfInterest').name('Active').onChange(updateGUI);
+    zoneFolder.add(params, 'zoneRadius', 50, Math.min(windowWidth, windowHeight) / 2).name('Radius').onChange(updateGUI);
+    zoneFolder.add(params, 'edgeSoftness', 0, 100).name('Edge Softness').onChange(updateGUI);
     zoneFolder.open();
     
-    // New folder for Resonance-specific controls
     const resonanceFolder = gui.addFolder('Resonance Settings');
-    resonanceFolder.add(params, 'resonanceSharpness', 1.0, 20.0).name('Sharpness');
-    resonanceFolder.add(params, 'resonanceCurve', 0.5, 5.0).name('Curve Amount');
+    resonanceFolder.add(params, 'resonanceSharpness', 1.0, 20.0).name('Sharpness').onChange(updateGUI);
+    resonanceFolder.add(params, 'resonanceSmoothness', 0.5, 5.0).name('Smoothness').onChange(updateGUI);
     resonanceFolder.open();
 
+    const exportFolder = gui.addFolder('Export');
+    savePNGController = exportFolder.add(params, 'saveAsPNG').name('Save as PNG');
+    exportFolder.open();
+
     const colorFolder = gui.addFolder('Colors');
-    colorFolder.addColor(params, 'dotColor').name('Dot Color');
-    colorFolder.addColor(params, 'backgroundColor').name('Background');
+    colorFolder.addColor(params, 'dotColor').name('Dot Color').onChange(updateGUI);
+    colorFolder.addColor(params, 'backgroundColor').name('Background').onChange(updateGUI);
     colorFolder.open();
 
-    gui.onChange(draw);
+    // Initial setup
+    updateGUI();
+}
 
-    // Initial loop state check
+function updateGUI() {
+    // Show/hide controls based on the current mode
+    const isResultMode = params.mode === 'Result';
+    const isLoadingMode = params.mode === 'Loading';
+    const isResonance = params.resultMethod === 'Resonance';
+
+    // Toggle visibility of controllers and folders
+    savePNGController.domElement.style.display = isResultMode ? 'block' : 'none';
+    gui.__folders['Shape & Motion (Loading)'].domElement.style.display = isLoadingMode ? 'block' : 'none';
+    gui.__folders['Resonance Settings'].domElement.style.display = (isResultMode && isResonance) ? 'block' : 'none';
+    
     handleLooping();
+    draw(); // Redraw canvas when GUI changes
+}
+
+function exportTransparentPNG() {
+    // To save with a transparent background, we clear the canvas,
+    // redraw the visuals without the background color, save it,
+    // and then redraw everything to restore the view.
+    clear(); // Clears the canvas to be transparent
+    renderVisuals(); // Draw just the dots
+    saveCanvas('result-image', 'png'); // Save the transparent image
+    draw(); // Redraw with the background to restore the on-screen view
 }
 
 function handleLooping() {
-    // Only loop if in loading mode with speed > 0. All result modes are static.
+    // Loop only if in loading mode with animation speed.
     if (params.mode === 'Loading' && params.noiseSpeed > 0) {
         loop();
     } else {
@@ -116,11 +148,9 @@ function handleLooping() {
     }
 }
 
-function draw() {
-    background(params.backgroundColor);
-    handleLooping(); // Check if the loop should be running on every frame
-
-    // --- Main Drawing Loop ---
+// This function contains the core drawing logic,
+// so it can be called independently for transparent export.
+function renderVisuals() {
     for (let y = 0; y < height; y += params.spacing) {
         for (let x = 0; x < width; x += params.spacing) {
             
@@ -136,7 +166,7 @@ function draw() {
                 }
             }
 
-            let value = 0;
+            let dotIntensity = 0; 
             let currentMaxDotSize = params.maxDotSize;
 
             if (params.mode === 'Loading') {
@@ -146,7 +176,7 @@ function draw() {
                     y * params.noiseScale * 0.01, 
                     timeOffset
                 );
-                value = noiseVal - (distFromCenter / (width * params.blobFactor));
+                dotIntensity = noiseVal - (distFromCenter / (width * params.blobFactor));
 
             } else { // 'Result' mode
                 if (params.resultMethod === 'Complexity') {
@@ -158,7 +188,7 @@ function draw() {
                         y * currentNoiseScale * 0.01, 
                         timeOffset
                     );
-                    value = noiseVal - (distFromCenter / (width * params.blobFactor));
+                    dotIntensity = noiseVal - (distFromCenter / (width * params.blobFactor));
 
                 } else { // 'Resonance' method (Chladni Figures)
                     const modes = [
@@ -184,21 +214,18 @@ function draw() {
                     const chladniVal2 = cos(n2 * nx) * cos(m2 * ny) - cos(m2 * nx) * cos(n2 * ny);
 
                     const calculateSandValue = (val) => {
-                        // This value is now controlled by the GUI for fine-tuning.
                         return exp(-params.resonanceSharpness * val * val);
                     };
 
                     const sandValue1 = calculateSandValue(chladniVal1);
                     const sandValue2 = calculateSandValue(chladniVal2);
                     
-                    let rawValue = lerp(sandValue1, sandValue2, lerpFactor);
-                    
-                    // The curve amount is also controlled by the GUI.
-                    value = pow(rawValue, params.resonanceCurve);
+                    let rawIntensity = lerp(sandValue1, sandValue2, lerpFactor);
+                    dotIntensity = pow(rawIntensity, params.resonanceSmoothness);
                 }
             }
             
-            let targetSize = map(constrain(value, 0, 1), 0, 1, params.minDotSize, currentMaxDotSize);
+            let targetSize = map(constrain(dotIntensity, 0, 1), 0, 1, params.minDotSize, currentMaxDotSize);
 
             if (params.invert) {
                 targetSize = (params.minDotSize + currentMaxDotSize) - targetSize;
@@ -215,10 +242,16 @@ function draw() {
     }
 }
 
+function draw() {
+    background(params.backgroundColor);
+    handleLooping();
+    renderVisuals();
+}
+
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
     for (let i in gui.__folders['Zone of Interest'].__controllers) {
-        const controller = gui.__folders['Zone of an Interest'].__controllers[i];
+        const controller = gui.__folders['Zone of Interest'].__controllers[i];
         if (controller.property === 'zoneRadius') {
             controller.max(Math.min(windowWidth, windowHeight) / 2);
         }
@@ -226,22 +259,6 @@ function windowResized() {
     draw();
 }
 
-dat.GUI.prototype.onChange = function(callback) {
-    const customCallback = () => {
-        handleLooping();
-        callback();
-    };
-
-    for (let i in this.__controllers) {
-        this.__controllers[i].onChange(customCallback);
-    }
-    for (let f in this.__folders) {
-        const folder = this.__folders[f];
-        for (let i in folder.__controllers) {
-            folder.__controllers[i].onChange(customCallback);
-        }
-    }
-};
 </script>
 </body>
 </html>
