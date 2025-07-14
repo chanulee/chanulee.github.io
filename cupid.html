@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupid</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<script>
+// --- Configuration ---
+const params = {
+    // Blob shape settings
+    noiseScale: 0.5,
+    noiseSpeed: 0.01,
+    blobFactor: 0.6, // How much of the canvas the blob influences
+
+    // Halftone grid settings
+    spacing: 15,
+    minDotSize: 0,
+    maxDotSize: 15,
+
+    // Zone of Interest settings
+    zoneOfInterest: true,
+    zoneRadius: 300,
+    edgeSoftness: 20, // Controls the fade at the circle's edge
+
+    // Color settings
+    dotColor: [0, 0, 0],
+    backgroundColor: [255, 255, 255],
+    
+    // Invert the effect
+    invert: false,
+};
+
+// --- p5.js Sketch ---
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+
+    // --- GUI Setup ---
+    const gui = new dat.GUI();
+    const blobFolder = gui.addFolder('Shape & Motion');
+    blobFolder.add(params, 'noiseScale', 0.1, 2.0).name('Complexity');
+    blobFolder.add(params, 'noiseSpeed', 0, 0.05).name('Animation Speed');
+    blobFolder.add(params, 'blobFactor', 0.1, 1.5).name('Size');
+    blobFolder.open();
+
+    const halftoneFolder = gui.addFolder('Halftone Effect');
+    halftoneFolder.add(params, 'spacing', 5, 50).name('Grid Spacing');
+    halftoneFolder.add(params, 'minDotSize', 0, 20).name('Min Dot Size');
+    halftoneFolder.add(params, 'maxDotSize', 0, 50).name('Max Dot Size');
+    halftoneFolder.add(params, 'invert').name('Invert Effect');
+    halftoneFolder.open();
+
+    const zoneFolder = gui.addFolder('Zone of Interest');
+    zoneFolder.add(params, 'zoneOfInterest').name('Active');
+    zoneFolder.add(params, 'zoneRadius', 50, Math.min(windowWidth, windowHeight) / 2).name('Radius');
+    zoneFolder.add(params, 'edgeSoftness', 0, 100).name('Edge Softness');
+    zoneFolder.open();
+    
+    const colorFolder = gui.addFolder('Colors');
+    colorFolder.addColor(params, 'dotColor').name('Dot Color');
+    colorFolder.addColor(params, 'backgroundColor').name('Background');
+    colorFolder.open();
+
+    // Ensure the draw loop runs to see changes
+    gui.onChange(draw);
+}
+
+function draw() {
+    background(params.backgroundColor);
+    
+    const time = frameCount * params.noiseSpeed;
+    
+    // Iterate over the canvas in a grid pattern
+    for (let y = 0; y < height; y += params.spacing) {
+        for (let x = 0; x < width; x += params.spacing) {
+            
+            const distFromCenter = dist(x, y, width / 2, height / 2);
+            let edgeScaleFactor = 1.0;
+
+            // If the zone of interest is active, calculate the edge fade
+            if (params.zoneOfInterest) {
+                const softEdgeBoundary = params.zoneRadius - params.edgeSoftness;
+
+                if (distFromCenter > params.zoneRadius) {
+                    // Dot is completely outside the circle
+                    edgeScaleFactor = 0;
+                } else if (distFromCenter > softEdgeBoundary) {
+                    // Dot is in the soft edge zone, so we fade it out
+                    edgeScaleFactor = map(distFromCenter, softEdgeBoundary, params.zoneRadius, 1, 0);
+                }
+                // If inside the softEdgeBoundary, edgeScaleFactor remains 1.0 (full size)
+            }
+
+            if (edgeScaleFactor > 0) {
+                // Use Perlin noise to create an organic, blob-like value
+                const noiseVal = noise(
+                    x * params.noiseScale * 0.01, 
+                    y * params.noiseScale * 0.01, 
+                    time
+                );
+                
+                // Combine distance and noise to create the blob shape
+                const blobValue = noiseVal - (distFromCenter / (width * params.blobFactor));
+
+                // Map the blobValue to the dot size
+                let targetSize = map(constrain(blobValue, 0, 1), 0, 1, params.minDotSize, params.maxDotSize);
+
+                // Invert the effect if the checkbox is ticked
+                if (params.invert) {
+                    targetSize = params.maxDotSize - targetSize;
+                }
+                
+                // Apply the edge fade to the final dot size
+                targetSize *= edgeScaleFactor;
+
+                // Draw the dot
+                if (targetSize > 0.1) { // Only draw if the dot is visible
+                    fill(params.dotColor);
+                    noStroke();
+                    circle(x, y, targetSize);
+                }
+            }
+        }
+    }
+    
+    // If speed is 0, we don't need to loop, saving performance.
+    if (params.noiseSpeed === 0) {
+        noLoop();
+    } else {
+        loop();
+    }
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    // Update the max radius on the GUI slider
+    for (let i in gui.__folders['Zone of Interest'].__controllers) {
+        const controller = gui.__folders['Zone of Interest'].__controllers[i];
+        if (controller.property === 'zoneRadius') {
+            controller.max(Math.min(windowWidth, windowHeight) / 2);
+        }
+    }
+    draw(); // Redraw canvas on resize
+}
+
+// Helper function for GUI onChange events
+dat.GUI.prototype.onChange = function(callback) {
+    for (let i in this.__controllers) {
+        this.__controllers[i].onChange(callback);
+    }
+    for (let f in this.__folders) {
+        this.__folders[f].onChange(callback);
+    }
+};
+</script>
+</body>
+</html>
