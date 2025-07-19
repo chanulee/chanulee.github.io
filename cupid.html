@@ -30,19 +30,19 @@ const params = {
     metricValue: 75, // The metric to display in result mode (0-100)
 
     // Blob shape settings (for Loading mode)
-    noiseScale: 0.5,
-    noiseSpeed: 0.01,
-    blobFactor: 0.6, // How much of the canvas the blob influences
+    noiseScale: 1.16,
+    noiseSpeed: 0.015,
+    blobFactor: 0.66, // How much of the canvas the blob influences
 
     // Halftone grid settings
-    spacing: 15,
-    minDotSize: 0,
-    maxDotSize: 15,
+    spacing: 6.5,
+    minDotSize: 1,
+    maxDotSize: 12,
 
     // Zone of Interest settings (shared by all modes)
     zoneOfInterest: true,
-    zoneRadius: 300,
-    edgeSoftness: 20, // Controls the fade at the circle's edge
+    zoneRadius: 138,
+    edgeSoftness: 50, // Controls the fade at the circle's edge
 
     // Resonance-specific settings
     resonanceSharpness: 4.0,
@@ -61,44 +61,101 @@ const params = {
 
 // --- p5.js Sketch ---
 let gui; // Make GUI globally accessible
+let targetParams; // For smooth parameter transitions
+
+// A list of parameters that should be animated during state changes
+const animatedParams = [
+    'noiseScale', 'noiseSpeed', 'blobFactor',
+    'spacing', 'minDotSize', 'maxDotSize',
+    'zoneRadius', 'edgeSoftness',
+    'resonanceSharpness', 'resonanceSmoothness'
+];
 
 // GUI controllers for dynamic visibility
 let savePNGController;
 
+// --- WebSocket Communication ---
+let socket;
+let receivedValue = null;
+let lastReceivedTime = 0;
+const COOLDOWN_PERIOD = 40000; // 40 seconds in ms
+
+// --- State Management ---
+let appState = 'MEASURING'; // IDLE, MEASURING, RESULT
+let isSequenceRunning = false;
+let isAnimating = false; // Flag to track if params are animating
+let sequenceTimeouts = []; // To store timeout IDs for cancellation
+
+// Store parameter sets for different states
+const idleParams = {
+    noiseSpeed: 0.015,
+    maxDotSize: 12,
+    zoneRadius: 138,
+    edgeSoftness: 50,
+    mode: 'Loading',
+    resultMethod: 'Complexity',
+};
+
+const measuringParams = {
+    noiseSpeed: 0.04,
+    maxDotSize: 16,
+    zoneRadius: 339,
+    edgeSoftness: 100,
+    mode: 'Loading',
+    resultMethod: 'Complexity',
+};
+
+const resultParams = {
+    minDotSize: 2.1,
+    maxDotSize: 9.5,
+    zoneRadius: 400,
+    resonanceSharpness: 1,
+    resonanceSmoothness: 3,
+    mode: 'Result',
+    resultMethod: 'Resonance',
+};
+
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
+
+    // --- WebSocket Setup ---
+    connectToWebSocket();
     
     // --- GUI Setup ---
     gui = new dat.GUI();
 
+    // --- Animation Setup ---
+    targetParams = { ...params }; // Initialize target params for smooth transitions
+
     const modeFolder = gui.addFolder('Mode & Metric');
-    modeFolder.add(params, 'mode', ['Loading', 'Result']).name('Display Mode').onChange(updateGUI);
-    modeFolder.add(params, 'resultMethod', ['Complexity', 'Resonance']).name('Result Method').onChange(updateGUI);
-    modeFolder.add(params, 'metricValue', 0, 100).name('Metric (0-100)').onChange(updateGUI);
+    modeFolder.add(params, 'mode', ['Loading', 'Result']).name('Display Mode').onChange(onGuiChange);
+    modeFolder.add(params, 'resultMethod', ['Complexity', 'Resonance']).name('Result Method').onChange(onGuiChange);
+    modeFolder.add(params, 'metricValue', 0, 100).name('Metric (0-100)').onChange(onGuiChange);
     modeFolder.open();
     
     const blobFolder = gui.addFolder('Shape & Motion (Loading)');
-    blobFolder.add(params, 'noiseScale', 0.1, 2.0).name('Complexity').onChange(updateGUI);
-    blobFolder.add(params, 'noiseSpeed', 0, 0.05).name('Animation Speed').onChange(updateGUI);
-    blobFolder.add(params, 'blobFactor', 0.1, 1.5).name('Size').onChange(updateGUI);
+    blobFolder.add(params, 'noiseScale', 0.1, 2.0).name('Complexity').onChange(onGuiChange);
+    blobFolder.add(params, 'noiseSpeed', 0, 0.05).name('Animation Speed').onChange(onGuiChange);
+    blobFolder.add(params, 'blobFactor', 0.1, 1.5).name('Size').onChange(onGuiChange);
     blobFolder.open();
 
     const halftoneFolder = gui.addFolder('Halftone Effect');
-    halftoneFolder.add(params, 'spacing', 5, 50).name('Grid Spacing').onChange(updateGUI);
-    halftoneFolder.add(params, 'minDotSize', 0, 20).name('Min Dot Size').onChange(updateGUI);
-    halftoneFolder.add(params, 'maxDotSize', 0, 50).name('Max Dot Size').onChange(updateGUI);
-    halftoneFolder.add(params, 'invert').name('Invert Effect').onChange(updateGUI);
+    halftoneFolder.add(params, 'spacing', 5, 50).name('Grid Spacing').onChange(onGuiChange);
+    halftoneFolder.add(params, 'minDotSize', 0, 20).name('Min Dot Size').onChange(onGuiChange);
+    halftoneFolder.add(params, 'maxDotSize', 0, 50).name('Max Dot Size').onChange(onGuiChange);
+    halftoneFolder.add(params, 'invert').name('Invert Effect').onChange(onGuiChange);
     halftoneFolder.open();
 
     const zoneFolder = gui.addFolder('Zone of Interest');
-    zoneFolder.add(params, 'zoneOfInterest').name('Active').onChange(updateGUI);
-    zoneFolder.add(params, 'zoneRadius', 50, Math.min(windowWidth, windowHeight) / 2).name('Radius').onChange(updateGUI);
-    zoneFolder.add(params, 'edgeSoftness', 0, 100).name('Edge Softness').onChange(updateGUI);
+    zoneFolder.add(params, 'zoneOfInterest').name('Active').onChange(onGuiChange);
+    zoneFolder.add(params, 'zoneRadius', 50, Math.min(windowWidth, windowHeight) / 2).name('Radius').onChange(onGuiChange);
+    zoneFolder.add(params, 'edgeSoftness', 0, 100).name('Edge Softness').onChange(onGuiChange);
     zoneFolder.open();
     
     const resonanceFolder = gui.addFolder('Resonance Settings');
-    resonanceFolder.add(params, 'resonanceSharpness', 1.0, 20.0).name('Sharpness').onChange(updateGUI);
-    resonanceFolder.add(params, 'resonanceSmoothness', 0.5, 5.0).name('Smoothness').onChange(updateGUI);
+    resonanceFolder.add(params, 'resonanceSharpness', 1.0, 20.0).name('Sharpness').onChange(onGuiChange);
+    resonanceFolder.add(params, 'resonanceSmoothness', 0.5, 5.0).name('Smoothness').onChange(onGuiChange);
     resonanceFolder.open();
 
     const exportFolder = gui.addFolder('Export');
@@ -106,15 +163,92 @@ function setup() {
     exportFolder.open();
 
     const colorFolder = gui.addFolder('Colors');
-    colorFolder.addColor(params, 'dotColor').name('Dot Color').onChange(updateGUI);
-    colorFolder.addColor(params, 'backgroundColor').name('Background').onChange(updateGUI);
+    colorFolder.addColor(params, 'dotColor').name('Dot Color').onChange(onGuiChange);
+    colorFolder.addColor(params, 'backgroundColor').name('Background').onChange(onGuiChange);
     colorFolder.open();
 
     // Initial setup
-    updateGUI();
+    setAppState('MEASURING');
+    updateGUIVisuals();
 }
 
-function updateGUI() {
+function setAppState(newState, value = null) {
+    appState = newState;
+    let preset;
+    switch (appState) {
+        case 'IDLE':
+            preset = idleParams;
+            receivedValue = null;
+            break;
+        case 'MEASURING':
+            preset = measuringParams;
+            break;
+        case 'RESULT':
+            preset = resultParams;
+            params.metricValue = value; // Direct update, not animated
+            receivedValue = value;
+            lastReceivedTime = millis();
+            break;
+    }
+
+    // Update target params to start the animation
+    Object.assign(targetParams, preset);
+
+    // Update non-animated params immediately as they control logic
+    if (preset.mode) {
+        params.mode = preset.mode;
+    }
+    if (preset.resultMethod) {
+        params.resultMethod = preset.resultMethod;
+    }
+    
+    updateGUIVisuals();
+}
+
+function connectToWebSocket() {
+    socket = new WebSocket('ws://localhost:8080');
+
+    socket.onopen = (event) => {
+        console.log('WebSocket connection opened:', event);
+    };
+
+    socket.onmessage = (event) => {
+        console.log('Received from server:', event.data);
+        if (event.data === 'connected') return;
+        onSerialData(event.data);
+    };
+
+    socket.onclose = (event) => {
+        console.log('WebSocket connection closed:', event);
+        // Optional: try to reconnect
+        setTimeout(connectToWebSocket, 5000);
+    };
+
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+}
+
+function onSerialData(data) {
+    if (isSequenceRunning) return; // Ignore data when sequence is active
+
+    const value = parseFloat(data);
+    if (isNaN(value)) return;
+
+    if (value === 0) {
+        setAppState('MEASURING');
+    } else {
+        setAppState('RESULT', value);
+    }
+}
+
+function onGuiChange() {
+    // Sync target with any manual GUI changes to stop animation for that param
+    Object.assign(targetParams, params);
+    updateGUIVisuals();
+}
+
+function updateGUIVisuals() {
     // Show/hide controls based on the current mode
     const isResultMode = params.mode === 'Result';
     const isLoadingMode = params.mode === 'Loading';
@@ -124,9 +258,19 @@ function updateGUI() {
     savePNGController.domElement.style.display = isResultMode ? 'block' : 'none';
     gui.__folders['Shape & Motion (Loading)'].domElement.style.display = isLoadingMode ? 'block' : 'none';
     gui.__folders['Resonance Settings'].domElement.style.display = (isResultMode && isResonance) ? 'block' : 'none';
-    
+
+    // Update all controllers with new param values
+    for (let i in gui.__controllers) {
+        gui.__controllers[i].updateDisplay();
+    }
+    for (let f in gui.__folders) {
+        for (let i in gui.__folders[f].__controllers) {
+            gui.__folders[f].__controllers[i].updateDisplay();
+        }
+    }
+
     handleLooping();
-    draw(); // Redraw canvas when GUI changes
+    redraw(); // Use redraw to respect noLoop() status
 }
 
 function exportTransparentPNG() {
@@ -136,12 +280,12 @@ function exportTransparentPNG() {
     clear(); // Clears the canvas to be transparent
     renderVisuals(); // Draw just the dots
     saveCanvas('result-image', 'png'); // Save the transparent image
-    draw(); // Redraw with the background to restore the on-screen view
+    redraw(); // Redraw with the background to restore the on-screen view
 }
 
 function handleLooping() {
-    // Loop only if in loading mode with animation speed.
-    if (params.mode === 'Loading' && params.noiseSpeed > 0) {
+    // Loop if animating, or in loading mode with animation.
+    if (isAnimating || (params.mode === 'Loading' && params.noiseSpeed > 0)) {
         loop();
     } else {
         noLoop();
@@ -240,10 +384,40 @@ function renderVisuals() {
             }
         }
     }
+
+    // Display the result value if in the correct state
+    if (appState === 'RESULT' && receivedValue !== null) {
+        fill(params.dotColor); // Use dot color for text
+        textSize(32);
+        textAlign(CENTER, BOTTOM);
+        text(receivedValue.toFixed(1), width / 2, height - 20);
+    }
+}
+
+function updateAnimatedParams() {
+    const lerpFactor = 0.05;
+    isAnimating = false; // Reset before checking
+    for (const key of animatedParams) {
+        if (typeof params[key] === 'number' && typeof targetParams[key] === 'number') {
+            if (abs(params[key] - targetParams[key]) > 0.01) {
+                params[key] = lerp(params[key], targetParams[key], lerpFactor);
+                isAnimating = true;
+            } else {
+                params[key] = targetParams[key]; // Snap to final value
+            }
+        }
+    }
 }
 
 function draw() {
+    updateAnimatedParams(); // Smoothly update parameters
     background(params.backgroundColor);
+
+    // Check for cooldown period
+    if (!isSequenceRunning && appState === 'RESULT' && millis() - lastReceivedTime > COOLDOWN_PERIOD) {
+        setAppState('IDLE');
+    }
+
     handleLooping();
     renderVisuals();
 }
@@ -256,7 +430,71 @@ function windowResized() {
             controller.max(Math.min(windowWidth, windowHeight) / 2);
         }
     }
-    draw();
+    redraw();
+}
+
+function clearSequenceTimeouts() {
+    for (const timeoutId of sequenceTimeouts) {
+        clearTimeout(timeoutId);
+    }
+    sequenceTimeouts = [];
+}
+
+function breakSequence() {
+    if (!isSequenceRunning) return;
+
+    console.log("Sequence interrupted. Returning to MEASURING state.");
+    isSequenceRunning = false;
+    clearSequenceTimeouts();
+    setAppState('MEASURING');
+}
+
+function startShowSequence() {
+    clearSequenceTimeouts(); // Ensure no old timeouts are lingering
+    isSequenceRunning = true;
+    console.log("Starting show sequence...");
+
+    // 1. Change to IDLE mode and wait 15 seconds.
+    setAppState('IDLE');
+    console.log("State: IDLE (15s)");
+
+    sequenceTimeouts.push(setTimeout(() => {
+        // 2. Change to MEASURING mode for 20 seconds.
+        setAppState('MEASURING');
+        console.log("State: MEASURING (20s)");
+
+        sequenceTimeouts.push(setTimeout(() => {
+            // 3. Change to RESULT, generate random metric, wait for 1:40.
+            const randomMetric = random(60, 100);
+            setAppState('RESULT', randomMetric);
+            console.log(`State: RESULT (${100000 / 1000}s), Metric: ${randomMetric.toFixed(2)}`);
+
+            sequenceTimeouts.push(setTimeout(() => {
+                // 4. Go back to default state (MEASURING) and finish sequence.
+                setAppState('MEASURING');
+                console.log("Sequence finished. State: MEASURING");
+                isSequenceRunning = false;
+                clearSequenceTimeouts();
+            }, 100000)); // 1 minute 40 seconds
+
+        }, 20000)); // 20 seconds
+
+    }, 15000)); // 15 seconds
+}
+
+function keyPressed() {
+    if (key === 'v' || key === 'V') {
+        const guiEl = gui.domElement;
+        if (guiEl.style.display === 'none') {
+            guiEl.style.display = 'block';
+        } else {
+            guiEl.style.display = 'none';
+        }
+    } else if ((key === 's' || key === 'S') && !isSequenceRunning) {
+        startShowSequence();
+    } else if ((key === 'r' || key === 'R') && isSequenceRunning) {
+        breakSequence();
+    }
 }
 
 </script>
