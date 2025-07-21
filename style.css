@@ -3,7 +3,7 @@
     padding: 0;
     background-color: #ffffff;
     color: #0f0f0f;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
 }
 
@@ -52,8 +52,8 @@ p {
 .featured-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr); /* 12-column grid */
-    gap: 16px; /* Column gap */
-    row-gap: 4rem; /* Row gap */
+    gap: 1.5rem; /* Column gap */
+    row-gap: 8rem; /* Row gap */
 }
 
 .item {
@@ -68,6 +68,10 @@ p {
     grid-column: span 8; /* Bold item spans 8 columns */
 }
 
+a.item {
+    text-decoration: none;
+}
+
 .item img {
     width: 100%;
     height: auto; /* Maintain aspect ratio */
@@ -78,9 +82,20 @@ p {
 .item .thumbnail-container {
     position: relative;
     width: 100%;
-    /* Calculate 5:3 aspect ratio: 3 / 5 = 0.6 = 60% */
-    padding-top: 60%; /* This creates the 5:3 aspect ratio container */
-    overflow: hidden; /* Hide parts of the image outside the container */
+    padding-top: 75%; /* Default to 4:3 landscape */
+    overflow: hidden;
+}
+
+.item.landscape .thumbnail-container {
+    padding-top: 75%; /* 4:3 */
+}
+
+.item.square .thumbnail-container {
+    padding-top: 100%; /* 1:1 */
+}
+
+.item.portrait .thumbnail-container {
+    padding-top: 133.33%; /* 3:4 */
 }
 
 .item .thumbnail-container img {
@@ -126,13 +141,16 @@ img {
 .project-header, .project-item {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 16px;
-    padding: 16px 0;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
 }
 
 .project-header {
-    font-size: 1rem; /* 16px */
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    opacity: 0.5;
 }
 
 .project-header .project-year {
@@ -161,36 +179,27 @@ img {
 }
 
 .project-item {
-    padding: 0.75rem 0;
+    padding: 0.25rem 0;
     text-align: left;
     font-size: 1rem; /* 16px */
-}
-
-.project-item:hover {
-    box-shadow: inset 0 1px 0 #b3aeff, inset 0 -1px 0 #b3aeff;
 }
 
 .project-item p {
     font-size: 1rem; /* 16px */
 }
 
+.project-item .project-name p,
+.project-item .project-affiliation p {
+    text-transform: uppercase;
+}
+
 .project-col {
     text-align: left;
 }
 
-.sortable {
-    cursor: pointer;
-    user-select: none;
-}
-
-.sortable:hover {
-    color: #0000ff;
-}
-
-.sort-icon {
-    display: inline-block;
-    margin-left: 4px;
-    font-size: 14px;
+a.project-item {
+    text-decoration: none;
+    color: inherit;
 }
 
 .project-name a, .project-affiliation a {
@@ -200,16 +209,10 @@ img {
     transition: color 0.2s ease;
 }
 
-.project-item:hover .project-name a, 
-.project-item:hover .project-affiliation a {
-    color: #0000ff;
-}
-
 .project-name a:hover, .project-affiliation a:hover {
     color: inherit !important;
 }
 
-<<<<<<< Updated upstream
 .item h4 {
     font-size: 1rem; /* 16px */
 }
@@ -258,11 +261,20 @@ nav li a {
     text-decoration: none;
     color: inherit;
     font-size: 1rem;
-    transition: color 0.3s ease;
 }
 
-nav li a:hover {
-    color: #0000ff; /* Example hover color */
+nav a.active {
+    font-weight: 700;
+}
+
+.nav-left,
+.nav-right ul li {
+    transition: opacity 0.2s ease-in-out;
+}
+
+nav:has(a:hover) .nav-left:not(:has(a:hover)),
+nav:has(a:hover) .nav-right ul li:not(:has(a:hover)):not(:has(a.active)) {
+    opacity: 0.4;
 }
 
 /* Footer */
@@ -272,15 +284,14 @@ footer {
 }
 
 .footer-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
     margin-bottom: 3rem;
 }
 
 .footer-left {
-    flex: 1;
-    max-width: 400px;
+    grid-column: span 5;
 }
 
 .footer-left h2 {
@@ -305,7 +316,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    flex: 1;
+    grid-column: span 7;
 }
 
 .footer-nav {
@@ -323,11 +334,11 @@ footer {
     text-decoration: none;
     color: inherit;
     font-size: 1rem;
-    transition: color 0.3s ease;
+    transition: opacity 0.2s ease-in-out;
 }
 
-.footer-nav-col a:hover {
-    color: #0000ff;
+.footer-nav:has(a:hover) a:not(:hover) {
+    opacity: 0.4;
 }
 
 .footer-contact p {
@@ -346,12 +357,12 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding-top: 2rem;
-    border-top: 1px solid rgba(24, 24, 24, 0.1);
 }
 
 .footer-year {
     font-size: 1rem;
     opacity: 0.5;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .footer-times {
@@ -503,28 +514,27 @@ footer {
 
 .paper-link:hover {
     opacity: 0.7;
-=======
-nav {
-    margin: 0;
-    display: flex;
+}
+
+.item, .project-item {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.featured-grid:has(.item.clickable:hover) .item:not(:hover),
+.project-list:has(.project-item.clickable:hover) .project-item:not(:hover) {
+    opacity: 0.4;
+}
+
+#image-preview {
+    width: 200px; /* Or your desired width */
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    pointer-events: none; /* Make sure the preview doesn't interfere with mouse events */
+}
+
+#image-preview img {
     width: 100%;
-    padding: 24px 0px;
-    gap: 16px;
-    justify-content: flex-start;
-}
-
-nav h4 {
-    flex: 1;
-}
-
-nav ul {
-    display: flex;
-    gap: 16px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    flex: 1;
-    justify-content: flex-start;
->>>>>>> Stashed changes
+    height: auto;
+    display: block;
 }
 
