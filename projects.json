@@ -33,10 +33,12 @@
     },
     {
       "project": "Synapse",
+      "projectLink": "projects/synapse.html",
       "affiliation": "Imperial College / RCA",
       "description": "Research on new mental model for the agentic AI age",
       "year": "2025",
-      "thumbnail": ""
+      "featured": true,
+      "thumbnail": "/resources/synapse/hero.jpg"
   },
     {
         "project": "OpenSimples",
@@ -74,20 +76,21 @@
     },
     {
         "project": "Digital Double",
-        "projectLink": "https://modemworks.com/research/digital-doubles/",
+        "projectLink": "projects/digital-double.html",
         "affiliation": "MODEM",
         "description": "Future scenario research on Digital Doubles",
         "year": "2024",
         "featured": true,
-        "thumbnail": "/resources/dd/modem.gif",
+        "thumbnail": "/resources/digital-double/modem.gif",
         "aspectRatio": "square"
     },
     {
         "project": "LLM-RecSys Hybrid System",
+        "projectLink": "projects/hybridai.html",
         "affiliation": "RCA CSRC",
         "description": "Research on LLM-RecSys hybrid system",
         "year": "2024",
-        "thumbnail": ""
+        "thumbnail": "/resources/csrc.jpg"
     },
     {
         "project": "Sensory Misalignment",
@@ -95,7 +98,7 @@
         "affiliation": "Snap Inc.",
         "description": "questioning reality and augmented one - by mismatching multimodality.",
         "year": "2024",
-        "thumbnail": "resources/snap/snap.png",
+        "thumbnail": "/resources/snap/snap.png",
         "featured": true
     },
     {
@@ -115,7 +118,7 @@
     },
     {
         "project": "LG AI OS",
-        "projectLink": "https://www.theverge.com/2023/12/28/24018312/lg-gram-pro-laptops-2024-ces",
+        "projectLink": "projects/lg-ai.html",
         "affiliation": "LG Electronics",
         "description": "R&D for AI features and roadmap on laptop OS",
         "year": "2023",
@@ -181,19 +184,13 @@
         "minor": true
 },
     {
-        "project": "Illogical Love II",
-        "affiliation": "Arts Korea Council / Art Center Nabi",
+        "project": "Illogical Love",
+        "projectLink": "projects/illogical-love.html",
+        "affiliation": "British Council",
         "description": "PROJECT",
         "year": "2022",
         "featured": true,
-        "thumbnail": ""
-    },
-    {
-        "project": "Illogical Love I",
-        "affiliation": "British Council / Korea Foundation / Watershed / Art Center Nabi",
-        "description": "PROJECT",
-        "year": "2021",
-        "thumbnail": ""
+        "thumbnail": "/resources/illogical-love/il.jpg"
     },
     {
         "project": "X: art & technolgoy 10th anniversary film",
