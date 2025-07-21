@@ -1,12 +1,5 @@
 [
     {
-        "project": "Information Gardening",
-        "affiliation": "Self-Initiated",
-        "description": "Research on new mental model for the agentic AI age",
-        "year": "ONGOING",
-        "thumbnail": ""
-    },
-    {
         "project": "Innovation Project",
         "affiliation": "Map Project Office",
         "description": "Future of Personal AI",
@@ -14,61 +7,77 @@
         "thumbnail": ""
     },
     {
-        "project": "Voyage",
-        "affiliation": "beyond",
-        "description": "R&D for non-invasive BCI",
+        "project": "Information Gardening",
+        "affiliation": "Imperial College / RCA",
+        "description": "Research on new mental model for the agentic AI age",
+        "year": "ONGOING",
+        "thumbnail": "",
+        "featured": true,
+        "aspectRatio": "landscape"
+    },
+    {
+        "project": "Neuro-AI wearable",
+        "affiliation": "Voyage",
+        "description": "Neuro-AI wearable startup",
         "year": "ONGOING",
         "featured": true,
         "thumbnail": "/resources/voyage/h.jpeg",
         "aspectRatio": "square"
     },
     {
-        "project": "Frameworks for Digital Double",
+        "project": "Levels of Digital Doubles",
         "affiliation": "MODEM",
-        "description": "Research on frameworks for digital double",
+        "description": "Research on digital doubles",
         "year": "ONGOING",
         "thumbnail": ""
     },
     {
-        "project": "Everychat",
-        "projectLink": "https://github.com/chanulee/everychat",
-        "affiliation": "Self-Initiated",
-        "description": "PROJECT",
-        "year": "2025",
+        "project": "semiotics of AI",
+        "affiliation": "lovelace research",
+        "description": "Research on AI semiosis",
+        "year": "ONGOING",
         "thumbnail": ""
     },
     {
+      "project": "Synapse",
+      "affiliation": "Imperial College / RCA",
+      "description": "Research on new mental model for the agentic AI age",
+      "year": "2025",
+      "thumbnail": ""
+  },
+    {
         "project": "OpenSimples",
         "projectLink": "https://opensimples.github.io/",
-        "affiliation": "Self-Initiated",
+        "affiliation": "lovelace research",
         "description": "PROJECT",
         "year": "2025",
-        "thumbnail": ""
+        "thumbnail": "",
+        "minor": true
+    },
+    {
+        "project": "Cupidastic",
+        "affiliation": "RCA design futures",
+        "description": "creative coding",
+        "year": "2025",
+        "thumbnail": "",
+        "minor": true
     },
     {
         "project": "coreOllama",
         "projectLink": "https://github.com/chanulee/coreOllama",
-        "affiliation": "Self-Initiated",
+        "affiliation": "lovelace research",
         "description": "Lightweight, simple and open-sourced UI for local LLM",
         "year": "2025",
         "thumbnail": ""
     },
     {
-        "project": "Persona Studio",
-        "projectLink": "https://github.com/chanulee/persona-studio",
-        "affiliation": "Self-Initiated",
-        "description": "PROJECT",
-        "year": "2025",
-        "thumbnail": ""
-    },
-    {
         "project": "TwelveLabs",
-        "projectLink": "https://www.twelvelabs.io",
+        "projectLink": "https://www.pentagram.com/work/twelvelabs",
         "affiliation": "Pentagram",
         "description": "Translating technology into metaphor and visual",
         "year": "2024",
         "featured": "bold",
-        "thumbnail": "/resources/26_TL_Keynote_HR.avif"
+        "thumbnail": "/resources/twelvelabs/1.avif"
     },
     {
         "project": "Digital Double",
@@ -77,10 +86,11 @@
         "description": "Future scenario research on Digital Doubles",
         "year": "2024",
         "featured": true,
-        "thumbnail": "/resources/modem.gif"
+        "thumbnail": "/resources/dd/modem.gif",
+        "aspectRatio": "square"
     },
     {
-        "project": "Listen & Observe: LLM-RecSys Hybrid System",
+        "project": "LLM-RecSys Hybrid System",
         "affiliation": "RCA CSRC",
         "description": "Research on LLM-RecSys hybrid system",
         "year": "2024",
@@ -88,60 +98,97 @@
     },
     {
         "project": "Sensory Misalignment",
-        "affiliation": "Snap Inc",
-        "description": "A research and interactive experience questioning the nature of reality by creating sensory mismatches to challenge users' expectations and automatic perception.",
+        "affiliation": "Snap Inc.",
+        "description": "questioning reality and augmented one - by mismatching multimodality.",
         "year": "2024",
-        "thumbnail": ""
+        "thumbnail": "resources/snap/snap.png",
+        "featured": true
     },
     {
         "project": "OPPO Centre",
         "affiliation": "OPPO",
-        "description": "A concept design for a personal cloud that gives data ownership back to the user, enabling privacy and re-use of old phones for personal AI.",
+        "description": "Personal AI cloud enabling privacy and re-use of old phones.",
         "year": "2024",
         "thumbnail": ""
     },
     {
         "project": "Sphere",
-        "affiliation": "Huawei, Dyson School of Design Engineering",
+        "affiliation": "Huawei HMI lab",
         "description": "Feeling text generation for AI literacy",
         "year": "2023",
         "thumbnail": ""
     },
     {
-        "project": "LG Lounge AI",
+        "project": "LG AI OS",
         "projectLink": "https://www.theverge.com/2023/12/28/24018312/lg-gram-pro-laptops-2024-ces",
         "affiliation": "LG Electronics",
         "description": "R&D for AI features and roadmap on laptop OS",
         "year": "2023",
         "featured": true,
-        "thumbnail": "/resources/lg-2.png"
+        "thumbnail": "/resources/lg-ai/lg-0.jpg"
+    },
+    {
+      "project": "sketchrotom",
+      "projectLink": "",
+      "affiliation": "lovelace research",
+      "description": "AI-powered sketchbook",
+      "year": "2023",
+      "thumbnail": ""
+  },
+
+    {
+        "project": "Never Tell the Trick",
+        "projectLink": "https://ieeexplore.ieee.org/document/10536387",
+        "affiliation": "Imperial / SGU / NRF",
+        "description": "Research on immersive XR system and solarpunk immersive media art",
+        "year": "2023",
+        "thumbnail": ""
     },
     {
         "project": "Sunny Day",
-        "projectLink": "https://www.theverge.com/2023/12/28/24018312/lg-gram-pro-laptops-2024-ces",
-        "affiliation": "Sogang University, National Research Foundation",
+        "projectLink": "",
+        "affiliation": "lifestyle media group (SGU) / NRF",
         "description": "Research on immersive XR system and solarpunk immersive media art",
         "year": "2023",
         "thumbnail": ""
     },
     {
-        "project": "Never Tell the Trick",
-        "projectLink": "https://www.theverge.com/2023/12/28/24018312/lg-gram-pro-laptops-2024-ces",
-        "affiliation": "Sogang University, National Research Foundation",
-        "description": "Research on immersive XR system and solarpunk immersive media art",
-        "year": "2023",
-        "thumbnail": ""
-    },
-    {
-        "project": "Virtual Audio Datasets",
-        "affiliation": "Sogang University, KAIST",
-        "description": "R&D for",
+        "project": "Virtual Acoustic Datasets",
+        "projectLink": "https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71354",
+        "affiliation": "NIA / MALer Lab (SGU) / KAIST",
+        "description": "R&D for virtual acoustic datasets",
         "year": "2022",
-        "thumbnail": ""
+        "thumbnail": "",
+        "minor": true
     },
+    {
+      "project": "creative.sogang.ac.kr",
+      "projectLink": "https://creative.sogang.ac.kr",
+      "affiliation": "Sogang University",
+      "description": "Interactive web and graphic poster",
+      "year": "2022",
+      "thumbnail": "",
+      "minor": true
+  },
+  {
+    "project": "Yeemock gallery",
+    "affiliation": "Superbloom",
+    "description": "website for Yeemock gallery",
+    "year": "2022",
+    "thumbnail": "",
+    "minor": true
+},
+  {
+    "project": "ETNAH NFT marketplace",
+    "affiliation": "Superbloom / Gallery Hyundai / Altava",
+    "description": "UIUX for NFT marketplace",
+    "year": "2022",
+    "thumbnail": "",
+    "minor": true
+},
     {
         "project": "Illogical Love II",
-        "affiliation": "Arts Korea Council, Art Center Nabi",
+        "affiliation": "Arts Korea Council / Art Center Nabi",
         "description": "PROJECT",
         "year": "2022",
         "featured": true,
@@ -149,14 +196,29 @@
     },
     {
         "project": "Illogical Love I",
-        "affiliation": "British Council, Korea Foundation, Watershed, Art Center Nabi",
+        "affiliation": "British Council / Korea Foundation / Watershed / Art Center Nabi",
         "description": "PROJECT",
         "year": "2021",
         "thumbnail": ""
     },
     {
+        "project": "X: art & technolgoy 10th anniversary film",
+        "affiliation": "sogang university",
+        "description": "producer",
+        "year": "2021",
+        "thumbnail": ""
+    },
+    {
+        "project": "atc21.space",
+        "affiliation": "sogang university",
+        "description": "virtual venue for art & technolgoy conference",
+        "year": "2021",
+        "thumbnail": "",
+        "minor": true
+    },
+    {
         "project": "human.inthe.loop",
-        "affiliation": "Art Center Nabi",
+        "affiliation": "Nabi AI Lab",
         "description": "PROJECT",
         "year": "2020",
         "thumbnail": ""
@@ -170,13 +232,15 @@
     },
     {
         "project": "NFT Layer Authentication",
-        "affiliation": "BaSE Lab",
+        "projectLink": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11113898",
+        "affiliation": "BaSE Lab (SGU)",
         "description": "Research on NFT creator authentication with layer information",
         "year": "2020",
         "thumbnail": ""
     },
     {
         "project": "Black Light",
+        "projectLink": "https://100films100posters.com/posters",
         "affiliation": "JIFF 100FILMS100POSTERS",
         "description": "Interactive web and graphic poster",
         "year": "2020",
@@ -194,16 +258,31 @@
         "affiliation": "Monthly DESIGN",
         "description": "Interactive web and graphic poster",
         "year": "2020",
-        "featured": true,
         "thumbnail": ""
     },
     {
         "project": "Dept. of Web & Land Property",
-        "projectLink": "https://www.theverge.com/2023/12/28/24018312/lg-gram-pro-laptops-2024-ces",
-        "affiliation": "Ministry of Science and ICT, Platform-L Contemporary Art Center",
+        "projectLink": "",
+        "affiliation": "Ministry of Science and ICT",
         "description": "Research on immersive XR system and solarpunk immersive media art",
         "year": "2019",
         "featured": true,
         "thumbnail": ""
+    },
+    {
+        "project": "ohgnus brand and website",
+        "affiliation": "Superbloom",
+        "description": "",
+        "year": "2019",
+        "thumbnail": "",
+        "minor": true
+    },
+    {
+        "project": "MBC DRAMA",
+        "affiliation": "MBC",
+        "description": "",
+        "year": "2019",
+        "thumbnail": "",
+        "minor": true
     }
 ]
