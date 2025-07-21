@@ -66,7 +66,7 @@
                 
                 <div class="footer-contact">
                     <p class="footer-contact-label">Get in touch</p>
-                    <a href="mailto:chanwoo.lee@imperial.ac.uk" class="footer-email">chanwoo.lee@imperial.ac.uk</a>
+                    <span class="footer-email" data-tooltip="copy email" onclick="copyEmail(this)">chanwoo.lee@imperial.ac.uk</span>
                 </div>
             </div>
             
@@ -80,17 +80,7 @@
                         <a href="/about.html">About</a>
                     </div>
                     <div class="footer-nav-col">
-                        <div class="footer-nav-title">Archive</div>
-                        <a href="/archive/2024.html">2024</a>
-                        <a href="/archive/2023.html">2023</a>
-                        <a href="/archive/2022.html">2022</a>
-                        <a href="/cv.pdf" target="_blank">CV</a>
-                    </div>
-                </div>
-                
-                <div class="footer-social">
-                    <div class="footer-social-title">Connect</div>
-                    <div class="footer-social-links">
+                        <div class="footer-nav-title">Connect</div>
                         <a href="https://linkedin.com/in/chanwoolee" target="_blank">LinkedIn</a>
                         <a href="https://github.com/chanulee" target="_blank">GitHub</a>
                         <a href="https://instagram.com/chanwoo.lee" target="_blank">Instagram</a>
@@ -102,10 +92,6 @@
         
         <div class="footer-bottom">
             <div class="footer-copyright">© 2025 Chanwoo Lee</div>
-            <div class="footer-location">
-                <span>London</span>
-                <span>Seoul</span>
-            </div>
             <div class="footer-times">
                 <span id="london-time">London BST 00:00:00</span>
                 <span id="seoul-time">Seoul KST 00:00:00</span>
@@ -332,6 +318,62 @@
                 });
             }
         });
+
+        // Copy email to clipboard
+        function copyEmail(element) {
+            const email = element.textContent;
+            
+            // Use the modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(function() {
+                    showCopiedState(element);
+                }).catch(function(err) {
+                    console.error('Could not copy text: ', err);
+                    fallbackCopyTextToClipboard(email, element);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(email, element);
+            }
+        }
+
+        // Fallback copy method for older browsers
+        function fallbackCopyTextToClipboard(text, element) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopiedState(element);
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Show copied state
+        function showCopiedState(element) {
+            element.setAttribute('data-tooltip', 'copied!');
+            element.classList.add('copied');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                element.setAttribute('data-tooltip', 'copy email');
+                element.classList.remove('copied');
+            }, 2000);
+        }
     </script>
 </body>
 </html>
