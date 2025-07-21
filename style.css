@@ -251,11 +251,12 @@ img {
 
 /* Responsive project list */
 @media (max-width: 767px) {
-    .project-description {
+    .project-description,
+    .project-year {
         display: none;
     }
     .project-header, .project-item {
-        grid-template-columns: 3fr 2fr 1fr;
+        grid-template-columns: 3fr 2fr;
     }
     .project-name {
         grid-column: span 1;
