@@ -20,6 +20,7 @@
                 <li><a href="/approach.html">Approach</a></li>
                 <li><a href="/project.html">Project</a></li>
                 <li><a href="/feed.html">Feed</a></li>
+                <li class="push-right"><a href="#">SIDE B</a></li>
             </ul>
         </div>
     </nav>
@@ -32,11 +33,17 @@
     </div>
 
     <div class="section">
-        <h3>Full Index</h3>
+        <div class="section-header">
+            <h3>Index</h3>
+        </div>
+        <div class="filter-controls">
+            <span class="filter-option" data-filter="full">Full</span>
+            <span class="filter-option active" data-filter="core">Core</span>
+        </div>
         <div class="project-table">
             <div class="project-header">
                 <div class="project-col project-name">PROJECT</div>
-                <div class="project-col project-affiliation">Affiliation</div>
+                <div class="project-col project-affiliation">Affiliated/collaborated</div>
                 <div class="project-col project-description">Description</div>
                 <div class="project-col project-year">YEAR</div>
             </div>
@@ -48,33 +55,57 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-top">
+        <div class="footer-container">
             <div class="footer-left">
-                <h2>Chanwoo Lee</h2>
-                <p class="footer-subtitle">Interface Architect.</p>
+                <div class="footer-intro">
+                    <h2>Chanwoo Lee</h2>
+                    <p class="subtitle">Interface Architect</p>
+                </div>
+                
                 <p class="footer-description">Designing and engineering computer interaction, interface and system for human agency.</p>
+                
+                <div class="footer-contact">
+                    <p class="footer-contact-label">Get in touch</p>
+                    <a href="mailto:chanwoo.lee@imperial.ac.uk" class="footer-email">chanwoo.lee@imperial.ac.uk</a>
+                </div>
             </div>
+            
             <div class="footer-right">
                 <div class="footer-nav">
                     <div class="footer-nav-col">
-                        <a href="/new/approach.html">Approach</a>
-                        <a href="/new/project.html">Project</a>
-                        <a href="/new/feed.html">Feed</a>
+                        <div class="footer-nav-title">Navigation</div>
+                        <a href="/approach.html">Approach</a>
+                        <a href="/project.html">Project</a>
+                        <a href="/feed.html">Feed</a>
+                        <a href="/about.html">About</a>
                     </div>
                     <div class="footer-nav-col">
-                        <a href="#">LinkedIn</a>
-                        <a href="#">Github</a>
-                        <a href="#">Instagram</a>
+                        <div class="footer-nav-title">Archive</div>
+                        <a href="/archive/2024.html">2024</a>
+                        <a href="/archive/2023.html">2023</a>
+                        <a href="/archive/2022.html">2022</a>
+                        <a href="/cv.pdf" target="_blank">CV</a>
                     </div>
                 </div>
-                <div class="footer-contact">
-                    <p>Feel free to say hi, ask question or request for collaboration.</p>
-                    <p class="footer-email">chanwoo.lee@imperial.ac.uk</p>
+                
+                <div class="footer-social">
+                    <div class="footer-social-title">Connect</div>
+                    <div class="footer-social-links">
+                        <a href="https://linkedin.com/in/chanwoolee" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/chanulee" target="_blank">GitHub</a>
+                        <a href="https://instagram.com/chanwoo.lee" target="_blank">Instagram</a>
+                        <a href="https://twitter.com/chanwoolee" target="_blank">Twitter</a>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <div class="footer-year">2025</div>
+            <div class="footer-copyright">© 2025 Chanwoo Lee</div>
+            <div class="footer-location">
+                <span>London</span>
+                <span>Seoul</span>
+            </div>
             <div class="footer-times">
                 <span id="london-time">London BST 00:00:00</span>
                 <span id="seoul-time">Seoul KST 00:00:00</span>
@@ -163,6 +194,7 @@
 
             // Path to your JSON file
             const jsonFilePath = 'projects.json';
+            let allProjects = [];
             
             // Fetch the JSON data
             fetch(jsonFilePath)
@@ -173,8 +205,30 @@
                     return response.json();
                 })
                 .then(projects => {
-                    renderFeaturedProjects(projects); // Render featured projects
-                    renderProjects(projects); // Initial render of full index
+                    allProjects = projects;
+                    renderFeaturedProjects(allProjects); // Render featured projects
+                    renderProjects(allProjects.filter(p => !p.minor)); // Initial render of core projects
+
+                    // Set up filter controls
+                    const filterControls = document.querySelector('.filter-controls');
+                    if (filterControls) {
+                        filterControls.addEventListener('click', (e) => {
+                            if (e.target.matches('.filter-option')) {
+                                filterControls.querySelector('.active').classList.remove('active');
+                                e.target.classList.add('active');
+
+                                const filterType = e.target.dataset.filter;
+                                let filteredProjects;
+
+                                if (filterType === 'core') {
+                                    filteredProjects = allProjects.filter(p => !p.minor);
+                                } else {
+                                    filteredProjects = allProjects;
+                                }
+                                renderProjects(filteredProjects);
+                            }
+                        });
+                    }
                 })
                 .catch(error => {
                     console.error('Error loading projects:', error);
@@ -239,8 +293,20 @@
             function renderProjects(projects) {
                 const projectList = document.getElementById('projectList');
                 projectList.innerHTML = '';
-                
-                projects.forEach(project => {
+
+                // Sort projects by year, treating 'ONGOING' as the most recent
+                const sortedProjects = [...projects].sort((a, b) => {
+                    const currentYear = new Date().getFullYear();
+                    let yearA = a.year.toString().toLowerCase();
+                    let yearB = b.year.toString().toLowerCase();
+
+                    if (yearA === 'ongoing') yearA = currentYear + 1; // Treat as future
+                    if (yearB === 'ongoing') yearB = currentYear + 1;
+
+                    return (parseInt(yearB) || 0) - (parseInt(yearA) || 0);
+                });
+
+                sortedProjects.forEach(project => {
                     const hasLink = !!project.projectLink;
                     const projectItem = document.createElement(hasLink ? 'a' : 'div');
                     projectItem.className = 'project-item';
@@ -269,3 +335,4 @@
     </script>
 </body>
 </html>
+
