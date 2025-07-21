@@ -246,7 +246,9 @@
 
                     if (hasLink) {
                         projectElement.href = project.projectLink;
-                        projectElement.target = "_blank";
+                        if (project.projectLink.startsWith('http')) {
+                            projectElement.target = "_blank";
+                        }
                         projectElement.classList.add('clickable');
                     }
                     
@@ -300,7 +302,9 @@
 
                     if (hasLink) {
                         projectItem.href = project.projectLink;
-                        projectItem.target = '_blank';
+                        if (project.projectLink.startsWith('http')) {
+                            projectItem.target = '_blank';
+                        }
                         projectItem.classList.add('clickable');
                     }
                     
