@@ -1039,7 +1039,7 @@ footer {
 
 /* Project Detail Page */
 .project-detail {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 24px;
 }
@@ -1129,6 +1129,11 @@ footer {
 
 .project-media {
     margin: 2rem 0;
+}
+
+.project-detail > .project-media:first-child {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
 }
 
 .project-media img,
