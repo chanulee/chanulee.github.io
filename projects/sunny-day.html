@@ -1,121 +1,338 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/style-prj.css">
-
-	<title>Sunny Day</title>
-	
-	<meta name="description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:url" content="https://chanulee.github.io">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="Chanwoo Lee">
-	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
-	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunny Day - Chanwoo Lee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
-<div class="main">
-	<div class="bg">
-	</div>
-	<div class="blur-layer">
-	</div>
-	
-	<div class="navbar">
-		<div class="nav-item" onclick="location.href='/index.html';"><p>chanwoo lee</p></div>
-		<div class="nav-item" id="current" onclick="location.href='/projects.html';"><p>← projects</p></div>
-		<div class="nav-item" onclick="location.href='/about.html';"><p>about</p></div>
-	</div>
-	
-	<div class="title-prj">
-		<h2>Sunny Day</h2>
-		<h3><a href="http://lifestylemedia.org/" target="_blank">Lifestyle Media Group</a> <span id="o30"> · </span> <a href="https://ieeexplore.ieee.org/document/10536387" target="_blank">IEEE VR 2024</a></h3>
-	</div>
-	
-	<div class="content">
-		<img src="/resources/sd-1.gif" alt="" id="blur">
-		
-		<p id="blur">
-			Interactive MR system for immersive storytelling capable of high degree of freedom in creative expressions, integrating UWB sensors, Azure Kinect and htc Vive.
-			</p>
-		
-		<iframe src="https://player.vimeo.com/video/776993562" frameborder="0" allow="autoplay; fullscreen" allowfullscreen id="blur"></iframe>
-		
-		<p id="blur">Solarpunk media art about a future where pixels approach the realm of atom, and the climate crisis has been overcome.</p>
-		
-		<img src="/resources/sd-2.gif" alt="" id="blur">
-		
-		<p id="blur">As a research team lead, I led research, design & engineering of the MR system and developed wearable input device.<br  />As a co-artist, we worked on research for future scenario and current humanity's climate technologies.</p>
-		
-		<!-- <p id="blur">C. Lee, K. Shim, S. Seo, G. Ryu and Y. Choi, "Never Tell the Trick: Covert Interactive Mixed Reality System for Immersive Storytelling," 2024 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW), Orlando, FL, USA, 2024, pp. 1009-1010, doi: 10.1109/VRW62533.2024.00301.</p> -->
-		
-		
-		<div class="gallery">
-			<div class="gallery-item"><img src="/resources/sd-2.gif" alt="" id="blur"></div>
-			<div class="gallery-item"><img src="/resources/sd-2.gif" alt="" id="blur"></div>
-			<div class="gallery-item"><img src="/resources/sd-2.gif" alt="" id="blur"></div>
-			<div class="gallery-item"><img src="/resources/sd-2.gif" alt="" id="blur"></div>
-		</div>
-		
-		<div class="detail-index">
-			<div class="detail-item">TIMELINE<br/>2022 - 2023</div>
-			<div class="detail-item">ROLE<br/>Research Lead<br/>HCI Design Engineering</div>
-			<div class="detail-item">AFFILIATION<br/>Lifestyle Media Group, Sogang Uni<br/>Multimidal XR Lab, MODULABS<br/>Imperial College London</div>
-			<div class="detail-item">TEAM<br/>Kyubeom Shim, Sanggyo Seo, Gwonu Ryu</div>
-			<div class="detail-item">SUPERVISOR<br/>Prof. Yong Soon Choi</div>
-			<div class="detail-item">SUPPORT<br/>National Research Foundation of Korea<br/>Ministry of Education<br/>Brian Impact Foundation</div>			
-		</div>
-	</div>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-left">
+            <h4><a href="/index.html">chanwoo lee</a></h4>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="/projects.html" class="active">projects</a></li>
+                <li><a href="/about.html">about</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="project-detail">
+        
+        <!-- Hero Image -->
+        <div class="project-hero">
+            <img src="/resources/sunnyday/sunnyday.jpg" alt="Sunny Day project hero image">
+        </div>
+
+        <!-- Client / Media Links -->
+        <div class="project-meta">
+            <div class="meta-section">
+                <span class="meta-label">Affiliation</span>
+                <a href="http://lifestylemedia.org/" target="_blank">Lifestyle Media Group</a>
+            </div>
+            <div class="meta-section">
+                <span class="meta-label">Links</span>
+                <div class="meta-links">
+                    <a href="https://ieeexplore.ieee.org/document/10536387" target="_blank">IEEE VR 2024 Publication</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="project-title">Sunny Day</h1>
+
+        <!-- Project Brief -->
+        <div class="project-brief">
+            <p>An interactive mixed-reality system for immersive storytelling that provides a high degree of freedom for creative expression. The system integrates UWB sensors, Azure Kinect, and HTC Vive to create a seamless experience.</p>
+            <p>'Sunny Day' is a Solarpunk media art piece about a future where pixels approach the realm of atoms, and the climate crisis has been overcome. It explores themes of technological harmony with nature and optimistic futures.</p>
+        </div>
+
+        <!-- Images and Videos -->
+        <div class="project-media">
+            <iframe style="width: 100%; aspect-ratio: 16 / 9;" src="https://player.vimeo.com/video/776993562" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+
+        <div class="project-media-grid">
+            <img src="/resources/sunnyday/sd-1.gif" alt="Sunny Day MR system in action">
+            <img src="/resources/sunnyday/sd-2.gif" alt="Sunny Day interactive experience">
+        </div>
+
+        <!-- Detail Text Content -->
+        <div class="project-text">
+            <div class="detail-section">
+                <div class="detail-header" onclick="toggleDetail(this)">
+                    <h3>Technical Details</h3>
+                    <span class="expand-btn">+</span>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-content-inner">
+                        <p>The system is designed for immersive storytelling with high freedom of expression, integrating Ultra-Wideband (UWB) sensors for precise tracking, Azure Kinect for depth sensing and body tracking, and HTC Vive for virtual reality rendering. This combination allows for rich, interactive narratives.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-header" onclick="toggleDetail(this)">
+                    <h3>Creative Vision</h3>
+                    <span class="expand-btn">+</span>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-content-inner">
+                        <p>This work is a piece of Solarpunk media art, envisioning a future where the climate crisis is resolved and technology, represented by pixels, exists in harmony with the natural world, represented by atoms. It's an optimistic exploration of a sustainable future.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-header" onclick="toggleDetail(this)">
+                    <h3>My Contribution</h3>
+                    <span class="expand-btn">+</span>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-content-inner">
+                        <p>As the research team lead, I directed the research, design, and engineering of the MR system. My work included developing a wearable input device for intuitive interaction. As a co-artist, I contributed to the research on future scenarios and humanity's current climate technologies that informed the artwork's narrative.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit -->
+        <div class="project-credit">
+            <div class="project-details-grid">
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Affiliation</div>
+                        <div class="detail-value">Lifestyle Media Group, Sogang Uni<br/>Multimidal XR Lab, MODULABS<br/>Imperial College London</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Year</div>
+                        <div class="detail-value">2022 - 2023</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Role</div>
+                        <div class="detail-value">Research Lead<br/>HCI Design Engineering</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Team</div>
+                        <div class="detail-value">Kyubeom Shim<br/>Sanggyo Seo<br/>Gwonu Ryu</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Supervisor</div>
+                        <div class="detail-value">Prof. Yong Soon Choi</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Support</div>
+                        <div class="detail-value">National Research Foundation of Korea<br/>Ministry of Education<br/>Brian Impact Foundation</div>
+                    </div>
+                </div>
+
+                 <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Recognition</div>
+                        <div class="detail-value">Published in <a href="https://ieeexplore.ieee.org/document/10536387" target="_blank">IEEE VR 2024</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-	<div class="s-sec">
-		<div class="buttons">
-			<a class="big-button" id="blur" href="/projects.html">
-			<h2>All Projects<br/>←</h2>
-			</a>
-		</div>
-	</div>
 
-	
-	<div class="footer" id="o30" >
-		<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
-	</div>
-		
-		<script>
-		function setBlurEffect() {
-			const texts = document.querySelectorAll('#blur');
-			const windowHeight = window.innerHeight;
-		
-			texts.forEach(text => {
-				const rect = text.getBoundingClientRect();
-				const textCenterY = rect.top + rect.height / 2;
-		
-				// Calculate the blur amount and opacity based on the Y position
-				let blurAmount = Math.max(0, (textCenterY - 0.75 * windowHeight) / (windowHeight / 2) * 10);
-				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.75 * windowHeight) / (windowHeight / 2));
-		
-				// Apply the blur and opacity to the text
-				text.style.filter = `blur(${blurAmount}px)`;
-				text.style.opacity = opacityAmount;
-			});
-		}
-		
-		// Initialize blur effect on page load
-		document.addEventListener('DOMContentLoaded', function () {
-			setBlurEffect();
-		});
-		
-		// Adjust blur effect on scroll
-		document.addEventListener('scroll', function () {
-			setBlurEffect();
-		});
-		
-		</script>
-</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-intro">
+                    <h2>Chanwoo Lee</h2>
+                    <p class="subtitle">Interface Architect</p>
+                </div>
+                
+                <p class="footer-description">Designing and engineering computer interaction, interface and system for human agency.</p>
+                
+                <div class="footer-contact">
+                    <p class="footer-contact-label">Get in touch</p>
+                    <span class="footer-email" data-tooltip="copy email" onclick="copyEmail(this)">chanwoo.lee@imperial.ac.uk</span>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <div class="footer-nav-title">Navigation</div>
+                        <a href="/about.html">Approach</a>
+                        <a href="/project.html">Project</a>
+                        <a href="/feed.html">Feed</a>
+                        <a href="/about.html">About</a>
+                    </div>
+                    <div class="footer-nav-col">
+                        <div class="footer-nav-title">Connect</div>
+                        <a href="https://linkedin.com/in/chanwoolee" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/chanulee" target="_blank">GitHub</a>
+                        <a href="https://instagram.com/chanwoo.lee" target="_blank">Instagram</a>
+                        <a href="https://twitter.com/chanwoolee" target="_blank">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">© 2025 Chanwoo Lee</div>
+            <div class="footer-times">
+                <span id="london-time">London BST 00:00:00</span>
+                <span id="seoul-time">Seoul KST 00:00:00</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Real-time clock function (same as main project page)
+        function updateClocks() {
+            const now = new Date();
+            
+            const londonTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Europe/London',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            const seoulTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Seoul',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            const londonOffset = new Date().toLocaleString('en', {timeZone: 'Europe/London', timeZoneName: 'short'}).split(' ').pop();
+            const londonLabel = londonOffset === 'BST' ? 'BST' : 'GMT';
+            
+            document.getElementById('london-time').textContent = `London ${londonLabel} ${londonTime}`;
+            document.getElementById('seoul-time').textContent = `Seoul KST ${seoulTime}`;
+        }
+        
+        updateClocks();
+        setInterval(updateClocks, 1000);
+
+        // Highlight active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === '/project.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Toggle detail sections
+        function toggleDetail(header) {
+            const section = header.parentElement;
+            const content = section.querySelector('.detail-content');
+            const isExpanded = section.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapsing
+                content.style.maxHeight = content.scrollHeight + 'px';
+                // Force reflow
+                content.offsetHeight;
+                content.style.maxHeight = '0px';
+                section.classList.remove('expanded');
+                content.classList.remove('expanded');
+            } else {
+                // Expanding
+                section.classList.add('expanded');
+                content.classList.add('expanded');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                
+                // Reset max-height after animation completes
+                setTimeout(() => {
+                    if (section.classList.contains('expanded')) {
+                        content.style.maxHeight = 'none';
+                    }
+                }, 400);
+            }
+        }
+
+        // Copy email to clipboard
+        function copyEmail(element) {
+            const email = element.textContent;
+            
+            // Use the modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(function() {
+                    showCopiedState(element);
+                }).catch(function(err) {
+                    console.error('Could not copy text: ', err);
+                    fallbackCopyTextToClipboard(email, element);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(email, element);
+            }
+        }
+
+        // Fallback copy method for older browsers
+        function fallbackCopyTextToClipboard(text, element) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopiedState(element);
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Show copied state
+        function showCopiedState(element) {
+            element.setAttribute('data-tooltip', 'copied!');
+            element.classList.add('copied');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                element.setAttribute('data-tooltip', 'copy email');
+                element.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
 </body>
-
-<footer>
-</footer>
 </html>

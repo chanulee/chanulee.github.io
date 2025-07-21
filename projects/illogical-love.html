@@ -1,124 +1,289 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/style-prj.css">
-
-	<title>Illogical Love</title>
-	
-	<meta name="description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:url" content="https://chanulee.github.io">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="Chanwoo Lee">
-	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
-	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illogical Love - Chanwoo Lee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
-<div class="main">
-	<div class="bg">
-	</div>
-	<div class="blur-layer">
-	</div>
-	
-	<div class="navbar">
-		<div class="nav-item" onclick="location.href='/index.html';"><p>chanwoo lee</p></div>
-		<div class="nav-item" id="current" onclick="location.href='/projects.html';"><p>← projects</p></div>
-		<div class="nav-item" onclick="location.href='/about.html';"><p>about</p></div>
-	</div>
-	
-	<div class="title-prj">
-		<h2>Illogical Love</h2>
-		<h3>
-			<a href="https://www.britishcouncil.org/climate-connection/be-inspired/creative-commissions/gathering-moss" target="_blank">British Council</a>
-			<span id="o30"> · </span>
-			<a href="https://www.watershed.co.uk/studio/projects/gathering-moss" target="_blank">Watershed-Pervasive Media Studio</a>
-			<span id="o30"> · </span>
-			<a href="https://www.nabi.or.kr/page/board_view.php?brd_idx=1132&brd_id=project" target="_blank">Art Center Nabi</a>
-		</h3>
-	</div>
-	
-	<div class="content">
-		<img src="/resources/hero/il.jpg" alt="" id="blur">
-		
-		<p id="blur">
-			Imagining a sustainable coastal and personal datacentre for  symbiosis among data, human and non-human
-		</p>		
-		
-		<img src="https://videoapi-muybridge.vimeocdn.com/animated-thumbnails/image/0f8edc9c-3509-4517-8080-f41652bf68a8.gif?ClientID=sulu&Date=1718056514&Signature=2e74d750bef8858ee9f9b34ca2b4a9eaa32c5c84" alt="" id="blur">
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-left">
+            <h4><a href="/index.html">chanwoo lee</a></h4>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="/projects.html" class="active">projects</a></li>
+                <li><a href="/about.html">about</a></li>
+            </ul>
+        </div>
+    </nav>
 
-		
-		
+    <!-- Main Content Container -->
+    <div class="project-detail">
+        
+        <!-- Hero Image -->
+        <div class="project-hero">
+            <img src="/resources/illogical-love/il.jpg" alt="Illogical Love project hero image">
+        </div>
 
-		<p id="blur">
-			Structured design principles & objectives for Human-AI interaction, designing hybrid AI interface. With interaction-centric AI approach, streamlined data learning system and AI architecture blueprint for future LG AI roadmap.
-		</p>
-		
-		<iframe src="https://player.vimeo.com/video/727289233" frameborder="0" allow="autoplay; fullscreen" allowfullscreen id="blur"></iframe>
+        <!-- Client / Media Links -->
+        <div class="project-meta">
+            <div class="meta-section">
+                <span class="meta-label">Affiliation</span>
+                 <a href="https://www.britishcouncil.org/" target="_blank">British Council</a>
+            </div>
+            <div class="meta-section">
+                <span class="meta-label">Links</span>
+                <div class="meta-links">
+                    <a href="https://www.watershed.co.uk/studio/projects/gathering-moss" target="_blank">Watershed Feature</a>
+                    <a href="https://www.nabi.or.kr/page/board_view.php?brd_idx=1132&brd_id=project" target="_blank">Art Center Nabi</a>
+                </div>
+            </div>
+        </div>
 
-		<p>
-			Our proposal for integrating AI organizing feature into connectivity app has been accepted and released in 2024 as one of 3 main features of LG gram Pro.</p>
-			
-		<div class="detail-index">
-			<div class="detail-item">Project Timeline<br/>2023</div>			
-			<div class="detail-item">Role<br/>Co-artist<br/>Technology & Design Researcher</div>
-			<div class="detail-item">Co-artist<br/>Sooah Kwak</div>
-			<div class="detail-item">Cultural programme for P4G Seoul Summit 2021 and the United Nations COP26</div>
-			<div class="detail-item">Exhibition<br/>"Gathering Moss", Art Center Nabi, Watershed, 2022 - 2023<br/><a href="https://www.watershed.co.uk/cafe-bar/gallery/futures" target="_blank">"Hopeful Futures", Watershed 40 Gallery</a></div>
-			<div class="detail-item">Creative Commission by<br/>British Council<br/>Korea Foundation</div>
-			<div class="detail-item">Organized by<br/>Watershed<br/>Art Center Nabi</div>
-		</div>
-	</div>
+        <!-- Title -->
+        <h1 class="project-title">Illogical Love</h1>
+
+        <!-- Project Brief -->
+        <div class="project-brief">
+            <p>An imaginative exploration of a sustainable coastal and personal data center, designed to foster a symbiotic relationship between data, humans, and non-human entities. This project was a cultural program for the P4G Seoul Summit 2021 and the United Nations COP26.</p>
+        </div>
+
+        <!-- Images and Videos -->
+        <div class="project-media">
+             <iframe style="width: 100%; aspect-ratio: 16 / 9;" src="https://player.vimeo.com/video/727289233" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+
+        <!-- Detail Text Content -->
+        <div class="project-text">
+            <div class="detail-section">
+                <div class="detail-header" onclick="toggleDetail(this)">
+                    <h3>Exhibitions & Features</h3>
+                    <span class="expand-btn">+</span>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-content-inner">
+                        <p>Exhibited at "Gathering Moss" at Art Center Nabi and Watershed from 2022-2023, and featured in the "Hopeful Futures" exhibition at the Watershed 40 Gallery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credit -->
+        <div class="project-credit">
+            <div class="project-details-grid">
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Role</div>
+                        <div class="detail-value">Co-artist<br/>Technology & Design Researcher</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Co-artist</div>
+                        <div class="detail-value">Sooah Kwak</div>
+                    </div>
+                </div>
+                
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Creative Commission</div>
+                        <div class="detail-value">British Council<br/>Korea Foundation</div>
+                    </div>
+                </div>
+
+                <div class="detail-group">
+                    <div class="detail-item">
+                        <div class="detail-label">Organized By</div>
+                        <div class="detail-value">Watershed<br/>Art Center Nabi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-	<div class="s-sec">
-		<div class="buttons">
-			<a class="big-button" id="blur">
-				<h2>All Projects<br/>←</h2>
-			</a>
-		</div>
-	</div>
 
-	
-	<div class="footer" id="o30" >
-		<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
-	</div>
-		
-		<script>
-		function setBlurEffect() {
-			const texts = document.querySelectorAll('#blur');
-			const windowHeight = window.innerHeight;
-		
-			texts.forEach(text => {
-				const rect = text.getBoundingClientRect();
-				const textCenterY = rect.top + rect.height / 2;
-		
-				// Calculate the blur amount and opacity based on the Y position
-				let blurAmount = Math.max(0, (textCenterY - 0.75 * windowHeight) / (windowHeight / 2) * 10);
-				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.75 * windowHeight) / (windowHeight / 2));
-		
-				// Apply the blur and opacity to the text
-				text.style.filter = `blur(${blurAmount}px)`;
-				text.style.opacity = opacityAmount;
-			});
-		}
-		
-		// Initialize blur effect on page load
-		document.addEventListener('DOMContentLoaded', function () {
-			setBlurEffect();
-		});
-		
-		// Adjust blur effect on scroll
-		document.addEventListener('scroll', function () {
-			setBlurEffect();
-		});
-		
-		</script>
-</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-intro">
+                    <h2>Chanwoo Lee</h2>
+                    <p class="subtitle">Interface Architect</p>
+                </div>
+                
+                <p class="footer-description">Designing and engineering computer interaction, interface and system for human agency.</p>
+                
+                <div class="footer-contact">
+                    <p class="footer-contact-label">Get in touch</p>
+                    <span class="footer-email" data-tooltip="copy email" onclick="copyEmail(this)">chanwoo.lee@imperial.ac.uk</span>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <div class="footer-nav-title">Navigation</div>
+                        <a href="/about.html">Approach</a>
+                        <a href="/project.html">Project</a>
+                        <a href="/feed.html">Feed</a>
+                        <a href="/about.html">About</a>
+                    </div>
+                    <div class="footer-nav-col">
+                        <div class="footer-nav-title">Connect</div>
+                        <a href="https://linkedin.com/in/chanwoolee" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/chanulee" target="_blank">GitHub</a>
+                        <a href="https://instagram.com/chanwoo.lee" target="_blank">Instagram</a>
+                        <a href="https://twitter.com/chanwoolee" target="_blank">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">© 2025 Chanwoo Lee</div>
+            <div class="footer-times">
+                <span id="london-time">London BST 00:00:00</span>
+                <span id="seoul-time">Seoul KST 00:00:00</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Real-time clock function (same as main project page)
+        function updateClocks() {
+            const now = new Date();
+            
+            const londonTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Europe/London',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            const seoulTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Seoul',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            const londonOffset = new Date().toLocaleString('en', {timeZone: 'Europe/London', timeZoneName: 'short'}).split(' ').pop();
+            const londonLabel = londonOffset === 'BST' ? 'BST' : 'GMT';
+            
+            document.getElementById('london-time').textContent = `London ${londonLabel} ${londonTime}`;
+            document.getElementById('seoul-time').textContent = `Seoul KST ${seoulTime}`;
+        }
+        
+        updateClocks();
+        setInterval(updateClocks, 1000);
+
+        // Highlight active nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === '/project.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Toggle detail sections
+        function toggleDetail(header) {
+            const section = header.parentElement;
+            const content = section.querySelector('.detail-content');
+            const isExpanded = section.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapsing
+                content.style.maxHeight = content.scrollHeight + 'px';
+                // Force reflow
+                content.offsetHeight;
+                content.style.maxHeight = '0px';
+                section.classList.remove('expanded');
+                content.classList.remove('expanded');
+            } else {
+                // Expanding
+                section.classList.add('expanded');
+                content.classList.add('expanded');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                
+                // Reset max-height after animation completes
+                setTimeout(() => {
+                    if (section.classList.contains('expanded')) {
+                        content.style.maxHeight = 'none';
+                    }
+                }, 400);
+            }
+        }
+
+        // Copy email to clipboard
+        function copyEmail(element) {
+            const email = element.textContent;
+            
+            // Use the modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(function() {
+                    showCopiedState(element);
+                }).catch(function(err) {
+                    console.error('Could not copy text: ', err);
+                    fallbackCopyTextToClipboard(email, element);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(email, element);
+            }
+        }
+
+        // Fallback copy method for older browsers
+        function fallbackCopyTextToClipboard(text, element) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopiedState(element);
+                }
+            } catch (err)
+ {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Show copied state
+        function showCopiedState(element) {
+            element.setAttribute('data-tooltip', 'copied!');
+            element.classList.add('copied');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                element.setAttribute('data-tooltip', 'copy email');
+                element.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
 </body>
-
-<footer>
-</footer>
 </html>
