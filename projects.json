@@ -32,13 +32,6 @@
         "thumbnail": ""
     },
     {
-        "project": "semiotics of AI",
-        "affiliation": "lovelace research",
-        "description": "Research on AI semiosis",
-        "year": "ONGOING",
-        "thumbnail": ""
-    },
-    {
       "project": "Synapse",
       "affiliation": "Imperial College / RCA",
       "description": "Research on new mental model for the agentic AI age",
@@ -72,7 +65,7 @@
     },
     {
         "project": "TwelveLabs",
-        "projectLink": "https://www.pentagram.com/work/twelvelabs",
+        "projectLink": "projects/twelvelabs.html",
         "affiliation": "Pentagram",
         "description": "Translating technology into metaphor and visual",
         "year": "2024",
@@ -98,6 +91,7 @@
     },
     {
         "project": "Sensory Misalignment",
+        "projectLink": "projects/snap.html",
         "affiliation": "Snap Inc.",
         "description": "questioning reality and augmented one - by mismatching multimodality.",
         "year": "2024",
@@ -112,11 +106,12 @@
         "thumbnail": ""
     },
     {
-        "project": "Sphere",
+        "project": "AI Sphere",
+        "projectLink": "projects/sphere.html",
         "affiliation": "Huawei HMI lab",
         "description": "Feeling text generation for AI literacy",
-        "year": "2023",
-        "thumbnail": ""
+        "year": "2024",
+        "thumbnail": "/resources/sphere/arch1.png"
     },
     {
         "project": "LG AI OS",
@@ -146,11 +141,11 @@
     },
     {
         "project": "Sunny Day",
-        "projectLink": "",
+        "projectLink": "projects/sunny-day.html",
         "affiliation": "lifestyle media group (SGU) / NRF",
         "description": "Research on immersive XR system and solarpunk immersive media art",
         "year": "2023",
-        "thumbnail": ""
+        "thumbnail": "/resources/sunnyday/sunnyday.jpg"
     },
     {
         "project": "Virtual Acoustic Datasets",
@@ -183,8 +178,7 @@
     "affiliation": "Superbloom / Gallery Hyundai / Altava",
     "description": "UIUX for NFT marketplace",
     "year": "2022",
-    "thumbnail": "",
-    "minor": true
+        "minor": true
 },
     {
         "project": "Illogical Love II",
