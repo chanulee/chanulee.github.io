@@ -202,11 +202,12 @@ img {
 }
 
 .project-header {
-    font-size: 12px;
+    font-size: 0.75rem; /* 12px */
     font-weight: 400;
     font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
-    opacity: 0.5;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
 }
 
 .project-header .project-year {
@@ -423,6 +424,7 @@ footer {
 
 .footer-contact-label {
     font-size: 0.75rem; /* 12px */
+    font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -489,6 +491,7 @@ footer {
 
 .footer-nav-title {
     font-size: 0.75rem; /* 12px */
+    font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -814,6 +817,7 @@ footer {
     font-family: 'Roboto Mono', monospace;
     opacity: 0.6;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .section-link {
@@ -851,6 +855,7 @@ footer {
 
 .focus-label {
     font-size: 0.75rem; /* 12px */
+    font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -1071,9 +1076,10 @@ footer {
 
 .meta-label {
     font-size: 0.75rem; /* 12px */
+    font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    opacity: 0.5;
+    opacity: 0.6;
     margin-bottom: 0.25rem;
 }
 
@@ -1215,10 +1221,11 @@ footer {
 
 .detail-label {
     font-size: 0.75rem; /* 12px */
+    font-family: 'Roboto Mono', monospace;
     font-weight: 400;
     opacity: 0.6;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.05em;
 }
 
 .detail-value {
