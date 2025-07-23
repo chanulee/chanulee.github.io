@@ -1,31 +1,15 @@
 @font-face {
-	font-family: 'ImperialSansText';
-	src: url('resources/fonts/ImperialSansText-Regular.woff2') format('woff2');
-	font-weight: normal;
-	/* 400 */
-	font-style: normal;
+    font-family: 'Favorit Hangul';
+    src: url('fonts/ABCFavoritHangul-Book.woff2') format('woff2');
+    font-weight: 400; /* Regular */
+    font-style: normal;
 }
 
 @font-face {
-	font-family: 'ImperialSansDisplay';
-	src: url('resources/fonts/ImperialSansDisplay-Regular.woff2') format('woff2');
-	font-weight: normal;
-	/* 400 */
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'ImperialSansDisplay';
-	src: url('resources/fonts/ImperialSansDisplay-Light.woff2') format('woff2');
-	font-weight: 200;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'ImperialSansText';
-	src: url('resources/fonts/ImperialSansText-Light.woff2') format('woff2');
-	font-weight: 200;
-	font-style: normal;
+    font-family: 'Favorit Hangul';
+    src: url('fonts/ABCFavoritHangul-Medium.woff2') format('woff2');
+    font-weight: 700; /* Bold */
+    font-style: normal;
 }
 
 html {
@@ -72,7 +56,7 @@ html {
 
 * {
 	box-sizing: border-box;
-	font-family: 'ImperialSansText', sans-serif;
+	font-family: 'Favorit Hangul', sans-serif;
 	transition: 0.4s;
 	font-size: 0.875rem;
 	line-height: 115%;
@@ -81,6 +65,7 @@ html {
 	font-weight: normal;
 	text-decoration: none;
 	color: rgba(255, 255, 255, 0.9);
+	font-feature-settings: "zero", "tnum", "ss05";
 }
 
 body {
@@ -93,7 +78,7 @@ body {
 
 
 h1, h2 {
-	font-family: 'ImperialSansDisplay', sans-serif;
+	font-family: 'Favorit Hangul', sans-serif;
 	padding: 0rem;
 	margin: 0rem;	
 	text-align: center;
@@ -113,7 +98,7 @@ h2 {
 
 h3 {
 	/* ITEM TITLE */
-	font-family: 'ImperialSansText', sans-serif;
+	font-family: 'Favorit Hangul', sans-serif;
 
 	padding: 0rem;
 	margin: 0rem;	
@@ -126,7 +111,7 @@ h3 {
 }
 
 p {
-	font-family: 'ImperialSansText', sans-serif;
+	font-family: 'Favorit Hangul', sans-serif;
 	font-size: 1rem; /*16*/
 	font-weight: 200;
 	line-height: 125%;

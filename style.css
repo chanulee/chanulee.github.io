@@ -1,10 +1,27 @@
+@font-face {
+    font-family: 'Favorit Hangul';
+    src: url('fonts/ABCFavoritHangul-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Favorit Hangul';
+    src: url('fonts/ABCFavoritHangul-Medium.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
     color: #0f0f0f;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
+    font-weight: normal;
+    word-spacing: -0.01em;
+    line-height: 1.2;
+    font-family: 'Favorit Hangul', sans-serif;
+    font-feature-settings: "zero", "tnum", "ss05", "ss06", "ss04", "ss03", "ss02", "ss05";
 }
 
 body {
@@ -36,6 +53,7 @@ h3 {
 
 h4 {
     font-size: 0.875rem; /* 14px */
+    font-weight: 500;
     line-height: auto;
 }
 
@@ -90,7 +108,8 @@ p {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
-    row-gap: 2rem;
+    row-gap: 4rem;
+    align-items: start;
 }
 
 .item {
@@ -109,7 +128,7 @@ p {
 @media (min-width: 768px) {
     .featured-grid {
         grid-template-columns: repeat(3, 1fr);
-        row-gap: 4rem;
+        row-gap: 8rem;
     }
 
     .item.bold {
@@ -289,10 +308,12 @@ a.project-item {
 
 .item h4 {
     font-size: 1rem; /* 16px */
+    text-transform: uppercase;
 }
 
 .item p#sub {
     font-size: 1rem; /* 16px */
+    text-transform: uppercase;
 }
 
 /* Navigation Bar */
