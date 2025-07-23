@@ -271,17 +271,14 @@ img {
 
 /* Responsive project list */
 @media (max-width: 767px) {
-    .project-description,
-    .project-year {
+    .project-affiliation,
+    .project-description {
         display: none;
     }
     .project-header, .project-item {
-        grid-template-columns: 3fr 2fr;
+        grid-template-columns: 1fr auto;
     }
     .project-name {
-        grid-column: span 1;
-    }
-    .project-affiliation {
         grid-column: span 1;
     }
 }
@@ -364,10 +361,6 @@ nav li a {
     color: inherit;
     font-size: 1rem;
     text-transform: uppercase;
-}
-
-nav a.active {
-    /* Remove font-weight: 700; to match filter controls */
 }
 
 /* Responsive navigation */
