@@ -320,7 +320,7 @@ a.project-item {
 nav {
     display: flex;
     justify-content: space-between; /* Keep space-between for main axis alignment */
-    align-items: center;
+    align-items: baseline;
     padding: 1rem 0;
     gap: 1rem; /* 1rem gap between left and right containers */
 }
@@ -337,6 +337,8 @@ nav h4 a {
     color: inherit;
     font-size: 1.25rem; /* Adjust size as needed */
     font-weight: 600;
+    position: relative;
+    top: -0.5px;
 }
 
 nav ul {
@@ -373,6 +375,10 @@ nav a.active {
     nav {
         margin-left: 0;
         margin-right: 0;
+    }
+    nav ul {
+        display: flex;
+        align-items: baseline;
     }
 }
 
