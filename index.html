@@ -1,170 +1,225 @@
 <!DOCTYPE html>
-<!--
-	2024
-	Chanwoo Lee
--->
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="landing.css">
-
-	<title>CHANWOO LEE</title>
-	
-	<meta name="description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:url" content="https://chanulee.github.io">
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="Chanwoo Lee">
-	<meta property="og:description" content="HCI design engineer, researcher and artist. Designing computational media for the future. Codesign of technologies and behaviours.">
-	<meta property="og:image" content="/resources/csrc.jpg"> <!-- 200x200px - 1200x1200px -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANWOO LEE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-	<div class="bg">
-	</div>
-	<div class="blur-layer">
-	</div>
-	<div class="main">
-	<div class="navbar">
-		<div class="nav-item" id="current"><p>chanwoo lee</p></div>
-		<div class="nav-item" onclick="location.href='/projects.html';"><p>projects</p></div>
-		<div class="nav-item" onclick="location.href='/about.html';"><p>about</p></div>
-	</div>
-		
-		<div class="title">
-			<h1>Chanwoo Lee</h1>
-			<h2 id="o50">Designing Computational Tools for Everyone</h2>
-		</div>
-		
-		<div class="sec">
-			<h2 id="blur">Co-designing technology and behaviour to build the future.</h2>
-			
-			<div class="buttons">
-				<a class="button" id="blur" href='https://drive.google.com/file/d/1MhRJjFJrRrx9xhDTY0j-VpzT9FEiwetZ/view?usp=sharing' target="_blank">
-					<p>Digital Renaissance Manifesto ↗</p>
-					<p id="o30">PDF</p>
-				</a>
-				<a class="button" id="blur" href='https://www.imperial.ac.uk/design-engineering/about-us/what-is-design-engineering/' target="_blank">
-					<p>Design Engineering ↗</p>
-					<p id="o30">imperial.ac.uk</p>
-				</a>
-			</div>
-		</div>
-		
-		<div class="sec">
-			<h2 id="blur">Just like an architect:<br/>Mix of designer, engineer and researcher.</h2>
-		</div>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-left">
+            <h4><a href="/index.html" class="active">chanwoo lee</a></h4>
+        </div>
+        <div class="nav-right">
+            <ul>
+                <li><a href="/projects.html">projects</a></li>
+                <li><a href="/about.html">about</a></li>
+            </ul>
+        </div>
+    </nav>
 
-		<div class="sec-combination">
-			<h2 id="blur">
-				Understanding relationship between human and technology.
-			</h2>
-			
-			<h3 id="blur">Future Scenarios</h3>
-			<h3 id="blur">Contemporary Media Art</h3>
-			<h3 id="blur">Design Research</h3>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <div class="section hero-placeholder">
+            <p>Interactive graphic will come here.</p>
+        </div>
 
-			<div class="buttons">
-				<a class="button" id="blur" href="/projects/snap.html">
-					<p>Exploring sense and reality on AR</p>
-					<p id="o30">SNAP R&D</p>
-				</a>
-				<a class="button" id="blur" href="/projects/illogical-love.html">
-					<p>The future of decentralized, sustainable web</p>
-					<p id="o30">COP26 selected Media Art</p>
-				</a>
-			</div>
-		</div>
-	
-		
-		<div class="sec-combination">
-			<h2 id="blur">
-				How can we make it happen with computers?
-			</h2>
-			
-			<h3 id="blur">Applied Computing Research</h3>
-			<h3 id="blur">Interaction & Interface Design Engineering</h3>
-			
-			<div class="buttons">
-				
-				<a class="button" id="blur" href="/projects/lg-ai.html">
-					<p>Right information at the right moment on laptop</p>
-					<p id="o30">LG Electronics R&D</p>
-				</a>
-				<a class="button" id="blur" href="/projects/oppo.html">
-					<p>Data ownership and personal AI using old phones</p>
-					<p id="o30">OPPO R&D</p>
-				</a>
-			</div>
-		</div>
-		
-		
-		<div class="sec">
-			<h2 id="blur">Currently pursuing</h2>
-			<h2 id="blur">MA/MSc Innovation Design Engineering</h2>
-			<h2 id="blur">at <a href="https://imperial.ac.uk" target="_blank">Imperial College ↗</a></h2>
-			<h2 id="blur">and <a href="https://rca.ac.uk" target="_blank">Royal College of Art ↗</a>.</h2>
-		</div> 
-		
-		<div class="sec">
-			<h3 id="blur">Human Centred Computing</h3>
-			<h3 id="blur">Human-Computer Interaction</h3>
-			<h3 id="blur">Intelligent System</h3>
-			<h3 id="blur"><a href="https://neurips.cc/virtual/2022/invited-talk/55870" target="_blank">Interaction-centric AI ↗</a></h3>
-			<h3 id="blur"><a href="https://www.cs.cmu.edu/~jasonh/courses/ubicomp-sp2007/slides/12-intro-context-aware.pdf" target="_blank">context-aware system ↗</a></h3>
-			<h3 id="blur"><a href="https://web.mit.edu/6.826/www/notes/HO13.pdf" target="_blank">semantic file system ↗</a></h3>
-			<h3 id="blur">Graph and machine learning</h3>
-		</div>
-			
-		<div class="s-sec">
-			<div class="buttons">
-				<a class="big-button" id="blur" href="/projects.html">
-					<h2>Projects<br/>→</h2>
-				</a>
-				<a class="big-button" id="blur" href="/about.html">
-					<h2>About<br/>→</h2>
-				</a>
-			</div>
-		</div>
-			
-		<div class="footer" id="o30" >
-			<p>CHANWOO LEE, 2024. London &amp; Seoul</p>
-		</div>
-			
-		<script>
-		function setBlurEffect() {
-			const texts = document.querySelectorAll('#blur');
-			const windowHeight = window.innerHeight;
-		
-			texts.forEach(text => {
-				const rect = text.getBoundingClientRect();
-				const textCenterY = rect.top + rect.height / 2;
-		
-				// Calculate the blur amount and opacity based on the Y position
-				let blurAmount = Math.max(0, (textCenterY - 0.65 * windowHeight) / (windowHeight / 2) * 10);
-				let opacityAmount = Math.max(0, 1 - (textCenterY - 0.55 * windowHeight) / (windowHeight / 2));
-		
-				// Apply the blur and opacity to the text
-				text.style.filter = `blur(${blurAmount}px)`;
-				text.style.opacity = opacityAmount;
-			});
-		}
-		
-		// Initialize blur effect on page load
-		document.addEventListener('DOMContentLoaded', function () {
-			setBlurEffect();
-		});
-		
-		// Adjust blur effect on scroll
-		document.addEventListener('scroll', function () {
-			setBlurEffect();
-		});
-		
-		
-		</script>
-	</div>
+        <!-- Worked With Section -->
+        <div class="section worked-with">
+            <div class="worked-with-title">
+                <h3>Worked with world-leading institutions</h3>
+            </div>
+            <div class="logo-wall">
+                <!-- 4x3 logo wall will go here -->
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+                <div class="logo-placeholder"></div>
+            </div>
+        </div>
+
+        <!-- Featured Projects Section -->
+        <div class="section">
+            <div class="section-header">
+                <h3>Featured</h3>
+            </div>
+            <div class="featured-grid-home" id="featuredProjects">
+                <!-- Featured projects will be loaded here -->
+            </div>
+            <div class="see-all-projects">
+                <a href="/projects.html" class="section-link">See full projects</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-intro">
+                    <h2>Chanwoo Lee</h2>
+                    <p class="subtitle">Interface Architect</p>
+                </div>
+                
+                <p class="footer-description">Designing and engineering computer interaction, interface and system for human agency.</p>
+                
+                <div class="footer-contact">
+                    <p class="footer-contact-label">Get in touch</p>
+                    <span class="footer-email" data-tooltip="copy email" onclick="copyEmail(this)">chanwoo.lee@imperial.ac.uk</span>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <div class="footer-nav-title">Navigation</div>
+                        <a href="/index.html">Home</a>
+                        <a href="/projects.html">Projects</a>
+                        <a href="/about.html">About</a>
+                    </div>
+                    <div class="footer-nav-col">
+                        <div class="footer-nav-title">Connect</div>
+                        <a href="https://linkedin.com/in/chanwoolee" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/chanulee" target="_blank">GitHub</a>
+                        <a href="https://instagram.com/chanwoo.lee" target="_blank">Instagram</a>
+                        <a href="https://twitter.com/chanwoolee" target="_blank">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-copyright">© 2025 Chanwoo Lee</div>
+            <div class="footer-times">
+                <span id="london-time">London BST 00:00:00</span>
+                <span id="seoul-time">Seoul KST 00:00:00</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Real-time clock function
+        function updateClocks() {
+            const now = new Date();
+            
+            const londonTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Europe/London',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            const seoulTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Seoul',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            
+            const londonOffset = new Date().toLocaleString('en', {timeZone: 'Europe/London', timeZoneName: 'short'}).split(' ').pop();
+            const londonLabel = londonOffset === 'BST' ? 'BST' : 'GMT';
+            
+            document.getElementById('london-time').textContent = `London ${londonLabel} ${londonTime}`;
+            document.getElementById('seoul-time').textContent = `Seoul KST ${seoulTime}`;
+        }
+        
+        updateClocks();
+        setInterval(updateClocks, 1000);
+
+        // Copy email to clipboard
+        function copyEmail(element) {
+            const email = element.textContent;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(() => showCopiedState(element));
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = email;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopiedState(element);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showCopiedState(element) {
+            element.setAttribute('data-tooltip', 'copied!');
+            element.classList.add('copied');
+            setTimeout(() => {
+                element.setAttribute('data-tooltip', 'copy email');
+                element.classList.remove('copied');
+            }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const jsonFilePath = 'projects.json';
+            
+            fetch(jsonFilePath)
+                .then(response => response.json())
+                .then(projects => {
+                    renderFeaturedProjects(projects);
+                })
+                .catch(error => console.error('Error loading projects:', error));
+
+            function renderFeaturedProjects(projects) {
+                const featuredContainer = document.getElementById('featuredProjects');
+                featuredContainer.innerHTML = '';
+
+                const featuredProjects = projects.filter(project => project.featured);
+
+                featuredProjects.forEach(project => {
+                    const hasLink = !!project.projectLink;
+                    const projectElement = document.createElement(hasLink ? 'a' : 'div');
+                    
+                    projectElement.className = 'item';
+                    
+                    const aspectRatio = project.aspectRatio || 'landscape';
+                    projectElement.classList.add(aspectRatio);
+
+                    if (hasLink) {
+                        projectElement.href = project.projectLink;
+                        if (project.projectLink.startsWith('http')) {
+                            projectElement.target = "_blank";
+                        }
+                        projectElement.classList.add('clickable');
+                    }
+                    
+                    projectElement.innerHTML = `
+                        <div class="thumbnail-container">
+                            <img src="${project.thumbnail || '/resources/placeholder.webp'}" alt="${project.project || 'Project image'}">
+                        </div>
+                        <div>
+                            <h4>${project.project || 'Title'}</h4>
+                            <p id="sub">${project.affiliation || ''}</p>
+                        </div>
+                    `;
+                    
+                    featuredContainer.appendChild(projectElement);
+                });
+            }
+        });
+    </script>
 </body>
-
-<footer>
-</footer>
 </html>

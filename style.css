@@ -120,10 +120,6 @@ p {
     /* grid-column is now handled in media queries */
 }
 
-.item.bold {
-    /* No special sizing on mobile, handled in media queries */
-}
-
 /* Medium screens (Tablet) */
 @media (min-width: 768px) {
     .featured-grid {
@@ -1413,6 +1409,63 @@ footer {
     
     .detail-content-inner p {
         font-size: 0.875rem; /* 14px */
+    }
+}
+
+/* Home Page Specifics */
+.hero-placeholder {
+    width: 100%;
+    height: 300px; /* Or other desired height */
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.worked-with {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.worked-with-title h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.logo-wall {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.logo-placeholder {
+    height: 60px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.featured-grid-home {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 16px;
+    row-gap: 4rem;
+    align-items: start;
+}
+
+.see-all-projects {
+    margin-top: 2rem;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .worked-with {
+        grid-template-columns: 1fr;
+    }
+    .featured-grid-home {
+        grid-template-columns: 1fr;
     }
 }
 
