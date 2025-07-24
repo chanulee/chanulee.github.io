@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Reader</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        .simulation-zone {
+            flex-basis: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e9e9e9;
+            transition: flex-basis 0.5s ease-in-out;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .control-panel {
+            flex-basis: 50%;
+            padding: 2rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+            gap: 1.5rem;
+        }
+
+        .controls-hidden .simulation-zone {
+            flex-basis: 100%;
+        }
+
+        .controls-hidden .control-panel {
+            display: none;
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .control-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .control-group label {
+            font-weight: 500;
+        }
+
+        .control-group input[type="number"],
+        .control-group select {
+            width: 120px;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .control-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .control-buttons button {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            background-color: #007aff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .control-buttons button:hover {
+            background-color: #005ecb;
+        }
+        
+        .control-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .display-area {
+            width: 400px; /* Or whatever size fits your design */
+            height: 400px;
+            background-color: black;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            overflow: hidden;
+            position: relative;
+            perspective: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .display-area::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+        
+        .display-area.has-background::before {
+            opacity: 1;
+        }
+
+        .word {
+            position: relative;
+            z-index: 1;
+        }
+
+        .teleprompter-words, .stack-words {
+            z-index: 1;
+        }
+
+        .pivot {
+            color: #ff3b30;
+        }
+
+        .preset-questions {
+            margin-top: 0;
+        }
+
+        .preset-questions h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .preset-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            font-size: 0.9rem;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .preset-btn:hover {
+            background-color: #e9e9e9;
+            border-color: #ccc;
+        }
+
+        /* --- Animations --- */
+        :root {
+            --animation-duration: 600ms;
+        }
+
+        .word.fade, .word.blur, .word.rise, .word.depth {
+            animation-duration: var(--animation-duration);
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+
+        .word.fade { animation-name: fade-in-out; }
+        .word.blur { animation-name: blur-in-out; }
+        .word.rise { animation-name: rise-in-out; }
+        .word.depth { animation-name: depth-in-out; }
+
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes blur-in-out {
+            0%, 100% { opacity: 0; filter: blur(10px); }
+            50% { opacity: 1; filter: blur(0); }
+        }
+
+        @keyframes rise-in-out {
+            0% { opacity: 0; transform: translateY(50px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+        
+        @keyframes depth-in-out {
+            0% {
+                opacity: 0;
+                transform: translateZ(-200px) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translateZ(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateZ(100px) scale(1.2);
+            }
+        }
+
+        .teleprompter-words {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: 0 auto;
+            white-space: nowrap;
+        }
+
+        /* --- Stack Animation --- */
+        .stack-words {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .stack-word {
+            opacity: var(--side-word-opacity, 0.3);
+            transition: all 0.3s ease-in-out;
+            height: 1.5em; /* Maintain consistent spacing */
+            line-height: 1.5em;
+            overflow: hidden;
+        }
+        
+        .stack-current {
+            opacity: 1;
+            font-size: 3rem;
+            font-weight: 500;
+        }
+
+
+        .prev-word-container, .next-word-container {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .current-word-container {
+            flex-shrink: 0;
+            padding: 0 1rem;
+        }
+
+        .prev-word-container { text-align: right; }
+        .next-word-container { text-align: left; }
+
+        .prev-word, .next-word {
+            opacity: var(--side-word-opacity, 0.3);
+            font-size: 2rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .current-word {
+            opacity: 1;
+            font-size: 3rem;
+        }
+
+    /* --- Timeline Slider --- */
+    .timeline-container {
+        width: 400px;
+    }
+
+    .timeline-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 18px;
+        background: #ddd;
+        outline: none;
+        opacity: 0.7;
+        transition: opacity .2s;
+        border-radius: 10px;
+    }
+
+    .timeline-slider:hover {
+        opacity: 1;
+    }
+
+    .timeline-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #ffffff;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    .timeline-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: #007aff;
+        cursor: pointer;
+        border-radius: 50%;
+        border: none;
+    }
+
+    .main-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .main-controls label {
+        font-weight: 500;
+    }
+
+    .main-controls input[type="number"] {
+        width: 80px;
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .main-controls button {
+        flex-grow: 1;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: none;
+        background-color: #007aff;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .main-controls button:hover {
+        background-color: #005ecb;
+    }
+    
+    .main-controls button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .animation-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .animation-controls label {
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .button-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .anim-btn {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        background: #f8f8f8;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .anim-btn:hover {
+        background: #e9e9e9;
+        border-color: #ccc;
+    }
+
+    .anim-btn.active {
+        background-color: #007aff;
+        color: white;
+        border-color: #007aff;
+        font-weight: 500;
+    }
+
+    .visual-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .control-btn-style {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        background: #f8f8f8;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+        text-align: center;
+        color: #333;
+    }
+
+    .control-btn-style:hover {
+        background: #e9e9e9;
+        border-color: #ccc;
+    }
+
+    #animation-slider-container {
+        gap: 1rem;
+    }
+
+    .display-area {
+        width: 400px; /* Or whatever size fits your design */
+        height: 400px;
+        background-color: black;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        overflow: hidden;
+        position: relative;
+        perspective: 500px;
+    }
+
+    .word {
+        position: relative;
+    }
+
+    .pivot {
+        color: #ff3b30;
+    }
+
+    .preset-questions {
+        margin-top: 0;
+    }
+
+    .preset-questions h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .preset-btn {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #333;
+        font-size: 0.9rem;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .preset-btn:hover {
+        background-color: #e9e9e9;
+        border-color: #ccc;
+    }
+
+    /* --- Animations --- */
+    :root {
+        --animation-duration: 600ms;
+    }
+
+    .word.fade, .word.blur, .word.rise, .word.depth {
+        animation-duration: var(--animation-duration);
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    .word.fade { animation-name: fade-in-out; }
+    .word.blur { animation-name: blur-in-out; }
+    .word.rise { animation-name: rise-in-out; }
+    .word.depth { animation-name: depth-in-out; }
+
+    @keyframes fade-in-out {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+    }
+
+    @keyframes blur-in-out {
+        0%, 100% { opacity: 0; filter: blur(10px); }
+        50% { opacity: 1; filter: blur(0); }
+    }
+
+    @keyframes rise-in-out {
+        0% { opacity: 0; transform: translateY(50px); }
+        20% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-50px); }
+    }
+    
+    @keyframes depth-in-out {
+        0% {
+            opacity: 0;
+            transform: translateZ(-200px) scale(0.5);
+        }
+        50% {
+            opacity: 1;
+            transform: translateZ(0) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateZ(100px) scale(1.2);
+        }
+    }
+
+    .teleprompter-words {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        margin: 0 auto;
+        white-space: nowrap;
+    }
+
+    /* --- Stack Animation --- */
+    .stack-words {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .stack-word {
+        opacity: var(--side-word-opacity, 0.3);
+        transition: all 0.3s ease-in-out;
+        height: 1.5em; /* Maintain consistent spacing */
+        line-height: 1.5em;
+        overflow: hidden;
+    }
+    
+    .stack-current {
+        opacity: 1;
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+
+    .prev-word-container, .next-word-container {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .current-word-container {
+        flex-shrink: 0;
+        padding: 0 1rem;
+    }
+
+    .prev-word-container { text-align: right; }
+    .next-word-container { text-align: left; }
+
+    .prev-word, .next-word {
+        opacity: var(--side-word-opacity, 0.3);
+        font-size: 2rem;
+        transition: opacity 0.3s ease;
+    }
+
+    .current-word {
+        opacity: 1;
+        font-size: 3rem;
+    }
+
+    </style>
+</head>
+<body class="">
+    <div class="main-container">
+        <div class="simulation-zone">
+            <div class="display-area">
+                <span id="word-display" class="word"></span>
+            </div>
+            <div class="timeline-container">
+                <input type="range" id="timeline-slider" class="timeline-slider" value="0" min="0" step="1">
+            </div>
+        </div>
+        <div class="control-panel">
+            <h1>Speed Reader</h1>
+            <textarea id="text-input" placeholder="Paste your text here... or press 'd' to hide controls and 1-4 to start."></textarea>
+            <div class="main-controls">
+                <label for="wpm">WPM:</label>
+                <input type="number" id="wpm" value="300" min="50" step="10">
+                <button id="start-btn" disabled>Start</button>
+                <button id="pause-btn" disabled>Pause</button>
+                <button id="reset-btn" disabled>Reset</button>
+            </div>
+            <div class="animation-controls">
+                <label>Animation</label>
+                <div id="animation-buttons" class="button-group">
+                    <button class="anim-btn active" data-animation="none">Blink</button>
+                    <button class="anim-btn" data-animation="fade">Fade</button>
+                    <button class="anim-btn" data-animation="blur">Blur</button>
+                    <button class="anim-btn" data-animation="rise">Rise</button>
+                    <button class="anim-btn" data-animation="teleprompter">Teleprompter</button>
+                    <button class="anim-btn" data-animation="depth">Depth</button>
+                    <button class="anim-btn" data-animation="stack">Stack</button>
+                </div>
+            </div>
+            <div id="animation-slider-container" class="control-group" style="display: none;">
+                <label id="animation-slider-label" for="animation-slider">Smoothness</label>
+                <input type="range" id="animation-slider" class="timeline-slider">
+            </div>
+            <div class="visual-controls">
+                <label for="background-upload" class="control-btn-style">Set Background</label>
+                <input type="file" id="background-upload" accept="image/*" style="display:none;">
+                <button id="remove-background-btn" class="control-btn-style">Remove BG</button>
+            </div>
+            <div class="preset-questions">
+                <h2>Preset Questions</h2>
+                <button class="preset-btn">Let's look back on my day to understand myself better.</button>
+                <button class="preset-btn">What was the most challenging part of my day, and what did I learn from it?</button>
+                <button class="preset-btn">Think back to a moment today that made me smile or feel grateful.</button>
+                <button class="preset-btn">If I could do one thing differently today, what would it be and why?</button>
+                <button class="preset-btn">What small victory did I achieve today that I'm proud of?</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const wpmInput = document.getElementById('wpm');
+        const startBtn = document.getElementById('start-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const wordDisplayContainer = document.querySelector('.display-area');
+        let wordDisplay = document.getElementById('word-display');
+        const presetBtns = document.querySelectorAll('.preset-btn');
+        const body = document.body;
+        const animationButtonsContainer = document.getElementById('animation-buttons');
+        const timelineSlider = document.getElementById('timeline-slider');
+        const animationSliderContainer = document.getElementById('animation-slider-container');
+        const animationSlider = document.getElementById('animation-slider');
+        const animationSliderLabel = document.getElementById('animation-slider-label');
+        const backgroundUpload = document.getElementById('background-upload');
+        const removeBackgroundBtn = document.getElementById('remove-background-btn');
+        const displayArea = document.querySelector('.display-area');
+
+        let words = [];
+        let currentWordIndex = 0;
+        let intervalId = null;
+        let currentAnimation = 'none';
+
+        const animationParams = {
+            fade: { label: 'Hold Start (%)', min: 10, max: 49, value: 20, step: 1 },
+            blur: { label: 'Blur Amount (px)', min: 5, max: 30, value: 10, step: 1 },
+            rise: { label: 'Rise Distance (px)', min: 20, max: 100, value: 50, step: 5 },
+            depth: { label: 'Depth Distance (px)', min: 100, max: 500, value: 200, step: 10 },
+            teleprompter: { label: 'Side Opacity', min: 0, max: 0.8, value: 0.3, step: 0.05 },
+            stack: { label: 'Side Opacity', min: 0, max: 0.8, value: 0.3, step: 0.05 },
+        };
+        let dynamicStyleElement = null;
+
+        function updateAnimationStyles(animationType, value) {
+            if (!dynamicStyleElement) {
+                dynamicStyleElement = document.createElement('style');
+                document.head.appendChild(dynamicStyleElement);
+            }
+            
+            let keyframes = '';
+            switch(animationType) {
+                case 'fade':
+                    keyframes = `@keyframes fade-in-out {
+                        0%, 100% { opacity: 0; }
+                        ${value}%, ${100 - value}% { opacity: 1; }
+                    }`;
+                    break;
+                case 'blur':
+                    keyframes = `@keyframes blur-in-out {
+                        0%, 100% { opacity: 0; filter: blur(${value}px); }
+                        50% { opacity: 1; filter: blur(0); }
+                    }`;
+                    break;
+                case 'rise':
+                    keyframes = `@keyframes rise-in-out {
+                        0% { opacity: 0; transform: translateY(${value}px); }
+                        20%, 80% { opacity: 1; transform: translateY(0); }
+                        100% { opacity: 0; transform: translateY(-${value}px); }
+                    }`;
+                    break;
+                case 'depth':
+                     keyframes = `@keyframes depth-in-out {
+                        0% { opacity: 0; transform: translateZ(-${value}px) scale(0.5); }
+                        50% { opacity: 1; transform: translateZ(0) scale(1); }
+                        100% { opacity: 0; transform: translateZ(${value/2}px) scale(1.2); }
+                    }`;
+                    break;
+                case 'teleprompter':
+                case 'stack':
+                    document.documentElement.style.setProperty('--side-word-opacity', value);
+                    break;
+            }
+            dynamicStyleElement.textContent = keyframes;
+        }
+
+        function getOptimalRecognitionPoint(word) {
+            const length = word.length;
+            if (length <= 1) return 0;
+            if (length <= 5) return 1;
+            if (length <= 9) return 2;
+            if (length <= 13) return 3;
+            return 4;
+        }
+
+        function setupDisplayForAnimation(animationType) {
+            wordDisplayContainer.innerHTML = ''; // Clear previous content
+            if (animationType === 'teleprompter') {
+                wordDisplayContainer.innerHTML = `
+                    <div class="teleprompter-words">
+                        <div class="prev-word-container">
+                            <span id="prev-word" class="prev-word"></span>
+                        </div>
+                        <div class="current-word-container">
+                            <span id="word-display" class="word current-word"></span>
+                        </div>
+                        <div class="next-word-container">
+                            <span id="next-word" class="next-word"></span>
+                        </div>
+                    </div>
+                `;
+            } else if (animationType === 'stack') {
+                wordDisplayContainer.innerHTML = `
+                    <div class="stack-words">
+                        <span id="stack-word-minus-2" class="stack-word"></span>
+                        <span id="stack-word-minus-1" class="stack-word"></span>
+                        <span id="word-display" class="word stack-word stack-current"></span>
+                        <span id="stack-word-plus-1" class="stack-word"></span>
+                        <span id="stack-word-plus-2" class="stack-word"></span>
+                    </div>
+                `;
+            } else {
+                wordDisplayContainer.innerHTML = `<span id="word-display" class="word"></span>`;
+            }
+            wordDisplay = document.getElementById('word-display');
+        }
+
+        function updateWordDisplay(index) {
+            if (index < 0 || index >= words.length || !wordDisplay) {
+                return;
+            }
+            
+            const word = words[index];
+
+            switch (currentAnimation) {
+                case 'teleprompter':
+                    const prevWord = words[index - 1] || '';
+                    const nextWord = words[index + 1] || '';
+                    const prevWordEl = document.getElementById('prev-word');
+                    const nextWordEl = document.getElementById('next-word');
+
+                    const pivotIndex = getOptimalRecognitionPoint(word);
+                    const before = word.substring(0, pivotIndex);
+                    const pivot = word.substring(pivotIndex, pivotIndex + 1);
+                    const after = word.substring(pivotIndex + 1);
+                    wordDisplay.innerHTML = `${before}<span class="pivot">${pivot}</span>${after}`;
+                    
+                    if (prevWordEl) prevWordEl.textContent = prevWord;
+                    if (nextWordEl) nextWordEl.textContent = nextWord;
+                    break;
+                
+                case 'stack':
+                    const word_m2 = words[index - 2] || '';
+                    const word_m1 = words[index - 1] || '';
+                    const word_c = words[index] || '';
+                    const word_p1 = words[index + 1] || '';
+                    const word_p2 = words[index + 2] || '';
+                    
+                    document.getElementById('stack-word-minus-2').textContent = word_m2;
+                    document.getElementById('stack-word-minus-1').textContent = word_m1;
+                    document.getElementById('stack-word-plus-1').textContent = word_p1;
+                    document.getElementById('stack-word-plus-2').textContent = word_p2;
+                    
+                    const pivotStack = getOptimalRecognitionPoint(word_c);
+                    const beforeStack = word_c.substring(0, pivotStack);
+                    const pivotCharStack = word_c.substring(pivotStack, pivotStack + 1);
+                    const afterStack = word_c.substring(pivotStack + 1);
+                    wordDisplay.innerHTML = `${beforeStack}<span class="pivot">${pivotCharStack}</span>${afterStack}`;
+                    break;
+
+                case 'fade':
+                case 'blur':
+                case 'rise':
+                case 'depth':
+                    wordDisplay.className = 'word'; // reset classes
+                    void wordDisplay.offsetWidth; // trigger reflow
+                    
+                    const pivotIndexAnim = getOptimalRecognitionPoint(word);
+                    const beforeAnim = word.substring(0, pivotIndexAnim);
+                    const pivotAnim = word.substring(pivotIndexAnim, pivotIndexAnim + 1);
+                    const afterAnim = word.substring(pivotIndexAnim + 1);
+                    wordDisplay.innerHTML = `${beforeAnim}<span class="pivot">${pivotAnim}</span>${afterAnim}`;
+
+                    wordDisplay.classList.add(currentAnimation);
+                    break;
+
+                case 'none':
+                default:
+                    const pivotIndexDefault = getOptimalRecognitionPoint(word);
+                    const beforeDefault = word.substring(0, pivotIndexDefault);
+                    const pivotDefault = word.substring(pivotIndexDefault, pivotIndexDefault + 1);
+                    const afterDefault = word.substring(pivotIndexDefault + 1);
+                    wordDisplay.innerHTML = `${beforeDefault}<span class="pivot">${pivotDefault}</span>${afterDefault}`;
+                    break;
+            }
+        }
+
+        function displayWord() {
+            if (currentWordIndex >= words.length) {
+                stop();
+                if(currentAnimation !== 'teleprompter'){
+                    wordDisplay.innerHTML = '';
+                }
+                return;
+            }
+            
+            timelineSlider.value = currentWordIndex;
+            updateWordDisplay(currentWordIndex);
+            
+            currentWordIndex++;
+        }
+
+        function start() {
+            const text = textInput.value.trim();
+            if (text === '') return;
+            
+            words = text.split(/\s+/);
+            timelineSlider.max = words.length > 0 ? words.length - 1 : 0;
+            
+            startBtn.disabled = true;
+            pauseBtn.disabled = false;
+            resetBtn.disabled = false;
+            textInput.disabled = true;
+
+            const wpm = parseInt(wpmInput.value, 10);
+            const interval = (60 / wpm) * 1000;
+
+            if (['fade', 'blur', 'rise', 'depth'].includes(currentAnimation)) {
+                document.documentElement.style.setProperty('--animation-duration', `${interval}ms`);
+            }
+
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            
+            displayWord();
+            intervalId = setInterval(displayWord, interval);
+        }
+
+        function pause() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                pauseBtn.textContent = 'Resume';
+            } else {
+                startBtn.disabled = true;
+                pauseBtn.textContent = 'Pause';
+                const wpm = parseInt(wpmInput.value, 10);
+                const interval = (60 / wpm) * 1000;
+                intervalId = setInterval(displayWord, interval);
+            }
+        }
+        
+        function stop() {
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            intervalId = null;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            resetBtn.disabled = false;
+            textInput.disabled = false;
+            pauseBtn.textContent = 'Pause';
+        }
+
+        function reset() {
+            stop();
+            currentWordIndex = 0;
+            words = [];
+            setupDisplayForAnimation(currentAnimation);
+            timelineSlider.value = 0;
+            timelineSlider.max = 0;
+            textInput.value = '';
+            textInput.disabled = false;
+            startBtn.disabled = true;
+            pauseBtn.disabled = true;
+            resetBtn.disabled = true;
+        }
+        
+        function resetPlaybackState() {
+            stop();
+            currentWordIndex = 0;
+
+            const text = textInput.value.trim();
+            words = text ? text.split(/\s+/) : [];
+
+            setupDisplayForAnimation(currentAnimation);
+
+            timelineSlider.value = 0;
+            timelineSlider.max = words.length > 0 ? words.length - 1 : 0;
+            
+            if (words.length > 0) {
+                updateWordDisplay(0);
+                resetBtn.disabled = false;
+            } else {
+                resetBtn.disabled = true;
+            }
+
+            startBtn.disabled = words.length === 0;
+            pauseBtn.disabled = true;
+            textInput.disabled = false;
+        }
+
+        function loadPresetText(text) {
+            stop();
+            textInput.value = text;
+            resetPlaybackState();
+        }
+
+        textInput.addEventListener('input', () => {
+            const hasText = textInput.value.trim().length > 0;
+            startBtn.disabled = !hasText;
+            resetBtn.disabled = !hasText;
+        });
+
+        wpmInput.addEventListener('change', () => {
+            if (intervalId) {
+                pause();
+                // To resume with new speed
+                if(pauseBtn.textContent === 'Pause') {
+                    pause();
+                }
+            }
+        });
+
+        startBtn.addEventListener('click', () => {
+            currentWordIndex = 0;
+            start();
+        });
+        pauseBtn.addEventListener('click', pause);
+        resetBtn.addEventListener('click', reset);
+
+        presetBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                loadPresetText(button.textContent);
+            });
+        });
+
+        animationButtonsContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('.anim-btn');
+            if (!button) return;
+
+            animationButtonsContainer.querySelector('.active').classList.remove('active');
+            button.classList.add('active');
+
+            currentAnimation = button.dataset.animation;
+            
+            const params = animationParams[currentAnimation];
+            if (params) {
+                animationSliderContainer.style.display = 'flex';
+                animationSliderLabel.textContent = params.label;
+                animationSlider.min = params.min;
+                animationSlider.max = params.max;
+                animationSlider.step = params.step;
+                animationSlider.value = params.value;
+                updateAnimationStyles(currentAnimation, params.value);
+            } else {
+                animationSliderContainer.style.display = 'none';
+                updateAnimationStyles('none', 0); // Clear styles
+            }
+            
+            resetPlaybackState();
+        });
+
+        animationSlider.addEventListener('input', (e) => {
+            updateAnimationStyles(currentAnimation, e.target.value);
+        });
+
+        timelineSlider.addEventListener('input', (e) => {
+            if (intervalId) {
+                // Seeking is disabled while playing for simplicity.
+                // Re-set slider to current position to avoid confusion.
+                timelineSlider.value = currentWordIndex > 0 ? currentWordIndex - 1 : 0;
+                return;
+            }
+            currentWordIndex = parseInt(e.target.value, 10);
+            updateWordDisplay(currentWordIndex);
+        });
+
+        backgroundUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                displayArea.style.backgroundImage = `url(${event.target.result})`;
+                displayArea.classList.add('has-background');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        removeBackgroundBtn.addEventListener('click', () => {
+            displayArea.style.backgroundImage = 'none';
+            displayArea.classList.remove('has-background');
+            backgroundUpload.value = ''; // Allow re-uploading the same file
+        });
+
+        document.addEventListener('keydown', (event) => {
+            // Ignore keypresses if an input or textarea is focused
+            if (event.target.tagName === 'TEXTAREA' || event.target.tagName === 'INPUT') {
+                return;
+            }
+
+            if (event.key.toLowerCase() === 'd') {
+                body.classList.toggle('controls-hidden');
+            }
+
+            if (body.classList.contains('controls-hidden')) {
+                const keyIndex = parseInt(event.key, 10) - 1;
+                if (keyIndex >= 0 && keyIndex < presetBtns.length) {
+                    loadPresetText(presetBtns[keyIndex].textContent);
+                    start();
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
