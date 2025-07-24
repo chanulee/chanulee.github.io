@@ -130,10 +130,32 @@
             overflow: hidden;
             position: relative;
             perspective: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .display-area::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+        
+        .display-area.has-background::before {
+            opacity: 1;
         }
 
         .word {
             position: relative;
+            z-index: 1;
+        }
+
+        .teleprompter-words, .stack-words {
+            z-index: 1;
         }
 
         .pivot {
@@ -241,7 +263,7 @@
         }
 
         .stack-word {
-            opacity: 0.3;
+            opacity: var(--side-word-opacity, 0.3);
             transition: all 0.3s ease-in-out;
             height: 1.5em; /* Maintain consistent spacing */
             line-height: 1.5em;
@@ -270,7 +292,7 @@
         .next-word-container { text-align: left; }
 
         .prev-word, .next-word {
-            opacity: 0.3;
+            opacity: var(--side-word-opacity, 0.3);
             font-size: 2rem;
             transition: opacity 0.3s ease;
         }
@@ -400,6 +422,198 @@
         font-weight: 500;
     }
 
+    .visual-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .control-btn-style {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        background: #f8f8f8;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+        text-align: center;
+        color: #333;
+    }
+
+    .control-btn-style:hover {
+        background: #e9e9e9;
+        border-color: #ccc;
+    }
+
+    #animation-slider-container {
+        gap: 1rem;
+    }
+
+    .display-area {
+        width: 400px; /* Or whatever size fits your design */
+        height: 400px;
+        background-color: black;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        overflow: hidden;
+        position: relative;
+        perspective: 500px;
+    }
+
+    .word {
+        position: relative;
+    }
+
+    .pivot {
+        color: #ff3b30;
+    }
+
+    .preset-questions {
+        margin-top: 0;
+    }
+
+    .preset-questions h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .preset-btn {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #333;
+        font-size: 0.9rem;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .preset-btn:hover {
+        background-color: #e9e9e9;
+        border-color: #ccc;
+    }
+
+    /* --- Animations --- */
+    :root {
+        --animation-duration: 600ms;
+    }
+
+    .word.fade, .word.blur, .word.rise, .word.depth {
+        animation-duration: var(--animation-duration);
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    .word.fade { animation-name: fade-in-out; }
+    .word.blur { animation-name: blur-in-out; }
+    .word.rise { animation-name: rise-in-out; }
+    .word.depth { animation-name: depth-in-out; }
+
+    @keyframes fade-in-out {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+    }
+
+    @keyframes blur-in-out {
+        0%, 100% { opacity: 0; filter: blur(10px); }
+        50% { opacity: 1; filter: blur(0); }
+    }
+
+    @keyframes rise-in-out {
+        0% { opacity: 0; transform: translateY(50px); }
+        20% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-50px); }
+    }
+    
+    @keyframes depth-in-out {
+        0% {
+            opacity: 0;
+            transform: translateZ(-200px) scale(0.5);
+        }
+        50% {
+            opacity: 1;
+            transform: translateZ(0) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateZ(100px) scale(1.2);
+        }
+    }
+
+    .teleprompter-words {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        margin: 0 auto;
+        white-space: nowrap;
+    }
+
+    /* --- Stack Animation --- */
+    .stack-words {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .stack-word {
+        opacity: var(--side-word-opacity, 0.3);
+        transition: all 0.3s ease-in-out;
+        height: 1.5em; /* Maintain consistent spacing */
+        line-height: 1.5em;
+        overflow: hidden;
+    }
+    
+    .stack-current {
+        opacity: 1;
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+
+    .prev-word-container, .next-word-container {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .current-word-container {
+        flex-shrink: 0;
+        padding: 0 1rem;
+    }
+
+    .prev-word-container { text-align: right; }
+    .next-word-container { text-align: left; }
+
+    .prev-word, .next-word {
+        opacity: var(--side-word-opacity, 0.3);
+        font-size: 2rem;
+        transition: opacity 0.3s ease;
+    }
+
+    .current-word {
+        opacity: 1;
+        font-size: 3rem;
+    }
+
     </style>
 </head>
 <body class="">
@@ -434,6 +648,15 @@
                     <button class="anim-btn" data-animation="stack">Stack</button>
                 </div>
             </div>
+            <div id="animation-slider-container" class="control-group" style="display: none;">
+                <label id="animation-slider-label" for="animation-slider">Smoothness</label>
+                <input type="range" id="animation-slider" class="timeline-slider">
+            </div>
+            <div class="visual-controls">
+                <label for="background-upload" class="control-btn-style">Set Background</label>
+                <input type="file" id="background-upload" accept="image/*" style="display:none;">
+                <button id="remove-background-btn" class="control-btn-style">Remove BG</button>
+            </div>
             <div class="preset-questions">
                 <h2>Preset Questions</h2>
                 <button class="preset-btn">Let's look back on my day to understand myself better.</button>
@@ -457,11 +680,69 @@
         const body = document.body;
         const animationButtonsContainer = document.getElementById('animation-buttons');
         const timelineSlider = document.getElementById('timeline-slider');
+        const animationSliderContainer = document.getElementById('animation-slider-container');
+        const animationSlider = document.getElementById('animation-slider');
+        const animationSliderLabel = document.getElementById('animation-slider-label');
+        const backgroundUpload = document.getElementById('background-upload');
+        const removeBackgroundBtn = document.getElementById('remove-background-btn');
+        const displayArea = document.querySelector('.display-area');
 
         let words = [];
         let currentWordIndex = 0;
         let intervalId = null;
         let currentAnimation = 'none';
+
+        const animationParams = {
+            fade: { label: 'Hold Start (%)', min: 10, max: 49, value: 20, step: 1 },
+            blur: { label: 'Blur Amount (px)', min: 5, max: 30, value: 10, step: 1 },
+            rise: { label: 'Rise Distance (px)', min: 20, max: 100, value: 50, step: 5 },
+            depth: { label: 'Depth Distance (px)', min: 100, max: 500, value: 200, step: 10 },
+            teleprompter: { label: 'Side Opacity', min: 0, max: 0.8, value: 0.3, step: 0.05 },
+            stack: { label: 'Side Opacity', min: 0, max: 0.8, value: 0.3, step: 0.05 },
+        };
+        let dynamicStyleElement = null;
+
+        function updateAnimationStyles(animationType, value) {
+            if (!dynamicStyleElement) {
+                dynamicStyleElement = document.createElement('style');
+                document.head.appendChild(dynamicStyleElement);
+            }
+            
+            let keyframes = '';
+            switch(animationType) {
+                case 'fade':
+                    keyframes = `@keyframes fade-in-out {
+                        0%, 100% { opacity: 0; }
+                        ${value}%, ${100 - value}% { opacity: 1; }
+                    }`;
+                    break;
+                case 'blur':
+                    keyframes = `@keyframes blur-in-out {
+                        0%, 100% { opacity: 0; filter: blur(${value}px); }
+                        50% { opacity: 1; filter: blur(0); }
+                    }`;
+                    break;
+                case 'rise':
+                    keyframes = `@keyframes rise-in-out {
+                        0% { opacity: 0; transform: translateY(${value}px); }
+                        20%, 80% { opacity: 1; transform: translateY(0); }
+                        100% { opacity: 0; transform: translateY(-${value}px); }
+                    }`;
+                    break;
+                case 'depth':
+                     keyframes = `@keyframes depth-in-out {
+                        0% { opacity: 0; transform: translateZ(-${value}px) scale(0.5); }
+                        50% { opacity: 1; transform: translateZ(0) scale(1); }
+                        100% { opacity: 0; transform: translateZ(${value/2}px) scale(1.2); }
+                    }`;
+                    break;
+                case 'teleprompter':
+                case 'stack':
+                    document.documentElement.style.setProperty('--side-word-opacity', value);
+                    break;
+            }
+            dynamicStyleElement.textContent = keyframes;
+        }
 
         function getOptimalRecognitionPoint(word) {
             const length = word.length;
@@ -723,7 +1004,26 @@
             button.classList.add('active');
 
             currentAnimation = button.dataset.animation;
+            
+            const params = animationParams[currentAnimation];
+            if (params) {
+                animationSliderContainer.style.display = 'flex';
+                animationSliderLabel.textContent = params.label;
+                animationSlider.min = params.min;
+                animationSlider.max = params.max;
+                animationSlider.step = params.step;
+                animationSlider.value = params.value;
+                updateAnimationStyles(currentAnimation, params.value);
+            } else {
+                animationSliderContainer.style.display = 'none';
+                updateAnimationStyles('none', 0); // Clear styles
+            }
+            
             resetPlaybackState();
+        });
+
+        animationSlider.addEventListener('input', (e) => {
+            updateAnimationStyles(currentAnimation, e.target.value);
         });
 
         timelineSlider.addEventListener('input', (e) => {
@@ -735,6 +1035,24 @@
             }
             currentWordIndex = parseInt(e.target.value, 10);
             updateWordDisplay(currentWordIndex);
+        });
+
+        backgroundUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                displayArea.style.backgroundImage = `url(${event.target.result})`;
+                displayArea.classList.add('has-background');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        removeBackgroundBtn.addEventListener('click', () => {
+            displayArea.style.backgroundImage = 'none';
+            displayArea.classList.remove('has-background');
+            backgroundUpload.value = ''; // Allow re-uploading the same file
         });
 
         document.addEventListener('keydown', (event) => {
