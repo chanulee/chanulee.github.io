@@ -320,6 +320,86 @@
         border: none;
     }
 
+    .main-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .main-controls label {
+        font-weight: 500;
+    }
+
+    .main-controls input[type="number"] {
+        width: 80px;
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .main-controls button {
+        flex-grow: 1;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: none;
+        background-color: #007aff;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .main-controls button:hover {
+        background-color: #005ecb;
+    }
+    
+    .main-controls button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .animation-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .animation-controls label {
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .button-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .anim-btn {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        background: #f8f8f8;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .anim-btn:hover {
+        background: #e9e9e9;
+        border-color: #ccc;
+    }
+
+    .anim-btn.active {
+        background-color: #007aff;
+        color: white;
+        border-color: #007aff;
+        font-weight: 500;
+    }
+
     </style>
 </head>
 <body class="">
@@ -335,26 +415,24 @@
         <div class="control-panel">
             <h1>Speed Reader</h1>
             <textarea id="text-input" placeholder="Paste your text here... or press 'd' to hide controls and 1-4 to start."></textarea>
-            <div class="control-group">
+            <div class="main-controls">
                 <label for="wpm">WPM:</label>
                 <input type="number" id="wpm" value="300" min="50" step="10">
-            </div>
-            <div class="control-group">
-                <label for="animation-select">Animation:</label>
-                <select id="animation-select">
-                    <option value="none" selected>Blink</option>
-                    <option value="fade">Fade</option>
-                    <option value="blur">Blur</option>
-                    <option value="rise">Rise</option>
-                    <option value="teleprompter">Teleprompter</option>
-                    <option value="depth">Depth</option>
-                    <option value="stack">Stack</option>
-                </select>
-            </div>
-            <div class="control-buttons">
-                <button id="start-btn">Start</button>
+                <button id="start-btn" disabled>Start</button>
                 <button id="pause-btn" disabled>Pause</button>
                 <button id="reset-btn" disabled>Reset</button>
+            </div>
+            <div class="animation-controls">
+                <label>Animation</label>
+                <div id="animation-buttons" class="button-group">
+                    <button class="anim-btn active" data-animation="none">Blink</button>
+                    <button class="anim-btn" data-animation="fade">Fade</button>
+                    <button class="anim-btn" data-animation="blur">Blur</button>
+                    <button class="anim-btn" data-animation="rise">Rise</button>
+                    <button class="anim-btn" data-animation="teleprompter">Teleprompter</button>
+                    <button class="anim-btn" data-animation="depth">Depth</button>
+                    <button class="anim-btn" data-animation="stack">Stack</button>
+                </div>
             </div>
             <div class="preset-questions">
                 <h2>Preset Questions</h2>
@@ -377,7 +455,7 @@
         let wordDisplay = document.getElementById('word-display');
         const presetBtns = document.querySelectorAll('.preset-btn');
         const body = document.body;
-        const animationSelect = document.getElementById('animation-select');
+        const animationButtonsContainer = document.getElementById('animation-buttons');
         const timelineSlider = document.getElementById('timeline-slider');
 
         let words = [];
@@ -513,10 +591,8 @@
 
         function start() {
             const text = textInput.value.trim();
-            if (text === '') {
-                alert('Please paste some text to begin.');
-                return;
-            }
+            if (text === '') return;
+            
             words = text.split(/\s+/);
             timelineSlider.max = words.length > 0 ? words.length - 1 : 0;
             
@@ -575,24 +651,46 @@
             timelineSlider.max = 0;
             textInput.value = '';
             textInput.disabled = false;
-            startBtn.disabled = false;
+            startBtn.disabled = true;
             pauseBtn.disabled = true;
             resetBtn.disabled = true;
         }
         
-        function loadPresetText(text) {
+        function resetPlaybackState() {
             stop();
             currentWordIndex = 0;
-            words = [];
+
+            const text = textInput.value.trim();
+            words = text ? text.split(/\s+/) : [];
+
             setupDisplayForAnimation(currentAnimation);
+
             timelineSlider.value = 0;
-            timelineSlider.max = 0;
-            textInput.value = text;
-            textInput.disabled = false;
-            startBtn.disabled = false;
+            timelineSlider.max = words.length > 0 ? words.length - 1 : 0;
+            
+            if (words.length > 0) {
+                updateWordDisplay(0);
+                resetBtn.disabled = false;
+            } else {
+                resetBtn.disabled = true;
+            }
+
+            startBtn.disabled = words.length === 0;
             pauseBtn.disabled = true;
-            resetBtn.disabled = true; 
+            textInput.disabled = false;
         }
+
+        function loadPresetText(text) {
+            stop();
+            textInput.value = text;
+            resetPlaybackState();
+        }
+
+        textInput.addEventListener('input', () => {
+            const hasText = textInput.value.trim().length > 0;
+            startBtn.disabled = !hasText;
+            resetBtn.disabled = !hasText;
+        });
 
         wpmInput.addEventListener('change', () => {
             if (intervalId) {
@@ -617,9 +715,15 @@
             });
         });
 
-        animationSelect.addEventListener('change', (e) => {
-            currentAnimation = e.target.value;
-            reset();
+        animationButtonsContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('.anim-btn');
+            if (!button) return;
+
+            animationButtonsContainer.querySelector('.active').classList.remove('active');
+            button.classList.add('active');
+
+            currentAnimation = button.dataset.animation;
+            resetPlaybackState();
         });
 
         timelineSlider.addEventListener('input', (e) => {
