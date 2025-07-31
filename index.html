@@ -30,38 +30,42 @@
             <p>Interactive graphic will come here.</p>
         </div>
 
-        <!-- Worked With Section -->
-        <div class="section worked-with">
-            <div class="worked-with-title">
-                <h3>Worked with world-leading institutions</h3>
-            </div>
-            <div class="logo-wall">
-                <!-- 4x3 logo wall will go here -->
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-            </div>
+        <!-- Brief Intro Section -->
+        <div class="section brief-intro">
+            <p>Designing and engineering computer interaction, interface and system for human agency.</p>
+            <a href="/about.html" class="cta-button">More about me</a>
         </div>
 
         <!-- Featured Projects Section -->
         <div class="section">
             <div class="section-header">
                 <h3>Featured</h3>
+                <a href="/projects.html" class="cta-button">See full projects</a>
             </div>
             <div class="featured-grid-home" id="featuredProjects">
                 <!-- Featured projects will be loaded here -->
             </div>
-            <div class="see-all-projects">
-                <a href="/projects.html" class="section-link">See full projects</a>
+        </div>
+
+        <!-- Worked With Section -->
+        <div class="section worked-with">
+            <div class="worked-with-title">
+                <h3>World-leading Institutions</h3>
+                <p>My work has been trusted by and collaborated with a diverse range of organizations.</p>
+            </div>
+            <div class="logo-wall">
+                <div class="logo-item"><img src="resources/logos/1.svg" alt="Logo 1"></div>
+                <div class="logo-item"><img src="resources/logos/2.svg" alt="Logo 2"></div>
+                <div class="logo-item"><img src="resources/logos/3.svg" alt="Logo 3"></div>
+                <div class="logo-item"><img src="resources/logos/4.svg" alt="Logo 4"></div>
+                <div class="logo-item"><img src="resources/logos/5.svg" alt="Logo 5"></div>
+                <div class="logo-item"><img src="resources/logos/6.svg" alt="Logo 6"></div>
+                <div class="logo-item"><img src="resources/logos/7.svg" alt="Logo 7"></div>
+                <div class="logo-item"><img src="resources/logos/8.svg" alt="Logo 8"></div>
+                <div class="logo-item"><img src="resources/logos/9.svg" alt="Logo 9"></div>
+                <div class="logo-item"><img src="resources/logos/10.svg" alt="Logo 10"></div>
+                <div class="logo-item"><img src="resources/logos/11.svg" alt="Logo 11"></div>
+                <div class="logo-item"><img src="resources/logos/12.svg" alt="Logo 12"></div>
             </div>
         </div>
     </div>
@@ -93,10 +97,10 @@
                     </div>
                     <div class="footer-nav-col">
                         <div class="footer-nav-title">Connect</div>
-                        <a href="https://linkedin.com/in/chanwoolee" target="_blank">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/chanulee/" target="_blank">LinkedIn</a>
                         <a href="https://github.com/chanulee" target="_blank">GitHub</a>
-                        <a href="https://instagram.com/chanwoo.lee" target="_blank">Instagram</a>
-                        <a href="https://twitter.com/chanwoolee" target="_blank">Twitter</a>
+                        <a href="https://instagram.com/chnwlee" target="_blank">Instagram</a>
+                        <a href="https://twitter.com/chnwlee" target="_blank">Twitter</a>
                     </div>
                 </div>
             </div>
@@ -188,8 +192,9 @@
                 featuredContainer.innerHTML = '';
 
                 const featuredProjects = projects.filter(project => project.featured);
+                const topThreeProjects = featuredProjects.slice(0, 3);
 
-                featuredProjects.forEach(project => {
+                topThreeProjects.forEach(project => {
                     const hasLink = !!project.projectLink;
                     const projectElement = document.createElement(hasLink ? 'a' : 'div');
                     
