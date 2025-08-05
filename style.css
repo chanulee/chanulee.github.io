@@ -20,7 +20,7 @@
     word-spacing: -0.01em;
     line-height: 1.2;
     font-family: 'Favorit Hangul', sans-serif;
-    font-feature-settings: "zero", "tnum", "ss05", "ss06", "ss04", "ss03", "ss02", "ss05";
+    font-feature-settings: "zero", "ss05", "ss06", "ss04", "ss03", "ss02", "ss05";
 }
 
 body {
