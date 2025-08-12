@@ -1,9 +1,9 @@
 [
     {
-        "project": "Prototyping Realities",
+        "project": "Pleasant Friction",
         "affiliation": "Meta / RCA",
-        "description": "Designing AI+XR experience with purpose",
-        "year": "ONGOING",
+        "description": "Designing XR interaction for affirming agency",
+        "year": "2025",
         "thumbnail": ""
     },
     {
@@ -18,9 +18,7 @@
         "affiliation": "Imperial College / RCA",
         "description": "Research on new mental model for the agentic AI age",
         "year": "ONGOING",
-        "thumbnail": "/resources/ig.png",
-        "featured": true,
-        "aspectRatio": "landscape"
+        "thumbnail": "/resources/ig.png"
     },
     {
         "project": "Neuro-AI wearable",
@@ -44,7 +42,8 @@
       "affiliation": "Imperial College / RCA",
       "description": "Research on new mental model for the agentic AI age",
       "year": "2025",
-      "featured": "bold",
+      "aspectRatio": "square",
+      "featured": true,
       "thumbnail": "/resources/synapse/hero.jpg"
   },
     {
@@ -263,9 +262,7 @@
         "projectLink": "",
         "affiliation": "Ministry of Science and ICT",
         "description": "Research on immersive XR system and solarpunk immersive media art",
-        "year": "2019",
-        "featured": true,
-        "thumbnail": ""
+        "year": "2019"
     },
     {
         "project": "ohgnus brand and website",
