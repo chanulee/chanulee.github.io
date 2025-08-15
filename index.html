@@ -192,9 +192,9 @@
                 featuredContainer.innerHTML = '';
 
                 const featuredProjects = projects.filter(project => project.featured);
-                const topThreeProjects = featuredProjects.slice(0, 3);
+                const topFourProjects = featuredProjects.slice(0, 4);
 
-                topThreeProjects.forEach(project => {
+                topFourProjects.forEach(project => {
                     const hasLink = !!project.projectLink;
                     const projectElement = document.createElement(hasLink ? 'a' : 'div');
                     
