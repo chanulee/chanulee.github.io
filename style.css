@@ -1502,6 +1502,22 @@ footer {
     padding-left: 2rem;
 }
 
+.brief-intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay with 30% opacity */
+    z-index: 1;
+}
+
+.brief-intro > * {
+    position: relative;
+    z-index: 2; /* Ensure content appears above the overlay */
+}
+
 .brief-intro p {
     font-size: 4rem; /* 24px */
     line-height: 1.1;
@@ -1552,6 +1568,32 @@ footer {
     }
     .featured-grid-home {
         grid-template-columns: 1fr;
+    }
+    
+    .brief-intro {
+        padding-top: 8rem;
+        padding-bottom: 6rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .brief-intro p {
+        font-size: 2.5rem; /* Reduced from 4rem for mobile */
+        max-width: 90vw; /* Increased from 60vw for mobile */
+        line-height: 1.2; /* Slightly increased for better readability */
+    }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 480px) {
+    .brief-intro {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+    
+    .brief-intro p {
+        font-size: 2rem; /* Even smaller for very small screens */
+        max-width: 95vw;
     }
 }
 
