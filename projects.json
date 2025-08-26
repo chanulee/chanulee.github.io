@@ -8,7 +8,7 @@
     },
     {
         "project": "Innovation Project",
-        "affiliation": "Map Project Office",
+        "affiliation": "lovelace research / Map Project Office",
         "description": "Future of Personal AI",
         "year": "ONGOING",
         "thumbnail": ""
@@ -24,7 +24,7 @@
         "project": "Neuro-AI wearable",
         "affiliation": "Voyage",
         "description": "Neuro-AI wearable startup",
-        "year": "ONGOING",
+        "year": "2024-2025",
         "featured": true,
         "thumbnail": "/resources/voyage/h.jpeg",
         "aspectRatio": "square"
