@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Radial Dial UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for sliders for a consistent look in light mode */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb; /* gray-200 */
+            border-radius: 9999px;
+            outline: none;
+            opacity: 0.8;
+            transition: opacity .2s;
+        }
+        input[type="range"]:hover {
+            opacity: 1;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #ffffff; /* white */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #6b7280; /* gray-500 */
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #ffffff; /* white */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #6b7280; /* gray-500 */
+        }
+        /* Custom styles for color input */
+        input[type="color"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: 2px solid #e5e7eb; /* gray-200 */
+            border-radius: 6px;
+        }
+        /* Simple toggle switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0891b2; /* cyan-600 */
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0891b2; /* cyan-600 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-700 flex flex-col lg:flex-row items-center justify-center min-h-screen p-4 lg:p-8">
+
+    <!-- Main container for canvas and controls -->
+    <div class="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
+        
+        <!-- Canvas container -->
+        <div class="flex-grow flex items-center justify-center">
+            <canvas id="canvas" class="rounded-2xl bg-white shadow-xl"></canvas>
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="w-full lg:w-96 bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-200/50 shadow-lg flex-shrink-0">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Controls</h3>
+            
+            <div class="space-y-5">
+                <!-- Dial Shape Controls -->
+                <div>
+                    <h4 class="text-sm font-semibold text-cyan-600 mb-3 uppercase tracking-wider">Dial Shape</h4>
+                    <div class="space-y-4 p-4 bg-gray-200/50 rounded-lg">
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="numDials" class="font-medium text-sm">Number of Dials</label>
+                                <span id="numDialsValue" class="text-sm text-gray-500 font-mono">100</span>
+                            </div>
+                            <input type="range" id="numDials" min="10" max="300" value="100" step="1">
+                        </div>
+                        <div class="control-group">
+                             <div class="flex justify-between items-center mb-1">
+                                <label for="dialLength" class="font-medium text-sm">Length</label>
+                                <span class="text-sm text-gray-500 font-mono"><span id="dialLengthValue">10</span>px</span>
+                            </div>
+                            <input type="range" id="dialLength" min="5" max="100" value="10" step="1">
+                        </div>
+                         <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="baseThickness" class="font-medium text-sm">Base Thickness</label>
+                                <span class="text-sm text-gray-500 font-mono"><span id="baseThicknessValue">1.0</span>px</span>
+                            </div>
+                            <input type="range" id="baseThickness" min="0.5" max="10" value="1" step="0.1">
+                        </div>
+                         <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="maxThickness" class="font-medium text-sm">Max Thickness</label>
+                                <span class="text-sm text-gray-500 font-mono"><span id="maxThicknessValue">20.0</span>px</span>
+                            </div>
+                            <input type="range" id="maxThickness" min="1" max="50" value="20" step="0.5">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interaction Physics Controls -->
+                <div>
+                    <h4 class="text-sm font-semibold text-cyan-600 mb-3 uppercase tracking-wider">Interaction Physics</h4>
+                    <div class="space-y-4 p-4 bg-gray-200/50 rounded-lg">
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="sigma" class="font-medium text-sm">Focus Spread (σ)</label>
+                                <span id="sigmaValue" class="text-sm text-gray-500 font-mono">0.40</span>
+                            </div>
+                            <input type="range" id="sigma" min="0.05" max="2.0" value="0.4" step="0.01">
+                        </div>
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="gravityStrength" class="font-medium text-sm">Gravity Strength</label>
+                                <span id="gravityStrengthValue" class="text-sm text-gray-500 font-mono">5.0</span>
+                            </div>
+                            <input type="range" id="gravityStrength" min="0" max="5" value="5.0" step="0.1">
+                        </div>
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="gravityRange" class="font-medium text-sm">Gravity Range</label>
+                                <span class="text-sm text-gray-500 font-mono"><span id="gravityRangeValue">170</span>px</span>
+                            </div>
+                            <input type="range" id="gravityRange" min="20" max="250" value="170" step="5">
+                        </div>
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="gravityCurve" class="font-medium text-sm">Gravity Curve</label>
+                                <span id="gravityCurveValue" class="text-sm text-gray-500 font-mono">2.0</span>
+                            </div>
+                            <input type="range" id="gravityCurve" min="0.5" max="5" value="2.0" step="0.1">
+                        </div>
+                        <div class="control-group flex justify-between items-center">
+                            <label for="showRangeToggle" class="font-medium text-sm">Show Gravity Range</label>
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                <input type="checkbox" name="showRangeToggle" id="showRangeToggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer" checked/>
+                                <label for="showRangeToggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visuals Controls -->
+                <div>
+                    <h4 class="text-sm font-semibold text-cyan-600 mb-3 uppercase tracking-wider">Visuals</h4>
+                    <div class="p-4 bg-gray-200/50 rounded-lg space-y-4">
+                        <div class="flex justify-around items-center">
+                            <div>
+                                <label for="startColor" class="font-medium text-sm text-center block mb-2">Base Color</label>
+                                <input type="color" id="startColor" value="#A3A3A3">
+                            </div>
+                            <div>
+                                <label for="endColor" class="font-medium text-sm text-center block mb-2">Highlight Color</label>
+                                <input type="color" id="endColor" value="#000000">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-1">
+                                <label for="glowIntensity" class="font-medium text-sm">Glow Intensity</label>
+                                <span id="glowIntensityValue" class="text-sm text-gray-500 font-mono">0.0</span>
+                            </div>
+                            <input type="range" id="glowIntensity" min="0" max="10" value="0" step="0.1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // --- State and Parameters ---
+        let centerX, centerY;
+        let dials = [];
+
+        let params = {
+            numDials: 100,
+            dialLength: 10,
+            baseThickness: 1,
+            maxThickness: 20,
+            sigma: 0.4, // Distribution spread
+            startColor: '#A3A3A3', // neutral-400
+            endColor: '#000000',   // custom blue
+            mainRadius: 200,
+            gravityStrength: 5.0,
+            gravityRange: 170,
+            gravityCurve: 2.0,
+            glowIntensity: 0,
+            showGravityRange: true
+        };
+
+        let mouse = {
+            x: 0,
+            y: 0,
+            angle: 0,
+            distance: 0,
+            isInside: false
+        };
+
+        // --- Utility Functions ---
+        const getAngleFromCenter = (x, y) => Math.atan2(y - centerY, x - centerX);
+        const getDistanceFromCenter = (x, y) => Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+        const normalDistribution = (x, mean, sigma) => Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(sigma, 2)));
+        const angularDistance = (a1, a2) => {
+            let diff = a2 - a1;
+            while (diff > Math.PI) diff -= 2 * Math.PI;
+            while (diff < -Math.PI) diff += 2 * Math.PI;
+            return diff;
+        };
+        const lerpColor = (a, b, amount) => {
+            const ar = parseInt(a.slice(1,3), 16), ag = parseInt(a.slice(3,5), 16), ab = parseInt(a.slice(5,7), 16);
+            const br = parseInt(b.slice(1,3), 16), bg = parseInt(b.slice(3,5), 16), bb = parseInt(b.slice(5,7), 16);
+            const rr = Math.round(ar + amount * (br - ar)).toString(16).padStart(2, '0');
+            const gg = Math.round(ag + amount * (bg - ag)).toString(16).padStart(2, '0');
+            const bb_ = Math.round(ab + amount * (bb - ab)).toString(16).padStart(2, '0');
+            return `#${rr}${gg}${bb_}`;
+        };
+
+        function drawQuadrantTitles() {
+            const textRadius = params.mainRadius - params.dialLength - 15; // Position text inside the dials
+            const quadrants = [
+                { title: 'SELF UNDERSTANDING', angle: -Math.PI / 4 },    // Top-Right
+                { title: 'CRITICAL THINKING', angle: -3 * Math.PI / 4 },  // Top-Left
+                { title: 'EMOTIONAL SUPPORT', angle: 3 * Math.PI / 4 },   // Bottom-Left
+                { title: 'DECISION MAKING', angle: Math.PI / 4 },    // Bottom-Right
+            ];
+            
+            ctx.font = 'bold 10px Inter'; // Smaller font for longer text
+            ctx.fillStyle = '#9ca3af'; // gray-400
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            quadrants.forEach(quadrant => {
+                const text = quadrant.title;
+                const angle = quadrant.angle;
+                const chars = text.split('');
+                const kerning = 7 / textRadius; // Adjust kerning for tighter fit
+                
+                // Center the text block on the main angle
+                const startAngle = angle - ((chars.length - 1) * kerning / 2);
+
+                chars.forEach((char, index) => {
+                    const charAngle = startAngle + index * kerning;
+                    
+                    // Rotation for the character to be upright along the circle
+                    const rotation = charAngle + Math.PI / 2; 
+
+                    ctx.save();
+                    
+                    // Move to the character's position on the arc
+                    ctx.translate(
+                        centerX + Math.cos(charAngle) * textRadius, 
+                        centerY + Math.sin(charAngle) * textRadius
+                    );
+
+                    // Rotate the context
+                    ctx.rotate(rotation);
+
+                    // Draw the character
+                    ctx.fillText(char, 0, 0);
+
+                    ctx.restore();
+                });
+            });
+        }
+
+        // --- Setup Functions ---
+        function setupCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const size = Math.min(window.innerWidth * 0.9, window.innerHeight * 0.9, 600);
+            canvas.width = size * dpr;
+            canvas.height = size * dpr;
+            canvas.style.width = `${size}px`;
+            canvas.style.height = `${size}px`;
+            ctx.scale(dpr, dpr);
+            
+            centerX = size / 2;
+            centerY = size / 2;
+            params.mainRadius = size * 0.35; // Make radius responsive
+        }
+
+        function createDials() {
+            dials = [];
+            for (let i = 0; i < params.numDials; i++) {
+                dials.push({
+                    angle: (i / params.numDials) * Math.PI * 2,
+                    currentThickness: params.baseThickness,
+                    targetThickness: params.baseThickness,
+                });
+            }
+        }
+        
+        function setupControls() {
+            const controls = [
+                { id: 'numDials', valueId: 'numDialsValue', param: 'numDials', type: 'float', action: createDials },
+                { id: 'dialLength', valueId: 'dialLengthValue', param: 'dialLength', type: 'float' },
+                { id: 'baseThickness', valueId: 'baseThicknessValue', param: 'baseThickness', type: 'float' },
+                { id: 'maxThickness', valueId: 'maxThicknessValue', param: 'maxThickness', type: 'float' },
+                { id: 'sigma', valueId: 'sigmaValue', param: 'sigma', type: 'float' },
+                { id: 'gravityStrength', valueId: 'gravityStrengthValue', param: 'gravityStrength', type: 'float' },
+                { id: 'gravityRange', valueId: 'gravityRangeValue', param: 'gravityRange', type: 'float' },
+                { id: 'gravityCurve', valueId: 'gravityCurveValue', param: 'gravityCurve', type: 'float' },
+                { id: 'startColor', param: 'startColor', type: 'color' },
+                { id: 'endColor', param: 'endColor', type: 'color' },
+                { id: 'glowIntensity', valueId: 'glowIntensityValue', param: 'glowIntensity', type: 'float' },
+            ];
+
+            controls.forEach(({ id, valueId, param, type, action }) => {
+                const input = document.getElementById(id);
+                if (!input) return;
+
+                const eventType = type === 'color' ? 'input' : 'input';
+                
+                input.addEventListener(eventType, (e) => {
+                    const value = type === 'float' ? parseFloat(e.target.value) : e.target.value;
+                    params[param] = value;
+                    if (valueId) {
+                        const display = document.getElementById(valueId);
+                        if (type === 'float') {
+                            let precision = 1;
+                            if (param === 'easing' || param === 'sigma') {
+                                precision = 2;
+                            } else if (['numDials', 'dialLength', 'gravityRange'].includes(param)) {
+                                precision = 0;
+                            }
+                            display.textContent = value.toFixed(precision);
+                        } else {
+                           // For color inputs, we don't need to update a text display
+                        }
+                    }
+                    if (action) action();
+                });
+            });
+
+            // Specific listener for the toggle switch
+            const showRangeToggle = document.getElementById('showRangeToggle');
+            showRangeToggle.addEventListener('change', (e) => {
+                params.showGravityRange = e.target.checked;
+            });
+        }
+
+        // --- Event Listeners ---
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            mouse.angle = getAngleFromCenter(mouse.x, mouse.y);
+            mouse.distance = getDistanceFromCenter(mouse.x, mouse.y);
+            mouse.isInside = true;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouse.isInside = false;
+        });
+
+        window.addEventListener('resize', () => {
+            setupCanvas();
+            createDials();
+        });
+
+        // --- Main Animation Loop ---
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // --- Draw Gravity Range Visualizer (Inward Only) ---
+            if (params.showGravityRange && mouse.isInside) {
+                const innerRadius = Math.max(0, params.mainRadius - params.gravityRange);
+                const outerRadius = params.mainRadius; // The outer edge is now the dial circle itself
+
+                // Draw the semi-transparent ring for the gravity area
+                ctx.fillStyle = 'rgba(0, 122, 255, 0.04)'; // Light blue fill
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2); // Outer circle
+                ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2, true); // Inner circle (creates the donut hole)
+                ctx.fill();
+
+                // Draw the dashed boundaries
+                ctx.strokeStyle = 'rgba(0, 122, 255, 0.25)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 5]);
+
+                // Inner boundary
+                if (innerRadius > 0) {
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                // Boundary on the main radius itself for clarity
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.setLineDash([]); // Reset for other drawings
+            }
+
+            drawQuadrantTitles();
+
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            dials.forEach(dial => {
+                let intensity = 0;
+                if (mouse.isInside) {
+                    const angDist = Math.abs(angularDistance(dial.angle, mouse.angle));
+                    const angularIntensity = normalDistribution(angDist, 0, params.sigma);
+                    
+                    let gravityFactor = 0;
+                    // --- Inward-Only Gravity Calculation ---
+                    if (mouse.distance < params.mainRadius) {
+                        const inwardDistanceFromEdge = params.mainRadius - mouse.distance;
+                        if (inwardDistanceFromEdge < params.gravityRange) {
+                            const normalizedDistance = inwardDistanceFromEdge / params.gravityRange;
+                            gravityFactor = Math.pow(1 - normalizedDistance, params.gravityCurve) * params.gravityStrength;
+                            gravityFactor = Math.min(1, Math.max(0, gravityFactor));
+                        }
+                    }
+                    intensity = angularIntensity * gravityFactor;
+                }
+                
+                dial.targetThickness = params.baseThickness + (params.maxThickness - params.baseThickness) * intensity;
+                dial.currentThickness += (dial.targetThickness - dial.currentThickness) * 0.1; // Hardcoded easing for smooth animation
+
+                // --- Drawing ---
+                const outerX = centerX + Math.cos(dial.angle) * params.mainRadius;
+                const outerY = centerY + Math.sin(dial.angle) * params.mainRadius;
+                const innerX = centerX + Math.cos(dial.angle) * (params.mainRadius - params.dialLength);
+                const innerY = centerY + Math.sin(dial.angle) * (params.mainRadius - params.dialLength);
+
+                const colorIntensity = (dial.currentThickness - params.baseThickness) / (params.maxThickness - params.baseThickness || 1);
+                
+                ctx.beginPath();
+                ctx.moveTo(outerX, outerY);
+                ctx.lineTo(innerX, innerY);
+                
+                ctx.strokeStyle = lerpColor(params.startColor, params.endColor, Math.max(0, Math.min(1, colorIntensity)));
+                ctx.lineWidth = dial.currentThickness;
+                ctx.lineCap = 'butt'; // Changed from 'round' to 'butt' for sharp edges
+
+                // Add a subtle glow for highlighted dials
+                if (colorIntensity > 0.1) {
+                    ctx.shadowColor = params.endColor;
+                    ctx.shadowBlur = dial.currentThickness * params.glowIntensity;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+                
+                ctx.stroke();
+                ctx.shadowBlur = 0; // Reset shadow for the next dial
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // --- Initialization ---
+        function init() {
+            setupCanvas();
+            setupControls();
+            createDials();
+            animate();
+        }
+
+        init();
+    </script>
+</body>
+</html>
+
