@@ -1,15 +1,57 @@
 @font-face {
-    font-family: 'Favorit Hangul';
-    src: url('fonts/ABCFavoritHangul-Regular.woff2') format('woff2');
-    font-weight: normal;
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Regular.woff2') format('woff2');
+    font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: 'Favorit Hangul';
-    src: url('fonts/ABCFavoritHangul-Medium.woff2') format('woff2');
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-RegularItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Medium.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-MediumItalic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-BoldItalic.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
 }
 
 * {
@@ -19,8 +61,7 @@
     font-weight: normal;
     word-spacing: -0.01em;
     line-height: 1.2;
-    font-family: 'Favorit Hangul', sans-serif;
-    font-feature-settings: "zero", "ss05", "ss06", "ss04", "ss03", "ss02", "ss05";
+    font-family: 'ABC Areal Semi Mono', monospace;
 }
 
 body {
@@ -82,7 +123,7 @@ p {
 .filter-controls {
     display: flex;
     gap: 1rem;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     font-size: 12px;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -219,7 +260,7 @@ img {
 .project-header {
     font-size: 0.75rem; /* 12px */
     font-weight: 400;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -452,7 +493,7 @@ footer {
 
 .footer-contact-label {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -519,7 +560,7 @@ footer {
 
 .footer-nav-title {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -578,19 +619,19 @@ footer {
 }
 
 .footer-copyright {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
 }
 
 .footer-times {
     display: flex;
     gap: 2rem;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
 }
 
 .footer-location {
     display: flex;
     gap: 2rem;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
 }
 
 /* Responsive footer */
@@ -842,7 +883,7 @@ footer {
 
 .section-year {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     opacity: 0.6;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -883,7 +924,7 @@ footer {
 
 .focus-label {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -947,7 +988,7 @@ footer {
 
 .featured-work-year {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     opacity: 0.6;
 }
 
@@ -1104,7 +1145,7 @@ footer {
 
 .meta-label {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     opacity: 0.6;
@@ -1249,7 +1290,7 @@ footer {
 
 .detail-label {
     font-size: 0.75rem; /* 12px */
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'ABC Areal Semi Mono', monospace;
     font-weight: 400;
     opacity: 0.6;
     text-transform: uppercase;

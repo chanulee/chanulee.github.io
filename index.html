@@ -3,226 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHANWOO LEE</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Chanwoo Lee</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-left">
-            <h4><a href="/index.html" class="active">chanwoo lee</a></h4>
-        </div>
-        <div class="nav-right">
-            <ul>
-                <li><a href="/projects.html">projects</a></li>
-                <li><a href="/about.html">about</a></li>
-            </ul>
-        </div>
-    </nav>
+    <p class="site-links">
+        <a href="/index.html">Chanwoo Lee</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/about.html">About</a>
+    </p>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Hero Section -->
-        <!-- <div class="section hero-placeholder">
-            <p>Interactive graphic will come here.</p>
-        </div> -->
-
-        <!-- Brief Intro Section -->
-        <div class="section brief-intro">
-            <p>Vision-Driven Curiosity.<br>Building Human-Centred Future.</p>
-            <a href="/about.html" class="cta-button">More about me</a>
-        </div>
-
-        <!-- Featured Projects Section -->
-        <div class="section">
-            <div class="section-header">
-                <h3>Featured</h3>
-                <a href="/projects.html" class="cta-button">See full projects</a>
-            </div>
-            <div class="featured-grid-home" id="featuredProjects">
-                <!-- Featured projects will be loaded here -->
-            </div>
-        </div>
-
-        <!-- Worked With Section -->
-        <div class="section worked-with">
-            <div class="worked-with-title">
-                <h3>World-leading Institutions</h3>
-                <p>My work has been trusted by and collaborated with a diverse range of organizations.</p>
-            </div>
-            <div class="logo-wall">
-                <div class="logo-item"><img src="resources/logos/1.svg" alt="Logo 1"></div>
-                <div class="logo-item"><img src="resources/logos/2.svg" alt="Logo 2"></div>
-                <div class="logo-item"><img src="resources/logos/3.svg" alt="Logo 3"></div>
-                <div class="logo-item"><img src="resources/logos/4.svg" alt="Logo 4"></div>
-                <div class="logo-item"><img src="resources/logos/5.svg" alt="Logo 5"></div>
-                <div class="logo-item"><img src="resources/logos/6.svg" alt="Logo 6"></div>
-                <div class="logo-item"><img src="resources/logos/7.svg" alt="Logo 7"></div>
-                <div class="logo-item"><img src="resources/logos/8.svg" alt="Logo 8"></div>
-                <div class="logo-item"><img src="resources/logos/9.svg" alt="Logo 9"></div>
-                <div class="logo-item"><img src="resources/logos/10.svg" alt="Logo 10"></div>
-                <div class="logo-item"><img src="resources/logos/11.svg" alt="Logo 11"></div>
-                <div class="logo-item"><img src="resources/logos/12.svg" alt="Logo 12"></div>
-            </div>
-        </div>
+    <div class="intro">
+        <p>Vision-Driven Curiosity.</p>
+        <p>Building Human-Centred Future.</p>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-left">
-                <div class="footer-intro">
-                    <h2>Chanwoo Lee</h2>
-                    <p class="subtitle">Interface Architect</p>
-                </div>
-                
-                <p class="footer-description">Designing and engineering computer interaction, interface and system for human agency.</p>
-                
-                <div class="footer-contact">
-                    <p class="footer-contact-label">Get in touch</p>
-                    <span class="footer-email" data-tooltip="copy email" onclick="copyEmail(this)">chanwoo.lee@imperial.ac.uk</span>
-                </div>
-            </div>
-            
-            <div class="footer-right">
-                <div class="footer-nav">
-                    <div class="footer-nav-col">
-                        <div class="footer-nav-title">Navigation</div>
-                        <a href="/index.html">Home</a>
-                        <a href="/projects.html">Projects</a>
-                        <a href="/about.html">About</a>
-                    </div>
-                    <div class="footer-nav-col">
-                        <div class="footer-nav-title">Connect</div>
-                        <a href="https://www.linkedin.com/in/chanulee/" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/chanulee" target="_blank">GitHub</a>
-                        <a href="https://instagram.com/chnwlee" target="_blank">Instagram</a>
-                        <a href="https://twitter.com/chnwlee" target="_blank">Twitter</a>
-                    </div>
-                </div>
-            </div>
+    <!--
+      Landing stream: edit order here in HTML.
+      - Project: <div class="project" data-project="Exact name from projects.json"></div>
+      - Quote:   <div class="quote" style="background:#C8D9C9">Your text</div>
+    -->
+    <main class="stream">
+        <div class="project" data-project="Neuro-AI wearable"></div>
+        <div class="project" data-project="Synapse"></div>
+
+        <div class="quote" style="background:#C8D9C9">
+            Example quote or comment goes here.
         </div>
-        
-        <div class="footer-bottom">
-            <div class="footer-copyright">© 2025 Chanwoo Lee</div>
-            <div class="footer-times">
-                <span id="london-time">London BST 00:00:00</span>
-                <span id="seoul-time">Seoul KST 00:00:00</span>
-            </div>
-        </div>
-    </footer>
+
+        <div class="project" data-project="TwelveLabs"></div>
+        <div class="project" data-project="Digital Double"></div>
+        <div class="project" data-project="Sensory Misalignment"></div>
+    </main>
+
+    <div class="site-end">
+        <p><a href="mailto:chanwoo.lee@imperial.ac.uk">chanwoo.lee@imperial.ac.uk</a></p>
+        <p class="links">
+            <a href="https://www.linkedin.com/in/chanulee/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/chanulee" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://instagram.com/chnwlee" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://twitter.com/chnwlee" target="_blank" rel="noopener">Twitter</a>
+        </p>
+        <p>© 2026 Chanwoo Lee</p>
+    </div>
 
     <script>
-        // Real-time clock function
-        function updateClocks() {
-            const now = new Date();
-            
-            const londonTime = new Intl.DateTimeFormat('en-GB', {
-                timeZone: 'Europe/London',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).format(now);
-            
-            const seoulTime = new Intl.DateTimeFormat('en-GB', {
-                timeZone: 'Asia/Seoul',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).format(now);
-            
-            const londonOffset = new Date().toLocaleString('en', {timeZone: 'Europe/London', timeZoneName: 'short'}).split(' ').pop();
-            const londonLabel = londonOffset === 'BST' ? 'BST' : 'GMT';
-            
-            document.getElementById('london-time').textContent = `London ${londonLabel} ${londonTime}`;
-            document.getElementById('seoul-time').textContent = `Seoul KST ${seoulTime}`;
-        }
-        
-        updateClocks();
-        setInterval(updateClocks, 1000);
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                const projects = await fetch('projects.json').then(r => r.json());
+                const byName = Object.fromEntries(projects.map(p => [p.project, p]));
 
-        // Copy email to clipboard
-        function copyEmail(element) {
-            const email = element.textContent;
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(email).then(() => showCopiedState(element));
-            } else {
-                const textArea = document.createElement("textarea");
-                textArea.value = email;
-                textArea.style.position = "fixed";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showCopiedState(element);
-                } catch (err) {
-                    console.error('Fallback: Oops, unable to copy', err);
-                }
-                document.body.removeChild(textArea);
-            }
-        }
-
-        function showCopiedState(element) {
-            element.setAttribute('data-tooltip', 'copied!');
-            element.classList.add('copied');
-            setTimeout(() => {
-                element.setAttribute('data-tooltip', 'copy email');
-                element.classList.remove('copied');
-            }, 2000);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const jsonFilePath = 'projects.json';
-            
-            fetch(jsonFilePath)
-                .then(response => response.json())
-                .then(projects => {
-                    renderFeaturedProjects(projects);
-                })
-                .catch(error => console.error('Error loading projects:', error));
-
-            function renderFeaturedProjects(projects) {
-                const featuredContainer = document.getElementById('featuredProjects');
-                featuredContainer.innerHTML = '';
-
-                const featuredProjects = projects.filter(project => project.featured);
-                const topFourProjects = featuredProjects.slice(0, 4);
-
-                topFourProjects.forEach(project => {
-                    const hasLink = !!project.projectLink;
-                    const projectElement = document.createElement(hasLink ? 'a' : 'div');
-                    
-                    projectElement.className = 'item';
-                    
-                    const aspectRatio = project.aspectRatio || 'landscape';
-                    projectElement.classList.add(aspectRatio);
-
-                    if (hasLink) {
-                        projectElement.href = project.projectLink;
-                        if (project.projectLink.startsWith('http')) {
-                            projectElement.target = "_blank";
-                        }
-                        projectElement.classList.add('clickable');
+                document.querySelectorAll('.stream .project[data-project]').forEach(slot => {
+                    const project = byName[slot.dataset.project];
+                    if (!project || !project.thumbnail) {
+                        slot.remove();
+                        return;
                     }
-                    
-                    projectElement.innerHTML = `
-                        <div class="thumbnail-container">
-                            <img src="${project.thumbnail || '/resources/placeholder.webp'}" alt="${project.project || 'Project image'}">
-                        </div>
-                        <div>
-                            <h4>${project.project || 'Title'}</h4>
-                            <p id="sub">${project.affiliation || ''}</p>
-                        </div>
-                    `;
-                    
-                    featuredContainer.appendChild(projectElement);
+
+                    let el = slot;
+                    if (project.projectLink) {
+                        const link = document.createElement('a');
+                        link.className = 'project';
+                        link.href = project.projectLink;
+                        if (project.projectLink.startsWith('http')) {
+                            link.target = '_blank';
+                            link.rel = 'noopener';
+                        }
+                        slot.replaceWith(link);
+                        el = link;
+                    }
+
+                    const img = document.createElement('img');
+                    img.src = project.thumbnail;
+                    img.alt = project.project || '';
+                    el.appendChild(img);
                 });
+            } catch (error) {
+                console.error('Error loading projects:', error);
             }
         });
     </script>

@@ -1,15 +1,25 @@
 @font-face {
-    font-family: 'Favorit Hangul';
-    src: url('fonts/ABCFavoritHangul-Book.woff2') format('woff2');
-    font-weight: 400; /* Regular */
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Regular.woff2') format('woff2');
+    font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: 'Favorit Hangul';
-    src: url('fonts/ABCFavoritHangul-Medium.woff2') format('woff2');
-    font-weight: 700; /* Bold */
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Medium.woff2') format('woff2');
+    font-weight: 500;
     font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
 html {
@@ -56,7 +66,7 @@ html {
 
 * {
 	box-sizing: border-box;
-	font-family: 'Favorit Hangul', sans-serif;
+	font-family: 'ABC Areal Semi Mono', monospace;
 	transition: 0.4s;
 	font-size: 0.875rem;
 	line-height: 115%;
@@ -78,7 +88,7 @@ body {
 
 
 h1, h2 {
-	font-family: 'Favorit Hangul', sans-serif;
+	font-family: 'ABC Areal Semi Mono', monospace;
 	padding: 0rem;
 	margin: 0rem;	
 	text-align: center;
@@ -98,7 +108,7 @@ h2 {
 
 h3 {
 	/* ITEM TITLE */
-	font-family: 'Favorit Hangul', sans-serif;
+	font-family: 'ABC Areal Semi Mono', monospace;
 
 	padding: 0rem;
 	margin: 0rem;	
@@ -111,7 +121,7 @@ h3 {
 }
 
 p {
-	font-family: 'Favorit Hangul', sans-serif;
+	font-family: 'ABC Areal Semi Mono', monospace;
 	font-size: 1rem; /*16*/
 	font-weight: 200;
 	line-height: 125%;
