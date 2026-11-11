@@ -1,3 +1,6 @@
+---
+# Landing page. Events and thoughts come from _data/events.yml and _data/thoughts.yml.
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +70,7 @@
 
         <div class="spacer" aria-hidden="true"></div>
 
-        <!-- EVENTS — newest first. The first three show on the landing; add class="extra" to the rest. -->
+        <!-- EVENTS — edit _data/events.yml. The first three show on the landing. -->
         <section class="sec sec-list" data-sec="events">
             <div class="head">
                 <h2 class="label" data-flip>events</h2>
@@ -76,19 +79,13 @@
                 </button>
             </div>
             <ul class="rows" id="events-list">
-                <li data-flip><span>KHU</span><span>TBD Dec</span></li>
-                <li data-flip><span>HYU ERICA</span><span>11.24</span></li>
-                <li data-flip><span>SNU ISC</span><span>11.17</span></li>
-                <li class="extra"><span>KOCCA AI Camp</span><span>Sep-Dec</span></li>
-                <li class="extra"><span>LLLOUNGE SEOUL</span><span>11.06-08</span></li>
-                <li class="extra"><span>ONSO AI Community</span><span>Nov-Dec</span></li>
-                <li class="extra"><span>Processing Community Day Seoul</span><span>10.31</span></li>
-                <li class="extra"><span>Peter &amp; Paul</span><span>10.29</span></li>
-                <li class="extra"><span>SNU ISC</span><span>9.29</span></li>
+                {%- for event in site.data.events %}
+                <li{% if forloop.index > 3 %} class="extra"{% else %} data-flip{% endif %}><span>{% if event.url %}<a href="{{ event.url }}"{% if event.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ event.name | escape }}</a>{% else %}{{ event.name | escape }}{% endif %}</span><span>{{ event.date | escape }}</span></li>
+                {%- endfor %}
             </ul>
         </section>
 
-        <!-- THOUGHTS — wrap a title in <a href="…"> to link it; add class="extra" to rows past the third. -->
+        <!-- THOUGHTS — edit _data/thoughts.yml. Posts on this site live in /thoughts as Markdown. -->
         <section class="sec sec-list" data-sec="thoughts">
             <div class="head">
                 <h2 class="label" data-flip>thoughts</h2>
@@ -97,9 +94,9 @@
                 </button>
             </div>
             <ul class="rows" id="thoughts-list">
-                <li data-flip><span>Digital Renaissance Manifesto</span></li>
-                <li data-flip><span><a href="https://www.slanted.de/whats-next-in-seoul-design/" target="_blank" rel="noopener">What’s Next in Seoul Design?</a></span></li>
-                <li data-flip><span><a href="projects/digital-double.html">Digital Doubles w/ MODEM</a></span></li>
+                {%- for thought in site.data.thoughts %}
+                <li{% if forloop.index > 3 %} class="extra"{% else %} data-flip{% endif %}><span>{% if thought.url %}<a href="{{ thought.url }}"{% if thought.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ thought.title | escape }}</a>{% else %}{{ thought.title | escape }}{% endif %}</span></li>
+                {%- endfor %}
             </ul>
         </section>
     </main>

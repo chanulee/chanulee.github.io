@@ -1,0 +1,22 @@
+# THOUGHTS — shown on the landing page, in this order.
+# The first three show on the landing; the rest appear when "thoughts" is opened.
+#
+# External link:
+#   - title: Some essay
+#     url: https://example.com/essay
+#
+# Post on this site: add a Markdown file in /thoughts (see thoughts/_template.md),
+# then point to it here:
+#   - title: My post
+#     url: /thoughts/my-post/
+#
+# No "url:" line = plain text, not a link.
+
+- title: Digital Renaissance Manifesto
+  # url: /thoughts/digital-renaissance-manifesto/   <- uncomment once the text is in
+
+- title: What’s Next in Seoul Design?
+  url: https://www.slanted.de/whats-next-in-seoul-design/
+
+- title: Digital Doubles w/ MODEM
+  url: https://modemworks.com/projects/digital-doubles/

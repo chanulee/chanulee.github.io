@@ -1,0 +1,33 @@
+# EVENTS — shown on the landing page.
+#
+# To add one: copy two lines, paste them at the TOP, edit, commit.
+# Newest first. The first three show on the landing; the rest appear when
+# "events" is opened. "date" is free text (11.24, Sep-Dec, TBD Dec ...).
+# Optional: add a "url:" line to make the name a link.
+
+- name: KHU
+  date: TBD Dec
+
+- name: HYU ERICA
+  date: "11.24"
+
+- name: SNU ISC
+  date: "11.17"
+
+- name: KOCCA AI Camp
+  date: Sep-Dec
+
+- name: LLLOUNGE SEOUL
+  date: 11.06-08
+
+- name: ONSO AI Community
+  date: Nov-Dec
+
+- name: Processing Community Day Seoul
+  date: "10.31"
+
+- name: Peter & Paul
+  date: "10.29"
+
+- name: SNU ISC
+  date: "9.29"

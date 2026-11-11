@@ -109,8 +109,11 @@
         const leaving = sections.filter(s => wasVisible.get(s) && !visible(s));
         const returning = sections.filter(s => !wasVisible.get(s) && visible(s));
 
-        // 4. Movers: everything that stays on screen and changes position.
-        const moveDelay = leaving.length ? 60 : 0;
+        // 4. Movers: everything that stays on screen and changes position. They
+        //    set off one line after another, leading edge first, so the block
+        //    stretches out as it accelerates and gathers again as it lands.
+        const baseDelay = leaving.length ? 60 : 0;
+        const CASCADE = 30;
         const movers = [];
         let travel = 0;
         targets.forEach(el => {
@@ -122,18 +125,26 @@
             const dy = a.top - b.top;
             if (!dx && !dy) return;
             travel = Math.max(travel, Math.abs(dy));
-            movers.push({ a, b });
-            el.animate(
-                [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }],
-                { duration: MOVE, delay: moveDelay, easing: MOVE_EASE, fill: 'backwards' }
+            movers.push({ el, a, b, dx, dy, delay: baseDelay });
+        });
+        const goingUp = movers.reduce((sum, m) => sum + m.dy, 0) > 0;
+        movers.sort((p, q) => goingUp ? p.a.top - q.a.top : q.a.top - p.a.top);
+        let step = -1, lead = null;
+        movers.forEach(m => {
+            if (lead === null || Math.abs(m.a.top - lead) > 10) { step++; lead = m.a.top; }
+            m.delay = baseDelay + step * CASCADE;
+            m.el.animate(
+                [{ transform: `translate(${m.dx}px, ${m.dy}px)` }, { transform: 'none' }],
+                { duration: MOVE, delay: m.delay, easing: MOVE_EASE, fill: 'backwards' }
             );
         });
+        const landed = baseDelay + step * CASCADE;
 
         // When (in ms) do the movers sweep across a given rect? → [enter, exit] or null.
         const GAP = 6;
         function sweep(r) {
             let enter = Infinity, exit = -Infinity;
-            movers.forEach(({ a, b }) => {
+            movers.forEach(({ a, b, delay }) => {
                 if (Math.max(a.right, b.right) < r.left || Math.min(a.left, b.left) > r.right) return;
                 // Mover top(p) = a.top + (b.top - a.top) p. Overlap while
                 // top(p) < r.bottom + GAP  and  top(p) + height > r.top - GAP.
@@ -150,8 +161,8 @@
                     p1 = Math.min(1, Math.max(u, v));
                     if (p0 >= p1) return;
                 }
-                enter = Math.min(enter, moveDelay + MOVE * timeAt(p0));
-                exit = Math.max(exit, p1 >= 1 ? Infinity : moveDelay + MOVE * timeAt(p1));
+                enter = Math.min(enter, delay + MOVE * timeAt(p0));
+                exit = Math.max(exit, p1 >= 1 ? Infinity : delay + MOVE * timeAt(p1));
             });
             return enter === Infinity ? null : [enter, exit];
         }
@@ -212,7 +223,7 @@
         // 7. The opened section's extra content rises in line by line, once the
         //    section has landed and the space is clear.
         if (name) {
-            const base = travel > 40 ? moveDelay + MOVE * 0.55 : 160;
+            const base = travel > 40 ? landed + MOVE * 0.55 : 160;
             const lines = [];
             byName[name].querySelectorAll('.extra').forEach(el => {
                 if (el.matches('li')) lines.push(el);

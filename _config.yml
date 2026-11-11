@@ -1,0 +1,6 @@
+# Built by GitHub Pages (Jekyll). Content lives in _data/ and thoughts/.
+title: Chanwoo Lee
+url: https://chanwoolee.com
+markdown: kramdown
+exclude:
+  - projects.json

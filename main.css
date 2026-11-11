@@ -14,6 +14,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-RegularItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
     --bg: #cde3ff;
     --bg-clear: rgb(205 227 255 / 0);
@@ -358,6 +366,99 @@ a:focus-visible {
 .page.is-scrolled .sec.is-open .head::before,
 .page.is-scrolled .sec.is-open .head::after {
     opacity: 1;
+}
+
+/* ---------- Posts (/thoughts/…) ---------- */
+
+.post .lede a:hover {
+    text-decoration: none;
+}
+
+.post .label time {
+    font-weight: 400;
+    margin-left: 0.6em;
+}
+
+.post a.toggle {
+    display: block;
+}
+
+.prose {
+    margin-top: 16px;
+    padding-bottom: 36px;
+    line-height: 1.5;
+}
+
+.prose > * + * {
+    margin-top: 1.5em;
+}
+
+.prose h2,
+.prose h3 {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 3em;
+}
+
+.prose h2 + *,
+.prose h3 + * {
+    margin-top: 0.75em;
+}
+
+.prose a {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-underline-position: from-font;
+}
+
+.prose strong {
+    font-weight: 700;
+}
+
+.prose ul,
+.prose ol {
+    list-style: none;
+}
+
+.prose li {
+    position: relative;
+    padding-left: 1.2em;
+}
+
+.prose ul > li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+}
+
+.prose ol {
+    counter-reset: n;
+}
+
+.prose ol > li::before {
+    counter-increment: n;
+    content: counter(n);
+    position: absolute;
+    left: 0;
+}
+
+.prose blockquote {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.6px;
+}
+
+.prose img,
+.prose video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.prose hr {
+    border: 0;
+    height: 1.5em;
 }
 
 /* ---------- Wider screens ---------- */
