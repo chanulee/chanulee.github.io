@@ -1,0 +1,15 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://chanwoolee.com/</loc>
+    <lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
+  </url>
+  {%- for p in site.pages %}{% if p.layout == 'thought' %}
+  <url>
+    <loc>https://chanwoolee.com{{ p.url }}</loc>
+  </url>
+  {%- endif %}{% endfor %}
+</urlset>
