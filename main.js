@@ -345,30 +345,28 @@
         arrow.addEventListener('click', () => go('curation'));
         document.getElementById('to-home').addEventListener('click', () => go('home'));
 
-        /* Pulling past the bottom: the page lifts with resistance, and in the gap
-           underneath the arrow grows from a speck to full size. Let go once it is
-           full size and the page turns; let go earlier and everything settles back. */
-        const REACH = 150;       // the furthest the page lifts, px
-        const ARM = 92;          // lift at which the arrow is full size
-        let lift = 0;
+        /* Pulling past the bottom grows the arrow from a speck to full size; let go
+           once it is full size and the page turns. The page itself is never moved
+           here: where the browser rubber-bands (iOS, macOS) that motion is the
+           lift, and everything else about scrolling stays native — bounce,
+           pull-to-refresh at the top, momentum. */
+        const ARM = 92;          // pull at which the arrow is full size
+        let pull = 0;
 
-        const resist = d => REACH * (1 - Math.exp(-Math.max(0, d) / 190));
+        const resist = d => 150 * (1 - Math.exp(-Math.max(0, d) / 190));
+        const overscroll = () => Math.max(0, window.scrollY + window.innerHeight - root.scrollHeight);
 
-        function setLift(px, settle) {
-            lift = px;
-            const home = views.home;
-            home.style.transition = arrow.style.transition = '';
+        function setPull(px, settle) {
+            pull = px;
             arrow.classList.toggle('is-settling', !!settle);
-            if (settle) home.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
-            home.style.transform = px ? `translateY(${-px}px)` : '';
-            root.style.setProperty('--gap', px + 'px');
+            root.style.setProperty('--gap', overscroll() + 'px');
             root.style.setProperty('--pull', Math.min(1, px / ARM).toFixed(3));
             arrow.classList.toggle('is-armed', px >= ARM);
         }
 
         function turn() {
-            const px = lift;
-            setLift(0);
+            const px = overscroll();
+            setPull(0);
             history.pushState(null, '', '#curation');
             run(stage('curation'), px, true);
         }
@@ -385,13 +383,13 @@
                 if (pulled < 6) return;
                 drag.on = true;
             }
-            setLift(resist(pulled - 6));
+            setPull(resist(pulled - 6));
         }, { passive: true });
 
         const release = () => {
             if (!drag || !drag.on) { drag = null; return; }
             drag = null;
-            if (lift >= ARM) turn(); else setLift(0, true);
+            if (pull >= ARM) turn(); else setPull(0, true);
         };
         window.addEventListener('touchend', release, { passive: true });
         window.addEventListener('touchcancel', release, { passive: true });
@@ -407,12 +405,11 @@
             const px = resist(pushed * 0.75);
             if (px >= ARM) {
                 pushed = 0;
-                setLift(px);
                 turn();
                 return;
             }
-            setLift(px, true);
-            idle = setTimeout(() => { pushed = 0; setLift(0, true); }, 180);
+            setPull(px, true);
+            idle = setTimeout(() => { pushed = 0; setPull(0, true); }, 180);
         }, { passive: true });
 
         window.addEventListener('popstate', () => {
@@ -423,14 +420,20 @@
     })();
 
     /* Are.na feed for the curation page (API v3, public channels, no key).
-       Loads on first visit, then page by page as you scroll. */
+       Loads on first visit, then page by page as you scroll. Images come as
+       Are.na's small thumbnails, sized to the column they sit in. */
     const arena = (() => {
         const API = 'https://api.are.na/v3';
         const PER = 24;
         const box = document.getElementById('arena');
+        const toggle = document.getElementById('arena-cols');
         const group = box ? box.dataset.group.trim() : '';
         const channels = box && box.dataset.channel.trim() ? [box.dataset.channel.trim()] : [];
-        let page = 0, done = false, loading = false, started = false, shown = 0, sentinel;
+        const items = [];        // { node, weight } in feed order
+        let cols = 2;
+        try { cols = localStorage.getItem('arena-cols') === '1' ? 1 : 2; } catch (e) {}
+        let columns = [], heights = [];
+        let page = 0, done = false, loading = false, started = false, sentinel;
 
         const el = (tag, cls, text) => {
             const node = document.createElement(tag);
@@ -444,6 +447,8 @@
             if (!res.ok) throw new Error(res.status);
             return res.json();
         };
+        // How wide an image is on screen, so the browser picks the smallest file that is sharp.
+        const sizes = () => cols === 2 ? '(min-width: 768px) 197px, 46vw' : '(min-width: 768px) 402px, 92vw';
 
         function render(block) {
             if (block.type === 'Channel' || block.type === 'Group') return null;
@@ -454,36 +459,72 @@
             if (block.type === 'Text' && text) {
                 const div = el('div', 'blk');
                 div.append(el('p', 'blk-text', text));
-                return div;
+                return { node: div, weight: 0.6 };
             }
             const img = block.image;
-            const size = img && (img.medium || img.large || img.small);
-            if (!size && !title) return null;
+            const small = img && (img.small || img.medium);
+            if (!small && !title) return null;
 
             const a = el('a', 'blk');
             a.href = (block.source && block.source.url) || (block.attachment && block.attachment.url)
                 || `https://www.are.na/block/${block.id}`;
             a.target = '_blank';
             a.rel = 'noopener';
-            if (size) {
+            let weight = 0.15;
+            if (small) {
                 const image = el('img');
+                const w = +small.width, h = +small.height;
                 image.loading = 'lazy';
                 image.decoding = 'async';
-                image.alt = (img.alt_text || title);
-                if (size.width && size.height) { image.width = size.width; image.height = size.height; }
-                if (size.src_2x) image.srcset = `${size.src} 1x, ${size.src_2x} 2x`;
-                image.src = size.src;
+                image.alt = img.alt_text || title;
+                if (w && h) { image.width = w; image.height = h; weight += h / w; } else weight += 1;
+                const set = [];
+                if (w) {
+                    set.push(`${small.src} ${w}w`);
+                    if (small.src_2x) set.push(`${small.src_2x} ${w * 2}w`);
+                    if (img.medium && +img.medium.width > w * 2) set.push(`${img.medium.src} ${+img.medium.width}w`);
+                }
+                if (set.length) { image.srcset = set.join(', '); image.sizes = sizes(); }
+                image.src = small.src;
                 a.append(image);
             }
             if (title) a.append(el('span', 'blk-title', title));
             const from = block.source && block.source.url ? host(block.source.url) : '';
             if (from) a.append(el('span', 'blk-src', from));
-            return a;
+            return { node: a, weight };
+        }
+
+        // Each block goes to whichever column is shorter, so they stay level.
+        function place(item) {
+            let k = 0;
+            heights.forEach((h, i) => { if (h < heights[k]) k = i; });
+            columns[k].append(item.node);
+            heights[k] += item.weight;
+        }
+
+        function layout() {
+            box.dataset.cols = cols;
+            box.textContent = '';
+            columns = Array.from({ length: cols }, () => el('div', 'arena-col'));
+            heights = columns.map(() => 0);
+            box.append(...columns);
+            items.forEach(item => {
+                const image = item.node.querySelector('img[srcset]');
+                if (image) image.sizes = sizes();
+                place(item);
+            });
+            if (toggle) toggle.textContent = cols === 2 ? '2 columns' : '1 column';
         }
 
         const add = blocks => blocks.forEach(block => {
-            const node = render(block);
-            if (node) { box.insertBefore(node, sentinel); shown++; }
+            const item = render(block);
+            if (item) { items.push(item); place(item); }
+        });
+
+        if (toggle) toggle.addEventListener('click', () => {
+            cols = cols === 2 ? 1 : 2;
+            try { localStorage.setItem('arena-cols', cols); } catch (e) {}
+            layout();
         });
 
         async function more() {
@@ -500,8 +541,8 @@
                     }
                 }
                 // Keep going until something new is on screen or everything is read.
-                const before = shown;
-                while (channels.length && shown === before) {
+                const before = items.length;
+                while (channels.length && items.length === before) {
                     const json = await get(`/channels/${encodeURIComponent(channels[0])}/contents?per=${PER}&page=${page + 1}`);
                     add(json.data);
                     if (json.meta && json.meta.has_more_pages) page++;
@@ -510,22 +551,26 @@
                 if (!channels.length) done = true;
             } catch (err) {
                 done = true;
-                if (!shown) {
+                if (!items.length) {
                     const note = el('a', 'arena-note', 'See the collection on Are.na');
                     note.href = `https://www.are.na/${encodeURIComponent(group || channels[0] || '')}`;
                     note.target = '_blank';
                     note.rel = 'noopener';
-                    box.insertBefore(note, sentinel);
+                    box.after(note);
                 }
             }
             loading = false;
+            if (toggle) toggle.hidden = !items.length;
             if (done && sentinel) sentinel.remove();
+            // Still near the end of a short page: fetch the next one.
+            else if (sentinel && sentinel.getBoundingClientRect().top < window.innerHeight + 800) more();
         }
 
         function load() {
             if ((!group && !channels.length) || sentinel) return;
+            layout();
             sentinel = el('div', 'arena-end');
-            box.append(sentinel);
+            box.after(sentinel);
             if ('IntersectionObserver' in window) {
                 new IntersectionObserver(entries => {
                     if (entries.some(entry => entry.isIntersecting)) more();
