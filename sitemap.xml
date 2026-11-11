@@ -7,6 +7,14 @@ layout: null
     <loc>https://chanwoolee.com/</loc>
     <lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
   </url>
+  <url>
+    <loc>https://chanwoolee.com/about/</loc>
+    <lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
+  </url>
+  <url>
+    <loc>https://chanwoolee.com/ko/</loc>
+    <lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
+  </url>
   {%- for p in site.pages %}{% if p.layout == 'thought' %}
   <url>
     <loc>https://chanwoolee.com{{ p.url }}</loc>

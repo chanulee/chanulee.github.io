@@ -13,6 +13,8 @@
     <meta name="keywords" content="Chanwoo Lee, 이찬우, design engineer, 디자인 엔지니어, interaction design, 인터랙션 디자인, HCI, human-AI interaction, 휴먼 AI 인터랙션, human-centred AI, Lovelace Research, 러브레이스 리서치, Imperial College London, Royal College of Art, Innovation Design Engineering, K-Arts, 한국예술종합학교">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://chanwoolee.com/">
+    <link rel="author" href="https://chanwoolee.com/about/">
+    <link rel="alternate" hreflang="ko" href="https://chanwoolee.com/ko/" title="이찬우 소개 (한국어)">
 
     <meta property="og:type" content="profile">
     <meta property="og:site_name" content="Chanwoo Lee">
@@ -59,6 +61,7 @@
           "givenName": "Chanwoo",
           "familyName": "Lee",
           "url": "https://chanwoolee.com/",
+          "mainEntityOfPage": ["https://chanwoolee.com/about/", "https://chanwoolee.com/ko/"],
           "image": "https://chanwoolee.com/resources/chanwoo.jpg",
           "email": "mailto:hello@chanwoolee.com",
           "jobTitle": ["Design Engineer", "Interaction Designer", "Founder of Lovelace Research", "Visiting Lecturer", "Adjunct Professor"],
@@ -105,6 +108,7 @@
     <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+    <div class="view" id="home">
     <main class="page" id="page">
         <!-- The sentence animates in on load; then the closing phrase rotates. Edit the phrases in data-phrases, separated by "|".
              data-variant picks the animation: "a" typewriter, "b" soft blur per letter, "c" soft blur per word. (?h=a|b|c overrides it.) -->
@@ -152,6 +156,7 @@
 
                 <ul class="block" data-flip>
                     <li><button class="copy" type="button" data-copy="hello@chanwoolee.com" aria-live="polite">hello@chanwoolee.com</button></li>
+                    <li><a href="https://www.linkedin.com/in/chanulee/" target="_blank" rel="noopener">linkedin</a></li>
                     <li><a href="https://instagram.com/chnwlee" target="_blank" rel="noopener">instagram</a></li>
                     <li class="extra"><a href="https://github.com/chanulee" target="_blank" rel="noopener">github</a></li>
                 </ul>
@@ -190,21 +195,25 @@
             </ul>
         </section>
 
-        <!-- Plain-text profile for screen readers, search engines and AI assistants.
-             Same facts as the About section above, in English and Korean. -->
-        <section class="sr-only" aria-label="About Chanwoo Lee">
-            <h2>About Chanwoo Lee (이찬우)</h2>
-            <p>Chanwoo Lee (이찬우) is a design engineer and interaction designer based in Seoul and London, working on human-AI interaction and human-computer interaction (HCI). He builds personal computing tools for human agency and intentional living, co-designing human behaviour and technology.</p>
-            <p>He is the founder of Lovelace Research. He teaches Innovation Design Engineering as a visiting lecturer at Imperial College London and the Royal College of Art (RCA), and is an adjunct professor at Korea National University of the Arts (K-Arts). He holds an MSc from Imperial College London and an MA from the Royal College of Art in Innovation Design Engineering.</p>
-            <p>He has worked on projects with OpenAI, Pentagram, Meta, Snap, OPPO, LG, MODEM, Map Project Office, the British Council, Korea's Ministry of Science and ICT and Saatchi Gallery.</p>
-            <div lang="ko">
-                <p>이찬우(Chanwoo Lee)는 서울과 런던을 기반으로 활동하는 디자인 엔지니어이자 인터랙션 디자이너다. 휴먼-AI 인터랙션(Human-AI Interaction)과 HCI(인간-컴퓨터 상호작용) 분야에서, 사람의 주체성을 위한 개인 컴퓨팅 도구를 만든다.</p>
-                <p>러브레이스 리서치(Lovelace Research)의 창립자이며, 임페리얼 칼리지 런던(Imperial College London)과 영국 왕립예술대학(Royal College of Art, RCA)에서 방문 강사로 Innovation Design Engineering을 가르치고, 한국예술종합학교(K-Arts) 겸임교수로 재직 중이다. 임페리얼 칼리지 런던 MSc와 왕립예술대학 MA(Innovation Design Engineering) 학위를 받았다.</p>
-                <p>OpenAI, 펜타그램(Pentagram), Meta, Snap, OPPO, LG, MODEM, Map Project Office, 영국문화원, 과학기술정보통신부, 사치 갤러리 등과 프로젝트를 진행했다.</p>
-            </div>
-            <p>Contact: hello@chanwoolee.com</p>
-        </section>
+        <!-- Pull up past the bottom (or tap) to slide over to the curation page. -->
+        <button class="pager pager-down" id="to-curation" type="button" aria-label="More: a curation of links, images and texts">
+            <img src="resources/icons/arrow.svg" width="32" height="32" alt="">
+        </button>
     </main>
+    </div>
+
+    <!-- CURATION — the second page. The feed comes from an Are.na channel: set arena_channel in _config.yml. -->
+    <div class="view" id="curation" hidden>
+        <div class="cur-top">
+            <button class="pager pager-up" id="to-home" type="button" aria-label="Back to the main page">
+                <img src="resources/icons/arrow.svg" width="32" height="32" alt="">
+            </button>
+        </div>
+        <div class="page cur-page">
+            <h2 class="lede">Hi! Thanks for your interest.<br>Here’s my random curation of links, images, texts, papers, etc.</h2>
+            <div class="arena" id="arena" data-channel="{{ site.arena_channel | escape }}"></div>
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>

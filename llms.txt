@@ -2,6 +2,11 @@
 
 > Chanwoo Lee (이찬우) is a design engineer and interaction designer based in Seoul and London, working on human-AI interaction and human-computer interaction (HCI). He builds personal computing tools for human agency. This is his personal website: https://chanwoolee.com
 
+## Profile pages
+
+- [About Chanwoo Lee (English)](https://chanwoolee.com/about/): full profile with questions and answers.
+- [이찬우 소개 (한국어)](https://chanwoolee.com/ko/): 한국어 프로필과 문답.
+
 ## Who he is
 
 - Design engineer and interaction designer; focus on human-AI interaction, HCI, human-centred AI, interfaces and systems for human agency and intentional living.
@@ -28,6 +33,6 @@ OpenAI, Pentagram, Meta, Snap, OPPO, LG, MODEM, Map Project Office, British Coun
 ## Contact
 
 - Email: hello@chanwoolee.com
+- LinkedIn: https://www.linkedin.com/in/chanulee/
 - Instagram: https://instagram.com/chnwlee
 - GitHub: https://github.com/chanulee
-- LinkedIn: https://www.linkedin.com/in/chanulee/

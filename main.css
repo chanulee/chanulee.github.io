@@ -59,6 +59,7 @@
 
 html {
     background: var(--bg);
+    overscroll-behavior-y: none;
     -webkit-text-size-adjust: 100%;
 }
 
@@ -217,6 +218,173 @@ a:focus-visible {
     overflow: hidden;
     clip-path: inset(50%);
     white-space: nowrap;
+}
+
+/* ---------- Two pages: home and curation ----------
+   Each is a full-screen "card". Moving between them slides both cards
+   vertically over black, corners rounded while they travel. */
+
+.view {
+    min-height: 100vh;
+    min-height: 100svh;
+    background: var(--bg);
+}
+
+.view[hidden] {
+    display: none;
+}
+
+html.is-paging,
+html.is-paging body {
+    background: #000;
+    overflow: hidden;
+}
+
+html.is-paging .view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    will-change: transform;
+}
+
+#page {
+    padding-bottom: 2px;
+}
+
+#page.has-open {
+    padding-bottom: 36px;
+}
+
+.pager {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.pager img {
+    display: block;
+    transition: transform 0.5s var(--spin);
+}
+
+.pager-down {
+    flex: none;
+    margin: 38px auto 0;
+    animation: pager-in 0.6s 0.4s both;
+}
+
+#page.has-open .pager-down {
+    display: none;
+}
+
+.pager-up img {
+    transform: rotate(180deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .pager-down:hover img {
+        transform: translateY(3px);
+    }
+
+    .pager-up:hover img {
+        transform: rotate(180deg) translateY(3px);
+    }
+}
+
+.pager:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+    border-radius: 50%;
+}
+
+@keyframes pager-in {
+    from { opacity: 0; }
+}
+
+/* The back arrow floats at the top; content fades out beneath it. */
+.cur-top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    height: 64px;
+    padding-top: 16px;
+    background: linear-gradient(to bottom, var(--bg) 70%, var(--bg-clear));
+    pointer-events: none;
+}
+
+.cur-top .pager {
+    pointer-events: auto;
+}
+
+.cur-page {
+    min-height: 0;
+    padding-top: 8px;
+    padding-bottom: 72px;
+}
+
+.cur-page .lede {
+    min-height: 0;
+}
+
+/* Are.na feed */
+.arena {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    margin-top: 48px;
+}
+
+.arena:empty {
+    display: none;
+}
+
+.blk {
+    display: block;
+}
+
+.blk img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+    background: rgb(0 0 0 / 0.04);
+}
+
+.blk-title,
+.blk-src {
+    display: block;
+    overflow-wrap: anywhere;
+}
+
+.blk-src {
+    opacity: 0.5;
+}
+
+.blk-text {
+    white-space: pre-line;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 14;
+    overflow: hidden;
+}
+
+a.blk:hover,
+a.blk:focus-visible {
+    text-decoration: none;
+}
+
+.arena-note {
+    opacity: 0.5;
 }
 
 /* ---------- Sections ---------- */

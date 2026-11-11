@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#cde3ff">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description | escape }}">
+    <meta name="author" content="Chanwoo Lee">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="alternate" hreflang="en" href="{{ site.url }}/about/">
+    <link rel="alternate" hreflang="ko" href="{{ site.url }}/ko/">
+    <link rel="alternate" hreflang="x-default" href="{{ site.url }}/about/">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Chanwoo Lee">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{{ page.title | escape }}">
+    <meta property="og:description" content="{{ page.description | escape }}">
+    <meta property="og:image" content="{{ site.url }}/resources/chanwoo.jpg">
+    <meta property="og:locale" content="{% if page.lang == 'ko' %}ko_KR{% else %}en_GB{% endif %}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" href="/fonts/ABCArealSemiMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/main.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfilePage",
+          "@id": "{{ site.url }}{{ page.url }}#profile",
+          "url": "{{ site.url }}{{ page.url }}",
+          "name": {{ page.title | jsonify }},
+          "inLanguage": "{{ page.lang | default: 'en' }}",
+          "dateModified": "{{ site.time | date_to_xmlschema }}",
+          "mainEntity": { "@id": "{{ site.url }}/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "{{ site.url }}/#person",
+          "name": "Chanwoo Lee",
+          "alternateName": "이찬우",
+          "url": "{{ site.url }}/",
+          "image": "{{ site.url }}/resources/chanwoo.jpg",
+          "description": {{ page.description | jsonify }}
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "{{ site.url }}{{ page.url }}#faq",
+          "inLanguage": "{{ page.lang | default: 'en' }}",
+          "mainEntity": [
+            {%- for item in page.faq %}
+            { "@type": "Question", "name": {{ item.q | jsonify }}, "acceptedAnswer": { "@type": "Answer", "text": {{ item.a | jsonify }} } }{% unless forloop.last %},{% endunless %}
+            {%- endfor %}
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <main class="page has-open post" id="page">
+        <h1 class="lede"><a href="/"><strong>Chanwoo</strong></a> {{ page.heading }}</h1>
+
+        <section class="sec is-open">
+            <div class="head">
+                <p class="label">{{ page.label }}</p>
+                <a class="toggle" href="/" aria-label="{{ page.back }}">
+                    <img class="dots" src="/resources/icons/plus.svg" width="32" height="32" alt="">
+                </a>
+            </div>
+            <article class="prose">
+                {{ content }}
+
+                {%- for item in page.faq %}
+                <h2>{{ item.q | escape }}</h2>
+                <p>{{ item.a | escape }}</p>
+                {%- endfor %}
+
+                <p><a href="{{ page.other_url }}" hreflang="{{ page.other_lang }}" lang="{{ page.other_lang }}">{{ page.other_label }}</a></p>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        (() => {
+            const page = document.getElementById('page');
+            const lede = page.querySelector('.lede');
+            const size = () => page.style.setProperty('--lede-h', lede.offsetHeight + 'px');
+            const onScroll = () => page.classList.toggle('is-scrolled', window.scrollY > 1);
+            size();
+            onScroll();
+            window.addEventListener('resize', size);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
+        })();
+    </script>
+</body>
+</html>

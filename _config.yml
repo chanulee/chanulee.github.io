@@ -4,3 +4,7 @@ url: https://chanwoolee.com
 markdown: kramdown
 exclude:
   - projects.json
+
+# Are.na channel shown on the curation page (pull up from the bottom of the landing).
+# Use the last part of the channel URL: https://www.are.na/your-name/THIS-PART
+arena_channel: ""
