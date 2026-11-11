@@ -5,7 +5,29 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
-    const MOVE = 700;
+
+    // The travelling section eases in and out, so what is in its way has time to clear.
+    const MOVE = 760;
+    const MOVE_CURVE = [0.6, 0, 0.1, 1];
+    const MOVE_EASE = `cubic-bezier(${MOVE_CURVE})`;
+
+    /* Time fraction at which a cubic-bezier easing reaches a given progress. */
+    const timeAt = (() => {
+        const [x1, y1, x2, y2] = MOVE_CURVE;
+        const axis = (p1, p2) => u => 3 * (1 - u) * (1 - u) * u * p1 + 3 * (1 - u) * u * u * p2 + u * u * u;
+        const X = axis(x1, x2);
+        const Y = axis(y1, y2);
+        return progress => {
+            if (progress <= 0) return 0;
+            if (progress >= 1) return 1;
+            let lo = 0, hi = 1;
+            for (let i = 0; i < 24; i++) {
+                const mid = (lo + hi) / 2;
+                if (Y(mid) < progress) lo = mid; else hi = mid;
+            }
+            return X((lo + hi) / 2);
+        };
+    })();
 
     let open = null;   // what the DOM currently shows
     let want = null;   // what the latest click asked for
@@ -66,36 +88,30 @@
         }
 
         // 2. First: where everything is right now.
+        const LINES = '.toggle, .label, .rows > li, .body li, .body p';
+        const shown = el => el.getClientRects().length > 0;
+        const linesOf = sec => [...sec.querySelectorAll(LINES)].filter(shown);
+        const rectOf = el => el.getBoundingClientRect();
+
         const wasVisible = new Map(sections.map(s => [s, visible(s)]));
-        const pageTop = page.getBoundingClientRect().top;
-        const firstTop = new Map(sections.map(s => [s, s.getBoundingClientRect().top - pageTop]));
+        const firstSec = new Map(sections.map(s => [s, rectOf(s)]));
         const targets = flipTargets();
-        const first = new Map(targets.map(el => [el, el.getBoundingClientRect()]));
+        const first = new Map(targets.map(el => [el, rectOf(el)]));
+        const firstLines = new Map(sections.map(s => [s, linesOf(s).map(el => [el, rectOf(el)])]));
 
         // 3. Last: switch state, then measure again.
         stopAll();
         apply(name);
         window.scrollTo(0, 0);
-        const last = new Map(targets.map(el => [el, el.getBoundingClientRect()]));
+        const pageTop = rectOf(page).top;
+        const last = new Map(targets.map(el => [el, rectOf(el)]));
 
-        // 4. Play.
-        sections.forEach(sec => {
-            const was = wasVisible.get(sec);
-            const is = visible(sec);
+        const leaving = sections.filter(s => wasVisible.get(s) && !visible(s));
+        const returning = sections.filter(s => !wasVisible.get(s) && visible(s));
 
-            if (was && !is) {
-                // Leaving: hold its old place and fade out.
-                sec.style.top = firstTop.get(sec) + 'px';
-                sec.animate(
-                    [{ opacity: 1, visibility: 'visible' }, { opacity: 0, visibility: 'visible' }],
-                    { duration: 220, easing: 'ease-out' }
-                );
-            } else if (!was && is) {
-                // Returning: fade in once the moving section is nearly home.
-                fade(sec, 0, 1, { duration: 420, delay: 240 });
-            }
-        });
-
+        // 4. Movers: everything that stays on screen and changes position.
+        const moveDelay = leaving.length ? 60 : 0;
+        const movers = [];
         let travel = 0;
         targets.forEach(el => {
             const sec = el.closest('.sec');
@@ -105,26 +121,111 @@
             const dx = a.left - b.left;
             const dy = a.top - b.top;
             if (!dx && !dy) return;
-            if (sec && sec.dataset.sec === name) travel = Math.max(travel, Math.abs(dy));
+            travel = Math.max(travel, Math.abs(dy));
+            movers.push({ a, b });
             el.animate(
                 [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }],
-                { duration: MOVE, easing: EASE }
+                { duration: MOVE, delay: moveDelay, easing: MOVE_EASE, fill: 'backwards' }
             );
         });
 
+        // When (in ms) do the movers sweep across a given rect? → [enter, exit] or null.
+        const GAP = 6;
+        function sweep(r) {
+            let enter = Infinity, exit = -Infinity;
+            movers.forEach(({ a, b }) => {
+                if (Math.max(a.right, b.right) < r.left || Math.min(a.left, b.left) > r.right) return;
+                // Mover top(p) = a.top + (b.top - a.top) p. Overlap while
+                // top(p) < r.bottom + GAP  and  top(p) + height > r.top - GAP.
+                const d = b.top - a.top;
+                const lo = r.top - GAP - a.height;
+                const hi = r.bottom + GAP;
+                let p0, p1;
+                if (d === 0) {
+                    if (a.top <= lo || a.top >= hi) return;
+                    p0 = 0; p1 = 1;
+                } else {
+                    const u = (lo - a.top) / d, v = (hi - a.top) / d;
+                    p0 = Math.max(0, Math.min(u, v));
+                    p1 = Math.min(1, Math.max(u, v));
+                    if (p0 >= p1) return;
+                }
+                enter = Math.min(enter, moveDelay + MOVE * timeAt(p0));
+                exit = Math.max(exit, p1 >= 1 ? Infinity : moveDelay + MOVE * timeAt(p1));
+            });
+            return enter === Infinity ? null : [enter, exit];
+        }
+        const overlaps = (a, b) =>
+            a.left < b.right && b.left < a.right && a.top < b.bottom + GAP && b.top < a.bottom + GAP;
+
+        // 5. Leaving sections hold their place and clear out line by line, from the
+        //    bottom up — and always before a mover reaches them.
+        const cleared = []; // [rect, time it is fully gone]
+        const out = [];
+        leaving.forEach(sec => {
+            sec.style.top = (firstSec.get(sec).top - pageTop) + 'px';
+            firstLines.get(sec).forEach(([el, r]) => out.push({ el, r, sec }));
+        });
+        out.sort((p, q) => q.r.top - p.r.top);
+        let rank = -1, prevTop = null, outEnd = 0;
+        out.forEach(item => {
+            if (item.r.top !== prevTop) { rank++; prevTop = item.r.top; }
+            let start = rank * 22;
+            let dur = 170;
+            const hit = sweep(item.r);
+            if (hit && start + dur > hit[0]) {
+                start = Math.max(0, hit[0] - dur);
+                dur = Math.max(40, hit[0] - start);
+            }
+            item.el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: dur, delay: start, easing: 'ease-out', fill: 'both' });
+            cleared.push([item.r, start + dur]);
+            outEnd = Math.max(outEnd, start + dur);
+        });
+        leaving.forEach(sec => {
+            const hold = sec.animate([{ visibility: 'visible' }, { visibility: 'visible' }], { duration: outEnd + 20 });
+            hold.finished.then(() => {
+                firstLines.get(sec).forEach(([el]) => el.getAnimations().forEach(a => a.cancel()));
+            }).catch(() => {});
+        });
+
+        // Anything appearing waits for the spot to be free: movers gone past,
+        // leaving lines fully faded.
+        function freeAt(r) {
+            let t = 0;
+            const hit = sweep(r);
+            if (hit && hit[1] !== Infinity) t = hit[1];
+            cleared.forEach(([c, end]) => { if (overlaps(r, c)) t = Math.max(t, end); });
+            return t;
+        }
+
+        // 6. Returning sections come back line by line, from the top down.
+        const back = [];
+        returning.forEach(sec => linesOf(sec).forEach(el => back.push({ el, r: rectOf(el) })));
+        back.sort((p, q) => p.r.top - q.r.top);
+        rank = -1; prevTop = null;
+        back.forEach(item => {
+            if (item.r.top !== prevTop) { rank++; prevTop = item.r.top; }
+            const start = Math.max(140 + rank * 26, freeAt(item.r));
+            item.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, delay: start, easing: 'ease-out', fill: 'backwards' });
+        });
+
+        // 7. The opened section's extra content rises in line by line, once the
+        //    section has landed and the space is clear.
         if (name) {
-            // The new content rises in line by line — after the section has
-            // landed, if it had to travel up the page to get here.
-            const base = travel > 40 ? 400 : 160;
+            const base = travel > 40 ? moveDelay + MOVE * 0.55 : 160;
             const lines = [];
             byName[name].querySelectorAll('.extra').forEach(el => {
                 if (el.matches('li')) lines.push(el);
                 else lines.push(...el.querySelectorAll('p, li'));
             });
+            let prev = -Infinity;
             lines.forEach((el, i) => {
+                // Never out of order: a line waits for the one above it.
+                const start = Math.max(base + Math.min(i, 24) * 28, freeAt(rectOf(el)), prev + 28);
+                prev = start;
                 el.animate(
                     [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
-                    { duration: 520, delay: base + Math.min(i, 24) * 28, easing: EASE, fill: 'backwards' }
+                    { duration: 520, delay: start, easing: EASE, fill: 'backwards' }
                 );
             });
         }
@@ -149,6 +250,11 @@
         setOpen(byName[name] ? name : null);
     });
 
+    // Sticky header: its backdrop and fade only switch on once content scrolls under it.
+    const onScroll = () => page.classList.toggle('is-scrolled', window.scrollY > 1);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
     // Deep link: /#events opens straight into that section, no animation.
     const initial = location.hash.slice(1);
     if (byName[initial]) apply(want = initial);
@@ -171,6 +277,7 @@
 
         if (!phrases.length || reduced.matches) {
             typed.classList.add('is-on');
+            page.style.setProperty('--lede-h', lede.offsetHeight + 'px');
             return;
         }
 
@@ -228,6 +335,7 @@
             });
             ruler.remove();
             lede.style.minHeight = Math.ceil(max) + 'px';
+            page.style.setProperty('--lede-h', Math.ceil(max) + 'px');
         }
 
         lockHeight();
