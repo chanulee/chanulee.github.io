@@ -9,10 +9,13 @@
     <link rel="preload" href="fonts/ABCArealSemiMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ABCArealSemiMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="main.css">
+    <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
     <main class="page" id="page">
-        <h1 class="lede"><strong>Chanwoo</strong> is a design engineer building personal computing tools.</h1>
+        <!-- The first phrase types in on load; then the phrases rotate word by word. Edit them in data-phrases, separated by "|". -->
+        <h1 class="lede" aria-label="Chanwoo is a design engineer building personal computing tools."
+            data-phrases="building personal computing tools.|thinking human centred future.|helping people to be themselves.|imagining culture around technology."><strong>Chanwoo</strong><span class="typed" aria-hidden="true"> is a design engineer building personal computing tools.</span></h1>
 
         <!-- ABOUT -->
         <section class="sec sec-about" data-sec="about">
@@ -23,7 +26,7 @@
             </div>
             <div class="body">
                 <ul class="block" data-flip>
-                    <li>Founder <span class="u">LOVELACE</span></li>
+                    <li>Founder <a class="u" href="https://lovelace-research.com" target="_blank" rel="noopener">LOVELACE</a></li>
                     <li>+ Visiting Lecturer IMPERIAL &amp; RCA</li>
                     <li>+ Adjunct Professor KARTS</li>
                 </ul>

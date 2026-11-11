@@ -85,6 +85,19 @@ a:focus-visible {
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.6px;
+    /* Hold two lines so the rotating phrase never pushes the page around. */
+    min-height: 2.4em;
+}
+
+@media (max-width: 389px) {
+    .lede {
+        min-height: 3.6em;
+    }
+}
+
+/* With JS, the sentence stays hidden until the typing starts. */
+.js .typed:not(.is-on) {
+    visibility: hidden;
 }
 
 .lede strong {

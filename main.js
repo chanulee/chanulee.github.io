@@ -153,6 +153,56 @@
     const initial = location.hash.slice(1);
     if (byName[initial]) apply(want = initial);
 
+    /* Headline: "Chanwoo" is there from the start, the rest types in. After that
+       the closing phrase is deleted word by word and rewritten word by word. */
+    (function headline() {
+        const lede = page.querySelector('.lede');
+        const typed = lede.querySelector('.typed');
+        const phrases = (lede.dataset.phrases || '').split('|').map(s => s.trim()).filter(Boolean);
+        if (!typed) return;
+        if (!phrases.length || reduced.matches) {
+            typed.classList.add('is-on');
+            return;
+        }
+
+        const stem = ' is a design engineer ';
+        const wait = ms => new Promise(r => setTimeout(r, ms));
+        const say = words => {
+            typed.textContent = stem + words.join(' ');
+            lede.setAttribute('aria-label', 'Chanwoo' + typed.textContent);
+        };
+
+        (async () => {
+            // First load: type the whole sentence, character by character.
+            const full = stem + phrases[0];
+            typed.textContent = '';
+            typed.classList.add('is-on');
+            await wait(350);
+            for (let i = 1; i <= full.length; i++) {
+                typed.textContent = full.slice(0, i);
+                const ch = full[i - 1];
+                await wait(ch === ' ' ? 55 : 26 + Math.random() * 30);
+            }
+
+            // Then rotate the phrase, a word at a time.
+            let words = phrases[0].split(' ');
+            for (let n = 1; phrases.length > 1; n = (n + 1) % phrases.length) {
+                await wait(2600);
+                while (words.length) {
+                    words.pop();
+                    say(words);
+                    await wait(110);
+                }
+                await wait(260);
+                for (const word of phrases[n].split(' ')) {
+                    words.push(word);
+                    say(words);
+                    await wait(150);
+                }
+            }
+        })();
+    })();
+
     /* Live clocks — "Seoul 21:04 KST". */
     const clocks = [...document.querySelectorAll('[data-clock]')].map(el => ({
         el,
