@@ -1,0 +1,240 @@
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ABC Areal Semi Mono';
+    src: url('fonts/ABCArealSemiMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg: #cde3ff;
+    --ink: #000;
+    --gutter: 16px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --spin: cubic-bezier(0.34, 1.4, 0.44, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'ABC Areal Semi Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.u,
+a:hover,
+a:focus-visible {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-underline-position: from-font;
+}
+
+@media (hover: none) {
+    .rows a {
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+        text-underline-position: from-font;
+    }
+}
+
+/* ---------- Page frame (Figma: iPhone 17, 402 wide, 16px gutters) ---------- */
+
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 402px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 72px var(--gutter);
+}
+
+.lede {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.6px;
+}
+
+.lede strong {
+    font-weight: 700;
+}
+
+.spacer {
+    flex: 1 0 32px;
+}
+
+/* ---------- Sections ---------- */
+
+.sec {
+    margin-top: 16px;
+}
+
+.sec[data-sec="events"] {
+    margin-top: 0;
+}
+
+.sec[data-sec="thoughts"] {
+    margin-top: 28px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+}
+
+.sec-about .head {
+    justify-content: flex-end;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* ---------- Toggle: five dots, "+" at rest, turns 45° into "×" when open ---------- */
+
+.toggle {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.toggle:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+    border-radius: 50%;
+}
+
+.dots {
+    display: block;
+    transition: transform 0.7s var(--spin);
+}
+
+.sec.is-open .dots {
+    transform: rotate(45deg);
+}
+
+.toggle:active .dots {
+    transition-duration: 0.15s;
+    scale: 0.88;
+}
+
+/* ---------- About ---------- */
+
+.body {
+    margin-top: 16px;
+}
+
+.block + .block,
+.extra + .block,
+.block + .extra {
+    margin-top: 1.3em;
+}
+
+/* ---------- Lists (events, thoughts) ---------- */
+
+.rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 1px;
+}
+
+.rows li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    line-height: 17px;
+}
+
+.rows li span:last-child:not(:first-child) {
+    flex: none;
+    text-align: right;
+}
+
+.sec.is-open .rows {
+    gap: 12px;
+    margin-top: 5px;
+}
+
+/* ---------- Open / closed states ---------- */
+
+.sec:not(.is-open) .extra {
+    display: none;
+}
+
+/* When one section is open, it takes the top slot and the others leave the flow. */
+.page.has-open .spacer {
+    display: none;
+}
+
+.page.has-open .sec {
+    margin-top: 16px;
+}
+
+.page.has-open .sec:not(.is-open) {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ---------- Wider screens ---------- */
+
+@media (min-width: 768px) {
+    :root {
+        --gutter: 24px;
+    }
+
+    .page {
+        max-width: 450px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dots {
+        transition: none;
+    }
+}
