@@ -7,7 +7,7 @@
     const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
     // The travelling section eases in and out, so what is in its way has time to clear.
-    const MOVE = 760;
+    const MOVE_MAX = 760;       // the long trip from the bottom of the page; shorter moves take less
     const MOVE_CURVE = [0.6, 0, 0.1, 1];
     const MOVE_EASE = `cubic-bezier(${MOVE_CURVE})`;
 
@@ -47,9 +47,52 @@
 
     const flipTargets = () => [page.querySelector('.lede'), ...page.querySelectorAll('[data-flip]')];
     const visible = sec => getComputedStyle(sec).visibility !== 'hidden';
-    const stopAll = () => page.getAnimations({ subtree: true })
-        .filter(a => !(a instanceof CSSTransition))
-        .forEach(a => a.cancel());
+    const stopAll = () => {
+        page.getAnimations({ subtree: true })
+            .filter(a => !(a instanceof CSSTransition) && !(a instanceof CSSAnimation))
+            .forEach(a => a.cancel());
+        unsplit();
+    };
+
+    /* Paragraphs reveal one rendered line at a time. To do that, each word is
+       wrapped for the length of the animation and grouped by the line it landed
+       on; afterwards the paragraph gets its plain text back. */
+    const splitText = new Map();   // paragraph → original HTML
+
+    function splitLines(p) {
+        if (!splitText.has(p)) {
+            splitText.set(p, p.innerHTML);
+            [...p.childNodes].forEach(node => {
+                if (node.nodeType !== 3) return;
+                const frag = document.createDocumentFragment();
+                // Break where the browser may: at spaces and after hyphens.
+                node.textContent.split(/(\s+)/).forEach(chunk => {
+                    if (!chunk) return;
+                    if (/^\s+$/.test(chunk)) { frag.append(chunk); return; }
+                    chunk.split(/(?<=-)/).forEach(word => {
+                        const span = document.createElement('span');
+                        span.className = 'wd';
+                        span.textContent = word;
+                        frag.append(span);
+                    });
+                });
+                node.replaceWith(frag);
+            });
+        }
+        const lines = [];
+        let top = null;
+        p.querySelectorAll('.wd').forEach(word => {
+            const r = word.getBoundingClientRect();
+            if (top === null || Math.abs(r.top - top) > 4) { lines.push([]); top = r.top; }
+            lines[lines.length - 1].push(word);
+        });
+        return lines;
+    }
+
+    function unsplit() {
+        splitText.forEach((html, p) => { p.innerHTML = html; });
+        splitText.clear();
+    }
 
     function fade(el, from, to, opts) {
         return el.animate(
@@ -127,6 +170,7 @@
             travel = Math.max(travel, Math.abs(dy));
             movers.push({ el, a, b, dx, dy, delay: baseDelay });
         });
+        const MOVE = Math.round(Math.min(MOVE_MAX, Math.max(440, 300 + travel * 0.8)));
         const goingUp = movers.reduce((sum, m) => sum + m.dy, 0) > 0;
         movers.sort((p, q) => goingUp ? p.a.top - q.a.top : q.a.top - p.a.top);
         let step = -1, lead = null;
@@ -224,24 +268,35 @@
         //    section has landed and the space is clear.
         if (name) {
             const base = travel > 40 ? landed + MOVE * 0.55 : 160;
+            // A "line" is a list item, or one rendered line of a paragraph.
             const lines = [];
+            const pushItem = el => {
+                if (el.matches('p')) splitLines(el).forEach(words => lines.push(words));
+                else lines.push([el]);
+            };
             byName[name].querySelectorAll('.extra').forEach(el => {
-                if (el.matches('li')) lines.push(el);
-                else lines.push(...el.querySelectorAll('p, li'));
+                if (el.matches('li')) pushItem(el);
+                else el.querySelectorAll('p, li').forEach(pushItem);
             });
             let prev = -Infinity;
-            lines.forEach((el, i) => {
-                // Never out of order: a line waits for the one above it.
-                const r = rectOf(el);
+            const playing = [];
+            lines.forEach((els, i) => {
+                const rects = els.map(rectOf);
                 // Lines rise 10px into place, so they need that much more room below.
-                const room = { left: r.left, right: r.right, top: r.top, bottom: r.bottom + 10 };
-                const start = Math.max(base + Math.min(i, 24) * 28, freeAt(room), prev + 28);
+                const room = {
+                    left: Math.min(...rects.map(r => r.left)), right: Math.max(...rects.map(r => r.right)),
+                    top: Math.min(...rects.map(r => r.top)), bottom: Math.max(...rects.map(r => r.bottom)) + 10
+                };
+                // Never out of order: a line waits for the one above it.
+                const start = Math.max(base + Math.min(i, 40) * 28, freeAt(room), prev + 28);
                 prev = start;
-                el.animate(
+                els.forEach(el => playing.push(el.animate(
                     [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
                     { duration: 520, delay: start, easing: EASE, fill: 'backwards' }
-                );
+                )));
             });
+            // Hand the paragraphs their plain text back once everything has landed.
+            Promise.all(playing.map(a => a.finished)).then(() => { if (id === run) unsplit(); }).catch(() => {});
         }
     }
 

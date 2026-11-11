@@ -533,6 +533,11 @@ a.blk:focus-visible {
     margin-top: 1.3em;
 }
 
+/* Words wrapped while a paragraph reveals line by line (see main.js). */
+.wd {
+    display: inline-block;
+}
+
 /* Clock colons blink once a second. */
 .colon {
     animation: colon 1s steps(1) infinite;
