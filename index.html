@@ -194,15 +194,16 @@
                 {%- endfor %}
             </ul>
         </section>
-
-        <!-- Pull up past the bottom (or tap) to slide over to the curation page. -->
-        <button class="pager pager-down" id="to-curation" type="button" aria-label="More: a curation of links, images and texts">
-            <img src="resources/icons/arrow.svg" width="32" height="32" alt="">
-        </button>
     </main>
     </div>
 
-    <!-- CURATION — the second page. The feed comes from an Are.na channel: set arena_channel in _config.yml. -->
+    <!-- Hidden until the page is pulled up past its bottom edge: it grows out of
+         the gap as you pull, and letting go once it is full size turns the page. -->
+    <button class="pager pager-down" id="to-curation" type="button" aria-label="More: a curation of links, images and texts">
+        <img src="resources/icons/arrow.svg" width="32" height="32" alt="">
+    </button>
+
+    <!-- CURATION — the second page. The feed comes from Are.na: set arena_group (or arena_channel) in _config.yml. -->
     <div class="view" id="curation" hidden>
         <div class="cur-top">
             <button class="pager pager-up" id="to-home" type="button" aria-label="Back to the main page">
@@ -211,7 +212,7 @@
         </div>
         <div class="page cur-page">
             <h2 class="lede">Hi! Thanks for your interest.<br>Here’s my random curation of links, images, texts, papers, etc.</h2>
-            <div class="arena" id="arena" data-channel="{{ site.arena_channel | escape }}"></div>
+            <div class="arena" id="arena" data-group="{{ site.arena_group | escape }}" data-channel="{{ site.arena_channel | escape }}"></div>
         </div>
     </div>
 

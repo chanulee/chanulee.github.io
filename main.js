@@ -272,7 +272,6 @@
 
         const GAP = 32;          // black band between the two cards
         const RADIUS = 40;
-        const COMMIT = 90;       // px of pull needed to go through
         let view = 'home';
         let busy = false;
         let drag = null;
@@ -292,13 +291,6 @@
             const dir = to === 'curation' ? 1 : -1;   // 1: cards travel upwards
             const dist = window.innerHeight + GAP;
             return { from, next, to, dir, dist };
-        }
-
-        function place(st, px) {
-            const r = Math.min(RADIUS, Math.abs(px) * 0.5) + 'px';
-            st.from.style.transform = `translateY(${-st.dir * px}px)`;
-            st.next.style.transform = `translateY(${st.dir * (st.dist - px)}px)`;
-            st.from.style.borderRadius = st.next.style.borderRadius = r;
         }
 
         function unstage(st, landed) {
@@ -322,13 +314,13 @@
             if (reduced.matches || !('animate' in Element.prototype)) return unstage(st, landed);
             const end = landed ? st.dist : 0;
             const span = Math.abs(end - px);
-            const duration = Math.max(260, Math.min(900, 420 + span * 0.55));
-            const easing = px > 0 ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'cubic-bezier(0.7, 0, 0.2, 1)';
+            const duration = landed ? 520 : 300;
+            const easing = 'cubic-bezier(0.55, 0, 0.1, 1)';
             const r0 = Math.min(RADIUS, px * 0.5);
             const frames = (el, sign, offset) => el.animate([
                 { transform: `translateY(${sign * (offset ? st.dist - px : px)}px)`, borderRadius: r0 + 'px' },
-                { borderRadius: RADIUS + 'px', offset: 0.3 },
-                { borderRadius: RADIUS + 'px', offset: 0.7 },
+                { borderRadius: RADIUS + 'px', offset: 0.25 },
+                { borderRadius: RADIUS + 'px', offset: 0.8 },
                 { transform: `translateY(${sign * (offset ? st.dist - end : end)}px)`, borderRadius: '0px' }
             ], { duration, easing, fill: 'forwards' });
             const a = frames(st.from, -st.dir, false);
@@ -354,45 +346,78 @@
             run(stage(to), 0, true);
         }
 
-        document.getElementById('to-curation').addEventListener('click', () => go('curation'));
+        const arrow = document.getElementById('to-curation');
+        arrow.addEventListener('click', () => go('curation'));
         document.getElementById('to-home').addEventListener('click', () => go('home'));
 
-        // Touch: the page follows the finger, then goes through or settles back.
+        /* Pulling past the bottom: the page lifts with resistance, and in the gap
+           underneath the arrow grows from a speck to full size. Let go once it is
+           full size and the page turns; let go earlier and everything settles back. */
+        const REACH = 150;       // the furthest the page lifts, px
+        const ARM = 92;          // lift at which the arrow is full size
+        let lift = 0;
+
+        const resist = d => REACH * (1 - Math.exp(-Math.max(0, d) / 190));
+
+        function setLift(px, settle) {
+            lift = px;
+            const home = views.home;
+            home.style.transition = arrow.style.transition = '';
+            arrow.classList.toggle('is-settling', !!settle);
+            if (settle) home.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
+            home.style.transform = px ? `translateY(${-px}px)` : '';
+            root.style.setProperty('--gap', px + 'px');
+            root.style.setProperty('--pull', Math.min(1, px / ARM).toFixed(3));
+            arrow.classList.toggle('is-armed', px >= ARM);
+        }
+
+        function turn() {
+            const px = lift;
+            setLift(0);
+            history.pushState(null, '', '#curation');
+            run(stage('curation'), px, true);
+        }
+
         window.addEventListener('touchstart', e => {
-            drag = canPull() && e.touches.length === 1 ? { y: e.touches[0].clientY, st: null, px: 0 } : null;
+            drag = canPull() && e.touches.length === 1 ? { y: e.touches[0].clientY, on: false } : null;
         }, { passive: true });
 
         window.addEventListener('touchmove', e => {
             if (!drag) return;
             const pulled = drag.y - e.touches[0].clientY;
-            if (!drag.st) {
-                if (pulled < 8) { if (pulled < -8) drag = null; return; }
-                drag.st = stage('curation');
-                busy = true;
+            if (!drag.on) {
+                if (pulled < -8) { drag = null; return; }
+                if (pulled < 6) return;
+                drag.on = true;
             }
-            drag.px = Math.max(0, pulled - 8) * 0.85;
-            place(drag.st, drag.px);
+            setLift(resist(pulled - 6));
         }, { passive: true });
 
         const release = () => {
-            if (!drag || !drag.st) { drag = null; return; }
-            const { st, px } = drag;
+            if (!drag || !drag.on) { drag = null; return; }
             drag = null;
-            const through = px > COMMIT;
-            if (through) history.pushState(null, '', '#curation');
-            run(st, px, through);
+            if (lift >= ARM) turn(); else setLift(0, true);
         };
         window.addEventListener('touchend', release, { passive: true });
         window.addEventListener('touchcancel', release, { passive: true });
 
-        // Wheel / trackpad: keep scrolling past the bottom to go through.
+        // Wheel / trackpad: scrolling on past the bottom builds the same pull;
+        // it turns the page as soon as the arrow is full size.
         let pushed = 0, idle;
         window.addEventListener('wheel', e => {
-            if (!canPull() || e.deltaY <= 0) { pushed = 0; return; }
-            pushed += e.deltaY;
+            if (!canPull() || drag) return;
+            if (e.deltaY <= 0 && !pushed) return;
+            pushed = Math.max(0, pushed + e.deltaY);
             clearTimeout(idle);
-            idle = setTimeout(() => { pushed = 0; }, 220);
-            if (pushed > 140) { pushed = 0; go('curation'); }
+            const px = resist(pushed * 0.75);
+            if (px >= ARM) {
+                pushed = 0;
+                setLift(px);
+                turn();
+                return;
+            }
+            setLift(px, true);
+            idle = setTimeout(() => { pushed = 0; setLift(0, true); }, 180);
         }, { passive: true });
 
         window.addEventListener('popstate', () => {
@@ -402,12 +427,15 @@
         return { go, get view() { return view; } };
     })();
 
-    /* Are.na feed for the curation page. Loads on first visit, then page by page. */
+    /* Are.na feed for the curation page (API v3, public channels, no key).
+       Loads on first visit, then page by page as you scroll. */
     const arena = (() => {
-        const box = document.getElementById('arena');
-        const channel = box && box.dataset.channel.trim();
+        const API = 'https://api.are.na/v3';
         const PER = 24;
-        let page = 0, done = false, loading = false, sentinel;
+        const box = document.getElementById('arena');
+        const group = box ? box.dataset.group.trim() : '';
+        const channels = box && box.dataset.channel.trim() ? [box.dataset.channel.trim()] : [];
+        let page = 0, done = false, loading = false, started = false, shown = 0, sentinel;
 
         const el = (tag, cls, text) => {
             const node = document.createElement(tag);
@@ -416,41 +444,38 @@
             return node;
         };
         const host = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
-        const pick = (...values) => values.find(v => typeof v === 'string' && v) || '';
+        const get = async path => {
+            const res = await fetch(API + path);
+            if (!res.ok) throw new Error(res.status);
+            return res.json();
+        };
 
-        // Accepts both the v2 ("contents", "class") and v3 ("data", "type") response shapes.
         function render(block) {
-            const kind = block.class || block.type || '';
-            if (kind === 'Channel') return null;
-            const img = block.image || {};
-            const src = pick(
-                img.display && img.display.url, img.large && img.large.url, img.medium && img.medium.src,
-                img.large && img.large.src, img.original && img.original.url, img.src, img.url
-            );
-            const text = typeof block.content === 'string' ? block.content
-                : pick(block.content && block.content.plain, block.content && block.content.markdown);
-            const link = pick(
-                block.source && block.source.url, block.attachment && block.attachment.url,
-                block.id ? `https://www.are.na/block/${block.id}` : ''
-            );
-            const title = pick(block.title, block.generated_title, block.source && block.source.title);
-
-            if (kind === 'Text' && text) {
+            if (block.type === 'Channel' || block.type === 'Group') return null;
+            const title = block.title || (block.source && block.source.title) || '';
+            const text = block.content && block.content.plain;
+            if (block.type === 'Text' && text) {
                 const div = el('div', 'blk');
                 div.append(el('p', 'blk-text', text));
                 return div;
             }
-            if (!src && !title) return null;
+            const img = block.image;
+            const size = img && (img.medium || img.large || img.small);
+            if (!size && !title) return null;
+
             const a = el('a', 'blk');
-            a.href = link;
+            a.href = (block.source && block.source.url) || (block.attachment && block.attachment.url)
+                || `https://www.are.na/block/${block.id}`;
             a.target = '_blank';
             a.rel = 'noopener';
-            if (src) {
+            if (size) {
                 const image = el('img');
                 image.loading = 'lazy';
                 image.decoding = 'async';
-                image.alt = title;
-                image.src = src;
+                image.alt = (img.alt_text || title);
+                if (size.width && size.height) { image.width = size.width; image.height = size.height; }
+                if (size.src_2x) image.srcset = `${size.src} 1x, ${size.src_2x} 2x`;
+                image.src = size.src;
                 a.append(image);
             }
             if (title) a.append(el('span', 'blk-title', title));
@@ -459,26 +484,38 @@
             return a;
         }
 
+        const add = blocks => blocks.forEach(block => {
+            const node = render(block);
+            if (node) { box.insertBefore(node, sentinel); shown++; }
+        });
+
         async function more() {
             if (loading || done) return;
             loading = true;
             try {
-                const url = `https://api.are.na/v2/channels/${encodeURIComponent(channel)}/contents?per=${PER}&page=${page + 1}&direction=desc&sort=position`;
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(res.status);
-                const json = await res.json();
-                const blocks = json.contents || json.data || [];
-                page++;
-                blocks.forEach(block => {
-                    const node = render(block);
-                    if (node) box.insertBefore(node, sentinel);
-                });
-                if (blocks.length < PER) done = true;
+                if (!started) {
+                    started = true;
+                    if (group) {
+                        // A group lists its channels (and any loose blocks).
+                        const json = await get(`/groups/${encodeURIComponent(group)}/contents?per=100`);
+                        json.data.forEach(item => { if (item.type === 'Channel') channels.push(item.slug); });
+                        add(json.data);
+                    }
+                }
+                // Keep going until something new is on screen or everything is read.
+                const before = shown;
+                while (channels.length && shown === before) {
+                    const json = await get(`/channels/${encodeURIComponent(channels[0])}/contents?per=${PER}&page=${page + 1}`);
+                    add(json.data);
+                    if (json.meta && json.meta.has_more_pages) page++;
+                    else { channels.shift(); page = 0; }
+                }
+                if (!channels.length) done = true;
             } catch (err) {
                 done = true;
-                if (!page) {
+                if (!shown) {
                     const note = el('a', 'arena-note', 'See the collection on Are.na');
-                    note.href = `https://www.are.na/channel/${encodeURIComponent(channel)}`;
+                    note.href = `https://www.are.na/${encodeURIComponent(group || channels[0] || '')}`;
                     note.target = '_blank';
                     note.rel = 'noopener';
                     box.insertBefore(note, sentinel);
@@ -489,13 +526,13 @@
         }
 
         function load() {
-            if (!channel || sentinel) return;
+            if ((!group && !channels.length) || sentinel) return;
             sentinel = el('div', 'arena-end');
             box.append(sentinel);
             if ('IntersectionObserver' in window) {
                 new IntersectionObserver(entries => {
                     if (entries.some(entry => entry.isIntersecting)) more();
-                }, { rootMargin: '600px' }).observe(sentinel);
+                }, { rootMargin: '800px' }).observe(sentinel);
             }
             more();
         }

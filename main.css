@@ -251,14 +251,6 @@ html.is-paging .view {
     will-change: transform;
 }
 
-#page {
-    padding-bottom: 2px;
-}
-
-#page.has-open {
-    padding-bottom: 36px;
-}
-
 .pager {
     display: block;
     width: 32px;
@@ -275,14 +267,36 @@ html.is-paging .view {
     transition: transform 0.5s var(--spin);
 }
 
+/* Lives in the gap that opens under the page as it is pulled up.
+   --pull runs 0 → 1 with the pull; main.js sets it and the gap height. */
 .pager-down {
-    flex: none;
-    margin: 38px auto 0;
-    animation: pager-in 0.6s 0.4s both;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 4;
+    margin-left: -16px;
+    opacity: calc(var(--pull, 0) * 1.4 - 0.15);
+    transform: translateY(calc(var(--gap, 0px) * -0.5 + 16px)) scale(calc(0.1 + var(--pull, 0) * 0.9));
+    pointer-events: none;
 }
 
-#page.has-open .pager-down {
-    display: none;
+.pager-down.is-armed img {
+    transform: scale(1.25);
+    transition: transform 0.25s var(--spin);
+}
+
+.pager-down.is-settling {
+    transition: opacity 0.25s ease, transform 0.35s var(--ease);
+}
+
+.pager-down:focus-visible {
+    opacity: 1;
+    transform: translateY(-8px);
+    pointer-events: auto;
+}
+
+html.is-paging .pager-down {
+    visibility: hidden;
 }
 
 .pager-up img {
@@ -290,10 +304,6 @@ html.is-paging .view {
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .pager-down:hover img {
-        transform: translateY(3px);
-    }
-
     .pager-up:hover img {
         transform: rotate(180deg) translateY(3px);
     }
@@ -303,10 +313,6 @@ html.is-paging .view {
     outline: 1px solid currentColor;
     outline-offset: 4px;
     border-radius: 50%;
-}
-
-@keyframes pager-in {
-    from { opacity: 0; }
 }
 
 /* The back arrow floats at the top; content fades out beneath it. */

@@ -5,6 +5,9 @@ markdown: kramdown
 exclude:
   - projects.json
 
-# Are.na channel shown on the curation page (pull up from the bottom of the landing).
-# Use the last part of the channel URL: https://www.are.na/your-name/THIS-PART
+# Are.na feed on the curation page (pull up past the bottom of the landing).
+# arena_group: every public channel of a group, e.g. https://www.are.na/ram-rvk1qihvva
+# arena_channel: a single channel instead, e.g. the last part of https://www.are.na/name/THIS-PART
+# No API key is needed (and none should ever be put in this repository): public channels only.
+arena_group: ram-rvk1qihvva
 arena_channel: ""
