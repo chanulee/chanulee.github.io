@@ -22,6 +22,25 @@
     font-display: swap;
 }
 
+/* Korean text falls back to Favorit Hangul; only fetched when Hangul is on screen. */
+@font-face {
+    font-family: 'ABC Favorit Hangul';
+    src: url('fonts/ABCFavoritHangul-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+
+@font-face {
+    font-family: 'ABC Favorit Hangul';
+    src: url('fonts/ABCFavoritHangul-Medium.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+
 :root {
     --bg: #cde3ff;
     --bg-clear: rgb(205 227 255 / 0);
@@ -44,7 +63,7 @@ html {
 }
 
 body {
-    font-family: 'ABC Areal Semi Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-family: 'ABC Areal Semi Mono', 'ABC Favorit Hangul', ui-monospace, 'SF Mono', Menlo, monospace;
     font-size: 14px;
     line-height: 1.3;
     color: var(--ink);
@@ -106,6 +125,7 @@ a:focus-visible {
     flex-direction: column;
     width: 100%;
     max-width: 402px;
+    margin: 0 auto;
     min-height: 100vh;
     min-height: 100svh;
     padding: 72px var(--gutter) 36px;
@@ -187,6 +207,253 @@ a:focus-visible {
 
 .spacer {
     flex: 1 0 32px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ---------- Two pages: home and curation ----------
+   Moving between them slides both vertically, as one continuous sheet. */
+
+.view {
+    min-height: 100vh;
+    min-height: 100svh;
+    background: var(--bg);
+}
+
+.view[hidden] {
+    display: none;
+}
+
+html.is-paging,
+html.is-paging body {
+    overflow: hidden;
+}
+
+html.is-paging .view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.pager {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.pager img {
+    display: block;
+    transition: transform 0.5s var(--spin);
+}
+
+/* Hidden at rest. Pulling past the bottom of the page grows it from a speck to
+   full size: --pull runs 0 → 1, --gap is the browser's own overscroll, if any. */
+.pager-down {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 4;
+    margin-left: -16px;
+    opacity: calc(var(--pull, 0) * 1.4 - 0.15);
+    /* Sits in the page's bottom margin; rides up into the gap where the browser rubber-bands. */
+    transform: translateY(calc(min(-2px, var(--gap, 0px) * -0.5 + 16px))) scale(calc(0.1 + var(--pull, 0) * 0.9));
+    pointer-events: none;
+}
+
+.pager-down.is-armed img {
+    transform: scale(1.25);
+    transition: transform 0.25s var(--spin);
+}
+
+.pager-down.is-settling {
+    transition: opacity 0.25s ease, transform 0.35s var(--ease);
+}
+
+.pager-down:focus-visible {
+    opacity: 1;
+    transform: translateY(-8px);
+    pointer-events: auto;
+}
+
+html.is-paging .pager-down {
+    visibility: hidden;
+}
+
+.pager-up img {
+    transform: rotate(180deg);
+}
+
+/* The travelling arrow during a page turn; the real ones wait out of sight. */
+.pager-ghost {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 20;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    pointer-events: none;
+}
+
+html.is-paging .pager-up {
+    visibility: hidden;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .pager-up:hover img {
+        transform: rotate(180deg) translateY(3px);
+    }
+}
+
+.pager:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+    border-radius: 50%;
+}
+
+/* The back arrow floats at the top; content fades out beneath it. */
+.cur-top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    height: 64px;
+    padding-top: 16px;
+    background: linear-gradient(to bottom, var(--bg) 70%, var(--bg-clear));
+    pointer-events: none;
+}
+
+.cur-top .pager {
+    pointer-events: auto;
+}
+
+.cur-page {
+    min-height: 0;
+    padding-top: 8px;
+    padding-bottom: 72px;
+}
+
+.cur-page .lede {
+    min-height: 0;
+}
+
+/* Are.na feed */
+.arena-tools {
+    margin-top: 24px;
+}
+
+.cols {
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    opacity: 0.5;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cols:hover,
+.cols:focus-visible {
+    opacity: 1;
+    outline: none;
+}
+
+/* Columns are built by main.js, which keeps them level as blocks arrive. */
+.arena {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.arena-col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.arena[data-cols="1"] .arena-col {
+    gap: 28px;
+}
+
+.blk {
+    display: block;
+}
+
+.blk img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: rgb(0 0 0 / 0.04);
+}
+
+.blk img:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.blk-title,
+.blk-src {
+    display: block;
+    overflow-wrap: anywhere;
+}
+
+.blk-src {
+    opacity: 0.5;
+}
+
+/* Text blocks sit in a box, the way Are.na shows them: a square in two
+   columns, a shallower one in a single column. Long notes fade out at the bottom. */
+.blk-note {
+    aspect-ratio: 1;
+    padding: 12px;
+    border: 1px solid rgb(0 0 0 / 0.18);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.arena[data-cols="1"] .blk-note {
+    aspect-ratio: 16 / 9;
+}
+
+.blk-text {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+}
+
+a.blk:hover,
+a.blk:focus-visible {
+    text-decoration: none;
+}
+
+.arena-note {
+    opacity: 0.5;
 }
 
 /* ---------- Sections ---------- */

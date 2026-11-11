@@ -258,8 +258,357 @@
 
     window.addEventListener('hashchange', () => {
         const name = location.hash.slice(1);
+        if (name === 'curation' || (pager && pager.view === 'curation')) return;
         setOpen(byName[name] ? name : null);
     });
+
+    /* ---------- Two pages: home ⇄ curation ----------
+       Pull up past the bottom of the home page and the two pages slide up as one
+       continuous sheet. The arrow at the top slides back. */
+    const pager = (() => {
+        const root = document.documentElement;
+        const views = { home: document.getElementById('home'), curation: document.getElementById('curation') };
+        if (!views.curation) return null;
+
+        let view = 'home';
+        let busy = false;
+        let drag = null;
+
+        const atBottom = () => window.scrollY + window.innerHeight >= root.scrollHeight - 2;
+        const canPull = () => view === 'home' && !busy && !want && atBottom();
+
+        // Pin both pages to the screen so they can be moved as cards.
+        function stage(to) {
+            const from = views[view];
+            const next = views[to];
+            const y = window.scrollY;
+            next.hidden = false;
+            root.classList.add('is-paging');
+            from.scrollTop = y;
+            next.scrollTop = to === 'home' ? next.scrollHeight : 0;
+            const dir = to === 'curation' ? 1 : -1;   // 1: cards travel upwards
+            const dist = window.innerHeight;
+            return { from, next, to, dir, dist };
+        }
+
+        function unstage(st, landed) {
+            [st.from, st.next].forEach(el => { el.style.transform = ''; });
+            const shown = landed ? st.next : st.from;
+            const gone = landed ? st.from : st.next;
+            const y = shown.scrollTop;
+            gone.hidden = true;
+            root.classList.remove('is-paging');
+            window.scrollTo(0, y);
+            if (landed) {
+                view = st.to;
+                if (view === 'curation') arena.load();
+            }
+            busy = false;
+        }
+
+        // Animate from a pull of `px` to fully across (or back to rest).
+        function run(st, px, landed, lift0 = false) {
+            busy = true;
+            if (reduced.matches || !('animate' in Element.prototype)) return unstage(st, landed);
+            const end = landed ? st.dist : 0;
+            const span = Math.abs(end - px);
+            const duration = landed ? 520 : 300;
+            const easing = 'cubic-bezier(0.55, 0, 0.1, 1)';
+            const frames = (el, sign, offset) => el.animate([
+                { transform: `translateY(${sign * (offset ? st.dist - px : px)}px)` },
+                { transform: `translateY(${sign * (offset ? st.dist - end : end)}px)` }
+            ], { duration, easing, fill: 'forwards' });
+            const a = frames(st.from, -st.dir, false);
+            const b = frames(st.next, st.dir, true);
+
+            // One arrow makes the trip too: from the bottom edge to the top (or back),
+            // turning half a circle on the way so it always points where it leads.
+            let ghost;
+            if (landed) {
+                const bottom = window.innerHeight - 34, top = 16;
+                const up = st.dir === 1;
+                ghost = document.createElement('img');
+                ghost.src = arrow.querySelector('img').src;
+                ghost.className = 'pager-ghost';
+                ghost.alt = '';
+                document.body.append(ghost);
+                ghost.animate(up ? [
+                    { transform: `translateY(${bottom}px) rotate(0deg) scale(${px || lift0 ? 1 : 0.1})`, opacity: px || lift0 ? 1 : 0 },
+                    { opacity: 1, offset: 0.25 },
+                    { transform: `translateY(${top}px) rotate(180deg) scale(1)`, opacity: 1 }
+                ] : [
+                    { transform: `translateY(${top}px) rotate(180deg) scale(1)`, opacity: 1 },
+                    { transform: `translateY(${bottom - 60}px) rotate(340deg) scale(0.9)`, opacity: 1, offset: 0.8 },
+                    { transform: `translateY(${bottom}px) rotate(360deg) scale(0.1)`, opacity: 0 }
+                ], { duration, easing: up ? easing : 'cubic-bezier(0.55, 0, 0.3, 1)', fill: 'forwards' });
+            }
+
+            Promise.all([a.finished, b.finished]).catch(() => {}).then(() => {
+                a.cancel(); b.cancel();
+                if (ghost) ghost.remove();
+                unstage(st, landed);
+            });
+        }
+
+        function go(to, { push = true, instant = false } = {}) {
+            if (to === view || busy) return;
+            if (to === 'curation' && want) return;
+            if (push) history.pushState(null, '', to === 'curation' ? '#curation' : location.pathname + location.search);
+            if (instant) {
+                views[view].hidden = true;
+                views[to].hidden = false;
+                view = to;
+                window.scrollTo(0, to === 'home' ? root.scrollHeight : 0);
+                if (to === 'curation') arena.load();
+                return;
+            }
+            run(stage(to), 0, true);
+        }
+
+        const arrow = document.getElementById('to-curation');
+        arrow.addEventListener('click', () => go('curation'));
+        document.getElementById('to-home').addEventListener('click', () => go('home'));
+
+        /* Pulling past the bottom grows the arrow from a speck to full size; let go
+           once it is full size and the page turns. The page itself is never moved
+           here: where the browser rubber-bands (iOS, macOS) that motion is the
+           lift, and everything else about scrolling stays native — bounce,
+           pull-to-refresh at the top, momentum. */
+        const ARM = 92;          // pull at which the arrow is full size
+        let pull = 0;
+
+        const resist = d => 150 * (1 - Math.exp(-Math.max(0, d) / 190));
+        const overscroll = () => Math.max(0, window.scrollY + window.innerHeight - root.scrollHeight);
+
+        function setPull(px, settle) {
+            pull = px;
+            arrow.classList.toggle('is-settling', !!settle);
+            root.style.setProperty('--gap', overscroll() + 'px');
+            root.style.setProperty('--pull', Math.min(1, px / ARM).toFixed(3));
+            arrow.classList.toggle('is-armed', px >= ARM);
+        }
+
+        function turn() {
+            const px = overscroll();
+            const showing = pull > ARM * 0.5;
+            setPull(0);
+            history.pushState(null, '', '#curation');
+            run(stage('curation'), px, true, showing);
+        }
+
+        window.addEventListener('touchstart', e => {
+            drag = canPull() && e.touches.length === 1 ? { y: e.touches[0].clientY, on: false } : null;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', e => {
+            if (!drag) return;
+            const pulled = drag.y - e.touches[0].clientY;
+            if (!drag.on) {
+                if (pulled < -8) { drag = null; return; }
+                if (pulled < 6) return;
+                drag.on = true;
+            }
+            setPull(resist(pulled - 6));
+        }, { passive: true });
+
+        const release = () => {
+            if (!drag || !drag.on) { drag = null; return; }
+            drag = null;
+            if (pull >= ARM) turn(); else setPull(0, true);
+        };
+        window.addEventListener('touchend', release, { passive: true });
+        window.addEventListener('touchcancel', release, { passive: true });
+
+        // Wheel / trackpad: scrolling on past the bottom builds the same pull;
+        // it turns the page as soon as the arrow is full size.
+        let pushed = 0, idle;
+        window.addEventListener('wheel', e => {
+            if (!canPull() || drag) return;
+            if (e.deltaY <= 0 && !pushed) return;
+            pushed = Math.max(0, pushed + e.deltaY);
+            clearTimeout(idle);
+            const px = resist(pushed * 0.75);
+            if (px >= ARM) {
+                pushed = 0;
+                turn();
+                return;
+            }
+            setPull(px, true);
+            idle = setTimeout(() => { pushed = 0; setPull(0, true); }, 180);
+        }, { passive: true });
+
+        window.addEventListener('popstate', () => {
+            go(location.hash === '#curation' ? 'curation' : 'home', { push: false });
+        });
+
+        return { go, get view() { return view; } };
+    })();
+
+    /* Are.na feed for the curation page (API v3, public channels, no key).
+       Loads on first visit, then page by page as you scroll. Images come as
+       Are.na's small thumbnails, sized to the column they sit in. */
+    const arena = (() => {
+        const API = 'https://api.are.na/v3';
+        const PER = 24;
+        const box = document.getElementById('arena');
+        const toggle = document.getElementById('arena-cols');
+        const group = box ? box.dataset.group.trim() : '';
+        const channels = box && box.dataset.channel.trim() ? [box.dataset.channel.trim()] : [];
+        const items = [];        // { node, weight } in feed order
+        let cols = 2;
+        try { cols = localStorage.getItem('arena-cols') === '1' ? 1 : 2; } catch (e) {}
+        let columns = [], heights = [];
+        let page = 0, done = false, loading = false, started = false, sentinel;
+
+        const el = (tag, cls, text) => {
+            const node = document.createElement(tag);
+            if (cls) node.className = cls;
+            if (text) node.textContent = text;
+            return node;
+        };
+        const host = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
+        const get = async path => {
+            const res = await fetch(API + path);
+            if (!res.ok) throw new Error(res.status);
+            return res.json();
+        };
+        // How wide an image is on screen, so the browser picks the smallest file that is sharp.
+        const sizes = () => cols === 2 ? '(min-width: 768px) 197px, 46vw' : '(min-width: 768px) 402px, 92vw';
+
+        function render(block) {
+            if (block.type === 'Channel' || block.type === 'Group') return null;
+            // Uploads get their file name or a UUID as a title; those are not captions.
+            const named = block.title || (block.source && block.source.title) || '';
+            const title = /^[0-9a-f]{8}-[0-9a-f-]{20,}$|\.(jpe?g|png|gif|webp|heic|pdf|mp4|mov)$|^(img|dsc|screenshot)[ _-]?\d/i.test(named.trim()) ? '' : named;
+            const text = block.content && block.content.plain;
+            if (block.type === 'Text' && text) {
+                const div = el('div', 'blk blk-note');
+                div.append(el('p', 'blk-text', text));
+                return { node: div, weight: 1 };
+            }
+            const img = block.image;
+            const small = img && (img.small || img.medium);
+            if (!small && !title) return null;
+
+            // Only blocks that point somewhere of their own are links; nothing opens Are.na.
+            const href = (block.source && block.source.url) || (block.attachment && block.attachment.url);
+            const a = el(href ? 'a' : 'div', 'blk');
+            if (href) {
+                a.href = href;
+                a.target = '_blank';
+                a.rel = 'noopener';
+            }
+            let weight = title ? 0.15 : 0;
+            if (small) {
+                const image = el('img');
+                const w = +small.width, h = +small.height;
+                image.loading = 'lazy';
+                image.decoding = 'async';
+                image.alt = img.alt_text || title;
+                if (w && h) { image.width = w; image.height = h; weight += h / w; } else weight += 1;
+                const set = [];
+                if (w) {
+                    set.push(`${small.src} ${w}w`);
+                    if (small.src_2x) set.push(`${small.src_2x} ${w * 2}w`);
+                    if (img.medium && +img.medium.width > w * 2) set.push(`${img.medium.src} ${+img.medium.width}w`);
+                }
+                if (set.length) { image.srcset = set.join(', '); image.sizes = sizes(); }
+                image.src = small.src;
+                a.append(image);
+            }
+            if (title) a.append(el('span', 'blk-title', title));
+            const from = block.source && block.source.url ? host(block.source.url) : '';
+            if (from) a.append(el('span', 'blk-src', from));
+            return { node: a, weight };
+        }
+
+        // Each block goes to whichever column is shorter, so they stay level.
+        function place(item) {
+            let k = 0;
+            heights.forEach((h, i) => { if (h < heights[k]) k = i; });
+            columns[k].append(item.node);
+            heights[k] += item.weight;
+        }
+
+        function layout() {
+            box.dataset.cols = cols;
+            box.textContent = '';
+            columns = Array.from({ length: cols }, () => el('div', 'arena-col'));
+            heights = columns.map(() => 0);
+            box.append(...columns);
+            items.forEach(item => {
+                const image = item.node.querySelector('img[srcset]');
+                if (image) image.sizes = sizes();
+                place(item);
+            });
+            if (toggle) toggle.textContent = cols === 2 ? '2 columns' : '1 column';
+        }
+
+        const add = blocks => blocks.forEach(block => {
+            const item = render(block);
+            if (item) { items.push(item); place(item); }
+        });
+
+        if (toggle) toggle.addEventListener('click', () => {
+            cols = cols === 2 ? 1 : 2;
+            try { localStorage.setItem('arena-cols', cols); } catch (e) {}
+            layout();
+        });
+
+        async function more() {
+            if (loading || done) return;
+            loading = true;
+            try {
+                if (!started) {
+                    started = true;
+                    if (group) {
+                        // A group lists its channels (and any loose blocks).
+                        const json = await get(`/groups/${encodeURIComponent(group)}/contents?per=100`);
+                        json.data.forEach(item => { if (item.type === 'Channel') channels.push(item.slug); });
+                        add(json.data);
+                    }
+                }
+                // Keep going until something new is on screen or everything is read.
+                const before = items.length;
+                while (channels.length && items.length === before) {
+                    const json = await get(`/channels/${encodeURIComponent(channels[0])}/contents?per=${PER}&page=${page + 1}`);
+                    add(json.data);
+                    if (json.meta && json.meta.has_more_pages) page++;
+                    else { channels.shift(); page = 0; }
+                }
+                if (!channels.length) done = true;
+            } catch (err) {
+                done = true;
+                if (!items.length) {
+                    const note = el('a', 'arena-note', 'See the collection on Are.na');
+                    note.href = `https://www.are.na/${encodeURIComponent(group || channels[0] || '')}`;
+                    note.target = '_blank';
+                    note.rel = 'noopener';
+                    box.after(note);
+                }
+            }
+            loading = false;
+            if (toggle) toggle.hidden = !items.length;
+            if (done && sentinel) sentinel.remove();
+            // Still near the end of a short page: fetch the next one.
+            else if (sentinel && sentinel.getBoundingClientRect().top < window.innerHeight + 800) more();
+        }
+
+        function load() {
+            if ((!group && !channels.length) || sentinel) return;
+            layout();
+            sentinel = el('div', 'arena-end');
+            box.after(sentinel);
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(entries => {
+                    if (entries.some(entry => entry.isIntersecting)) more();
+                }, { rootMargin: '800px' }).observe(sentinel);
+            }
+            more();
+        }
+
+        return { load };
+    })();
 
     // Sticky header: its backdrop and fade only switch on once content scrolls under it.
     const onScroll = () => page.classList.toggle('is-scrolled', window.scrollY > 1);
@@ -269,6 +618,7 @@
     // Deep link: /#events opens straight into that section, no animation.
     const initial = location.hash.slice(1);
     if (byName[initial]) apply(want = initial);
+    if (initial === 'curation' && pager) pager.go('curation', { push: false, instant: true });
 
     /* Headline: "Chanwoo" is there from the start and the rest animates in.
        After that the closing phrase animates out and the next one animates in.

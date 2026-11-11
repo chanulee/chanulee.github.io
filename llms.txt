@@ -1,0 +1,38 @@
+# Chanwoo Lee (이찬우)
+
+> Chanwoo Lee (이찬우) is a design engineer and interaction designer based in Seoul and London, working on human-AI interaction and human-computer interaction (HCI). He builds personal computing tools for human agency. This is his personal website: https://chanwoolee.com
+
+## Profile pages
+
+- [About Chanwoo Lee (English)](https://chanwoolee.com/about/): full profile with questions and answers.
+- [이찬우 소개 (한국어)](https://chanwoolee.com/ko/): 한국어 프로필과 문답.
+
+## Who he is
+
+- Design engineer and interaction designer; focus on human-AI interaction, HCI, human-centred AI, interfaces and systems for human agency and intentional living.
+- Founder of Lovelace Research (https://lovelace-research.com).
+- Visiting Lecturer at Imperial College London and the Royal College of Art (RCA), teaching Innovation Design Engineering.
+- Adjunct Professor at Korea National University of the Arts (K-Arts, 한국예술종합학교).
+- Education: MSc, Imperial College London, and MA, Royal College of Art (Innovation Design Engineering).
+- Based in Seoul and London. Works in English and Korean.
+
+## Worked on projects with
+
+OpenAI, Pentagram, Meta, Snap, OPPO, LG, MODEM, Map Project Office, British Council, Ministry of Science and ICT (Korea), Saatchi Gallery.
+
+## Writing and press
+
+- [What's next in Seoul Design?](https://www.slanted.de/whats-next-in-seoul-design/): essay for Slanted.
+- [Digital Doubles](https://modemworks.com/projects/digital-doubles/): project with MODEM.
+- [선배에게 묻다 - 디자인 엔지니어 & 연구자](https://design.co.kr/young-meet/133994/): interview (Korean).
+
+## 한국어 소개
+
+이찬우(Chanwoo Lee)는 서울과 런던을 기반으로 활동하는 디자인 엔지니어이자 인터랙션 디자이너다. 휴먼-AI 인터랙션과 HCI(인간-컴퓨터 상호작용) 분야에서 사람의 주체성을 위한 개인 컴퓨팅 도구를 만든다. 러브레이스 리서치(Lovelace Research) 창립자이며, 임페리얼 칼리지 런던과 영국 왕립예술대학(RCA)에서 방문 강사로 Innovation Design Engineering을 가르치고, 한국예술종합학교 겸임교수로 재직 중이다. 임페리얼 칼리지 런던 MSc, 왕립예술대학 MA 학위를 받았으며 OpenAI, 펜타그램(Pentagram), Meta, Snap, OPPO, LG, MODEM, Map Project Office 등과 프로젝트를 진행했다.
+
+## Contact
+
+- Email: hello@chanwoolee.com
+- LinkedIn: https://www.linkedin.com/in/chanulee/
+- Instagram: https://instagram.com/chnwlee
+- GitHub: https://github.com/chanulee
