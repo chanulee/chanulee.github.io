@@ -13,8 +13,9 @@
 </head>
 <body>
     <main class="page" id="page">
-        <!-- The first phrase types in on load; then the phrases rotate word by word. Edit them in data-phrases, separated by "|". -->
-        <h1 class="lede" aria-label="Chanwoo is a design engineer building personal computing tools."
+        <!-- The sentence animates in on load; then the closing phrase rotates. Edit the phrases in data-phrases, separated by "|".
+             data-variant picks the animation: "a" typewriter, "b" soft blur per letter, "c" soft blur per word. (?h=a|b|c overrides it.) -->
+        <h1 class="lede" data-variant="b" aria-label="Chanwoo is a design engineer building personal computing tools."
             data-phrases="building personal computing tools.|thinking human centred future.|helping people to be themselves.|imagining culture around technology."><strong>Chanwoo</strong><span class="typed" aria-hidden="true"> is a design engineer building personal computing tools.</span></h1>
 
         <!-- ABOUT -->
@@ -57,7 +58,7 @@
                 </div>
 
                 <ul class="block" data-flip>
-                    <li><a href="mailto:hello@chanwoolee.com">hello@chanwoolee.com</a></li>
+                    <li><button class="copy" type="button" data-copy="hello@chanwoolee.com" aria-live="polite">hello@chanwoolee.com</button></li>
                     <li><a href="https://instagram.com/chnwlee" target="_blank" rel="noopener">instagram</a></li>
                     <li class="extra"><a href="https://github.com/chanulee" target="_blank" rel="noopener">github</a></li>
                 </ul>
@@ -97,7 +98,7 @@
             </div>
             <ul class="rows" id="thoughts-list">
                 <li data-flip><span>Digital Renaissance Manifesto</span></li>
-                <li data-flip><span>What’s Next in Seoul Design?</span></li>
+                <li data-flip><span><a href="https://www.slanted.de/whats-next-in-seoul-design/" target="_blank" rel="noopener">What’s Next in Seoul Design?</a></span></li>
                 <li data-flip><span><a href="projects/digital-double.html">Digital Doubles w/ MODEM</a></span></li>
             </ul>
         </section>

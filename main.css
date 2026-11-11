@@ -59,12 +59,33 @@ a:focus-visible {
     text-underline-position: from-font;
 }
 
-@media (hover: none) {
-    .rows a {
-        text-decoration: underline;
-        text-decoration-skip-ink: none;
-        text-underline-position: from-font;
-    }
+/* List links stay plain, even on hover. */
+.rows a:hover,
+.rows a:focus-visible {
+    text-decoration: none;
+}
+
+/* Tap-to-copy email */
+.copy {
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.copy:hover,
+.copy:focus-visible {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    text-underline-position: from-font;
+    outline: none;
+}
+
+.copy.is-copied {
+    text-decoration: none;
 }
 
 /* ---------- Page frame (Figma: iPhone 17, 402 wide, 16px gutters) ---------- */
@@ -77,7 +98,7 @@ a:focus-visible {
     max-width: 402px;
     min-height: 100vh;
     min-height: 100svh;
-    padding: 72px var(--gutter);
+    padding: 72px var(--gutter) 36px;
 }
 
 .lede {
@@ -85,14 +106,64 @@ a:focus-visible {
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.6px;
-    /* Hold two lines so the rotating phrase never pushes the page around. */
+    /* Fallback; main.js locks this to the tallest phrase at the current width. */
     min-height: 2.4em;
 }
 
-@media (max-width: 389px) {
-    .lede {
-        min-height: 3.6em;
-    }
+/* Headline letters. Every letter of the current phrase is always laid out, so
+   line breaks never move while it animates; .on only controls visibility. */
+.typed .w {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.typed .c {
+    display: inline-block;
+}
+
+/* a — typewriter: letters snap on and off. */
+.lede[data-variant="a"] .c {
+    opacity: 0;
+}
+
+.lede[data-variant="a"] .c.on {
+    opacity: 1;
+}
+
+/* b — each letter eases in out of a blur, and back into it. */
+.lede[data-variant="b"] .c {
+    opacity: 0;
+    filter: blur(6px);
+    transition: opacity 0.32s ease-in, filter 0.32s ease-in;
+}
+
+.lede[data-variant="b"] .c.on {
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 0.6s ease-out, filter 0.6s ease-out;
+}
+
+/* c — the same, a whole word at a time. */
+.lede[data-variant="c"] .w {
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 0.4s ease-in, filter 0.4s ease-in;
+}
+
+.lede[data-variant="c"] .w.on {
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 0.8s ease-out, filter 0.8s ease-out;
+}
+
+.measure {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 0;
+    min-height: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 /* With JS, the sentence stays hidden until the typing starts. */
