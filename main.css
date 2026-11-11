@@ -301,6 +301,22 @@ html.is-paging .pager-down {
     transform: rotate(180deg);
 }
 
+/* The travelling arrow during a page turn; the real ones wait out of sight. */
+.pager-ghost {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 20;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    pointer-events: none;
+}
+
+html.is-paging .pager-up {
+    visibility: hidden;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .pager-up:hover img {
         transform: rotate(180deg) translateY(3px);
@@ -389,8 +405,11 @@ html.is-paging .pager-down {
     display: block;
     width: 100%;
     height: auto;
-    margin-bottom: 8px;
     background: rgb(0 0 0 / 0.04);
+}
+
+.blk img:not(:last-child) {
+    margin-bottom: 8px;
 }
 
 .blk-title,
@@ -403,12 +422,29 @@ html.is-paging .pager-down {
     opacity: 0.5;
 }
 
-.blk-text {
-    white-space: pre-line;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 14;
+/* Text blocks sit in a box, the way Are.na shows them: a square in two
+   columns, a shallower one in a single column. Long notes fade out at the bottom. */
+.blk-note {
+    aspect-ratio: 1;
+    padding: 12px;
+    border: 1px solid rgb(0 0 0 / 0.18);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
+}
+
+.arena[data-cols="1"] .blk-note {
+    aspect-ratio: 16 / 9;
+}
+
+.blk-text {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent);
 }
 
 a.blk:hover,

@@ -307,7 +307,7 @@
         }
 
         // Animate from a pull of `px` to fully across (or back to rest).
-        function run(st, px, landed) {
+        function run(st, px, landed, lift0 = false) {
             busy = true;
             if (reduced.matches || !('animate' in Element.prototype)) return unstage(st, landed);
             const end = landed ? st.dist : 0;
@@ -320,8 +320,32 @@
             ], { duration, easing, fill: 'forwards' });
             const a = frames(st.from, -st.dir, false);
             const b = frames(st.next, st.dir, true);
+
+            // One arrow makes the trip too: from the bottom edge to the top (or back),
+            // turning half a circle on the way so it always points where it leads.
+            let ghost;
+            if (landed) {
+                const bottom = window.innerHeight - 34, top = 16;
+                const up = st.dir === 1;
+                ghost = document.createElement('img');
+                ghost.src = arrow.querySelector('img').src;
+                ghost.className = 'pager-ghost';
+                ghost.alt = '';
+                document.body.append(ghost);
+                ghost.animate(up ? [
+                    { transform: `translateY(${bottom}px) rotate(0deg) scale(${px || lift0 ? 1 : 0.1})`, opacity: px || lift0 ? 1 : 0 },
+                    { opacity: 1, offset: 0.25 },
+                    { transform: `translateY(${top}px) rotate(180deg) scale(1)`, opacity: 1 }
+                ] : [
+                    { transform: `translateY(${top}px) rotate(180deg) scale(1)`, opacity: 1 },
+                    { transform: `translateY(${bottom - 60}px) rotate(340deg) scale(0.9)`, opacity: 1, offset: 0.8 },
+                    { transform: `translateY(${bottom}px) rotate(360deg) scale(0.1)`, opacity: 0 }
+                ], { duration, easing: up ? easing : 'cubic-bezier(0.55, 0, 0.3, 1)', fill: 'forwards' });
+            }
+
             Promise.all([a.finished, b.finished]).catch(() => {}).then(() => {
                 a.cancel(); b.cancel();
+                if (ghost) ghost.remove();
                 unstage(st, landed);
             });
         }
@@ -366,9 +390,10 @@
 
         function turn() {
             const px = overscroll();
+            const showing = pull > ARM * 0.5;
             setPull(0);
             history.pushState(null, '', '#curation');
-            run(stage('curation'), px, true);
+            run(stage('curation'), px, true, showing);
         }
 
         window.addEventListener('touchstart', e => {
@@ -457,20 +482,23 @@
             const title = /^[0-9a-f]{8}-[0-9a-f-]{20,}$|\.(jpe?g|png|gif|webp|heic|pdf|mp4|mov)$|^(img|dsc|screenshot)[ _-]?\d/i.test(named.trim()) ? '' : named;
             const text = block.content && block.content.plain;
             if (block.type === 'Text' && text) {
-                const div = el('div', 'blk');
+                const div = el('div', 'blk blk-note');
                 div.append(el('p', 'blk-text', text));
-                return { node: div, weight: 0.6 };
+                return { node: div, weight: 1 };
             }
             const img = block.image;
             const small = img && (img.small || img.medium);
             if (!small && !title) return null;
 
-            const a = el('a', 'blk');
-            a.href = (block.source && block.source.url) || (block.attachment && block.attachment.url)
-                || `https://www.are.na/block/${block.id}`;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            let weight = 0.15;
+            // Only blocks that point somewhere of their own are links; nothing opens Are.na.
+            const href = (block.source && block.source.url) || (block.attachment && block.attachment.url);
+            const a = el(href ? 'a' : 'div', 'blk');
+            if (href) {
+                a.href = href;
+                a.target = '_blank';
+                a.rel = 'noopener';
+            }
+            let weight = title ? 0.15 : 0;
             if (small) {
                 const image = el('img');
                 const w = +small.width, h = +small.height;
