@@ -9,5 +9,5 @@ exclude:
 # arena_group: every public channel of a group, e.g. https://www.are.na/ram-rvk1qihvva
 # arena_channel: a single channel instead, e.g. the last part of https://www.are.na/name/THIS-PART
 # No API key is needed (and none should ever be put in this repository): public channels only.
-arena_group: ram-rvk1qihvva
-arena_channel: ""
+arena_group: ""
+arena_channel: ram-km3w3misdey

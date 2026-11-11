@@ -221,8 +221,7 @@ a:focus-visible {
 }
 
 /* ---------- Two pages: home and curation ----------
-   Each is a full-screen "card". Moving between them slides both cards
-   vertically over black, corners rounded while they travel. */
+   Moving between them slides both vertically, as one continuous sheet. */
 
 .view {
     min-height: 100vh;
@@ -236,7 +235,6 @@ a:focus-visible {
 
 html.is-paging,
 html.is-paging body {
-    background: #000;
     overflow: hidden;
 }
 

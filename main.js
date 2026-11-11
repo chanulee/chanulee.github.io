@@ -263,15 +263,13 @@
     });
 
     /* ---------- Two pages: home ⇄ curation ----------
-       Pull up past the bottom of the home page (or tap the arrow) and both pages
-       slide up as rounded cards over black. The arrow at the top comes back. */
+       Pull up past the bottom of the home page and the two pages slide up as one
+       continuous sheet. The arrow at the top slides back. */
     const pager = (() => {
         const root = document.documentElement;
         const views = { home: document.getElementById('home'), curation: document.getElementById('curation') };
         if (!views.curation) return null;
 
-        const GAP = 32;          // black band between the two cards
-        const RADIUS = 40;
         let view = 'home';
         let busy = false;
         let drag = null;
@@ -289,12 +287,12 @@
             from.scrollTop = y;
             next.scrollTop = to === 'home' ? next.scrollHeight : 0;
             const dir = to === 'curation' ? 1 : -1;   // 1: cards travel upwards
-            const dist = window.innerHeight + GAP;
+            const dist = window.innerHeight;
             return { from, next, to, dir, dist };
         }
 
         function unstage(st, landed) {
-            [st.from, st.next].forEach(el => { el.style.transform = ''; el.style.borderRadius = ''; });
+            [st.from, st.next].forEach(el => { el.style.transform = ''; });
             const shown = landed ? st.next : st.from;
             const gone = landed ? st.from : st.next;
             const y = shown.scrollTop;
@@ -316,12 +314,9 @@
             const span = Math.abs(end - px);
             const duration = landed ? 520 : 300;
             const easing = 'cubic-bezier(0.55, 0, 0.1, 1)';
-            const r0 = Math.min(RADIUS, px * 0.5);
             const frames = (el, sign, offset) => el.animate([
-                { transform: `translateY(${sign * (offset ? st.dist - px : px)}px)`, borderRadius: r0 + 'px' },
-                { borderRadius: RADIUS + 'px', offset: 0.25 },
-                { borderRadius: RADIUS + 'px', offset: 0.8 },
-                { transform: `translateY(${sign * (offset ? st.dist - end : end)}px)`, borderRadius: '0px' }
+                { transform: `translateY(${sign * (offset ? st.dist - px : px)}px)` },
+                { transform: `translateY(${sign * (offset ? st.dist - end : end)}px)` }
             ], { duration, easing, fill: 'forwards' });
             const a = frames(st.from, -st.dir, false);
             const b = frames(st.next, st.dir, true);
@@ -452,7 +447,9 @@
 
         function render(block) {
             if (block.type === 'Channel' || block.type === 'Group') return null;
-            const title = block.title || (block.source && block.source.title) || '';
+            // Uploads get their file name or a UUID as a title; those are not captions.
+            const named = block.title || (block.source && block.source.title) || '';
+            const title = /^[0-9a-f]{8}-[0-9a-f-]{20,}$|\.(jpe?g|png|gif|webp|heic|pdf|mp4|mov)$|^(img|dsc|screenshot)[ _-]?\d/i.test(named.trim()) ? '' : named;
             const text = block.content && block.content.plain;
             if (block.type === 'Text' && text) {
                 const div = el('div', 'blk');
