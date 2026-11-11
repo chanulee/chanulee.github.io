@@ -232,7 +232,10 @@
             let prev = -Infinity;
             lines.forEach((el, i) => {
                 // Never out of order: a line waits for the one above it.
-                const start = Math.max(base + Math.min(i, 24) * 28, freeAt(rectOf(el)), prev + 28);
+                const r = rectOf(el);
+                // Lines rise 10px into place, so they need that much more room below.
+                const room = { left: r.left, right: r.right, top: r.top, bottom: r.bottom + 10 };
+                const start = Math.max(base + Math.min(i, 24) * 28, freeAt(room), prev + 28);
                 prev = start;
                 el.animate(
                     [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
@@ -788,15 +791,31 @@
         })
     }));
 
+    clocks.forEach(clock => {
+        const span = text => { const node = document.createElement('span'); node.textContent = text; return node; };
+        clock.hour = span('--');
+        clock.colon = span(':');
+        clock.colon.className = 'colon';
+        clock.minute = span('--');
+        clock.tz = document.createTextNode('');
+        clock.el.textContent = '';
+        clock.el.append(clock.hour, clock.colon, clock.minute, clock.tz);
+    });
+
+    // The colon blinks in CSS; the digits change when the minute does.
     function tick() {
         const now = new Date();
-        clocks.forEach(({ el, zone, fmt }) => {
-            const parts = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
-            el.textContent = `${parts.hour}:${parts.minute} ${zone || parts.timeZoneName}`;
-            el.dateTime = now.toISOString();
+        clocks.forEach(clock => {
+            const parts = Object.fromEntries(clock.fmt.formatToParts(now).map(p => [p.type, p.value]));
+            if (clock.minute.textContent !== parts.minute || clock.hour.textContent !== parts.hour) {
+                clock.hour.textContent = parts.hour;
+                clock.minute.textContent = parts.minute;
+                clock.tz.textContent = ' ' + (clock.zone || parts.timeZoneName);
+                clock.el.dateTime = now.toISOString();
+            }
         });
+        setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
     }
 
     tick();
-    setInterval(tick, 10000);
 })();

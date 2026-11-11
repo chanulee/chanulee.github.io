@@ -533,6 +533,21 @@ a.blk:focus-visible {
     margin-top: 1.3em;
 }
 
+/* Clock colons blink once a second. */
+.colon {
+    animation: colon 1s steps(1) infinite;
+}
+
+@keyframes colon {
+    50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .colon {
+        animation: none;
+    }
+}
+
 /* ---------- Lists (events, thoughts) ---------- */
 
 .rows {
