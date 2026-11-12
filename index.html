@@ -212,7 +212,12 @@
     <div class="view" id="curation" hidden>
         <div class="cur-top">
             <button class="pager pager-up" id="to-home" type="button" aria-label="Back to the main page">
-                <img src="resources/icons/arrow.svg" width="32" height="32" alt="">
+                <!-- The arrow's three dots; they land one by one once the page has arrived. -->
+                <svg class="pager-dots" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                    <circle cx="16" cy="11" r="4"/>
+                    <circle cx="6" cy="21" r="4"/>
+                    <circle cx="26" cy="21" r="4"/>
+                </svg>
             </button>
         </div>
         <div class="page cur-page">
