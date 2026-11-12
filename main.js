@@ -32,6 +32,7 @@
     let open = null;   // what the DOM currently shows
     let want = null;   // what the latest click asked for
     let run = 0;
+    let settleTimer;
 
     /* Write the state to the DOM. All layout comes from CSS (.has-open / .is-open). */
     function apply(name) {
@@ -47,10 +48,22 @@
 
     const flipTargets = () => [page.querySelector('.lede'), ...page.querySelectorAll('[data-flip]')];
     const visible = sec => getComputedStyle(sec).visibility !== 'hidden';
+    // Every animation a transition starts is kept here, so cleaning up never
+    // depends on what the browser reports back from getAnimations().
+    const live = new Set();
+    const play = (el, frames, opts) => {
+        const a = el.animate(frames, opts);
+        live.add(a);
+        return a;
+    };
     const stopAll = () => {
-        page.getAnimations({ subtree: true })
-            .filter(a => !(a instanceof CSSTransition) && !(a instanceof CSSAnimation))
-            .forEach(a => a.cancel());
+        live.forEach(a => { try { a.cancel(); } catch (e) {} });
+        live.clear();
+        try {
+            page.getAnimations({ subtree: true })
+                .filter(a => !(a instanceof CSSTransition) && !(a instanceof CSSAnimation))
+                .forEach(a => a.cancel());
+        } catch (e) {}
         unsplit();
     };
 
@@ -95,7 +108,7 @@
     }
 
     function fade(el, from, to, opts) {
-        return el.animate(
+        return play(el, 
             [{ opacity: from, visibility: 'visible' }, { opacity: to, visibility: 'visible' }],
             { easing: 'ease-out', fill: 'backwards', ...opts }
         );
@@ -177,7 +190,7 @@
         movers.forEach(m => {
             if (lead === null || Math.abs(m.a.top - lead) > 10) { step++; lead = m.a.top; }
             m.delay = baseDelay + step * CASCADE;
-            m.el.animate(
+            play(m.el, 
                 [{ transform: `translate(${m.dx}px, ${m.dy}px)` }, { transform: 'none' }],
                 { duration: MOVE, delay: m.delay, easing: MOVE_EASE, fill: 'backwards' }
             );
@@ -232,15 +245,19 @@
                 start = Math.max(0, hit[0] - dur);
                 dur = Math.max(40, hit[0] - start);
             }
-            item.el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: dur, delay: start, easing: 'ease-out', fill: 'both' });
+            (item.sec.fades = item.sec.fades || []).push(
+                play(item.el, [{ opacity: 1 }, { opacity: 0 }], { duration: dur, delay: start, easing: 'ease-out', fill: 'both' }));
             cleared.push([item.r, start + dur]);
             outEnd = Math.max(outEnd, start + dur);
         });
+        let settleAt = outEnd + 20;
         leaving.forEach(sec => {
-            const hold = sec.animate([{ visibility: 'visible' }, { visibility: 'visible' }], { duration: outEnd + 20 });
-            hold.finished.then(() => {
-                firstLines.get(sec).forEach(([el]) => el.getAnimations().forEach(a => a.cancel()));
-            }).catch(() => {});
+            const fades = sec.fades || [];
+            sec.fades = null;
+            const hold = play(sec, [{ visibility: 'visible' }, { visibility: 'visible' }], { duration: outEnd + 20 });
+            // Once the section is out of sight its lines go back to plain, fully
+            // visible text, ready for when it returns.
+            hold.finished.then(() => fades.forEach(a => { a.cancel(); live.delete(a); })).catch(() => {});
         });
 
         // Anything appearing waits for the spot to be free: movers gone past,
@@ -260,8 +277,9 @@
         rank = -1; prevTop = null;
         back.forEach(item => {
             if (item.r.top !== prevTop) { rank++; prevTop = item.r.top; }
-            const start = Math.max(140 + rank * 26, freeAt(item.r));
-            item.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, delay: start, easing: 'ease-out', fill: 'backwards' });
+            const start = Math.min(1600, Math.max(140 + rank * 26, freeAt(item.r)));
+            settleAt = Math.max(settleAt, start + 420);
+            play(item.el, [{ opacity: 0 }, { opacity: 1 }], { duration: 420, delay: start, easing: 'ease-out', fill: 'backwards' });
         });
 
         // 7. The opened section's extra content rises in line by line, once the
@@ -288,16 +306,21 @@
                     top: Math.min(...rects.map(r => r.top)), bottom: Math.max(...rects.map(r => r.bottom)) + 10
                 };
                 // Never out of order: a line waits for the one above it.
-                const start = Math.max(base + Math.min(i, 40) * 28, freeAt(room), prev + 28);
+                const start = Math.min(2400, Math.max(base + Math.min(i, 40) * 28, freeAt(room), prev + 28));
+                settleAt = Math.max(settleAt, start + 520);
                 prev = start;
-                els.forEach(el => playing.push(el.animate(
+                els.forEach(el => playing.push(play(el, 
                     [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
                     { duration: 520, delay: start, easing: EASE, fill: 'backwards' }
                 )));
             });
-            // Hand the paragraphs their plain text back once everything has landed.
-            Promise.all(playing.map(a => a.finished)).then(() => { if (id === run) unsplit(); }).catch(() => {});
         }
+
+        // When the last animation is over, drop every one of them. From here on
+        // what is on screen depends on the classes alone, whatever happened on the way.
+        settleAt = Math.max(settleAt, landed + MOVE);
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(() => { if (id === run) stopAll(); }, settleAt + 80);
     }
 
     function toggle(name) {
@@ -776,12 +799,17 @@
 
         lockHeight();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
-        let lastWidth = window.innerWidth;
-        window.addEventListener('resize', () => {
-            if (window.innerWidth === lastWidth) return;
-            lastWidth = window.innerWidth;
+        // Re-measure only when the headline's own width changes (rotation, window
+        // resize) — never for the browser's toolbars sliding in and out.
+        let lastWidth = Math.round(lede.clientWidth);
+        const relock = () => {
+            const width = Math.round(lede.clientWidth);
+            if (!width || width === lastWidth) return;
+            lastWidth = width;
             lockHeight();
-        });
+        };
+        if ('ResizeObserver' in window) new ResizeObserver(relock).observe(lede);
+        else window.addEventListener('resize', relock);
 
         // Per-variant pacing: [ms between units going in, going out, settle time after the last one]
         const PACE = {

@@ -6,6 +6,9 @@
     <meta name="theme-color" content="#cde3ff">
     <title>{{ page.title }} — Chanwoo Lee</title>
     {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
+    {% if page.description %}<meta name="description" content="{{ page.description | escape }}">{% endif %}
+    <meta name="author" content="Chanwoo Lee">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
     <meta property="og:title" content="{{ page.title }}">
     <meta property="og:type" content="article">
     <link rel="preload" href="/fonts/ABCArealSemiMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
