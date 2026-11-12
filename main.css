@@ -548,7 +548,7 @@ a.blk:focus-visible {
 /* ---------- Sections ---------- */
 
 .sec {
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .sec[data-sec="events"] {
@@ -613,7 +613,7 @@ a.blk:focus-visible {
 /* ---------- About ---------- */
 
 .body {
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .block + .block,
@@ -681,7 +681,7 @@ a.blk:focus-visible {
 }
 
 .page.has-open .sec {
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .page.has-open .sec:not(.is-open) {
