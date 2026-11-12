@@ -533,9 +533,6 @@
         const PER = 24;
         const box = document.getElementById('arena');
         const toggle = document.getElementById('arena-cols');
-        const fxToggle = document.getElementById('arena-fx');
-        let fx = 'rise';
-        try { fx = localStorage.getItem('arena-fx') === 'scan' ? 'scan' : 'rise'; } catch (e) {}
         const group = box ? box.dataset.group.trim() : '';
         const channels = box && box.dataset.channel.trim() ? [box.dataset.channel.trim()] : [];
         const items = [];        // { node, weight } in feed order
@@ -603,7 +600,76 @@
             if (title) a.append(el('span', 'blk-title', title));
             const from = block.source && block.source.url ? host(block.source.url) : '';
             if (from) a.append(el('span', 'blk-src', from));
+            // An image that leads nowhere opens large instead.
+            if (small && !href) {
+                const big = img.large || img.medium || small;
+                a.classList.add('blk-zoom');
+                a.tabIndex = 0;
+                a.setAttribute('role', 'button');
+                a.setAttribute('aria-label', title || 'Open image');
+                const open = () => zoom(a.querySelector('img'), big.src, title);
+                a.addEventListener('click', open);
+                a.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+            }
             return { node: a, weight };
+        }
+
+        /* Lightbox: the tapped image grows from where it sits to the middle of the
+           screen while the page behind dims and blurs. Tap anywhere, or Esc, to close. */
+        let lightbox = null;
+
+        function zoom(thumb, src, title) {
+            if (lightbox || !thumb) return;
+            const from = thumb.getBoundingClientRect();
+            const layer = el('div', 'lightbox');
+            const image = el('img');
+            image.alt = title || '';
+            image.src = thumb.currentSrc || thumb.src;       // instant: the file already on screen
+            image.style.width = image.style.height = '100%';  // fill the layer; object-fit keeps the shape
+            layer.append(image);
+            document.body.append(layer);
+            document.documentElement.classList.add('has-lightbox');
+
+            // Then the sharp one, swapped in once it has arrived.
+            const sharp = new Image();
+            sharp.onload = () => { if (lightbox && lightbox.image === image) image.src = src; };
+            sharp.src = src;
+
+            const fit = () => {
+                // Where the image actually ends up inside its box.
+                const box = image.getBoundingClientRect();
+                const ratio = from.width / from.height;
+                const w = Math.min(box.width, box.height * ratio), h = w / ratio;
+                return { left: box.left + (box.width - w) / 2, top: box.top + (box.height - h) / 2, width: w, height: h };
+            };
+            const flight = to => [
+                { transform: `translate(${from.left + from.width / 2 - (to.left + to.width / 2)}px, ${from.top + from.height / 2 - (to.top + to.height / 2)}px) scale(${from.width / to.width})` },
+                { transform: 'none' }
+            ];
+            const still = reduced.matches || !image.animate;
+            thumb.style.visibility = 'hidden';
+            layer.offsetWidth;
+            layer.classList.add('is-on');
+            if (!still) image.animate(flight(fit()), { duration: 420, easing: EASE });
+
+            const close = () => {
+                if (!lightbox) return;
+                lightbox = null;
+                document.removeEventListener('keydown', onKey);
+                layer.classList.remove('is-on');
+                const done = () => {
+                    thumb.style.visibility = '';
+                    layer.remove();
+                    document.documentElement.classList.remove('has-lightbox');
+                };
+                if (still) return done();
+                const back = image.animate(flight(fit()).reverse(), { duration: 320, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' });
+                back.finished.then(done, done);
+            };
+            const onKey = e => { if (e.key === 'Escape') close(); };
+            layer.addEventListener('click', close);
+            document.addEventListener('keydown', onKey);
+            lightbox = { image, close };
         }
 
         // Each block goes to whichever column is shorter, so they stay level.
@@ -626,7 +692,6 @@
                 place(item);
             });
             if (toggle) toggle.textContent = cols === 2 ? '2 columns' : '1 column';
-            setFx(fx);
             nudge();
         }
 
@@ -634,7 +699,7 @@
            right — one beat apart. A block takes its turn when its image has
            arrived and it is on (or near) the screen; a slow image holds the line
            only briefly, then the rest carry on and it fades in when it lands. */
-        const BEAT = { rise: 70, scan: 110 };
+        const BEAT = 70;
         const PATIENCE = 700;
         let turn = null, headSince = 0, headItem = null;
 
@@ -680,7 +745,7 @@
                 return;
             }
             show(next);
-            turn = setTimeout(() => { turn = null; pump(); }, BEAT[fx]);
+            turn = setTimeout(() => { turn = null; pump(); }, BEAT);
         }
 
         let queued = false;
@@ -708,28 +773,6 @@
             place(item);
             nudge();
         });
-
-        // Switching the effect plays it again on what is in view.
-        function setFx(name, replay) {
-            fx = name;
-            box.dataset.fx = fx;
-            if (fxToggle) fxToggle.textContent = fx;
-            if (!replay) return;
-            try { localStorage.setItem('arena-fx', fx); } catch (e) {}
-            clearTimeout(turn);
-            turn = null;
-            headItem = null;
-            items.forEach(item => {
-                const r = item.node.getBoundingClientRect();
-                if (r.bottom < 0 || r.top > window.innerHeight) return;
-                item.shown = false;
-                item.node.classList.add('is-waiting');
-            });
-            box.offsetWidth;
-            nudge();
-        }
-
-        if (fxToggle) fxToggle.addEventListener('click', () => setFx(fx === 'rise' ? 'scan' : 'rise', true));
 
         if (toggle) toggle.addEventListener('click', () => {
             cols = cols === 2 ? 1 : 2;
@@ -771,7 +814,6 @@
             }
             loading = false;
             if (toggle) toggle.hidden = !items.length;
-            if (fxToggle) fxToggle.hidden = !items.length;
             if (done && sentinel) sentinel.remove();
             // Still near the end of a short page: fetch the next one.
             else if (sentinel && sentinel.getBoundingClientRect().top < window.innerHeight + 800) more();

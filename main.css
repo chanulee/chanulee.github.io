@@ -404,7 +404,7 @@ html.is-paging .pager-up {
 }
 
 /* Blocks fade in one after another as they become ready (see main.js). */
-/* "rise": the same move as list rows coming in. */
+/* Blocks rise in with the same move as list rows. */
 .blk {
     transition: opacity 0.52s var(--ease), transform 0.52s var(--ease);
 }
@@ -415,18 +415,50 @@ html.is-paging .pager-up {
     transition: none;
 }
 
-/* "scan": drawn from the top edge down, coming into focus as it goes. */
-.arena[data-fx="scan"] .blk {
-    clip-path: inset(0 0 0 0);
-    transition: clip-path 0.75s cubic-bezier(0.3, 0, 0.2, 1), filter 0.75s ease-out, opacity 0.3s ease-out;
+/* Image blocks open large over the page. */
+.blk-zoom {
+    cursor: zoom-in;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.arena[data-fx="scan"] .blk.is-waiting {
-    opacity: 0;
-    transform: none;
-    filter: blur(8px);
-    clip-path: inset(0 0 100% 0);
-    transition: none;
+.blk-zoom:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background: rgb(0 0 0 / 0);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    cursor: zoom-out;
+    transition: background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease;
+}
+
+.lightbox.is-on {
+    background: rgb(0 0 0 / 0.45);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.lightbox img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    will-change: transform;
+}
+
+html.has-lightbox {
+    overflow: hidden;
 }
 
 /* An image that arrives after its block was shown fades in on its own. */
@@ -748,6 +780,25 @@ a.blk:focus-visible {
 
 .detail-page .lede {
     min-height: 0;
+}
+
+/* On scroll the title rides up beside "<" and settles there at body size.
+   --t runs 0 → 1 over that short stretch (set in the page's script). */
+.detail-page > .lede {
+    position: sticky;
+    top: 23px;
+    z-index: 6;
+    transform-origin: left top;
+    transform: translateX(calc(var(--t, 0) * 44px)) scale(calc(1 - var(--t, 0) * 0.3));
+    pointer-events: none;
+}
+
+/* Once settled, a long title keeps to one line. */
+.detail-page > .lede.is-docked {
+    width: calc((100% - 44px) / 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Pages slide sideways between the landing (left) and its detail pages (right).

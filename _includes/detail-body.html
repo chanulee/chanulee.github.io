@@ -23,6 +23,22 @@
 </main>
 
 <script>
+    // Scrolling the first stretch moves the title up beside "<" and down to body size.
+    (() => {
+        const title = document.querySelector('.detail-page > .lede');
+        if (!title) return;
+        const REACH = 41;   // px from the title's resting place (64) to where it docks (23)
+        let queued = false;
+        const update = () => {
+            queued = false;
+            const t = Math.max(0, Math.min(1, window.scrollY / REACH));
+            title.style.setProperty('--t', t.toFixed(3));
+            title.classList.toggle('is-docked', t === 1);
+        };
+        window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+        update();
+    })();
+
     // "<" goes back to exactly where the visitor came from when that was this site.
     document.getElementById('back').addEventListener('click', event => {
         let sameSite = false;
