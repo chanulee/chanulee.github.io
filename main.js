@@ -390,6 +390,7 @@
                 view = st.to;
                 if (view === 'curation') arena.load();
             }
+            views.curation.classList.toggle('is-arrived', view === 'curation');
             busy = false;
         }
 
@@ -445,6 +446,7 @@
                 views[view].hidden = true;
                 views[to].hidden = false;
                 view = to;
+                views.curation.classList.toggle('is-arrived', view === 'curation');
                 window.scrollTo(0, to === 'home' ? root.scrollHeight : 0);
                 if (to === 'curation') arena.load();
                 return;

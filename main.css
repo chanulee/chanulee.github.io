@@ -297,9 +297,28 @@ html.is-paging .pager-down {
     visibility: hidden;
 }
 
-.pager-up img {
-    transform: rotate(180deg);
+/* The dots wait at nothing, then land one after another once the page has arrived. */
+.pager-dots {
+    display: block;
+    fill: currentColor;
+    overflow: visible;
+    transition: transform 0.5s var(--spin);
 }
+
+.pager-dots circle {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(0);
+}
+
+.view.is-arrived .pager-dots circle {
+    transform: none;
+    animation: dot-in 0.32s var(--spin) both;
+}
+
+.view.is-arrived .pager-dots circle:nth-child(1) { animation-delay: 0s; }
+.view.is-arrived .pager-dots circle:nth-child(2) { animation-delay: 0.14s; }
+.view.is-arrived .pager-dots circle:nth-child(3) { animation-delay: 0.28s; }
 
 /* The travelling arrow during a page turn; the real ones wait out of sight. */
 .pager-ghost {
@@ -318,8 +337,8 @@ html.is-paging .pager-up {
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .pager-up:hover img {
-        transform: rotate(180deg) translateY(3px);
+    .pager-up:hover .pager-dots {
+        transform: translateY(-3px);
     }
 }
 
@@ -438,12 +457,12 @@ html.is-paging .pager-up {
     -webkit-backdrop-filter: blur(0);
     backdrop-filter: blur(0);
     cursor: zoom-out;
-    transition: background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease;
+    transition: background 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
 }
 
 .lightbox.is-on {
-    /* The page's own sky, a shade deeper, over a blur of what is behind. */
-    background: rgb(150 184 232 / 0.62);
+    /* The page's own sky, a touch deeper, over a blur of what is behind. */
+    background: rgb(150 184 232 / 0.32);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
 }
@@ -831,7 +850,8 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
         navigation: none;
     }
 
-    .back-dots circle {
+    .back-dots circle,
+    .view.is-arrived .pager-dots circle {
         animation: none;
     }
 }
