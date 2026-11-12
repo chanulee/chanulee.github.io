@@ -67,39 +67,45 @@
         unsplit();
     };
 
-    /* Paragraphs reveal one rendered line at a time. To do that, each word is
-       wrapped for the length of the animation and grouped by the line it landed
-       on; afterwards the paragraph gets its plain text back. */
+    /* Paragraphs reveal one rendered line at a time. The line breaks are read
+       from the paragraph as the browser has already laid it out — nothing is
+       re-wrapped — and for the length of the animation each of those lines
+       becomes its own unbreakable block. Afterwards the paragraph gets its
+       plain text back, wrapping exactly as before. */
     const splitText = new Map();   // paragraph → original HTML
 
     function splitLines(p) {
-        if (!splitText.has(p)) {
-            splitText.set(p, p.innerHTML);
-            [...p.childNodes].forEach(node => {
-                if (node.nodeType !== 3) return;
-                const frag = document.createDocumentFragment();
-                // Break where the browser may: at spaces and after hyphens.
-                node.textContent.split(/(\s+)/).forEach(chunk => {
-                    if (!chunk) return;
-                    if (/^\s+$/.test(chunk)) { frag.append(chunk); return; }
-                    chunk.split(/(?<=-)/).forEach(word => {
-                        const span = document.createElement('span');
-                        span.className = 'wd';
-                        span.textContent = word;
-                        frag.append(span);
-                    });
-                });
-                node.replaceWith(frag);
-            });
-        }
+        if (splitText.has(p)) return [...p.querySelectorAll('.ln')].map(line => [line]);
+        // Only plain text and <br>; anything richer is revealed as one piece.
+        if ([...p.childNodes].some(node => node.nodeType === 1 && node.tagName !== 'BR')) return [[p]];
+
         const lines = [];
+        const range = document.createRange();
         let top = null;
-        p.querySelectorAll('.wd').forEach(word => {
-            const r = word.getBoundingClientRect();
-            if (top === null || Math.abs(r.top - top) > 4) { lines.push([]); top = r.top; }
-            lines[lines.length - 1].push(word);
+        p.childNodes.forEach(node => {
+            if (node.nodeType !== 3) { top = null; return; }       // <br>: next word starts a line
+            const words = /\S+/g;
+            let m;
+            while ((m = words.exec(node.data))) {
+                range.setStart(node, m.index);
+                range.setEnd(node, m.index + m[0].length);
+                const rect = range.getClientRects()[0];
+                if (!rect) continue;
+                if (top === null || Math.abs(rect.top - top) > rect.height / 2) { lines.push([]); top = rect.top; }
+                lines[lines.length - 1].push(m[0]);
+            }
         });
-        return lines;
+        if (lines.length < 2) return [[p]];
+
+        splitText.set(p, p.innerHTML);
+        p.textContent = '';
+        return lines.map(words => {
+            const line = document.createElement('span');
+            line.className = 'ln';
+            line.textContent = words.join(' ');
+            p.append(line);
+            return [line];
+        });
     }
 
     function unsplit() {

@@ -434,7 +434,7 @@ html.is-paging .pager-up {
     align-items: center;
     justify-content: center;
     padding: 24px 16px;
-    background: rgb(0 0 0 / 0);
+    background: rgb(150 184 232 / 0);
     -webkit-backdrop-filter: blur(0);
     backdrop-filter: blur(0);
     cursor: zoom-out;
@@ -442,9 +442,10 @@ html.is-paging .pager-up {
 }
 
 .lightbox.is-on {
-    background: rgb(0 0 0 / 0.45);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    /* The page's own sky, a shade deeper, over a blur of what is behind. */
+    background: rgb(150 184 232 / 0.62);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
 }
 
 .lightbox img {
@@ -602,9 +603,10 @@ a.blk:focus-visible {
     margin-top: 1.3em;
 }
 
-/* Words wrapped while a paragraph reveals line by line (see main.js). */
-.wd {
-    display: inline-block;
+/* One rendered line of a paragraph while it reveals line by line (see main.js). */
+.ln {
+    display: block;
+    white-space: nowrap;
 }
 
 /* Clock colons blink once a second. */
