@@ -1,4 +1,12 @@
 (() => {
+    // Record an action in GoatCounter (shown under "Events" there). Silent if the
+    // counter is blocked or has not loaded.
+    const track = name => {
+        try {
+            if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true });
+        } catch (e) {}
+    };
+
     const page = document.getElementById('page');
     const sections = [...page.querySelectorAll('.sec')];
     const byName = Object.fromEntries(sections.map(s => [s.dataset.sec, s]));
@@ -331,6 +339,7 @@
 
     function toggle(name) {
         const next = want === name ? null : name;
+        if (next) track('open ' + next);
         setOpen(next);
         history.replaceState(null, '', next ? '#' + next : location.pathname + location.search);
     }
@@ -388,7 +397,7 @@
             window.scrollTo(0, y);
             if (landed) {
                 view = st.to;
-                if (view === 'curation') arena.load();
+                if (view === 'curation') { arena.load(); track('curation'); }
             }
             views.curation.classList.toggle('is-arrived', view === 'curation');
             busy = false;
@@ -628,6 +637,7 @@
 
         function zoom(thumb, src, title) {
             if (lightbox || !thumb) return;
+            track('image zoom');
             const from = thumb.getBoundingClientRect();
             const layer = el('div', 'lightbox');
             const image = el('img');
@@ -1003,6 +1013,7 @@
                 document.execCommand('copy');
                 ta.remove();
             }
+            track('copy email');
             btn.textContent = 'copied';
             btn.classList.add('is-copied');
             clearTimeout(timer);
@@ -1012,6 +1023,15 @@
             }, 1600);
         });
     });
+
+    // Link clicks: where people go from here (thoughts, events, contacts, feed links).
+    document.addEventListener('click', e => {
+        const a = e.target.closest && e.target.closest('a[href]');
+        if (!a) return;
+        let where = a.getAttribute('href');
+        try { const url = new URL(a.href); where = url.origin === location.origin ? url.pathname : url.hostname.replace(/^www\./, '') + url.pathname; } catch (err) {}
+        track('link ' + where.replace(/\/$/, ''));
+    }, true);
 
     /* Live clocks — "Seoul 21:04 KST". */
     const clocks = [...document.querySelectorAll('[data-clock]')].map(el => ({
