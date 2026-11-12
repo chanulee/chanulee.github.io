@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: 'en' }}" class="is-detail">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,41 +59,16 @@
     </script>
 </head>
 <body>
-    <main class="page has-open post" id="page">
-        <h1 class="lede"><a href="/"><strong>Chanwoo</strong></a> {{ page.heading }}</h1>
+    {%- capture body -%}
+        {{ content }}
 
-        <section class="sec is-open">
-            <div class="head">
-                <p class="label">{{ page.label }}</p>
-                <a class="toggle" href="/" aria-label="{{ page.back }}">
-                    <img class="dots" src="/resources/icons/plus.svg" width="32" height="32" alt="">
-                </a>
-            </div>
-            <article class="prose">
-                {{ content }}
+        {%- for item in page.faq %}
+        <h2>{{ item.q | escape }}</h2>
+        <p>{{ item.a | escape }}</p>
+        {%- endfor %}
 
-                {%- for item in page.faq %}
-                <h2>{{ item.q | escape }}</h2>
-                <p>{{ item.a | escape }}</p>
-                {%- endfor %}
-
-                <p><a href="{{ page.other_url }}" hreflang="{{ page.other_lang }}" lang="{{ page.other_lang }}">{{ page.other_label }}</a></p>
-            </article>
-        </section>
-    </main>
-
-    <script>
-        (() => {
-            const page = document.getElementById('page');
-            const lede = page.querySelector('.lede');
-            const size = () => page.style.setProperty('--lede-h', lede.offsetHeight + 'px');
-            const onScroll = () => page.classList.toggle('is-scrolled', window.scrollY > 1);
-            size();
-            onScroll();
-            window.addEventListener('resize', size);
-            window.addEventListener('scroll', onScroll, { passive: true });
-            if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
-        })();
-    </script>
+        <p><a href="{{ page.other_url }}" hreflang="{{ page.other_lang }}" lang="{{ page.other_lang }}">{{ page.other_label }}</a></p>
+    {%- endcapture -%}
+    {% include detail-body.html title=page.heading content=body back="/" back_label=page.back %}
 </body>
 </html>

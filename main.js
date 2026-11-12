@@ -602,9 +602,26 @@
             if (toggle) toggle.textContent = cols === 2 ? '2 columns' : '1 column';
         }
 
+        // Blocks show up one after another: each waits for its image, and never
+        // appears less than a beat after the one before it.
+        let lastShown = 0;
+        function reveal(node) {
+            const at = Math.max(performance.now(), lastShown + 70);
+            lastShown = at;
+            setTimeout(() => node.classList.remove('is-waiting'), at - performance.now());
+        }
+
         const add = blocks => blocks.forEach(block => {
             const item = render(block);
-            if (item) { items.push(item); place(item); }
+            if (!item) return;
+            const image = item.node.querySelector('img');
+            item.node.classList.add('is-waiting');
+            if (image && !image.complete) {
+                image.addEventListener('load', () => reveal(item.node), { once: true });
+                image.addEventListener('error', () => reveal(item.node), { once: true });
+            } else reveal(item.node);
+            items.push(item);
+            place(item);
         });
 
         if (toggle) toggle.addEventListener('click', () => {

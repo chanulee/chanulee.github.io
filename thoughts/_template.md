@@ -1,7 +1,6 @@
 ---
 layout: thought
 title: Title of the post
-date: 2026-01-01
 permalink: /thoughts/title-of-the-post/
 ---
 

@@ -4,7 +4,7 @@ lang: en
 permalink: /about/
 title: "About Chanwoo Lee (이찬우) — Design Engineer, Human-AI Interaction"
 description: "Chanwoo Lee (이찬우) is a design engineer and interaction designer in Seoul and London working on human-AI interaction and HCI. Founder of Lovelace Research; teaches Innovation Design Engineering at Imperial College London and the Royal College of Art; adjunct professor at K-Arts."
-heading: "Lee (이찬우) is a design engineer working on human-AI interaction."
+heading: "Chanwoo Lee (이찬우) is a design engineer working on human-AI interaction."
 label: about
 back: Back to the main page
 other_url: /ko/

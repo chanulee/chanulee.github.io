@@ -1,0 +1,35 @@
+{%- comment -%}
+  Shared body of a detail page (posts, profile pages). Conceptually these sit to
+  the right of the landing: they slide in from the right, and "<" slides back.
+  include.title: the headline. The page content follows it.
+{%- endcomment -%}
+<main class="page detail-page">
+    <div class="detail-top">
+        <a class="back" id="back" href="{{ include.back | default: '/' }}" aria-label="{{ include.back_label | default: 'Back' }}">
+            <!-- Three dots of the "+" icon; they land one after another when the page arrives. -->
+            <svg class="back-dots" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                <circle cx="6" cy="16" r="4"/>
+                <circle cx="16" cy="6" r="4"/>
+                <circle cx="16" cy="26" r="4"/>
+            </svg>
+        </a>
+    </div>
+
+    <h1 class="lede">{{ include.title }}</h1>
+
+    <article class="prose">
+        {{ include.content }}
+    </article>
+</main>
+
+<script>
+    // "<" goes back to exactly where the visitor came from when that was this site.
+    document.getElementById('back').addEventListener('click', event => {
+        let sameSite = false;
+        try { sameSite = new URL(document.referrer).origin === location.origin; } catch (e) {}
+        if (sameSite && history.length > 1) {
+            event.preventDefault();
+            history.back();
+        }
+    });
+</script>

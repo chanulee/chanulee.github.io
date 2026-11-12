@@ -1,45 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: 'en' }}" class="is-detail">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#cde3ff">
     <title>{{ page.title }} — Chanwoo Lee</title>
+    {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
     <meta property="og:title" content="{{ page.title }}">
     <meta property="og:type" content="article">
     <link rel="preload" href="/fonts/ABCArealSemiMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-    <!-- Same frame as an open section on the landing: sticky title, sticky label + ×, content scrolls beneath. -->
-    <main class="page has-open post" id="page">
-        <h1 class="lede"><a href="/"><strong>Chanwoo</strong></a> {{ page.title }}</h1>
-
-        <section class="sec is-open">
-            <div class="head">
-                <p class="label">thoughts{% if page.date %} <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y.%m' }}</time>{% endif %}</p>
-                <a class="toggle" href="/#thoughts" aria-label="Back to thoughts">
-                    <img class="dots" src="/resources/icons/plus.svg" width="32" height="32" alt="">
-                </a>
-            </div>
-            <article class="prose">
-                {{ content }}
-            </article>
-        </section>
-    </main>
-
-    <script>
-        (() => {
-            const page = document.getElementById('page');
-            const lede = page.querySelector('.lede');
-            const size = () => page.style.setProperty('--lede-h', lede.offsetHeight + 'px');
-            const onScroll = () => page.classList.toggle('is-scrolled', window.scrollY > 1);
-            size();
-            onScroll();
-            window.addEventListener('resize', size);
-            window.addEventListener('scroll', onScroll, { passive: true });
-            if (document.fonts && document.fonts.ready) document.fonts.ready.then(size);
-        })();
-    </script>
+    {% include detail-body.html title=page.title content=content back="/" back_label="Back" %}
 </body>
 </html>

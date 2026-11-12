@@ -15,7 +15,7 @@ layout: null
     <loc>https://chanwoolee.com/ko/</loc>
     <lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
   </url>
-  {%- for p in site.pages %}{% if p.layout == 'thought' %}
+  {%- for p in site.pages %}{% if p.layout == 'thought' and p.noindex != true %}
   <url>
     <loc>https://chanwoolee.com{{ p.url }}</loc>
   </url>

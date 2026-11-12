@@ -1,10 +1,8 @@
 ---
 layout: thought
 title: Digital Renaissance Manifesto
-date: 2024-01-01
 permalink: /thoughts/digital-renaissance-manifesto/
-published: false
+noindex: true   # remove this line once the real text is in
 ---
 
-Paste the manifesto here in Markdown, set the date above, then delete the
-"published: false" line and uncomment the url in _data/thoughts.yml.
+Text coming soon.

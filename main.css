@@ -401,6 +401,16 @@ html.is-paging .pager-up {
     display: block;
 }
 
+/* Blocks fade in one after another as they become ready (see main.js). */
+.blk.is-waiting {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.blk {
+    transition: opacity 0.5s ease, transform 0.6s var(--ease);
+}
+
 .blk img {
     display: block;
     width: 100%;
@@ -655,29 +665,105 @@ a.blk:focus-visible {
     opacity: 1;
 }
 
-/* ---------- Posts (/thoughts/…) ---------- */
+/* ---------- Detail pages (posts, profile) ----------
+   Figma "iPhone 17 - 7": "<" at 16/16, title at 64, body at 144. */
 
-.post .lede a:hover {
-    text-decoration: none;
+.detail-page {
+    padding-top: 0;
 }
 
-.post .label time {
-    font-weight: 400;
-    margin-left: 0.6em;
+/* "<" stays at the top while the page scrolls beneath it. */
+.detail-top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: 64px;
+    margin: 0 calc(var(--gutter) * -1);
+    padding: 16px var(--gutter) 0;
+    background: linear-gradient(to bottom, var(--bg) 70%, var(--bg-clear));
+    pointer-events: none;
 }
 
-.post a.toggle {
+.back {
     display: block;
+    width: 32px;
+    height: 32px;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.back:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+    border-radius: 50%;
+}
+
+.back-dots {
+    display: block;
+    fill: currentColor;
+    overflow: visible;
+}
+
+/* The dots land one by one as the page arrives. */
+.back-dots circle {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: dot-in 0.32s var(--spin) both;
+}
+
+.back-dots circle:nth-child(1) { animation-delay: 0.38s; }
+.back-dots circle:nth-child(2) { animation-delay: 0.52s; }
+.back-dots circle:nth-child(3) { animation-delay: 0.66s; }
+
+@keyframes dot-in {
+    from { transform: scale(0); }
+}
+
+.detail-page .lede {
+    min-height: 0;
+}
+
+/* Pages slide sideways between the landing (left) and its detail pages (right).
+   Uses cross-document view transitions; other browsers just navigate. */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.46s;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    animation-fill-mode: both;
+}
+
+html.is-detail::view-transition-old(root) { animation-name: slide-out-left; }
+html.is-detail::view-transition-new(root) { animation-name: slide-in-right; }
+html:not(.is-detail)::view-transition-old(root) { animation-name: slide-out-right; }
+html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left; }
+
+@keyframes slide-out-left { to { transform: translateX(-100%); } }
+@keyframes slide-in-right { from { transform: translateX(100%); } }
+@keyframes slide-out-right { to { transform: translateX(100%); } }
+@keyframes slide-in-left { from { transform: translateX(-100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+
+    .back-dots circle {
+        animation: none;
+    }
 }
 
 .prose {
-    margin-top: 16px;
+    margin-top: 56px;
     padding-bottom: 36px;
-    line-height: 1.5;
+    line-height: 1.3;
 }
 
 .prose > * + * {
-    margin-top: 1.5em;
+    margin-top: 1.3em;
 }
 
 .prose h2,

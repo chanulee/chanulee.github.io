@@ -13,7 +13,7 @@
 # No "url:" line = plain text, not a link.
 
 - title: Digital Renaissance Manifesto
-  # url: /thoughts/digital-renaissance-manifesto/   <- uncomment once the text is in
+  url: /thoughts/digital-renaissance-manifesto/
 
 - title: What’s Next in Seoul Design?
   url: https://www.slanted.de/whats-next-in-seoul-design/
