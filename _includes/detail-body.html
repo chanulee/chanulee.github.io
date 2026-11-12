@@ -23,20 +23,34 @@
 </main>
 
 <script>
-    // Scrolling the first stretch moves the title up beside "<" and down to body size.
+    // The title rides up with the page for the first stretch, then settles beside
+    // "<" at body size. It is fixed to the screen, so its place is set from here.
     (() => {
-        const title = document.querySelector('.detail-page > .lede');
+        const main = document.querySelector('.detail-page');
+        const title = main && main.querySelector(':scope > .lede');
         if (!title) return;
-        const REACH = 41;   // px from the title's resting place (64) to where it docks (23)
+        const REST = 64, DOCK = 23;     // px from the top: resting place, and where it docks
         let queued = false;
+
         const update = () => {
             queued = false;
-            const t = Math.max(0, Math.min(1, window.scrollY / REACH));
+            const y = Math.max(DOCK, REST - window.scrollY);
+            const t = Math.min(1, (REST - y) / (REST - DOCK));
+            title.style.setProperty('--y', y + 'px');
             title.style.setProperty('--t', t.toFixed(3));
             title.classList.toggle('is-docked', t === 1);
         };
+        // Room for the title in the page, at its full size.
+        const measure = () => {
+            title.classList.remove('is-docked');
+            main.style.setProperty('--title-h', title.offsetHeight + 'px');
+            update();
+        };
+
         window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
-        update();
+        window.addEventListener('resize', measure);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+        measure();
     })();
 
     // "<" goes back to exactly where the visitor came from when that was this site.

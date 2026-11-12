@@ -45,6 +45,7 @@
     --bg: #cde3ff;
     --bg-clear: rgb(205 227 255 / 0);
     --stick: 24px;
+    --col: 402px;       /* width of the page column */
     --ink: #000;
     --gutter: 16px;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -748,18 +749,23 @@ a.blk:focus-visible {
 /* ---------- Detail pages (posts, profile) ----------
    Figma "iPhone 17 - 7": "<" at 16/16, title at 64, body at 144. */
 
+/* The top bar and the title are fixed to the screen rather than sticky: Safari
+   drops sticky elements while the page rubber-bands past its end. The page
+   leaves room for them (the title's height is measured by the page's script). */
 .detail-page {
-    padding-top: 0;
+    padding-top: calc(64px + var(--title-h, 24px));
 }
 
 /* "<" stays at the top while the page scrolls beneath it. */
 .detail-top {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 50%;
     z-index: 5;
+    width: min(100%, var(--col));
     height: 64px;
-    margin: 0 calc(var(--gutter) * -1);
     padding: 16px var(--gutter) 0;
+    transform: translateX(-50%);
     background: linear-gradient(to bottom, var(--bg) 70%, var(--bg-clear));
     pointer-events: none;
 }
@@ -803,20 +809,23 @@ a.blk:focus-visible {
     min-height: 0;
 }
 
-/* On scroll the title rides up beside "<" and settles there at body size.
-   --t runs 0 → 1 over that short stretch (set in the page's script). */
+/* The title starts under the bar, rides up with the page, and settles beside
+   "<" at body size. --y is its distance from the top of the screen, --t runs
+   0 → 1 over the last stretch; both are set by the page's script. */
 .detail-page > .lede {
-    position: sticky;
-    top: 23px;
+    position: fixed;
+    top: 0;
+    left: calc(50% - min(50vw, var(--col) / 2) + var(--gutter));
     z-index: 6;
+    width: calc(min(100vw, var(--col)) - var(--gutter) * 2);
     transform-origin: left top;
-    transform: translateX(calc(var(--t, 0) * 44px)) scale(calc(1 - var(--t, 0) * 0.3));
+    transform: translate(calc(var(--t, 0) * 44px), var(--y, 64px)) scale(calc(1 - var(--t, 0) * 0.3));
     pointer-events: none;
 }
 
 /* Once settled, a long title keeps to one line. */
 .detail-page > .lede.is-docked {
-    width: calc((100% - 44px) / 0.7);
+    width: calc((min(100vw, var(--col)) - var(--gutter) * 2 - 44px) / 0.7);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -943,6 +952,7 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
 @media (min-width: 768px) {
     :root {
         --gutter: 24px;
+        --col: 450px;
     }
 
     .page {
