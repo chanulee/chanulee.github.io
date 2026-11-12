@@ -533,6 +533,9 @@
         const PER = 24;
         const box = document.getElementById('arena');
         const toggle = document.getElementById('arena-cols');
+        const fxToggle = document.getElementById('arena-fx');
+        let fx = 'rise';
+        try { fx = localStorage.getItem('arena-fx') === 'scan' ? 'scan' : 'rise'; } catch (e) {}
         const group = box ? box.dataset.group.trim() : '';
         const channels = box && box.dataset.channel.trim() ? [box.dataset.channel.trim()] : [];
         const items = [];        // { node, weight } in feed order
@@ -623,29 +626,110 @@
                 place(item);
             });
             if (toggle) toggle.textContent = cols === 2 ? '2 columns' : '1 column';
+            setFx(fx);
+            nudge();
         }
 
-        // Blocks show up one after another: each waits for its image, and never
-        // appears less than a beat after the one before it.
-        let lastShown = 0;
-        function reveal(node) {
-            const at = Math.max(performance.now(), lastShown + 70);
-            lastShown = at;
-            setTimeout(() => node.classList.remove('is-waiting'), at - performance.now());
+        /* Blocks appear strictly in reading order — top to bottom, left before
+           right — one beat apart. A block takes its turn when its image has
+           arrived and it is on (or near) the screen; a slow image holds the line
+           only briefly, then the rest carry on and it fades in when it lands. */
+        const BEAT = { rise: 70, scan: 110 };
+        const PATIENCE = 700;
+        let turn = null, headSince = 0, headItem = null;
+
+        const ready = item => !item.image || item.image.complete;
+
+        function show(item, instant) {
+            item.shown = true;
+            if (item.image && !item.image.complete) {
+                item.image.classList.add('is-late');
+                const land = () => item.image.classList.remove('is-late');
+                item.image.addEventListener('load', land, { once: true });
+                item.image.addEventListener('error', land, { once: true });
+            }
+            if (instant) {
+                item.node.style.transition = 'none';
+                item.node.classList.remove('is-waiting');
+                item.node.offsetWidth;
+                item.node.style.transition = '';
+            } else item.node.classList.remove('is-waiting');
         }
+
+        function pump() {
+            if (turn) return;
+            const waiting = items.filter(item => !item.shown);
+            if (!waiting.length) return;
+            const edge = window.innerHeight * 1.1;
+            waiting.forEach(item => { item.rect = item.node.getBoundingClientRect(); });
+            waiting.sort((p, q) => (p.rect.top - q.rect.top) || (p.rect.left - q.rect.left));
+
+            // Anything already scrolled past is simply there.
+            let next = waiting[0];
+            while (next && next.rect.bottom < 0) {
+                show(next, true);
+                waiting.shift();
+                next = waiting[0];
+            }
+            if (!next || next.rect.top > edge) return;      // nothing due on screen yet
+
+            const now = performance.now();
+            if (headItem !== next) { headItem = next; headSince = now; }
+            if (!ready(next) && now - headSince < PATIENCE) {
+                turn = setTimeout(() => { turn = null; pump(); }, 80);
+                return;
+            }
+            show(next);
+            turn = setTimeout(() => { turn = null; pump(); }, BEAT[fx]);
+        }
+
+        let queued = false;
+        const nudge = () => {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(() => { queued = false; pump(); });
+        };
+        window.addEventListener('scroll', nudge, { passive: true });
+        window.addEventListener('resize', nudge);
 
         const add = blocks => blocks.forEach(block => {
             const item = render(block);
             if (!item) return;
-            const image = item.node.querySelector('img');
+            item.image = item.node.querySelector('img');
             item.node.classList.add('is-waiting');
-            if (image && !image.complete) {
-                image.addEventListener('load', () => reveal(item.node), { once: true });
-                image.addEventListener('error', () => reveal(item.node), { once: true });
-            } else reveal(item.node);
+            // The first screenful is fetched straight away, in order; the rest wait
+            // until they are scrolled near.
+            if (item.image && items.length < 6) {
+                item.image.loading = 'eager';
+                item.image.fetchPriority = items.length < 2 ? 'high' : 'auto';
+            }
+            if (item.image) item.image.addEventListener('load', nudge, { once: true });
             items.push(item);
             place(item);
+            nudge();
         });
+
+        // Switching the effect plays it again on what is in view.
+        function setFx(name, replay) {
+            fx = name;
+            box.dataset.fx = fx;
+            if (fxToggle) fxToggle.textContent = fx;
+            if (!replay) return;
+            try { localStorage.setItem('arena-fx', fx); } catch (e) {}
+            clearTimeout(turn);
+            turn = null;
+            headItem = null;
+            items.forEach(item => {
+                const r = item.node.getBoundingClientRect();
+                if (r.bottom < 0 || r.top > window.innerHeight) return;
+                item.shown = false;
+                item.node.classList.add('is-waiting');
+            });
+            box.offsetWidth;
+            nudge();
+        }
+
+        if (fxToggle) fxToggle.addEventListener('click', () => setFx(fx === 'rise' ? 'scan' : 'rise', true));
 
         if (toggle) toggle.addEventListener('click', () => {
             cols = cols === 2 ? 1 : 2;
@@ -687,6 +771,7 @@
             }
             loading = false;
             if (toggle) toggle.hidden = !items.length;
+            if (fxToggle) fxToggle.hidden = !items.length;
             if (done && sentinel) sentinel.remove();
             // Still near the end of a short page: fetch the next one.
             else if (sentinel && sentinel.getBoundingClientRect().top < window.innerHeight + 800) more();

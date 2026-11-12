@@ -358,6 +358,8 @@ html.is-paging .pager-up {
 
 /* Are.na feed */
 .arena-tools {
+    display: flex;
+    justify-content: space-between;
     margin-top: 24px;
 }
 
@@ -402,13 +404,38 @@ html.is-paging .pager-up {
 }
 
 /* Blocks fade in one after another as they become ready (see main.js). */
-.blk.is-waiting {
-    opacity: 0;
-    transform: translateY(8px);
+/* "rise": the same move as list rows coming in. */
+.blk {
+    transition: opacity 0.52s var(--ease), transform 0.52s var(--ease);
 }
 
-.blk {
-    transition: opacity 0.5s ease, transform 0.6s var(--ease);
+.blk.is-waiting {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: none;
+}
+
+/* "scan": drawn from the top edge down, coming into focus as it goes. */
+.arena[data-fx="scan"] .blk {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 0.75s cubic-bezier(0.3, 0, 0.2, 1), filter 0.75s ease-out, opacity 0.3s ease-out;
+}
+
+.arena[data-fx="scan"] .blk.is-waiting {
+    opacity: 0;
+    transform: none;
+    filter: blur(8px);
+    clip-path: inset(0 0 100% 0);
+    transition: none;
+}
+
+/* An image that arrives after its block was shown fades in on its own. */
+.blk img.is-late {
+    opacity: 0;
+}
+
+.blk img {
+    transition: opacity 0.4s ease;
 }
 
 .blk img {
