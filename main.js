@@ -60,6 +60,13 @@
     // depends on what the browser reports back from getAnimations().
     const live = new Set();
     const play = (el, frames, opts) => {
+        // Fades are kept off the compositor: Safari can leave a composited layer at
+        // opacity 0 after its animation is cancelled, and the text then stays
+        // invisible. Animating a second, ordinary property alongside opacity makes
+        // the browser run the whole thing on the main thread, where that cannot happen.
+        if (frames.some(f => 'opacity' in f)) {
+            frames = frames.map((f, i) => 'opacity' in f ? { ...f, outlineOffset: i ? '0.02px' : '0px' } : f);
+        }
         const a = el.animate(frames, opts);
         live.add(a);
         return a;
@@ -74,6 +81,14 @@
         } catch (e) {}
         unsplit();
     };
+
+    // Belt and braces for the same Safari problem: once a transition has settled,
+    // nudge every line so the browser redraws it from its real, current style.
+    function repaint() {
+        const els = page.querySelectorAll('.sec, .toggle, .label, .rows > li, .body li, .body p, .extra');
+        els.forEach(el => { el.style.opacity = '0.999'; });
+        requestAnimationFrame(() => requestAnimationFrame(() => els.forEach(el => { el.style.opacity = ''; })));
+    }
 
     /* Paragraphs reveal one rendered line at a time. The line breaks are read
        from the paragraph as the browser has already laid it out — nothing is
@@ -334,7 +349,11 @@
         // what is on screen depends on the classes alone, whatever happened on the way.
         settleAt = Math.max(settleAt, landed + MOVE);
         clearTimeout(settleTimer);
-        settleTimer = setTimeout(() => { if (id === run) stopAll(); }, settleAt + 80);
+        settleTimer = setTimeout(() => {
+            if (id !== run) return;
+            stopAll();
+            repaint();
+        }, settleAt + 80);
     }
 
     function toggle(name) {
