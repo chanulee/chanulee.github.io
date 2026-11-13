@@ -104,9 +104,9 @@
 
         const lines = [];
         const range = document.createRange();
-        let top = null;
+        let top = null, breaks = 0;
         p.childNodes.forEach(node => {
-            if (node.nodeType !== 3) { top = null; return; }       // <br>: next word starts a line
+            if (node.nodeType !== 3) { top = null; breaks++; return; }   // <br>: next word starts a line
             const words = /\S+/g;
             let m;
             while ((m = words.exec(node.data))) {
@@ -114,7 +114,13 @@
                 range.setEnd(node, m.index + m[0].length);
                 const rect = range.getClientRects()[0];
                 if (!rect) continue;
-                if (top === null || Math.abs(rect.top - top) > rect.height / 2) { lines.push([]); top = rect.top; }
+                if (top === null || Math.abs(rect.top - top) > rect.height / 2) {
+                    // Extra <br>s in a row are blank lines; keep their space so the
+                    // paragraph does not jump when it gets its plain text back.
+                    for (let b = 1; b < breaks && lines.length; b++) lines.push([]);
+                    breaks = 0;
+                    lines.push([]); top = rect.top;
+                }
                 lines[lines.length - 1].push(m[0]);
             }
         });
@@ -125,7 +131,7 @@
         return lines.map(words => {
             const line = document.createElement('span');
             line.className = 'ln';
-            line.textContent = words.join(' ');
+            line.textContent = words.length ? words.join(' ') : '\u00a0';
             p.append(line);
             return [line];
         });
