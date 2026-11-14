@@ -5,6 +5,9 @@
 # "events" is opened. "date" is free text (11.24, Sep-Dec, TBD Dec ...).
 # Optional: add a "url:" line to make the name a link.
 
+- name: Microsoft Korea Agent-a-thon Tutor
+  date: "11.14"
+
 - name: KHU Talk
   date: TBD Dec
 
