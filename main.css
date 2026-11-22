@@ -756,6 +756,16 @@ a.blk:focus-visible {
     padding-top: calc(64px + var(--title-h, 24px));
 }
 
+/* On phones the wrapper has no box: "<" and the title are fixed on their own. */
+.detail-side {
+    display: contents;
+}
+
+/* The date shows only in the desktop side column. */
+.detail-date {
+    display: none;
+}
+
 /* "<" stays at the top while the page scrolls beneath it. */
 .detail-top {
     position: fixed;
@@ -812,7 +822,7 @@ a.blk:focus-visible {
 /* The title starts under the bar, rides up with the page, and settles beside
    "<" at body size. --y is its distance from the top of the screen, --t runs
    0 → 1 over the last stretch; both are set by the page's script. */
-.detail-page > .lede {
+.detail-side > .lede {
     position: fixed;
     top: 0;
     left: calc(50% - min(50vw, var(--col) / 2) + var(--gutter));
@@ -824,7 +834,7 @@ a.blk:focus-visible {
 }
 
 /* Once settled, a long title keeps to one line. */
-.detail-page > .lede.is-docked {
+.detail-side > .lede.is-docked {
     width: calc((min(100vw, var(--col)) - var(--gutter) * 2 - 44px) / 0.7);
     white-space: nowrap;
     overflow: hidden;
@@ -957,6 +967,97 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
 
     .page {
         max-width: 450px;
+    }
+}
+
+/* ---------- Desktop: detail pages ----------
+   A 12-column grid (40px margins, 24px gaps). "<", the title and the date stand
+   in columns 1–3 and stay put; the text takes the middle six (4–9). The title no
+   longer rides up and docks, so the inline --y / --t from the page's script and
+   .is-docked are overridden here. */
+
+@media (min-width: 1280px) {
+    html.is-detail body {
+        font-size: 20px;
+    }
+
+    html.is-detail .detail-page {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: 24px;
+        align-items: start;
+        max-width: none;
+        padding: 0 40px;
+    }
+
+    .detail-side {
+        display: block;
+        grid-column: 1 / 4;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        padding-top: 16px;
+    }
+
+    /* Text scrolling up still fades out under the sky at the top of the screen,
+       as under the phone's top bar. */
+    .detail-page::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        height: 64px;
+        background: linear-gradient(to bottom, var(--bg) 70%, var(--bg-clear));
+        pointer-events: none;
+    }
+
+    .detail-top {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        transform: none;
+        background: none;
+    }
+
+    .detail-side > .lede,
+    .detail-side > .lede.is-docked {
+        position: static;
+        width: auto;
+        margin-top: 16px;
+        transform: none;
+        /* Same step above the body as on phones (20 : 14). */
+        font-size: 28px;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+        white-space: normal;
+        overflow: visible;
+        pointer-events: auto;
+    }
+
+    .detail-date {
+        display: block;
+        margin-top: 8px;
+    }
+
+    /* First line of text level with the title. */
+    .prose {
+        grid-column: 4 / 10;
+        margin-top: 0;
+        padding-top: 64px;
+        padding-bottom: 80px;
+    }
+
+    .prose blockquote {
+        font-size: 28px;
+        letter-spacing: -0.8px;
+    }
+
+    .prose h2,
+    .prose h3 {
+        font-size: 20px;
     }
 }
 
