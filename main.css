@@ -960,6 +960,52 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
     }
 }
 
+/* ---------- Desktop: detail pages ----------
+   A 12-column grid (40px margins, 24px gaps); the text takes the middle six
+   columns (4–9), so it stays centred. --col is the text width plus the page's
+   own gutters, since the page pads its content by --gutter on each side. */
+
+@media (min-width: 1280px) {
+    html.is-detail {
+        --grid-m: 40px;
+        --grid-g: 24px;
+        --grid-c: calc((100vw - 2 * var(--grid-m) - 11 * var(--grid-g)) / 12);
+        --col: calc(6 * var(--grid-c) + 5 * var(--grid-g) + 2 * var(--gutter));
+        --dock: 18;     /* px from the top where the title docks beside "<" (read by the page's script) */
+    }
+
+    html.is-detail body {
+        font-size: 24px;
+    }
+
+    html.is-detail .page {
+        max-width: var(--col);
+    }
+
+    /* Deeper bar, so text scrolling up has faded out before the larger docked title. */
+    .detail-top {
+        height: 96px;
+        background: linear-gradient(to bottom, var(--bg) 60%, var(--bg-clear));
+    }
+
+    /* Headline and quotes keep their mobile ratio to the body (20 : 14). */
+    .detail-page .lede,
+    .prose blockquote {
+        font-size: 34px;
+        letter-spacing: -1px;
+    }
+
+    .prose {
+        margin-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .prose h2,
+    .prose h3 {
+        font-size: 24px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .dots {
         transition: none;

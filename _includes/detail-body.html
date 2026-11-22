@@ -29,7 +29,8 @@
         const main = document.querySelector('.detail-page');
         const title = main && main.querySelector(':scope > .lede');
         if (!title) return;
-        const REST = 64, DOCK = 23;     // px from the top: resting place, and where it docks
+        const REST = 64;                // px from the top: resting place
+        let DOCK = 23;                  // ...and where it docks (desktop sets --dock in main.css)
         let queued = false;
 
         const update = () => {
@@ -42,6 +43,7 @@
         };
         // Room for the title in the page, at its full size.
         const measure = () => {
+            DOCK = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dock')) || 23;
             title.classList.remove('is-docked');
             main.style.setProperty('--title-h', title.offsetHeight + 'px');
             update();
