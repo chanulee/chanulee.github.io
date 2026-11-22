@@ -11,8 +11,8 @@
     const sections = [...page.querySelectorAll('.sec')];
     const byName = Object.fromEntries(sections.map(s => [s.dataset.sec, s]));
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    // Desktop: three columns side by side, everything open, the curation feed in
-    // the third. Nothing opens, closes or turns there (see main.css).
+    // Desktop: three columns side by side, the feed in the third, so there is no
+    // second page to turn to. Sections open in place there (see main.css).
     const desk = window.matchMedia('(min-width: 1280px)');
 
     const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -164,7 +164,7 @@
 
         if (!animate) {
             apply(name);
-            window.scrollTo(0, 0);
+            if (!desk.matches) window.scrollTo(0, 0);
             return;
         }
 
@@ -196,7 +196,7 @@
         // 3. Last: switch state, then measure again.
         stopAll();
         apply(name);
-        window.scrollTo(0, 0);
+        if (!desk.matches) window.scrollTo(0, 0);
         const pageTop = rectOf(page).top;
         const last = new Map(targets.map(el => [el, rectOf(el)]));
 
@@ -382,7 +382,6 @@
 
     window.addEventListener('hashchange', () => {
         const name = location.hash.slice(1);
-        if (desk.matches) return;
         if (name === 'curation' || (pager && pager.view === 'curation')) return;
         setOpen(byName[name] ? name : null);
     });
@@ -905,19 +904,12 @@
 
     // Deep link: /#events opens straight into that section, no animation.
     const initial = location.hash.slice(1);
-    if (byName[initial] && !desk.matches) apply(want = initial);
+    if (byName[initial]) apply(want = initial);
     if (initial === 'curation' && pager) pager.go('curation', { push: false, instant: true });
 
-    // Crossing between the phone layout and the desktop grid: close whatever is
-    // open and put the feed where that layout wants it.
+    // Crossing between the phone layout and the desktop grid: put the feed where
+    // that layout wants it.
     function syncDesk() {
-        if (desk.matches && (open || want)) {
-            run++;
-            clearTimeout(settleTimer);
-            stopAll();
-            want = null;
-            apply(null);
-        }
         if (pager) pager.dock(desk.matches);
     }
     desk.addEventListener('change', syncDesk);

@@ -687,81 +687,81 @@ a.blk:focus-visible {
 
 /* ---------- Open / closed states ---------- */
 
-/* (Phones and tablets only: on desktop everything is open.) */
-@media (max-width: 1279.98px) {
-    .sec:not(.is-open) .extra {
-        display: none;
-    }
-}
-
-/* When one section is open, it takes the top slot and the others leave the flow. */
-.page.has-open .spacer {
+.sec:not(.is-open) .extra {
     display: none;
 }
 
-.page.has-open .sec {
-    margin-top: 8px;
-}
+/* Phones and tablets. On desktop a section opens in place, in its own column. */
+@media (max-width: 1279.98px) {
+    /* When one section is open, it takes the top slot and the others leave the flow. */
+    .page.has-open .spacer {
+        display: none;
+    }
 
-.page.has-open .sec:not(.is-open) {
-    position: absolute;
-    left: var(--gutter);
-    right: var(--gutter);
-    visibility: hidden;
-    pointer-events: none;
-}
+    .page.has-open .sec {
+        margin-top: 8px;
+    }
 
-/* ---------- Sticky header (open sections) ----------
-   The headline scrolls up a little, then sticks; the open section's header row
-   (label + ×) sticks right under it. Content scrolls beneath and fades out under
-   a sky-coloured gradient. The backdrop only appears once the page is scrolled. */
+    .page.has-open .sec:not(.is-open) {
+        position: absolute;
+        left: var(--gutter);
+        right: var(--gutter);
+        visibility: hidden;
+        pointer-events: none;
+    }
 
-.page.has-open .lede {
-    position: sticky;
-    top: var(--stick);
-    z-index: 3;
-}
+    /* ---------- Sticky header (open sections) ----------
+       The headline scrolls up a little, then sticks; the open section's header row
+       (label + ×) sticks right under it. Content scrolls beneath and fades out under
+       a sky-coloured gradient. The backdrop only appears once the page is scrolled. */
 
-.sec.is-open .head {
-    position: sticky;
-    top: calc(var(--stick) + var(--lede-h, 48px) + 16px);
-    z-index: 2;
-}
+    .page.has-open .lede {
+        position: sticky;
+        top: var(--stick);
+        z-index: 3;
+    }
 
-.page.has-open .lede::before,
-.sec.is-open .head::before,
-.sec.is-open .head::after {
-    content: '';
-    position: absolute;
-    left: calc(var(--gutter) * -1);
-    right: calc(var(--gutter) * -1);
-    z-index: -1;
-    background: var(--bg);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-}
+    .sec.is-open .head {
+        position: sticky;
+        top: calc(var(--stick) + var(--lede-h, 48px) + 16px);
+        z-index: 2;
+    }
 
-.page.has-open .lede::before {
-    top: -120px;
-    bottom: 0;
-}
+    .page.has-open .lede::before,
+    .sec.is-open .head::before,
+    .sec.is-open .head::after {
+        content: '';
+        position: absolute;
+        left: calc(var(--gutter) * -1);
+        right: calc(var(--gutter) * -1);
+        z-index: -1;
+        background: var(--bg);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
 
-.sec.is-open .head::before {
-    top: -16px;
-    bottom: 0;
-}
+    .page.has-open .lede::before {
+        top: -120px;
+        bottom: 0;
+    }
 
-.sec.is-open .head::after {
-    top: 100%;
-    height: 28px;
-    background: linear-gradient(to bottom, var(--bg), var(--bg-clear));
-}
+    .sec.is-open .head::before {
+        top: -16px;
+        bottom: 0;
+    }
 
-.page.is-scrolled.has-open .lede::before,
-.page.is-scrolled .sec.is-open .head::before,
-.page.is-scrolled .sec.is-open .head::after {
-    opacity: 1;
+    .sec.is-open .head::after {
+        top: 100%;
+        height: 28px;
+        background: linear-gradient(to bottom, var(--bg), var(--bg-clear));
+    }
+
+    .page.is-scrolled.has-open .lede::before,
+    .page.is-scrolled .sec.is-open .head::before,
+    .page.is-scrolled .sec.is-open .head::after {
+        opacity: 1;
+    }
 }
 
 /* ---------- Detail pages (posts, profile) ----------
@@ -1067,9 +1067,10 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
 
 /* ---------- Desktop: landing ----------
    The same 12-column grid, in three columns of four: the headline and about
-   (1–4), events and thoughts (5–8), the curation feed (9–12). Everything is
-   open, so there is nothing to toggle and no second page to turn to.
-   Type: headline and column headings share the large size; all else is body. */
+   (1–4), events and thoughts (5–8), the library feed (9–12), which on phones is
+   the second page. "+" works as on phones, except that a section opens in
+   place, in its own column, and the others stay where they are.
+   Type: only the headline is large; column headings are body size, in bold. */
 
 @media (min-width: 1280px) {
     .landing {
@@ -1117,49 +1118,56 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
     }
 
     .landing .spacer,
-    .landing .toggle,
-    .landing .sec-about .head,
     .landing .pager-down,
     .landing .cur-top,
     .landing .cur-page .lede {
         display: none;
     }
 
-    /* Column headings stand on the headline's first line. */
+    /* Heading rows are one headline line tall, so the headings stand on the
+       headline's first line. */
     .landing .head,
     .landing .arena-tools {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         justify-content: space-between;
-        height: auto;
+        height: calc(var(--fs-lg) * var(--lh-lg));
         margin-top: 0;
+    }
+
+    .landing .sec-about .head {
+        justify-content: flex-end;
+    }
+
+    .landing .arena-tools {
+        align-items: baseline;
+    }
+
+    /* An empty strut at the headline's size gives the body-size heading the
+       headline's baseline. */
+    .landing .label::before {
+        content: '\200b';
+        font-size: var(--fs-lg);
+        line-height: var(--lh-lg);
     }
 
     .landing .label {
         display: block;
-        font-size: var(--fs-lg);
-        letter-spacing: var(--ls-lg);
     }
 
-    .landing .sec,
-    .landing .body {
+    .landing .sec[data-sec="events"] {
         margin-top: 0;
     }
 
-    /* One headline line between the headline and the text under it… */
-    .landing .sec-about,
-    .landing .rows,
-    .landing .arena {
-        margin-top: calc(var(--fs-lg) * var(--lh-lg));
-    }
-
-    /* …and two between one list and the next heading. */
     .landing .sec[data-sec="thoughts"] {
-        margin-top: calc(var(--fs-lg) * var(--lh-lg) * 2);
+        margin-top: 40px;
     }
 
-    .landing .rows {
+    /* The first rows keep their place when a list opens. */
+    .landing .rows,
+    .landing .sec.is-open .rows {
         gap: 8px;
+        margin-top: 12px;
     }
 
     .landing .rows li {
@@ -1172,7 +1180,11 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
     }
 
     /* The feed's two columns fall on the grid: two columns each. */
-    .landing .arena,
+    .landing .arena {
+        gap: 24px;
+        margin-top: 12px;
+    }
+
     .landing .arena-col {
         gap: 24px;
     }
