@@ -756,6 +756,16 @@ a.blk:focus-visible {
     padding-top: calc(64px + var(--title-h, 24px));
 }
 
+/* On phones the wrapper has no box: "<" and the title are fixed on their own. */
+.detail-side {
+    display: contents;
+}
+
+/* The date shows only in the desktop side column. */
+.detail-date {
+    display: none;
+}
+
 /* "<" stays at the top while the page scrolls beneath it. */
 .detail-top {
     position: fixed;
@@ -812,7 +822,7 @@ a.blk:focus-visible {
 /* The title starts under the bar, rides up with the page, and settles beside
    "<" at body size. --y is its distance from the top of the screen, --t runs
    0 → 1 over the last stretch; both are set by the page's script. */
-.detail-page > .lede {
+.detail-side > .lede {
     position: fixed;
     top: 0;
     left: calc(50% - min(50vw, var(--col) / 2) + var(--gutter));
@@ -824,7 +834,7 @@ a.blk:focus-visible {
 }
 
 /* Once settled, a long title keeps to one line. */
-.detail-page > .lede.is-docked {
+.detail-side > .lede.is-docked {
     width: calc((min(100vw, var(--col)) - var(--gutter) * 2 - 44px) / 0.7);
     white-space: nowrap;
     overflow: hidden;
@@ -961,48 +971,76 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
 }
 
 /* ---------- Desktop: detail pages ----------
-   A 12-column grid (40px margins, 24px gaps); the text takes the middle six
-   columns (4–9), so it stays centred. --col is the text width plus the page's
-   own gutters, since the page pads its content by --gutter on each side. */
+   A 12-column grid (40px margins, 24px gaps). "<", the title and the date stand
+   in columns 1–3 and stay put; the text takes the middle six (4–9). The title no
+   longer rides up and docks, so the inline --y / --t from the page's script and
+   .is-docked are overridden here. */
 
 @media (min-width: 1280px) {
-    html.is-detail {
-        --grid-m: 40px;
-        --grid-g: 24px;
-        --grid-c: calc((100vw - 2 * var(--grid-m) - 11 * var(--grid-g)) / 12);
-        --col: calc(6 * var(--grid-c) + 5 * var(--grid-g) + 2 * var(--gutter));
-        --dock: 18;     /* px from the top where the title docks beside "<" (read by the page's script) */
-    }
-
     html.is-detail body {
-        font-size: 24px;
+        font-size: 20px;
     }
 
-    html.is-detail .page {
-        max-width: var(--col);
+    html.is-detail .detail-page {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: 24px;
+        align-items: start;
+        max-width: none;
+        padding: 0 40px;
     }
 
-    /* Deeper bar, so text scrolling up has faded out before the larger docked title. */
+    .detail-side {
+        display: block;
+        grid-column: 1 / 4;
+        position: sticky;
+        top: 0;
+        padding-top: 16px;
+    }
+
     .detail-top {
-        height: 96px;
-        background: linear-gradient(to bottom, var(--bg) 60%, var(--bg-clear));
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        transform: none;
+        background: none;
     }
 
-    /* Headline and quotes keep their mobile ratio to the body (20 : 14). */
-    .detail-page .lede,
-    .prose blockquote {
-        font-size: 34px;
-        letter-spacing: -1px;
+    .detail-side > .lede,
+    .detail-side > .lede.is-docked {
+        position: static;
+        width: auto;
+        margin-top: 16px;
+        transform: none;
+        font-size: inherit;
+        line-height: 1.3;
+        letter-spacing: normal;
+        white-space: normal;
+        overflow: visible;
+        pointer-events: auto;
     }
 
+    .detail-date {
+        display: block;
+    }
+
+    /* First line of text level with the title. */
     .prose {
-        margin-top: 80px;
+        grid-column: 4 / 10;
+        margin-top: 0;
+        padding-top: 64px;
         padding-bottom: 80px;
+    }
+
+    .prose blockquote {
+        font-size: 28px;
+        letter-spacing: -0.8px;
     }
 
     .prose h2,
     .prose h3 {
-        font-size: 24px;
+        font-size: 20px;
     }
 }
 

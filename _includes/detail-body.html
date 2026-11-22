@@ -1,21 +1,28 @@
 {%- comment -%}
   Shared body of a detail page (posts, profile pages). Conceptually these sit to
   the right of the landing: they slide in from the right, and "<" slides back.
-  include.title: the headline. The page content follows it.
+  include.title: the headline. include.date (optional): when it was written.
+  The page content follows. On desktop "<", the title and the date stand in a
+  column on the left; on phones .detail-side has no box of its own.
 {%- endcomment -%}
 <main class="page detail-page">
-    <div class="detail-top">
-        <a class="back" id="back" href="{{ include.back | default: '/' }}" aria-label="{{ include.back_label | default: 'Back' }}">
-            <!-- Three dots of the "+" icon; they land one after another when the page arrives. -->
-            <svg class="back-dots" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-                <circle cx="6" cy="16" r="4"/>
-                <circle cx="16" cy="6" r="4"/>
-                <circle cx="16" cy="26" r="4"/>
-            </svg>
-        </a>
-    </div>
+    <div class="detail-side">
+        <div class="detail-top">
+            <a class="back" id="back" href="{{ include.back | default: '/' }}" aria-label="{{ include.back_label | default: 'Back' }}">
+                <!-- Three dots of the "+" icon; they land one after another when the page arrives. -->
+                <svg class="back-dots" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                    <circle cx="6" cy="16" r="4"/>
+                    <circle cx="16" cy="6" r="4"/>
+                    <circle cx="16" cy="26" r="4"/>
+                </svg>
+            </a>
+        </div>
 
-    <h1 class="lede">{{ include.title }}</h1>
+        <h1 class="lede">{{ include.title }}</h1>
+        {%- if include.date %}
+        <p class="detail-date">Written in <time datetime="{{ include.date | date: '%Y-%m' }}">{{ include.date | date: '%m. %Y' }}</time></p>
+        {%- endif %}
+    </div>
 
     <article class="prose">
         {{ include.content }}
@@ -27,10 +34,9 @@
     // "<" at body size. It is fixed to the screen, so its place is set from here.
     (() => {
         const main = document.querySelector('.detail-page');
-        const title = main && main.querySelector(':scope > .lede');
+        const title = main && main.querySelector('.detail-side > .lede');
         if (!title) return;
-        const REST = 64;                // px from the top: resting place
-        let DOCK = 23;                  // ...and where it docks (desktop sets --dock in main.css)
+        const REST = 64, DOCK = 23;     // px from the top: resting place, and where it docks
         let queued = false;
 
         const update = () => {
@@ -43,7 +49,6 @@
         };
         // Room for the title in the page, at its full size.
         const measure = () => {
-            DOCK = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dock')) || 23;
             title.classList.remove('is-docked');
             main.style.setProperty('--title-h', title.offsetHeight + 'px');
             update();

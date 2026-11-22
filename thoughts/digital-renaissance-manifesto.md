@@ -2,6 +2,7 @@
 layout: thought
 title: Digital Renaissance Manifesto
 permalink: /thoughts/digital-renaissance-manifesto/
+date: 2026-11-11
 description: "Humanism in the information age: computer designers, scientists and engineers as its new architects, co-designing behaviour and technology."
 ---
 
