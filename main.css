@@ -48,6 +48,12 @@
     --col: 402px;       /* width of the page column */
     --ink: #000;
     --gutter: 16px;
+    /* Type: two sizes. Body, and a larger one for headlines. */
+    --fs: 14px;
+    --lh: 1.3;
+    --fs-lg: 20px;
+    --lh-lg: 1.2;
+    --ls-lg: -0.03em;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --spin: cubic-bezier(0.34, 1.4, 0.44, 1);
 }
@@ -65,8 +71,8 @@ html {
 
 body {
     font-family: 'ABC Areal Semi Mono', 'ABC Favorit Hangul', ui-monospace, 'SF Mono', Menlo, monospace;
-    font-size: 14px;
-    line-height: 1.3;
+    font-size: var(--fs);
+    line-height: var(--lh);
     color: var(--ink);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
@@ -133,10 +139,10 @@ a:focus-visible {
 }
 
 .lede {
-    font-size: 20px;
+    font-size: var(--fs-lg);
     font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.6px;
+    line-height: var(--lh-lg);
+    letter-spacing: var(--ls-lg);
     /* Fallback; main.js locks this to the tallest phrase at the current width. */
     min-height: 2.4em;
 }
@@ -208,6 +214,15 @@ a:focus-visible {
 
 .spacer {
     flex: 1 0 32px;
+}
+
+/* Column wrappers for the desktop grid; on phones they have no box. */
+.col {
+    display: contents;
+}
+
+.cur-label {
+    display: none;
 }
 
 .sr-only {
@@ -572,9 +587,9 @@ a.blk:focus-visible {
 }
 
 .label {
-    font-size: 14px;
+    font-size: var(--fs);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: var(--lh-lg);
 }
 
 /* ---------- Toggle: five dots, "+" at rest, turns 45° into "×" when open ---------- */
@@ -620,7 +635,7 @@ a.blk:focus-visible {
 .block + .block,
 .extra + .block,
 .block + .extra {
-    margin-top: 1.3em;
+    margin-top: calc(var(--lh) * 1em);
 }
 
 /* One rendered line of a paragraph while it reveals line by line (see main.js). */
@@ -672,8 +687,11 @@ a.blk:focus-visible {
 
 /* ---------- Open / closed states ---------- */
 
-.sec:not(.is-open) .extra {
-    display: none;
+/* (Phones and tablets only: on desktop everything is open.) */
+@media (max-width: 1279.98px) {
+    .sec:not(.is-open) .extra {
+        display: none;
+    }
 }
 
 /* When one section is open, it takes the top slot and the others leave the flow. */
@@ -878,18 +896,17 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
 .prose {
     margin-top: 56px;
     padding-bottom: 36px;
-    line-height: 1.3;
 }
 
 .prose > * + * {
-    margin-top: 1.3em;
+    margin-top: calc(var(--lh) * 1em);
 }
 
 .prose h2,
 .prose h3 {
-    font-size: 14px;
+    font-size: var(--fs);
     font-weight: 700;
-    line-height: 1.3;
+    line-height: var(--lh);
     margin-top: 3em;
 }
 
@@ -940,9 +957,9 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
 }
 
 .prose blockquote {
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.6px;
+    font-size: var(--fs-lg);
+    line-height: var(--lh-lg);
+    letter-spacing: var(--ls-lg);
 }
 
 .prose img,
@@ -977,8 +994,9 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
    .is-docked are overridden here. */
 
 @media (min-width: 1280px) {
-    html.is-detail body {
-        font-size: 20px;
+    html.is-detail {
+        --fs: 20px;
+        --fs-lg: 28px;
     }
 
     html.is-detail .detail-page {
@@ -1028,10 +1046,6 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
         width: auto;
         margin-top: 16px;
         transform: none;
-        /* Same step above the body as on phones (20 : 14). */
-        font-size: 28px;
-        line-height: 1.2;
-        letter-spacing: -0.8px;
         white-space: normal;
         overflow: visible;
         pointer-events: auto;
@@ -1049,15 +1063,118 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
         padding-top: 64px;
         padding-bottom: 80px;
     }
+}
 
-    .prose blockquote {
-        font-size: 28px;
-        letter-spacing: -0.8px;
+/* ---------- Desktop: landing ----------
+   The same 12-column grid, in three columns of four: the headline and about
+   (1–4), events and thoughts (5–8), the curation feed (9–12). Everything is
+   open, so there is nothing to toggle and no second page to turn to.
+   Type: headline and column headings share the large size; all else is body. */
+
+@media (min-width: 1280px) {
+    .landing {
+        --fs: 16px;
+        --fs-lg: 24px;
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: 24px;
+        align-items: start;
+        padding: 0 40px;
     }
 
-    .prose h2,
-    .prose h3 {
-        font-size: 20px;
+    /* The first two columns stay put while the feed scrolls. If they are taller
+       than the window they scroll until their end shows (--home-h: main.js). */
+    .landing #home {
+        grid-column: 1 / 9;
+        position: sticky;
+        top: min(0px, 100vh - var(--home-h, 100vh));
+    }
+
+    .landing #curation {
+        grid-column: 9 / 13;
+    }
+
+    .landing #home .page {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        column-gap: 24px;
+        align-items: start;
+        max-width: none;
+        padding: 64px 0;
+    }
+
+    .landing .col {
+        display: block;
+        position: relative;
+    }
+
+    .landing .col-a { grid-column: 1 / 5; }
+    .landing .col-b { grid-column: 5 / 9; }
+
+    .landing .measure {
+        left: 0;
+        right: 0;
+    }
+
+    .landing .spacer,
+    .landing .toggle,
+    .landing .sec-about .head,
+    .landing .pager-down,
+    .landing .cur-top,
+    .landing .cur-page .lede {
+        display: none;
+    }
+
+    /* Column headings stand on the headline's first line. */
+    .landing .head,
+    .landing .arena-tools {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        height: auto;
+        margin-top: 0;
+    }
+
+    .landing .label {
+        display: block;
+        font-size: var(--fs-lg);
+        letter-spacing: var(--ls-lg);
+    }
+
+    .landing .sec,
+    .landing .body {
+        margin-top: 0;
+    }
+
+    /* One headline line between the headline and the text under it… */
+    .landing .sec-about,
+    .landing .rows,
+    .landing .arena {
+        margin-top: calc(var(--fs-lg) * var(--lh-lg));
+    }
+
+    /* …and two between one list and the next heading. */
+    .landing .sec[data-sec="thoughts"] {
+        margin-top: calc(var(--fs-lg) * var(--lh-lg) * 2);
+    }
+
+    .landing .rows {
+        gap: 8px;
+    }
+
+    .landing .rows li {
+        line-height: var(--lh);
+    }
+
+    .landing .cur-page {
+        max-width: none;
+        padding: 64px 0;
+    }
+
+    /* The feed's two columns fall on the grid: two columns each. */
+    .landing .arena,
+    .landing .arena-col {
+        gap: 24px;
     }
 }
 

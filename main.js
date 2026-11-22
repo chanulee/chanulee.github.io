@@ -11,6 +11,9 @@
     const sections = [...page.querySelectorAll('.sec')];
     const byName = Object.fromEntries(sections.map(s => [s.dataset.sec, s]));
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Desktop: three columns side by side, everything open, the curation feed in
+    // the third. Nothing opens, closes or turns there (see main.css).
+    const desk = window.matchMedia('(min-width: 1280px)');
 
     const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
@@ -379,6 +382,7 @@
 
     window.addEventListener('hashchange', () => {
         const name = location.hash.slice(1);
+        if (desk.matches) return;
         if (name === 'curation' || (pager && pager.view === 'curation')) return;
         setOpen(byName[name] ? name : null);
     });
@@ -396,7 +400,7 @@
         let drag = null;
 
         const atBottom = () => window.scrollY + window.innerHeight >= root.scrollHeight - 2;
-        const canPull = () => view === 'home' && !busy && !want && atBottom();
+        const canPull = () => !desk.matches && view === 'home' && !busy && !want && atBottom();
 
         // Pin both pages to the screen so they can be moved as cards.
         function stage(to) {
@@ -473,7 +477,7 @@
         }
 
         function go(to, { push = true, instant = false } = {}) {
-            if (to === view || busy) return;
+            if (to === view || busy || desk.matches) return;
             if (to === 'curation' && want) return;
             if (push) history.pushState(null, '', to === 'curation' ? '#curation' : location.pathname + location.search);
             if (instant) {
@@ -564,7 +568,21 @@
             go(location.hash === '#curation' ? 'curation' : 'home', { push: false });
         });
 
-        return { go, get view() { return view; } };
+        // Desktop shows both pages at once, the feed as the third column.
+        function dock(on) {
+            if (busy) return;
+            if (on) {
+                if (view === 'curation') history.replaceState(null, '', location.pathname + location.search);
+                view = 'home';
+                views.home.hidden = false;
+                views.curation.hidden = false;
+                views.curation.classList.remove('is-arrived');
+                setPull(0);
+                arena.load();
+            } else views.curation.hidden = view !== 'curation';
+        }
+
+        return { go, dock, get view() { return view; } };
     })();
 
     /* Are.na feed for the curation page (API v3, public channels, no key).
@@ -596,7 +614,9 @@
             return res.json();
         };
         // How wide an image is on screen, so the browser picks the smallest file that is sharp.
-        const sizes = () => cols === 2 ? '(min-width: 768px) 197px, 46vw' : '(min-width: 768px) 402px, 92vw';
+        const sizes = () => cols === 2
+            ? '(min-width: 1280px) 16vw, (min-width: 768px) 197px, 46vw'
+            : '(min-width: 1280px) 32vw, (min-width: 768px) 402px, 92vw';
 
         function render(block) {
             if (block.type === 'Channel' || block.type === 'Group') return null;
@@ -885,8 +905,30 @@
 
     // Deep link: /#events opens straight into that section, no animation.
     const initial = location.hash.slice(1);
-    if (byName[initial]) apply(want = initial);
+    if (byName[initial] && !desk.matches) apply(want = initial);
     if (initial === 'curation' && pager) pager.go('curation', { push: false, instant: true });
+
+    // Crossing between the phone layout and the desktop grid: close whatever is
+    // open and put the feed where that layout wants it.
+    function syncDesk() {
+        if (desk.matches && (open || want)) {
+            run++;
+            clearTimeout(settleTimer);
+            stopAll();
+            want = null;
+            apply(null);
+        }
+        if (pager) pager.dock(desk.matches);
+    }
+    desk.addEventListener('change', syncDesk);
+    syncDesk();
+
+    // On desktop the first two columns stay put while the feed scrolls; if they
+    // are taller than the window they scroll just far enough to show their end.
+    const home = document.getElementById('home');
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(() => home.style.setProperty('--home-h', home.offsetHeight + 'px')).observe(home);
+    }
 
     /* Headline: "Chanwoo" is there from the start and the rest animates in.
        After that the closing phrase animates out and the next one animates in.
@@ -955,7 +997,7 @@
         ruler.append(rulerTyped);
 
         function lockHeight() {
-            page.append(ruler);
+            lede.parentNode.append(ruler);
             let max = 0;
             phrases.forEach(phrase => {
                 rulerSwap.textContent = '';
