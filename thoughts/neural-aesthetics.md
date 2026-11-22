@@ -2,7 +2,7 @@
 layout: thought
 title: Neural Aesthetics
 permalink: /thoughts/neural-aesthetics/
-date: 2026-11-13
+date: 2026-10-01
 description: "In search of a new visual and motion language for human-centred neural technology."
 ---
 

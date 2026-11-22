@@ -995,7 +995,22 @@ html:not(.is-detail)::view-transition-new(root) { animation-name: slide-in-left;
         grid-column: 1 / 4;
         position: sticky;
         top: 0;
+        z-index: 5;
         padding-top: 16px;
+    }
+
+    /* Text scrolling up still fades out under the sky at the top of the screen,
+       as under the phone's top bar. */
+    .detail-page::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        height: 64px;
+        background: linear-gradient(to bottom, var(--bg) 70%, var(--bg-clear));
+        pointer-events: none;
     }
 
     .detail-top {

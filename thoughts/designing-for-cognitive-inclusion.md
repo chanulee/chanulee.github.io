@@ -2,7 +2,7 @@
 layout: thought
 title: Designing for Cognitive Inclusion
 permalink: /thoughts/designing-for-cognitive-inclusion/
-date: 2026-11-22
+date: 2025-08-01
 description: "Synapse is a tool for cognitive inclusion: a private knowledge base, Socratic reflection, and a personal AI twin the user owns and controls."
 ---
 
