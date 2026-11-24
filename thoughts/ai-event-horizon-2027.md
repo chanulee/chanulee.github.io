@@ -10,7 +10,7 @@ description: "When we actually cross the singularity, we may not notice at all. 
 
 An event horizon is a physically irreversible boundary, a point of no return, often described as the edge of a black hole. What makes it fascinating is that the one crossing it does not know they have crossed it, but only an outside observer can tell where the edge lies.
 
-When we talk about the AI singularity, instead of an exponential curve, I visualise an event horizon. It is an irreversible threshold pulled not merely by physics, but by a social scientific gravity: human desire, curiosity, geopolitical rivalry, the urge to be first, the ambition to leave one's name in history.
+When we talk about the AI singularity, instead of an exponential curve, I visualise an event horizon. An event horizon pulled by a social scientific gravity: human desire, curiosity, geopolitical rivalry, the urge to be first, the ambition to leave one's name in history.
 
 Because of this, we will neither define the singularity cleanly in scientific terms nor recognise the exact moment we cross it. Only after we are drawn far deeper inside will we realise that we have already passed the point of no return. Some might say that AI became this capable "all of a sudden." No. There is no "all of a sudden." The signals were there every single day, and we simply chose to ignore them.
 
