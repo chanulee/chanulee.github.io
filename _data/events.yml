@@ -5,8 +5,14 @@
 # "events" is opened. "date" is free text (11.24, Sep-Dec, TBD Dec ...).
 # Optional: add a "url:" line to make the name a link.
 
-- name: Microsoft Korea Agenthon Mentor
-  date: "11.14"
+- name: Hyundai CMK ONSO AI Community Lead
+  date: Nov-Dec
+  
+- name: HYU Project
+  date: "Oct-Dec"
+
+- name: KOCCA AI Camp Tutor
+  date: Sep-Dec
 
 - name: KHU Talk
   date: TBD Dec
@@ -14,23 +20,14 @@
 - name: Sogang On-Site Mentoring
   date: "11.29"
 
-- name: HYU ERICA Talk
-  date: "11.24"
-
-- name: HYU ERICA Project
-  date: "Nov-Dec"
-
 - name: SNU ISC
   date: "11.17"
 
-- name: KOCCA AI Camp 
-  date: Sep-Dec
+  - name: Microsoft Korea Agenthon Mentor
+  date: "11.14"
 
 - name: LLLOUNGE SEOUL
   date: 11.06-08
-
-- name: Hyundai CMK ONSO AI Community
-  date: Nov-Dec
 
 - name: Processing Community Day Seoul
   date: "10.31"
