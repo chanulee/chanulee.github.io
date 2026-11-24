@@ -42,7 +42,8 @@
         const update = () => {
             queued = false;
             const y = Math.max(DOCK, REST - window.scrollY);
-            const t = Math.min(1, (REST - y) / (REST - DOCK));
+            // Pulling the page down past its top (iOS bounce) makes scrollY negative; keep t in 0..1 so the title never grows.
+            const t = Math.max(0, Math.min(1, (REST - y) / (REST - DOCK)));
             title.style.setProperty('--y', y + 'px');
             title.style.setProperty('--t', t.toFixed(3));
             title.classList.toggle('is-docked', t === 1);
